@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/ejes7/내 드라이브/portfolio/2024.04-06 BENSON \\(NEW\\)/**)",
+      "Read(//c/Users/ejes7/내 드라이브/portfolio/2024.06-09 BODY GUARD \\(NEW, REBRANDING\\)/**)",
+      "Read(//c/Users/ejes7/内 drive/portfolio/2024.04-06 BENSON \\(NEW\\)/**)",
+      "Bash(grep -E \"^[A-Za-z0-9가-힣\\\\s]{3,}\")",
+      "Bash(wc -l \"c:\\\\Users\\\\ejes7\\\\내 드라이브\\\\portfolio\\\\2024.06-09 BODY GUARD \\(NEW, REBRANDING\\)\\\\index.html\")",
+      "Read(//mnt/c/Users/**)",
+      "Bash(ls -la \"C:/Users/ejes7/내 드라이브/portfolio/2024.12 SOLDAM MARKET \\(NEW\\)/\")",
+      "Bash(head -100 \"C:/Users/ejes7/내 드라이브/portfolio/2024.12 SOLDAM MARKET \\(NEW\\)/index-embedded.html\")",
+      "Bash(head -30 \"C:/Users/ejes7/내 드라이브/portfolio/2024.12 SOLDAM MARKET \\(NEW\\)/index-embedded.html\")",
+      "Bash(tail -100 \"C:/Users/ejes7/내 드라이브/portfolio/2024.12 SOLDAM MARKET \\(NEW\\)/index-embedded.html\")",
+      "Bash(head -n 745 \"C:/Users/ejes7/내 드라이브/portfolio/2024.12 SOLDAM MARKET \\(NEW\\)/index-embedded.html\")",
+      "Bash(ls \"C:/Users/ejes7/내 드라이브/portfolio/2024.05-06 GAGGA \\(NEW\\)/\")",
+      "Bash(ls \"C:/Users/ejes7/내 드라이브/portfolio/2024.05-06 GAGGA \\(NEW\\)/최종 렌더링 이미지/\")",
+      "Bash(ls \"C:/Users/ejes7/내 드라이브/portfolio/2024.05-06 GAGGA \\(NEW\\)/가까/\")",
+      "Bash(curl -sLo hero.jpg \"https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/hYE9/image/L5k1TNmz6gkn7MDws3Htsu6Gwzg.jpg\")",
+      "Bash(curl -sLo interior.jpg \"https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/hYE9/image/kxL4WuPDBtGJY6O_Ndm6heRM_3w.jpg\")",
+      "Bash(curl -sLo branding.jpg \"https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/hYE9/image/txDKSTIt27P4zz5JMo-S2qDV7gA.jpg\")",
+      "Bash(curl -sLo tasting.jpg \"https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/hYE9/image/IiaoRl1cGRbQPGGOenTrHjBYxfA.jpg\")",
+      "Bash(curl -sLo shelf.jpg \"https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/hYE9/image/IdaKfMri0MKipr-9RjDHBQaSoQU.jpg\")"
+    ]
+  }
+}

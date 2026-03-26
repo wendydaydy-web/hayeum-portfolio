@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@200;300;400;500;700&family=DM+Mono:wght@300;400;500&display=swap');
+
+/* ===== RESET ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== THEME VARIABLES ===== */
+:root {
+  /* Dark theme (default) */
+  --bg: #0f0e0e;
+  --fg: #fff;
+  --fg-90: rgba(255,255,255,0.9);
+  --fg-75: rgba(255,255,255,0.75);
+  --fg-70: rgba(255,255,255,0.7);
+  --fg-60: rgba(255,255,255,0.6);
+  --fg-50: rgba(255,255,255,0.5);
+  --fg-40: rgba(255,255,255,0.4);
+  --fg-30: rgba(255,255,255,0.3);
+  --fg-25: rgba(255,255,255,0.25);
+  --fg-15: rgba(255,255,255,0.15);
+  --fg-10: rgba(255,255,255,0.1);
+  --fg-08: rgba(255,255,255,0.08);
+  --fg-06: rgba(255,255,255,0.06);
+  --nav-scrolled: rgba(16,16,16,0.85);
+  --card-bg: #1a1a1a;
+
+  /* Fonts */
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Noto Sans KR', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-title: 'Bebas Neue', sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f5f4f0;
+    --fg: #0f0e0e;
+    --fg-90: rgba(15,14,14,0.9);
+    --fg-75: rgba(15,14,14,0.75);
+    --fg-70: rgba(15,14,14,0.7);
+    --fg-60: rgba(15,14,14,0.6);
+    --fg-50: rgba(15,14,14,0.5);
+    --fg-40: rgba(15,14,14,0.4);
+    --fg-30: rgba(15,14,14,0.3);
+    --fg-25: rgba(15,14,14,0.25);
+    --fg-15: rgba(15,14,14,0.15);
+    --fg-10: rgba(15,14,14,0.1);
+    --fg-08: rgba(15,14,14,0.08);
+    --fg-06: rgba(15,14,14,0.06);
+    --nav-scrolled: rgba(245,244,240,0.9);
+    --card-bg: #e8e6e1;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ===== I18N ===== */
+[data-en] { display: none; }
+html[lang="en"] [data-ko] { display: none; }
+html[lang="en"] [data-en] { display: inline; }
+html[lang="en"] p[data-en],
+html[lang="en"] h2[data-en],
+html[lang="en"] h3[data-en],
+html[lang="en"] span[data-en],
+html[lang="en"] div[data-en] { display: block; }
+html[lang="ko"] p[data-ko],
+html[lang="ko"] h2[data-ko],
+html[lang="ko"] h3[data-ko],
+html[lang="ko"] span[data-ko],
+html[lang="ko"] div[data-ko] { display: block; }
+html[lang="ko"] p[data-en],
+html[lang="ko"] h2[data-en],
+html[lang="ko"] h3[data-en],
+html[lang="ko"] span[data-en],
+html[lang="ko"] div[data-en] { display: none; }
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== FADE-UP ANIMATION ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
