@@ -230,7 +230,20 @@ export default function HomePage() {
           </div>
         </Link>
 
-        {/* Project 4: SOLDAM MARKET */}
+        {/* Project 4: GAGGA */}
+        <Link href="/projects/gagga" className="project-card reveal" ref={addRevealRef}>
+          <img src="/images/gagga/hero.jpg" alt="GAGGA" className="project-img-default" />
+          <img src="/images/main/gagga-grid.jpg" alt="GAGGA hover" className="project-img-hover" />
+          <div className="project-info">
+            <div>
+              <p className="project-name">GAGGA</p>
+              <span className="project-tag">Brand &amp; Spatial Design</span>
+            </div>
+            <div className="project-expand"><ExpandSVG /></div>
+          </div>
+        </Link>
+
+        {/* Project 5: SOLDAM MARKET */}
         <Link href="/projects/soldam" className="project-card reveal" ref={addRevealRef}>
           <img src="/images/main/soldam-default.png" alt="SOLDAM MARKET" className="project-img-default" />
           <img src="/images/main/soldam-hover.png" alt="SOLDAM MARKET hover" className="project-img-hover" />
