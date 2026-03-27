@@ -2,11 +2,28 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
+// Dynamic project data from sync script
+let allProjects = [];
+try { allProjects = require('../data/projects-generated'); } catch (e) { /* not synced yet */ }
+
+// Hardcoded slugs that have dedicated pages
+const HARDCODED_SLUGS = new Set(['tofug', 'benson', 'bodyguard', 'gagga', 'soldam']);
+
+// Category filter config
+const CATEGORIES = [
+  { key: 'all', label_ko: '전체', label_en: 'All' },
+  { key: 'new', label_ko: '신규매장', label_en: 'New Store' },
+  { key: 'popup', label_ko: '팝업', label_en: 'Pop-up' },
+  { key: 'deco', label_ko: '데코', label_en: 'Deco' },
+  { key: 'brand', label_ko: '브랜드', label_en: 'Brand' },
+];
+
 export default function HomePage() {
   const [lang, setLangState] = useState('ko');
   const [scrolled, setScrolled] = useState(false);
   const [overlayOpen, setOverlayOpen] = useState(false);
   const [activeScope, setActiveScope] = useState(null);
+  const [activeFilter, setActiveFilter] = useState('all');
   const revealRefs = useRef([]);
   const navRef = useRef(null);
 
@@ -178,6 +195,71 @@ export default function HomePage() {
               where brand and place seamlessly become one.
             </p>
           )}
+        </div>
+      </section>
+
+      {/* ── Experience ── */}
+      <section className="experience reveal" ref={addRevealRef}>
+        <p className="about-label">Experience</p>
+        <div className="exp-list">
+
+          {/* PRADA Korea */}
+          <div className="exp-item">
+            <div className="exp-header">
+              <span className="exp-company">PRADA Korea</span>
+              <span className="exp-period">2022.05 – 2022.12</span>
+            </div>
+            <span className="exp-role">Interior Tech</span>
+            <ul className="exp-works">
+              <li>TROPICO POP-UP (Lotte Dongtan · The Hyundai Seoul · Galleria Apgujeong)</li>
+              <li>HOLIDAY POP-UP (Shinsegae Gangnam · The Hyundai Seoul · Lotte Dongtan)</li>
+              <li>SHINSEGAE DAEJEON OPENING</li>
+            </ul>
+          </div>
+
+          {/* DaeHye Architecture */}
+          <div className="exp-item">
+            <div className="exp-header">
+              <span className="exp-company">DaeHye Architecture</span>
+              <span className="exp-period">2023.03 – 2024.03</span>
+            </div>
+            <span className="exp-role">Space Design</span>
+            <ul className="exp-works">
+              <li>STARFIELD BUSAN CHANGWON</li>
+              <li>STARFIELD VILLAGE BYEOLLAE</li>
+              <li>HYUNDAI MOTORS COMPANY, Atlanta, Georgia USA</li>
+            </ul>
+          </div>
+
+          {/* Lotte GRS */}
+          <div className="exp-item">
+            <div className="exp-header">
+              <span className="exp-company">Lotte GRS</span>
+              <span className="exp-period">2025.04 – 2025.09</span>
+            </div>
+            <span className="exp-role">Construction Cost Management</span>
+            <ul className="exp-works">
+              <li>Construction cost standardization for Lotteria stores</li>
+              <li>Analyzed bid documents, categorized manual vs non-manual cost structures</li>
+            </ul>
+          </div>
+
+          {/* INIA */}
+          <div className="exp-item">
+            <div className="exp-header">
+              <span className="exp-company">INIA (이니시아)</span>
+              <span className="exp-period">2025 – Present</span>
+            </div>
+            <span className="exp-role">Spatial Branding Designer</span>
+            <ul className="exp-works">
+              <li>
+                <Link href="/projects/tofug" className="exp-link">
+                  tofuG Brand &amp; Spatial Design
+                </Link>
+              </li>
+            </ul>
+          </div>
+
         </div>
       </section>
 
@@ -389,29 +471,102 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Project Cards Grid ── */}
+      {/* ── Explore Projects (Dynamic) ── */}
       <section className="project-cards-section reveal" ref={addRevealRef}>
         <h2 className="project-cards-heading">
           {isKo ? '프로젝트 둘러보기' : 'Explore Projects'}
         </h2>
-        <div className="project-cards-grid">
-          {[
-            { name: 'tofuG', href: '/projects/tofug', tag: 'Brand & Spatial Design', thumb: 'https://framerusercontent.com/images/vForpcAJWD1kBVHipRHJhWa6eM.jpg' },
-            { name: 'BENSON', href: '/projects/benson', tag: 'Brand & Spatial Design', thumb: '/images/benson/page_01.png' },
-            { name: 'BODY GUARD', href: '/projects/bodyguard', tag: 'Brand & Spatial Design', thumb: '/images/bodyguard/page_01.png' },
-            { name: 'GAGGA', href: '/projects/gagga', tag: 'Brand & Spatial Design', thumb: '/images/gagga/hero.jpg' },
-            { name: 'SOLDAM MARKET', href: '/projects/soldam', tag: 'Brand & Spatial Design', thumb: '/images/soldam/hero.jpg' },
-          ].map((p) => (
-            <Link key={p.href} href={p.href} className="pc-card">
-              <div className="pc-card-img-wrap">
-                <img src={p.thumb} alt={p.name} />
+
+        {/* Category Filter Pills */}
+        {allProjects.length > 0 && (
+          <div className="filter-pills">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.key}
+                className={`filter-pill${activeFilter === cat.key ? ' active' : ''}`}
+                onClick={() => setActiveFilter(cat.key)}
+              >
+                {isKo ? cat.label_ko : cat.label_en}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Project List Table */}
+        {allProjects.length > 0 && (
+          <div className="project-list">
+            {allProjects
+              .filter((p) => activeFilter === 'all' || p.category === activeFilter)
+              .map((p) => {
+                const hasSections = p.sections && p.sections.length > 0;
+                const hasPage = HARDCODED_SLUGS.has(p.slug) || hasSections;
+                const href = `/projects/${p.slug}`;
+
+                const inner = (
+                  <div className={`project-list-row${!hasPage ? ' disabled' : ''}`}>
+                    <span className="pl-year">{p.year}</span>
+                    <span className="pl-name">{p.name}</span>
+                    <span className="pl-category">{isKo ? (p.type_kr || p.category_label_kr || '') : (p.type_en || p.category_label_en || '')}</span>
+                    <span className="pl-desc">{isKo ? (p.tagline_kr || '') : (p.tagline_en || '')}</span>
+                    <span className="pl-arrow">{hasPage ? '\u2192' : ''}</span>
+                  </div>
+                );
+
+                return hasPage ? (
+                  <Link key={p.slug} href={href} className="project-list-link">
+                    {inner}
+                  </Link>
+                ) : (
+                  <div key={p.slug} className="project-list-link no-link">
+                    {inner}
+                  </div>
+                );
+              })}
+          </div>
+        )}
+
+        {/* Thumbnail Grid */}
+        <div className="project-cards-grid" style={allProjects.length > 0 ? { marginTop: 60 } : undefined}>
+          {(allProjects.length > 0
+            ? allProjects
+                .filter((p) => activeFilter === 'all' || p.category === activeFilter)
+                .filter((p) => p.grid_image || p.cover_image)
+                .map((p) => {
+                  const hasSections = p.sections && p.sections.length > 0;
+                  const hasPage = HARDCODED_SLUGS.has(p.slug) || hasSections;
+                  const thumb = `/images/${p.slug}/${p.grid_image || p.cover_image}`;
+                  return { name: p.name, href: `/projects/${p.slug}`, tag: isKo ? (p.type_kr || '') : (p.type_en || ''), thumb, hasPage, slug: p.slug };
+                })
+            : [
+                { name: 'tofuG', href: '/projects/tofug', tag: 'Brand & Spatial Design', thumb: 'https://framerusercontent.com/images/vForpcAJWD1kBVHipRHJhWa6eM.jpg', hasPage: true, slug: 'tofug' },
+                { name: 'BENSON', href: '/projects/benson', tag: 'Brand & Spatial Design', thumb: '/images/benson/page_01.png', hasPage: true, slug: 'benson' },
+                { name: 'BODY GUARD', href: '/projects/bodyguard', tag: 'Brand & Spatial Design', thumb: '/images/bodyguard/page_01.png', hasPage: true, slug: 'bodyguard' },
+                { name: 'GAGGA', href: '/projects/gagga', tag: 'Brand & Spatial Design', thumb: '/images/gagga/hero.jpg', hasPage: true, slug: 'gagga' },
+                { name: 'SOLDAM MARKET', href: '/projects/soldam', tag: 'Brand & Spatial Design', thumb: '/images/soldam/hero.jpg', hasPage: true, slug: 'soldam' },
+              ]
+          ).map((p) =>
+            p.hasPage ? (
+              <Link key={p.slug} href={p.href} className="pc-card">
+                <div className="pc-card-img-wrap">
+                  <img src={p.thumb} alt={p.name} />
+                </div>
+                <div className="pc-card-body">
+                  <p className="pc-card-name">{p.name}</p>
+                  <span className="pc-card-tag">{p.tag}</span>
+                </div>
+              </Link>
+            ) : (
+              <div key={p.slug} className="pc-card pc-card-disabled">
+                <div className="pc-card-img-wrap">
+                  <img src={p.thumb} alt={p.name} />
+                </div>
+                <div className="pc-card-body">
+                  <p className="pc-card-name">{p.name}</p>
+                  <span className="pc-card-tag">{p.tag}</span>
+                </div>
               </div>
-              <div className="pc-card-body">
-                <p className="pc-card-name">{p.name}</p>
-                <span className="pc-card-tag">{p.tag}</span>
-              </div>
-            </Link>
-          ))}
+            )
+          )}
         </div>
       </section>
 
@@ -817,6 +972,87 @@ export default function HomePage() {
             line-height: 1.8;
             font-weight: 300;
             color: var(--fg-50);
+        }
+
+        /* ── Experience Section ── */
+        .experience {
+            padding: 0 40px 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .exp-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .exp-item {
+            padding: 32px 0;
+            border-top: 1px solid var(--fg-10);
+        }
+        .exp-item:last-child {
+            border-bottom: 1px solid var(--fg-10);
+        }
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+        .exp-company {
+            font-size: clamp(15px, 1.4vw, 18px);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--fg-90);
+        }
+        .exp-period {
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            color: var(--fg-40);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .exp-role {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--fg-50);
+            margin-bottom: 14px;
+            display: block;
+        }
+        .exp-works {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .exp-works li {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--fg-60, var(--fg-50));
+            line-height: 1.6;
+            padding-left: 16px;
+            position: relative;
+        }
+        .exp-works li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--fg-30, var(--fg-40));
+            font-size: 12px;
+        }
+        .exp-link {
+            color: var(--fg-50);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 0.2s;
+        }
+        .exp-link:hover {
+            color: var(--fg-90);
         }
 
         /* ── Section Title ── */
@@ -1258,10 +1494,110 @@ export default function HomePage() {
             display: inline-block;
         }
 
+        /* ── Filter Pills ── */
+        .filter-pills {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-pill {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--fg-15);
+            background: transparent;
+            color: var(--fg-50);
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-pill:hover {
+            border-color: var(--fg-30);
+            color: var(--fg-70);
+        }
+        .filter-pill.active {
+            background: #c4a882;
+            border-color: #c4a882;
+            color: #0c0c0c;
+            font-weight: 500;
+        }
+
+        /* ── Project List ── */
+        .project-list {
+            margin-bottom: 20px;
+        }
+        .project-list-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            border-top: 1px solid var(--fg-08);
+            transition: background 0.2s;
+        }
+        .project-list-link:last-child {
+            border-bottom: 1px solid var(--fg-08);
+        }
+        .project-list-link:hover:not(.no-link) {
+            background: var(--fg-06);
+        }
+        .project-list-link.no-link {
+            cursor: default;
+        }
+        .project-list-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 140px 1.5fr 40px;
+            align-items: center;
+            padding: 18px 0;
+            gap: 16px;
+        }
+        .project-list-row.disabled {
+            opacity: 0.4;
+        }
+        .pl-year {
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            color: var(--fg-40);
+            letter-spacing: 0.05em;
+        }
+        .pl-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--fg-90);
+            letter-spacing: 0.01em;
+        }
+        .pl-category {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--fg-40);
+            letter-spacing: 0.04em;
+        }
+        .pl-desc {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--fg-50);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .pl-arrow {
+            font-size: 16px;
+            color: var(--fg-30);
+            text-align: center;
+        }
+
+        /* ── Disabled Card ── */
+        .pc-card-disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
         /* ── Responsive ── */
         @media (max-width: 1199px) {
             .nav { padding: 16px 24px; }
             .about { padding: 100px 24px; }
+            .experience { padding: 0 24px 80px; }
             .projects { padding: 0 24px 100px; }
             .scope { padding: 100px 24px; }
             .footer { padding: 80px 24px; }
@@ -1275,6 +1611,8 @@ export default function HomePage() {
             .availability { display: none; }
             .lang-toggle { right: 60px; top: 16px; }
             .about { padding: 80px 20px; }
+            .experience { padding: 0 20px 60px; }
+            .exp-header { flex-wrap: wrap; gap: 4px; }
             .section-header { padding: 80px 20px 40px; }
             .projects { padding: 0 20px 80px; }
             .project-info { padding: 24px; }
@@ -1290,6 +1628,12 @@ export default function HomePage() {
             .projects-grid { grid-template-columns: repeat(2, 1fr); }
             .project-cards-grid { grid-template-columns: 1fr; gap: 24px; }
             .project-cards-section { padding: 80px 20px; }
+            .project-list-row {
+                grid-template-columns: 60px 1fr 40px;
+            }
+            .pl-category, .pl-desc { display: none; }
+            .filter-pills { gap: 8px; }
+            .filter-pill { padding: 6px 14px; font-size: 12px; }
         }
       `}</style>
     </>
