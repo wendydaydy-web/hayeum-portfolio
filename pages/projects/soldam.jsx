@@ -54,29 +54,36 @@ export default function SoldamMarket() {
       <section className="overview" id="overview">
         <Reveal>
           <p className="section-num">01 — Overview</p>
-          <h2 className="section-title">테크 기업의 기술력을<br /><em>공간으로 번역하다</em></h2>
+          <h2 className="section-title" data-ko>테크 기업의 기술력을<br /><em>공간으로 번역하다</em></h2>
+          <h2 className="section-title" data-en>Translating Tech DNA<br /><em>Into Space</em></h2>
         </Reveal>
         <div className="overview-grid">
           <Reveal className="overview-text">
-            <p>삼성전기에서 분사한 글로벌 리테일 테크 기업 <strong>솔루엠(SOLUM)</strong>이 용인 신사옥으로 본사를 이전하면서, 1층에 자사 핵심 기술인 ESL(전자가격표시기), AI 카메라, BLE 센서, 디지털 사이니지를 실제 리테일 환경에서 체험할 수 있는 <strong>스마트 리테일 쇼룸</strong>을 구축했습니다.</p>
-            <p>단순한 편의점이 아닌, B2B 고객에게는 솔루엠의 <strong>SSP(SOLUM Store Platform)</strong> 기술력을 실증하는 쇼룸이자, B2C 고객에게는 미래형 소비 경험을 제공하는 이중 목적의 공간. 브랜드 네이밍부터 공간 전략, 디자인 제안, 현장 감리까지 전 과정에 참여했습니다.</p>
+            <p data-ko>삼성전기에서 분사한 글로벌 리테일 테크 기업 <strong>솔루엠(SOLUM)</strong>이 용인 신사옥으로 본사를 이전하면서, 1층에 자사 핵심 기술인 ESL(전자가격표시기), AI 카메라, BLE 센서, 디지털 사이니지를 실제 리테일 환경에서 체험할 수 있는 <strong>스마트 리테일 쇼룸</strong>을 구축했습니다.</p>
+            <p data-en><strong>SOLUM</strong>, a global retail tech company spun off from Samsung Electro-Mechanics, relocated to a new HQ in Yongin. The ground floor was designed as a <strong>smart retail showroom</strong> where core technologies — ESL, AI cameras, BLE sensors, and digital signage — could be experienced in a real retail environment.</p>
+            <p data-ko>단순한 편의점이 아닌, B2B 고객에게는 솔루엠의 <strong>SSP(SOLUM Store Platform)</strong> 기술력을 실증하는 쇼룸이자, B2C 고객에게는 미래형 소비 경험을 제공하는 이중 목적의 공간. 브랜드 네이밍부터 공간 전략, 디자인 제안, 현장 감리까지 전 과정에 참여했습니다.</p>
+            <p data-en>Not just a convenience store — a dual-purpose space serving as a <strong>SSP (SOLUM Store Platform)</strong> demo showroom for B2B clients while delivering futuristic retail experiences for B2C customers. Involved from brand naming through spatial strategy, design proposal, and on-site supervision.</p>
           </Reveal>
           <Reveal className="overview-stats">
             <div className="stat-card">
               <div className="stat-value">ESL</div>
-              <div className="stat-label">전자가격표시기 실시간 재고 연동 시스템 적용</div>
+              <div className="stat-label" data-ko>전자가격표시기 실시간 재고 연동 시스템 적용</div>
+              <div className="stat-label" data-en>Real-time inventory sync via electronic shelf labels</div>
             </div>
             <div className="stat-card">
               <div className="stat-value">AI</div>
-              <div className="stat-label">Vision AI 카메라 기반 고객 동선 분석</div>
+              <div className="stat-label" data-ko>Vision AI 카메라 기반 고객 동선 분석</div>
+              <div className="stat-label" data-en>Customer flow analysis via Vision AI cameras</div>
             </div>
             <div className="stat-card">
               <div className="stat-value">GS</div>
-              <div className="stat-label">GS리테일 DX Lab 무인결제 게이트 연계</div>
+              <div className="stat-label" data-ko>GS리테일 DX Lab 무인결제 게이트 연계</div>
+              <div className="stat-label" data-en>GS Retail DX Lab unmanned checkout gate</div>
             </div>
             <div className="stat-card">
               <div className="stat-value">B2B+C</div>
-              <div className="stat-label">쇼룸 + 리테일 이중 목적 공간 설계</div>
+              <div className="stat-label" data-ko>쇼룸 + 리테일 이중 목적 공간 설계</div>
+              <div className="stat-label" data-en>Dual-purpose showroom + retail space design</div>
             </div>
           </Reveal>
         </div>
@@ -86,29 +93,36 @@ export default function SoldamMarket() {
       <section className="challenge" id="challenge">
         <Reveal>
           <p className="section-num">02 — Challenge</p>
-          <h2 className="section-title">설계의 <em>핵심 과제</em></h2>
+          <h2 className="section-title" data-ko>설계의 <em>핵심 과제</em></h2>
+          <h2 className="section-title" data-en>Core Design <em>Challenges</em></h2>
         </Reveal>
         <div className="challenge-content">
           <ul className="challenge-list">
             <Reveal className="challenge-item">
               <span className="challenge-num">01</span>
               <div>
-                <h3>동선 = 데이터</h3>
-                <p>AI 카메라와 BLE 센서가 고객 동선을 실시간으로 추적하는 공간에서, 동선 설계 자체가 곧 데이터 수집 효율을 결정합니다. 일반 편의점과 달리, 기술이 읽을 수 있는 동선을 설계해야 했습니다.</p>
+                <h3 data-ko>동선 = 데이터</h3>
+                <h3 data-en>Circulation = Data</h3>
+                <p data-ko>AI 카메라와 BLE 센서가 고객 동선을 실시간으로 추적하는 공간에서, 동선 설계 자체가 곧 데이터 수집 효율을 결정합니다. 일반 편의점과 달리, 기술이 읽을 수 있는 동선을 설계해야 했습니다.</p>
+                <p data-en>In a space where AI cameras and BLE sensors track customer movement in real time, circulation design directly determines data collection efficiency. Unlike a standard convenience store, we had to design paths that technology could read.</p>
               </div>
             </Reveal>
             <Reveal className="challenge-item">
               <span className="challenge-num">02</span>
               <div>
-                <h3>쇼룸 × 매장의 공존</h3>
-                <p>해외 바이어에게는 SSP 플랫폼 데모 공간으로, 지역 주민에게는 일상적 편의점으로 동시에 작동해야 합니다. 체험 동선과 구매 동선이 충돌하지 않는 레이아웃이 필요했습니다.</p>
+                <h3 data-ko>쇼룸 × 매장의 공존</h3>
+                <h3 data-en>Showroom × Store Coexistence</h3>
+                <p data-ko>해외 바이어에게는 SSP 플랫폼 데모 공간으로, 지역 주민에게는 일상적 편의점으로 동시에 작동해야 합니다. 체험 동선과 구매 동선이 충돌하지 않는 레이아웃이 필요했습니다.</p>
+                <p data-en>The space needed to function simultaneously as an SSP platform demo for international buyers and an everyday convenience store for local residents. A layout where demo and purchase flows don&apos;t collide was essential.</p>
               </div>
             </Reveal>
             <Reveal className="challenge-item">
               <span className="challenge-num">03</span>
               <div>
-                <h3>전자부품 기업의 브랜드 감성 전환</h3>
-                <p>B2B 하드웨어 제조사 이미지를 소비자 친화적 라이프스타일 브랜드로 전환하면서도, 기술 기업으로서의 정체성을 유지하는 균형이 필요했습니다.</p>
+                <h3 data-ko>전자부품 기업의 브랜드 감성 전환</h3>
+                <h3 data-en>Brand Perception Shift</h3>
+                <p data-ko>B2B 하드웨어 제조사 이미지를 소비자 친화적 라이프스타일 브랜드로 전환하면서도, 기술 기업으로서의 정체성을 유지하는 균형이 필요했습니다.</p>
+                <p data-en>Transforming a B2B hardware manufacturer&apos;s image into a consumer-friendly lifestyle brand while maintaining its identity as a tech company required careful balance.</p>
               </div>
             </Reveal>
           </ul>
@@ -119,9 +133,13 @@ export default function SoldamMarket() {
       <section className="brand-strategy" id="strategy">
         <Reveal>
           <p className="section-num">03 — Brand Naming Strategy</p>
-          <h2 className="section-title">세 가지 브랜드 방향,<br /><em>하나의 솔루엠</em></h2>
-          <p style={{ maxWidth: 680, fontSize: 15, lineHeight: 1.8, color: 'var(--gray-600)', wordBreak: 'keep-all' }}>
+          <h2 className="section-title" data-ko>세 가지 브랜드 방향,<br /><em>하나의 솔루엠</em></h2>
+          <h2 className="section-title" data-en>Three Brand Directions,<br /><em>One SOLUM</em></h2>
+          <p style={{ maxWidth: 680, fontSize: 15, lineHeight: 1.8, color: 'var(--gray-600)', wordBreak: 'keep-all' }} data-ko>
             솔루엠의 기술 정체성을 소비자 언어로 번역하기 위해, 타겟 퍼소나와 공간 무드가 서로 다른 세 가지 브랜드 네이밍 안을 제안했습니다.
+          </p>
+          <p style={{ maxWidth: 680, fontSize: 15, lineHeight: 1.8, color: 'var(--gray-600)', wordBreak: 'keep-all' }} data-en>
+            To translate SOLUM&apos;s tech identity into consumer language, three brand naming proposals were developed — each with distinct target personas and spatial moods.
           </p>
         </Reveal>
         <div className="brand-options">
@@ -136,7 +154,8 @@ export default function SoldamMarket() {
             <div className="brand-card-body">
               <p className="brand-card-label">Option A</p>
               <h3 className="brand-card-name">Pick! SOLDAM</h3>
-              <p className="brand-card-desc">&ldquo;그냥, 집어봐!&rdquo; — 새로운 CVS, 새로운 소비방법의 즐겁고 아이코닉한 시작. MZ세대 타겟의 캐주얼한 무드.</p>
+              <p className="brand-card-desc" data-ko>&ldquo;그냥, 집어봐!&rdquo; — 새로운 CVS, 새로운 소비방법의 즐겁고 아이코닉한 시작. MZ세대 타겟의 캐주얼한 무드.</p>
+              <p className="brand-card-desc" data-en>&ldquo;Just pick it!&rdquo; — A fun, iconic start to a new CVS and new way of shopping. Casual mood targeting Gen MZ.</p>
             </div>
           </Reveal>
           {/* Option B */}
@@ -150,7 +169,8 @@ export default function SoldamMarket() {
             <div className="brand-card-body">
               <p className="brand-card-label">Option B</p>
               <h3 className="brand-card-name">LiFELAB SOLDAM</h3>
-              <p className="brand-card-desc">&ldquo;생활소비를 연구하는 실험실&rdquo; — 편의점도 편집샵도 아닌, 소비 패턴을 학습하는 공간이라는 기술 지향적 포지셔닝.</p>
+              <p className="brand-card-desc" data-ko>&ldquo;생활소비를 연구하는 실험실&rdquo; — 편의점도 편집샵도 아닌, 소비 패턴을 학습하는 공간이라는 기술 지향적 포지셔닝.</p>
+              <p className="brand-card-desc" data-en>&ldquo;A lab that studies everyday consumption&rdquo; — Neither a CVS nor a select shop, but a space that learns consumption patterns. Tech-forward positioning.</p>
             </div>
           </Reveal>
           {/* Option C */}
@@ -163,7 +183,8 @@ export default function SoldamMarket() {
             <div className="brand-card-body">
               <p className="brand-card-label">Option C</p>
               <h3 className="brand-card-name">STORAGE SOLDAM</h3>
-              <p className="brand-card-desc">&ldquo;기술과 소비, 생활, 지역, 그 모두를 모았다&rdquo; — AI의 스토리지 같은 창고형 보관소. 힙한 무드와 기억하기 쉬운 단어.</p>
+              <p className="brand-card-desc" data-ko>&ldquo;기술과 소비, 생활, 지역, 그 모두를 모았다&rdquo; — AI의 스토리지 같은 창고형 보관소. 힙한 무드와 기억하기 쉬운 단어.</p>
+              <p className="brand-card-desc" data-en>&ldquo;Tech, consumption, life, community — all stored here&rdquo; — A warehouse-style concept like AI storage. Hip mood with a memorable name.</p>
             </div>
           </Reveal>
         </div>
@@ -173,7 +194,8 @@ export default function SoldamMarket() {
       <section className="spatial" id="spatial">
         <Reveal>
           <p className="section-num">04 — Spatial Strategy</p>
-          <h2 className="section-title">데이터가 흐르는<br /><em>동선을 설계하다</em></h2>
+          <h2 className="section-title" data-ko>데이터가 흐르는<br /><em>동선을 설계하다</em></h2>
+          <h2 className="section-title" data-en>Designing Circulation<br /><em>Where Data Flows</em></h2>
         </Reveal>
         <div className="spatial-flow">
           <div className="flow-step">
@@ -203,7 +225,8 @@ export default function SoldamMarket() {
           </div>
         </div>
         <Reveal className="spatial-insight">
-          <p>스마트 리테일에서 고객 동선은 곧 데이터 파이프라인입니다.<br />AI 카메라가 추적할 수 있는 명확한 경로, BLE 센서가 체류시간을 측정할 수 있는 구분된 존, ESL이 가시성을 확보할 수 있는 선반 각도 — 모든 공간 결정이 기술 인프라와 동기화되어야 했습니다.</p>
+          <p data-ko>스마트 리테일에서 고객 동선은 곧 데이터 파이프라인입니다.<br />AI 카메라가 추적할 수 있는 명확한 경로, BLE 센서가 체류시간을 측정할 수 있는 구분된 존, ESL이 가시성을 확보할 수 있는 선반 각도 — 모든 공간 결정이 기술 인프라와 동기화되어야 했습니다.</p>
+          <p data-en>In smart retail, customer circulation is a data pipeline.<br />Clear paths for AI cameras to track, distinct zones for BLE sensors to measure dwell time, shelf angles for ESL visibility — every spatial decision had to sync with tech infrastructure.</p>
           <span className="insight-author">— Design Strategy Note</span>
         </Reveal>
       </section>
@@ -212,7 +235,8 @@ export default function SoldamMarket() {
       <section className="gallery-section proposal" id="proposal">
         <Reveal>
           <p className="section-num">05 — Design Proposal</p>
-          <h2 className="section-title">공간 디자인 <em>제안</em></h2>
+          <h2 className="section-title" data-ko>공간 디자인 <em>제안</em></h2>
+          <h2 className="section-title" data-en>Spatial Design <em>Proposal</em></h2>
         </Reveal>
         <p className="gallery-caption">CONCEPT RENDERINGS — ENSCAPE 3D VISUALIZATION</p>
         <div className="gallery-scroll">
@@ -226,18 +250,21 @@ export default function SoldamMarket() {
           <img src="/images/soldam/proposal-06-soldam-entrance.jpg" alt="Storage SOLDAM Entrance" />
           <img src="/images/soldam/proposal-07-lifelab-entrance.jpg" alt="LiFELAB SOLDAM Entrance" />
         </div>
-        <p className="gallery-caption">블루 테라조 · 유리벽돌 파티션 · 스테인리스 — 기술 기업의 차가운 정밀함과 리테일의 접근성을 동시에 구현하는 마테리얼 전략</p>
+        <p className="gallery-caption" data-ko>블루 테라조 · 유리벽돌 파티션 · 스테인리스 — 기술 기업의 차가운 정밀함과 리테일의 접근성을 동시에 구현하는 마테리얼 전략</p>
+        <p className="gallery-caption" data-en>Blue terrazzo · Glass brick partition · Stainless steel — A material strategy balancing tech precision with retail accessibility</p>
       </section>
 
       {/* ── 06 AS BUILT ── */}
       <section className="gallery-section built">
         <Reveal>
           <p className="section-num">06 — As Built</p>
-          <h2 className="section-title">완공 <em>현장</em></h2>
+          <h2 className="section-title" data-ko>완공 <em>현장</em></h2>
+          <h2 className="section-title" data-en>As <em>Built</em></h2>
         </Reveal>
         <Reveal className="built-note">
           <span className="dot"></span>
-          시공 단계에서 GS DX Lab 연계 요구사항 반영 및 파사드 디자인 변경이 진행되었습니다. 2025.08.01 그랜드 오픈.
+          <span data-ko>시공 단계에서 GS DX Lab 연계 요구사항 반영 및 파사드 디자인 변경이 진행되었습니다. 2025.08.01 그랜드 오픈.</span>
+          <span data-en>GS DX Lab integration requirements and façade design changes were applied during construction. Grand opening 2025.08.01.</span>
         </Reveal>
         <div className="gallery-full">
           <img src="/images/soldam/built-01-exterior-corner.jpg" alt="SOLDAM MARKET Exterior Corner" />
@@ -256,23 +283,30 @@ export default function SoldamMarket() {
       <section className="results" id="results">
         <Reveal>
           <p className="section-num">07 — Impact</p>
-          <h2 className="section-title">프로젝트가 <em>만든 가치</em></h2>
+          <h2 className="section-title" data-ko>프로젝트가 <em>만든 가치</em></h2>
+          <h2 className="section-title" data-en>Value <em>Created</em></h2>
         </Reveal>
         <div className="results-grid">
           <Reveal className="result-card">
             <div className="result-icon">🏢</div>
-            <h3>기업 쇼룸의 재정의</h3>
-            <p>NRF 2026에서 솔루엠이 발표한 SSP 플랫폼의 실증 공간으로 활용. 글로벌 리테일러 대상 PoC 레퍼런스 사이트로 기능.</p>
+            <h3 data-ko>기업 쇼룸의 재정의</h3>
+            <h3 data-en>Redefining Corporate Showrooms</h3>
+            <p data-ko>NRF 2026에서 솔루엠이 발표한 SSP 플랫폼의 실증 공간으로 활용. 글로벌 리테일러 대상 PoC 레퍼런스 사이트로 기능.</p>
+            <p data-en>Used as a proof-of-concept space for SOLUM&apos;s SSP platform presented at NRF 2026. Functions as a PoC reference site for global retailers.</p>
           </Reveal>
           <Reveal className="result-card">
             <div className="result-icon">📐</div>
-            <h3>데이터 기반 공간설계</h3>
-            <p>AI 카메라와 BLE 센서가 작동하는 리테일 환경에서, 기술 인프라와 동기화된 공간 전략의 새로운 방법론을 제시.</p>
+            <h3 data-ko>데이터 기반 공간설계</h3>
+            <h3 data-en>Data-Driven Spatial Design</h3>
+            <p data-ko>AI 카메라와 BLE 센서가 작동하는 리테일 환경에서, 기술 인프라와 동기화된 공간 전략의 새로운 방법론을 제시.</p>
+            <p data-en>Established a new methodology for spatial strategy synchronized with tech infrastructure in a retail environment powered by AI cameras and BLE sensors.</p>
           </Reveal>
           <Reveal className="result-card">
             <div className="result-icon">🎨</div>
-            <h3>브랜드 전환 프레임워크</h3>
-            <p>B2B 전자부품 제조사를 소비자 접점의 라이프스타일 브랜드로 전환하는 네이밍-공간 통합 전략을 수립.</p>
+            <h3 data-ko>브랜드 전환 프레임워크</h3>
+            <h3 data-en>Brand Transition Framework</h3>
+            <p data-ko>B2B 전자부품 제조사를 소비자 접점의 라이프스타일 브랜드로 전환하는 네이밍-공간 통합 전략을 수립.</p>
+            <p data-en>Developed an integrated naming-spatial strategy for transforming a B2B electronics manufacturer into a consumer-facing lifestyle brand.</p>
           </Reveal>
         </div>
       </section>

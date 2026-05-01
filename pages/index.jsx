@@ -6,8 +6,11 @@ import Link from 'next/link';
 let allProjects = [];
 try { allProjects = require('../data/projects-generated'); } catch (e) { /* not synced yet */ }
 
+// Visible projects (exclude brand + hidden — kept in data for future use)
+const visibleProjects = allProjects.filter((p) => p.category !== 'brand' && !p.hidden);
+
 // Hardcoded slugs that have dedicated pages
-const HARDCODED_SLUGS = new Set(['tofug', 'benson', 'bodyguard', 'gagga', 'soldam']);
+const HARDCODED_SLUGS = new Set(['tofug', 'benson', 'bodyguard', 'gagga', 'soldam', 'shabusangha', 'squidgame', 'gyedanbread', 'handonday']);
 
 // Category filter config
 const CATEGORIES = [
@@ -15,7 +18,6 @@ const CATEGORIES = [
   { key: 'new', label_ko: '신규매장', label_en: 'New Store' },
   { key: 'popup', label_ko: '팝업', label_en: 'Pop-up' },
   { key: 'deco', label_ko: '데코', label_en: 'Deco' },
-  { key: 'brand', label_ko: '브랜드', label_en: 'Brand' },
 ];
 
 export default function HomePage() {
@@ -24,6 +26,7 @@ export default function HomePage() {
   const [overlayOpen, setOverlayOpen] = useState(false);
   const [activeScope, setActiveScope] = useState(null);
   const [activeFilter, setActiveFilter] = useState('all');
+  const [aboutOpen, setAboutOpen] = useState(false);
   const revealRefs = useRef([]);
   const navRef = useRef(null);
 
@@ -173,34 +176,98 @@ export default function HomePage() {
           <img src="/images/main/hero-title.png" alt="空間夏陰" className="hero-title-img" />
           <p className="hero-subtitle">A place where people naturally gather, like summer shade.</p>
           <p className="hero-subtitle-ko">공 간 하 음</p>
+          <div
+            className={`hero-about-trigger${aboutOpen ? ' active' : ''}`}
+            onMouseEnter={() => { if (window.matchMedia('(hover: hover)').matches) setAboutOpen(true); }}
+            onMouseLeave={() => { if (window.matchMedia('(hover: hover)').matches) setAboutOpen(false); }}
+          >
+            <button
+              className="hero-about-pill"
+              type="button"
+              onClick={(e) => { e.stopPropagation(); setAboutOpen((prev) => !prev); }}
+            >About Ha-umm</button>
+            <div className="hero-about-popup" onClick={(e) => e.stopPropagation()}>
+              {isKo ? (
+                <p className="about-text-ko">
+                  공간하음(空間夏陰)은 여름날의 그늘처럼,<br/>
+                  자연스레 향하는 공간을 만듭니다.<br/><br/>
+                  우리는 그 순간의 영감을 담아,<br/>
+                  브랜드와 공간이 어우러지는 경험을 디자인합니다.
+                </p>
+              ) : (
+                <p className="about-text-en">
+                  Gonggan Ha-umm (空間夏陰) creates spaces that,<br/>
+                  like summer shade, naturally draw people in.<br/><br/>
+                  Inspired by such moments, we design spaces<br/>
+                  where brand and place seamlessly become one.
+                </p>
+              )}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ── About ── */}
-      <section className="about reveal" ref={addRevealRef}>
-        <div>
-          <p className="about-label">About</p>
-          {isKo ? (
-            <p className="about-text-ko">
-              공간하음(空間夏陰)은 여름날의 그늘처럼,<br/>
-              자연스레 향하는 공간을 만듭니다.<br/><br/>
-              우리는 그 순간의 영감을 담아,<br/>
-              브랜드와 공간이 어우러지는 경험을 디자인합니다.
-            </p>
-          ) : (
-            <p className="about-text-en" style={{ color: 'var(--fg-90)' }}>
-              Gonggan Ha-umm (空間夏陰) creates spaces that,<br/>
-              like summer shade, naturally draw people in.<br/><br/>
-              Inspired by such moments, we design spaces<br/>
-              where brand and place seamlessly become one.
-            </p>
-          )}
-        </div>
-      </section>
-
-      {/* ── Experience ── */}
+      {/* ── Studio ── */}
       <section className="experience reveal" ref={addRevealRef}>
-        <p className="about-label">Experience</p>
+        <p className="about-label">Studio</p>
+        <div className="exp-list">
+          <div className="exp-item exp-featured">
+            <div className="exp-header">
+              <span className="exp-company exp-company-studio">
+                {isKo ? '공간하음' : 'Gonggan Ha-umm'}
+              </span>
+              <span className="exp-period">2024 – Present</span>
+            </div>
+            <span className="exp-role exp-role-gold">Founder · Spatial Branding Designer</span>
+            <p className="exp-scope">
+              {isKo
+                ? 'Concept — Branding — Spatial Design — Construction — Supervision'
+                : 'Concept — Branding — Spatial Design — Construction — Supervision'}
+            </p>
+            <p className="exp-scope-sub">
+              {isKo ? '컨셉 기획부터 시공 감리까지' : 'From concept planning to construction supervision'}
+            </p>
+            <ul className="exp-works">
+              <li>{isKo ? '20+ 프로젝트 총괄 (F&B · Retail · Pop-Up · Deco)' : '20+ projects directed (F&B · Retail · Pop-Up · Deco)'}</li>
+              <li>{isKo ? '4개국 프로젝트 수행 (Korea · Singapore · Malaysia · USA)' : 'Projects across 4 countries (Korea · Singapore · Malaysia · USA)'}</li>
+              <li>{isKo ? '브랜드 공간 컨셉 기획 · SI 가이드북 · 실시설계 · 현장 감리' : 'Brand spatial concept · SI guidebook · Working drawings · On-site supervision'}</li>
+              <li>
+                {isKo
+                  ? '현재 INIA GROUP 소속으로 tofuG 멀티매장 디자인 총괄 중'
+                  : 'Currently directing multi-location tofuG design under INIA GROUP'}
+              </li>
+            </ul>
+
+            {/* Mini project preview grid */}
+            <div className="mini-preview">
+              {visibleProjects.map((p) => {
+                const hasSections = p.sections && p.sections.length > 0;
+                const hasPage = HARDCODED_SLUGS.has(p.slug) || hasSections;
+                const hasThumb = p.grid_image || p.cover_image;
+                const imgFile = p.grid_image || p.cover_image;
+                const imgDir = imgFile && imgFile.startsWith(p.slug) ? 'main' : p.slug;
+                const handleClick = hasPage
+                  ? () => { window.location.href = `/projects/${p.slug}`; }
+                  : () => { document.getElementById('browse')?.scrollIntoView({ behavior: 'smooth' }); };
+                return (
+                  <div key={p.slug} className="mini-thumb" onClick={handleClick} title={p.name}>
+                    {hasThumb ? (
+                      <img src={`/images/${imgDir}/${imgFile}`} alt={p.name} loading="lazy" />
+                    ) : (
+                      <span>{p.name.charAt(0)}</span>
+                    )}
+                    <div className="mini-tooltip">{p.name}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Career ── */}
+      <section className="experience experience-career reveal" ref={addRevealRef}>
+        <p className="about-label">Career</p>
         <div className="exp-list">
 
           {/* PRADA Korea */}
@@ -211,23 +278,23 @@ export default function HomePage() {
             </div>
             <span className="exp-role">Interior Tech</span>
             <ul className="exp-works">
-              <li>TROPICO POP-UP (Lotte Dongtan · The Hyundai Seoul · Galleria Apgujeong)</li>
-              <li>HOLIDAY POP-UP (Shinsegae Gangnam · The Hyundai Seoul · Lotte Dongtan)</li>
-              <li>SHINSEGAE DAEJEON OPENING</li>
+              <li>{isKo ? 'TROPICO POP-UP (롯데 동탄 · 더현대 서울 · 갤러리아 압구정)' : 'TROPICO POP-UP (Lotte Dongtan · The Hyundai Seoul · Galleria Apgujeong)'}</li>
+              <li>{isKo ? 'HOLIDAY POP-UP (신세계 강남 · 더현대 서울 · 롯데 동탄)' : 'HOLIDAY POP-UP (Shinsegae Gangnam · The Hyundai Seoul · Lotte Dongtan)'}</li>
+              <li>{isKo ? '신세계 대전 오프닝' : 'SHINSEGAE DAEJEON OPENING'}</li>
             </ul>
           </div>
 
           {/* DaeHye Architecture */}
           <div className="exp-item">
             <div className="exp-header">
-              <span className="exp-company">DaeHye Architecture</span>
+              <span className="exp-company">{isKo ? '대혜 건축' : 'DaeHye Architecture'}</span>
               <span className="exp-period">2023.03 – 2024.03</span>
             </div>
             <span className="exp-role">Space Design</span>
             <ul className="exp-works">
-              <li>STARFIELD BUSAN CHANGWON</li>
-              <li>STARFIELD VILLAGE BYEOLLAE</li>
-              <li>HYUNDAI MOTORS COMPANY, Atlanta, Georgia USA</li>
+              <li>{isKo ? '스타필드 부산 창원' : 'STARFIELD BUSAN CHANGWON'}</li>
+              <li>{isKo ? '스타필드 빌리지 별내' : 'STARFIELD VILLAGE BYEOLLAE'}</li>
+              <li>{isKo ? '현대자동차, 애틀랜타, 조지아 USA' : 'HYUNDAI MOTORS COMPANY, Atlanta, Georgia USA'}</li>
             </ul>
           </div>
 
@@ -239,22 +306,22 @@ export default function HomePage() {
             </div>
             <span className="exp-role">Construction Cost Management</span>
             <ul className="exp-works">
-              <li>Construction cost standardization for Lotteria stores</li>
-              <li>Analyzed bid documents, categorized manual vs non-manual cost structures</li>
+              <li>{isKo ? '롯데리아 매장 시공비 표준화' : 'Construction cost standardization for Lotteria stores'}</li>
+              <li>{isKo ? '입찰 서류 분석, 인력/비인력 비용 구조 분류' : 'Analyzed bid documents, categorized manual vs non-manual cost structures'}</li>
             </ul>
           </div>
 
-          {/* INIA */}
+          {/* INITIA */}
           <div className="exp-item">
             <div className="exp-header">
-              <span className="exp-company">INIA (이니시아)</span>
+              <span className="exp-company">INITIA</span>
               <span className="exp-period">2025 – Present</span>
             </div>
             <span className="exp-role">Spatial Branding Designer</span>
             <ul className="exp-works">
               <li>
                 <Link href="/projects/tofug" className="exp-link">
-                  tofuG Brand &amp; Spatial Design
+                  {isKo ? 'tofuG 브랜드 & 공간 디자인' : 'tofuG Brand & Spatial Design'}
                 </Link>
               </li>
             </ul>
@@ -282,7 +349,6 @@ export default function HomePage() {
               <p className="project-name">TOFUG</p>
               <span className="project-tag">Singapore &middot; Malaysia</span>
             </div>
-            <div className="project-expand"><ExpandSVG /></div>
           </div>
         </Link>
 
@@ -295,7 +361,6 @@ export default function HomePage() {
               <p className="project-name">BENSON</p>
               <span className="project-tag">Branding &amp; Spatial Design</span>
             </div>
-            <div className="project-expand"><ExpandSVG /></div>
           </div>
         </Link>
 
@@ -308,7 +373,6 @@ export default function HomePage() {
               <p className="project-name">BODY GUARD</p>
               <span className="project-tag">Rebranding</span>
             </div>
-            <div className="project-expand"><ExpandSVG /></div>
           </div>
         </Link>
 
@@ -321,7 +385,6 @@ export default function HomePage() {
               <p className="project-name">GAGGA</p>
               <span className="project-tag">Brand &amp; Spatial Design</span>
             </div>
-            <div className="project-expand"><ExpandSVG /></div>
           </div>
         </Link>
 
@@ -334,7 +397,6 @@ export default function HomePage() {
               <p className="project-name">SOLDAM MARKET</p>
               <span className="project-tag">Brand &amp; Spatial Design</span>
             </div>
-            <div className="project-expand"><ExpandSVG /></div>
           </div>
         </Link>
       </section>
@@ -472,101 +534,91 @@ export default function HomePage() {
       </section>
 
       {/* ── Explore Projects (Dynamic) ── */}
-      <section className="project-cards-section reveal" ref={addRevealRef}>
+      <section className="project-cards-section reveal" ref={addRevealRef} id="browse">
         <h2 className="project-cards-heading">
-          {isKo ? '프로젝트 둘러보기' : 'Explore Projects'}
+          {isKo ? '프로젝트 둘러보기' : 'Browse All Projects'}
         </h2>
 
+        {/* Project Count */}
+        {visibleProjects.length > 0 && (
+          <p className="browse-count">
+            {(() => {
+              const filtered = activeFilter === 'all' ? visibleProjects : visibleProjects.filter((p) => p.category === activeFilter);
+              return isKo ? `총 ${filtered.length}개 프로젝트` : `${filtered.length} projects total`;
+            })()}
+          </p>
+        )}
+
         {/* Category Filter Pills */}
-        {allProjects.length > 0 && (
+        {visibleProjects.length > 0 && (
           <div className="filter-pills">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.key}
-                className={`filter-pill${activeFilter === cat.key ? ' active' : ''}`}
-                onClick={() => setActiveFilter(cat.key)}
-              >
-                {isKo ? cat.label_ko : cat.label_en}
-              </button>
-            ))}
+            {CATEGORIES.map((cat) => {
+              const cnt = cat.key === 'all' ? visibleProjects.length : visibleProjects.filter((p) => p.category === cat.key).length;
+              return (
+                <button
+                  key={cat.key}
+                  className={`filter-pill${activeFilter === cat.key ? ' active' : ''}`}
+                  onClick={() => setActiveFilter(cat.key)}
+                >
+                  {isKo ? cat.label_ko : cat.label_en} <span className="filter-pill-count">{cnt}</span>
+                </button>
+              );
+            })}
           </div>
         )}
 
-        {/* Project List Table */}
-        {allProjects.length > 0 && (
-          <div className="project-list">
-            {allProjects
-              .filter((p) => activeFilter === 'all' || p.category === activeFilter)
-              .map((p) => {
-                const hasSections = p.sections && p.sections.length > 0;
-                const hasPage = HARDCODED_SLUGS.has(p.slug) || hasSections;
-                const href = `/projects/${p.slug}`;
-
-                const inner = (
-                  <div className={`project-list-row${!hasPage ? ' disabled' : ''}`}>
-                    <span className="pl-year">{p.year}</span>
-                    <span className="pl-name">{p.name}</span>
-                    <span className="pl-category">{isKo ? (p.type_kr || p.category_label_kr || '') : (p.type_en || p.category_label_en || '')}</span>
-                    <span className="pl-desc">{isKo ? (p.tagline_kr || '') : (p.tagline_en || '')}</span>
-                    <span className="pl-arrow">{hasPage ? '\u2192' : ''}</span>
-                  </div>
-                );
-
-                return hasPage ? (
-                  <Link key={p.slug} href={href} className="project-list-link">
-                    {inner}
-                  </Link>
-                ) : (
-                  <div key={p.slug} className="project-list-link no-link">
-                    {inner}
-                  </div>
-                );
-              })}
-          </div>
-        )}
-
-        {/* Thumbnail Grid */}
-        <div className="project-cards-grid" style={allProjects.length > 0 ? { marginTop: 60 } : undefined}>
-          {(allProjects.length > 0
-            ? allProjects
+        {/* Project Image Grid */}
+        <div className="browse-grid">
+          {(visibleProjects.length > 0
+            ? visibleProjects
                 .filter((p) => activeFilter === 'all' || p.category === activeFilter)
-                .filter((p) => p.grid_image || p.cover_image)
                 .map((p) => {
                   const hasSections = p.sections && p.sections.length > 0;
                   const hasPage = HARDCODED_SLUGS.has(p.slug) || hasSections;
-                  const thumb = `/images/${p.slug}/${p.grid_image || p.cover_image}`;
-                  return { name: p.name, href: `/projects/${p.slug}`, tag: isKo ? (p.type_kr || '') : (p.type_en || ''), thumb, hasPage, slug: p.slug };
+                  const hasThumb = p.grid_image || p.cover_image;
+                  const imgFile = p.grid_image || p.cover_image;
+                  const imgDir = imgFile && imgFile.startsWith(p.slug) ? 'main' : p.slug;
+                  const thumb = hasThumb ? `/images/${imgDir}/${imgFile}` : null;
+                  return {
+                    name: p.name, href: `/projects/${p.slug}`, slug: p.slug,
+                    tag: isKo ? (p.category_label_kr || '') : (p.category_label_en || ''),
+                    year: p.year, thumb, hasPage, isNew: p.isNew,
+                  };
                 })
             : [
-                { name: 'tofuG', href: '/projects/tofug', tag: 'Brand & Spatial Design', thumb: 'https://framerusercontent.com/images/vForpcAJWD1kBVHipRHJhWa6eM.jpg', hasPage: true, slug: 'tofug' },
-                { name: 'BENSON', href: '/projects/benson', tag: 'Brand & Spatial Design', thumb: '/images/benson/page_01.png', hasPage: true, slug: 'benson' },
-                { name: 'BODY GUARD', href: '/projects/bodyguard', tag: 'Brand & Spatial Design', thumb: '/images/bodyguard/page_01.png', hasPage: true, slug: 'bodyguard' },
-                { name: 'GAGGA', href: '/projects/gagga', tag: 'Brand & Spatial Design', thumb: '/images/gagga/hero.jpg', hasPage: true, slug: 'gagga' },
-                { name: 'SOLDAM MARKET', href: '/projects/soldam', tag: 'Brand & Spatial Design', thumb: '/images/soldam/hero.jpg', hasPage: true, slug: 'soldam' },
+                { name: 'tofuG', href: '/projects/tofug', tag: 'Brand & Spatial Design', thumb: 'https://framerusercontent.com/images/vForpcAJWD1kBVHipRHJhWa6eM.jpg', hasPage: true, slug: 'tofug', year: '2025', isNew: false },
+                { name: 'BENSON', href: '/projects/benson', tag: 'Brand & Spatial Design', thumb: '/images/benson/page_01.png', hasPage: true, slug: 'benson', year: '2024', isNew: false },
+                { name: 'BODY GUARD', href: '/projects/bodyguard', tag: 'Brand & Spatial Design', thumb: '/images/bodyguard/page_01.png', hasPage: true, slug: 'bodyguard', year: '2024', isNew: false },
+                { name: 'GAGGA', href: '/projects/gagga', tag: 'Brand & Spatial Design', thumb: '/images/gagga/hero.jpg', hasPage: true, slug: 'gagga', year: '2024', isNew: false },
+                { name: 'SOLDAM MARKET', href: '/projects/soldam', tag: 'Brand & Spatial Design', thumb: '/images/soldam/hero.jpg', hasPage: true, slug: 'soldam', year: '2024', isNew: false },
               ]
-          ).map((p) =>
-            p.hasPage ? (
-              <Link key={p.slug} href={p.href} className="pc-card">
-                <div className="pc-card-img-wrap">
-                  <img src={p.thumb} alt={p.name} />
-                </div>
-                <div className="pc-card-body">
-                  <p className="pc-card-name">{p.name}</p>
-                  <span className="pc-card-tag">{p.tag}</span>
-                </div>
-              </Link>
-            ) : (
-              <div key={p.slug} className="pc-card pc-card-disabled">
-                <div className="pc-card-img-wrap">
-                  <img src={p.thumb} alt={p.name} />
-                </div>
-                <div className="pc-card-body">
-                  <p className="pc-card-name">{p.name}</p>
-                  <span className="pc-card-tag">{p.tag}</span>
+          ).map((p) => {
+            const card = (
+              <div key={p.slug} className={`browse-card${p.hasPage ? '' : ' browse-card-dim'}`}>
+                {p.thumb ? (
+                  <img src={p.thumb} alt={p.name} loading="lazy" />
+                ) : (
+                  <div className="browse-card-ph">{p.name.charAt(0)}</div>
+                )}
+                {p.isNew && <span className="browse-card-badge">NEW</span>}
+                <div className="browse-card-overlay">
+                  <span className="browse-card-name">{p.name}</span>
+                  <span className="browse-card-meta">{p.tag}</span>
+                  <span className="browse-card-year">{p.year}</span>
                 </div>
               </div>
-            )
-          )}
+            );
+
+            return p.hasPage ? (
+              <Link key={p.slug} href={p.href} className="browse-card-link">
+                {card}
+              </Link>
+            ) : (
+              <div key={p.slug} className="browse-card-link browse-card-nolink">
+                {card}
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -887,6 +939,7 @@ export default function HomePage() {
             width: 100%;
             height: 100vh;
             min-height: 600px;
+            margin-bottom: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -946,7 +999,121 @@ export default function HomePage() {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── About Section ── */
+        /* ── Hero About Trigger ── */
+        .hero-about-trigger {
+            position: relative;
+            display: inline-block;
+            margin-top: 16px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease-out 1.4s forwards;
+        }
+
+        /* ── Hero About Pill Button ── */
+        .hero-about-pill,
+        .hero-about-trigger {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hero-about-pill {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            background: transparent;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            transition: border-color 0.3s, color 0.3s;
+        }
+        .hero-about-trigger.active .hero-about-pill {
+            border-color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* ── Hero About Popup ── */
+        .hero-about-popup {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            width: 520px;
+            padding: 28px 36px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 10;
+        }
+        .hero-about-trigger.active .hero-about-popup {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+        @media (hover: hover) {
+            .hero-about-trigger:hover .hero-about-pill {
+                border-color: rgba(255,255,255,0.6);
+                color: rgba(255,255,255,0.9);
+            }
+            .hero-about-trigger:hover .hero-about-popup {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+                pointer-events: auto;
+            }
+        }
+        .hero-about-popup .about-text-ko {
+            font-size: 14px;
+            line-height: 2;
+            font-weight: 300;
+            color: rgba(255,255,255,0.9);
+            word-break: keep-all;
+        }
+        .hero-about-popup .about-text-en {
+            font-size: 13px;
+            line-height: 2;
+            font-weight: 300;
+            color: rgba(255,255,255,0.85);
+        }
+
+        /* ── Hero Scroll Indicator ── */
+        .hero-scroll {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeUp 1s ease-out 1.6s forwards;
+        }
+        .hero-scroll span {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+        }
+        .hero-scroll-line {
+            width: 1px;
+            height: 36px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+            animation: scrollPulse 2.5s infinite;
+        }
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.2; transform: scaleY(0.6); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* ── About Section (kept for label/text reuse) ── */
         .about {
             padding: 140px 40px;
             max-width: 1200px;
@@ -956,7 +1123,7 @@ export default function HomePage() {
             font-family: 'DM Mono', monospace;
             font-size: 12px;
             letter-spacing: 0.1em;
-            color: var(--fg-50);
+            color: var(--fg);
             text-transform: uppercase;
             margin-bottom: 20px;
         }
@@ -977,6 +1144,7 @@ export default function HomePage() {
         /* ── Experience Section ── */
         .experience {
             padding: 0 40px 100px;
+            padding-top: 160px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -1009,7 +1177,7 @@ export default function HomePage() {
             font-family: 'DM Mono', monospace;
             font-size: 12px;
             letter-spacing: 0.08em;
-            color: var(--fg-40);
+            color: var(--fg);
             white-space: nowrap;
             flex-shrink: 0;
         }
@@ -1044,6 +1212,98 @@ export default function HomePage() {
             left: 0;
             color: var(--fg-30, var(--fg-40));
             font-size: 12px;
+        }
+        .exp-featured {
+            border-top: 2px solid var(--fg-30);
+            padding-bottom: 40px;
+            margin-bottom: 8px;
+        }
+        .exp-company-featured {
+            font-size: clamp(18px, 1.8vw, 24px) !important;
+            letter-spacing: 0.04em;
+        }
+        .exp-company-studio {
+            font-size: clamp(22px, 2.2vw, 30px) !important;
+            letter-spacing: 0.04em;
+        }
+        .exp-role-gold {
+            color: var(--fg) !important;
+        }
+        .experience-career {
+            padding-top: 80px;
+        }
+
+        /* ── Mini Project Preview ── */
+        .mini-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 30px;
+            opacity: 0.55;
+        }
+        .mini-thumb {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            border-radius: 3px;
+            overflow: visible;
+            background: #1a1a1a;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .mini-thumb:hover {
+            opacity: 1 !important;
+        }
+        .mini-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+        .mini-thumb span {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--fg-10);
+            border-radius: 3px;
+        }
+        .mini-tooltip {
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 10px;
+            background: rgba(0,0,0,0.85);
+            border-radius: 4px;
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.5px;
+            color: #fff;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .mini-thumb:hover .mini-tooltip {
+            opacity: 1;
+        }
+        .exp-scope {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            color: var(--fg);
+            margin-bottom: 4px;
+        }
+        .exp-scope-sub {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--fg-40);
+            margin-bottom: 16px;
         }
         .exp-link {
             color: var(--fg-50);
@@ -1437,7 +1697,7 @@ export default function HomePage() {
             font-size: clamp(14px, 1.2vw, 16px);
             font-weight: 500;
             letter-spacing: 0.08em;
-            color: var(--fg-60);
+            color: var(--fg);
             text-transform: uppercase;
             margin-bottom: 48px;
         }
@@ -1494,11 +1754,20 @@ export default function HomePage() {
             display: inline-block;
         }
 
+        /* ── Browse Count ── */
+        .browse-count {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--fg-40);
+            letter-spacing: 1px;
+            margin-bottom: 36px;
+        }
+
         /* ── Filter Pills ── */
         .filter-pills {
             display: flex;
-            gap: 10px;
-            margin-bottom: 40px;
+            gap: 8px;
+            margin-bottom: 44px;
             flex-wrap: wrap;
         }
         .filter-pill {
@@ -1519,9 +1788,32 @@ export default function HomePage() {
             color: var(--fg-70);
         }
         .filter-pill.active {
-            background: #c4a882;
-            border-color: #c4a882;
-            color: #0c0c0c;
+            background: var(--fg);
+            border-color: var(--fg);
+            color: var(--bg);
+            font-weight: 500;
+        }
+        .filter-pill-count {
+            opacity: 0.5;
+            margin-left: 2px;
+        }
+
+        /* ── Project List Header ── */
+        .project-list-header {
+            display: grid;
+            grid-template-columns: 70px 1fr 110px 200px 40px;
+            align-items: center;
+            gap: 16px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(196,168,130,0.12);
+            margin-bottom: 4px;
+        }
+        .project-list-header span {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--fg-30);
             font-weight: 500;
         }
 
@@ -1547,36 +1839,84 @@ export default function HomePage() {
         }
         .project-list-row {
             display: grid;
-            grid-template-columns: 80px 1fr 140px 1.5fr 40px;
+            grid-template-columns: 70px 1fr 110px 200px 40px;
             align-items: center;
             padding: 18px 0;
             gap: 16px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .project-list-row.disabled {
             opacity: 0.4;
         }
+        .project-list-row.linked:hover {
+            background: rgba(196,168,130,0.05);
+            padding-left: 12px;
+        }
+        .project-list-row.linked:hover .pl-arrow {
+            color: var(--fg);
+            transform: translateX(4px);
+        }
+        .project-list-row.dim-row {
+            opacity: 0.45;
+            cursor: default;
+        }
+        .project-list-row.dim-row:hover {
+            background: none;
+            padding-left: 0;
+        }
         .pl-year {
             font-family: 'DM Mono', monospace;
-            font-size: 12px;
-            color: var(--fg-40);
+            font-size: 13px;
+            color: var(--fg);
             letter-spacing: 0.05em;
         }
         .pl-name {
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 500;
             color: var(--fg-90);
-            letter-spacing: 0.01em;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .new-badge {
+            display: inline-block;
+            font-family: 'DM Mono', monospace;
+            font-size: 7px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--fg);
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+        .coming-badge {
+            display: inline-block;
+            font-family: 'DM Mono', monospace;
+            font-size: 7px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--fg-70);
+            border: 1px solid var(--fg-30);
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 500;
+            flex-shrink: 0;
         }
         .pl-category {
             font-family: 'DM Mono', monospace;
-            font-size: 11px;
-            color: var(--fg-40);
-            letter-spacing: 0.04em;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--fg-30);
         }
         .pl-desc {
-            font-size: 13px;
-            font-weight: 300;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
             color: var(--fg-50);
+            letter-spacing: 0.5px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -1584,13 +1924,196 @@ export default function HomePage() {
         .pl-arrow {
             font-size: 16px;
             color: var(--fg-30);
-            text-align: center;
+            text-align: right;
+            transition: all 0.3s;
         }
 
         /* ── Disabled Card ── */
         .pc-card-disabled {
             opacity: 0.4;
             pointer-events: none;
+        }
+
+        /* ── Bottom Visual Grid ── */
+        .btm-grid-wrap {
+            padding: 80px 0 60px;
+            border-top: 1px solid rgba(196,168,130,0.06);
+            margin-top: 60px;
+        }
+        .btm-tag {
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 6px;
+            color: var(--fg-40);
+            text-transform: uppercase;
+        }
+        .btm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .btm-card {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 3px;
+            background: #1c1c1c;
+            border: 1px solid rgba(196,168,130,0.06);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btm-card:hover {
+            transform: scale(1.03);
+        }
+        .btm-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btm-card:hover img {
+            transform: scale(1.06);
+        }
+        .btm-card-ph {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: rgba(196,168,130,0.06);
+        }
+        .btm-card-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 14px;
+            background: linear-gradient(to top, rgba(12,12,12,0.85), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btm-card:hover .btm-card-label {
+            opacity: 1;
+        }
+        .btm-card-label span {
+            font-size: 12px;
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        .btm-card-label small {
+            display: block;
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            color: #7a756e;
+            margin-top: 2px;
+            letter-spacing: 1px;
+        }
+
+        /* ── Browse Grid (unified) ── */
+        .browse-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+        }
+        .browse-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        .browse-card-nolink {
+            cursor: default;
+        }
+        .browse-card {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 4px;
+            background: #1a1a1a;
+            border: 1px solid var(--fg-06);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .browse-card:hover {
+            transform: scale(1.03);
+        }
+        .browse-card-dim {
+            opacity: 0.55;
+        }
+        .browse-card-dim:hover {
+            opacity: 0.75;
+        }
+        .browse-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .browse-card:hover img {
+            transform: scale(1.06);
+        }
+        .browse-card-ph {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 200;
+            color: var(--fg-08);
+        }
+        .browse-card-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 3;
+            font-family: 'DM Mono', monospace;
+            font-size: 7px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--fg);
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        .browse-card-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.15) 40%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 16px 18px;
+            opacity: 0;
+            transition: opacity 0.35s;
+        }
+        .browse-card:hover .browse-card-overlay {
+            opacity: 1;
+        }
+        .browse-card-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        .browse-card-meta {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .browse-card-year {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 1px;
+            margin-top: 2px;
         }
 
         /* ── Responsive ── */
@@ -1611,6 +2134,7 @@ export default function HomePage() {
             .availability { display: none; }
             .lang-toggle { right: 60px; top: 16px; }
             .about { padding: 80px 20px; }
+            .hero-about-popup { width: calc(100vw - 40px); padding: 24px 20px; }
             .experience { padding: 0 20px 60px; }
             .exp-header { flex-wrap: wrap; gap: 4px; }
             .section-header { padding: 80px 20px 40px; }
@@ -1628,12 +2152,17 @@ export default function HomePage() {
             .projects-grid { grid-template-columns: repeat(2, 1fr); }
             .project-cards-grid { grid-template-columns: 1fr; gap: 24px; }
             .project-cards-section { padding: 80px 20px; }
+            .project-list-header { display: none; }
             .project-list-row {
-                grid-template-columns: 60px 1fr 40px;
+                grid-template-columns: 50px 1fr 36px;
             }
             .pl-category, .pl-desc { display: none; }
             .filter-pills { gap: 8px; }
             .filter-pill { padding: 6px 14px; font-size: 12px; }
+            .btm-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            .btm-grid-wrap { padding: 60px 0 40px; }
+            .browse-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .browse-card-overlay { opacity: 1; }
         }
       `}</style>
     </>
