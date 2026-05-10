@@ -11,6 +11,7 @@ import LangToggle from './LangToggle';
  */
 export default function ProjectNav({ sections = [], accentColor }) {
   const [scrolled, setScrolled] = useState(false);
+  const [lang, setLang] = useState('ko');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -18,10 +19,24 @@ export default function ProjectNav({ sections = [], accentColor }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    const sync = () => setLang(localStorage.getItem('site-lang') || 'ko');
+    sync();
+    window.addEventListener('storage', sync);
+    const id = window.setInterval(sync, 400);
+    return () => {
+      window.removeEventListener('storage', sync);
+      window.clearInterval(id);
+    };
+  }, []);
+
+  const isKo = lang === 'ko';
+
   return (
     <nav className={scrolled ? 'scrolled' : ''}>
       <Link href="/" className="logo">
-        夏陰
+        <span className="logo-default">夏陰</span>
+        <span className="logo-hover">{isKo ? '여름 그늘' : 'summer shade'}</span>
       </Link>
       <div className="nav-right">
         <ul className="nav-links">
@@ -57,8 +72,12 @@ export default function ProjectNav({ sections = [], accentColor }) {
           -webkit-backdrop-filter: blur(20px);
         }
         nav :global(.logo) {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
           font-family: 'Inter', 'Noto Sans KR', sans-serif;
           font-size: 28px;
+          line-height: 1;
           font-weight: 400;
           letter-spacing: 0.05em;
           color: #fff;
@@ -68,6 +87,31 @@ export default function ProjectNav({ sections = [], accentColor }) {
         }
         nav.scrolled :global(.logo) {
           color: var(--fg);
+        }
+        nav :global(.logo .logo-default),
+        nav :global(.logo .logo-hover) {
+          display: inline-block;
+          font-size: inherit;
+          line-height: 1;
+          transition: opacity 0.45s ease;
+        }
+        nav :global(.logo .logo-hover) {
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+          font-weight: 500;
+          font-style: italic;
+          letter-spacing: 0.02em;
+          opacity: 0;
+          pointer-events: none;
+        }
+        nav :global(.logo:hover .logo-default) {
+          opacity: 0;
+        }
+        nav :global(.logo:hover .logo-hover) {
+          opacity: 1;
         }
         .nav-right {
           display: flex;

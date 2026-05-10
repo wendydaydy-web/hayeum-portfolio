@@ -27,7 +27,10 @@ export default function WorkCorpPage() {
 
       <main className="wc">
         <nav className="wc-nav">
-          <Link href="/" className="wc-logo" aria-label="Back to home">夏陰</Link>
+          <Link href="/" className="wc-logo" aria-label="Back to home">
+            <span className="wc-logo-default">夏陰</span>
+            <span className="wc-logo-hover">{isKo ? '여름 그늘' : 'summer shade'}</span>
+          </Link>
           <div className="wc-nav-right">
             <Link href="/" className="wc-nav-link">HOME</Link>
             <span className="wc-lang" aria-label="Language toggle">
@@ -139,10 +142,40 @@ export default function WorkCorpPage() {
             -webkit-backdrop-filter: blur(20px);
           }
           .wc-logo {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
             font-size: 28px;
+            line-height: 1;
             letter-spacing: 0.05em;
             color: #fff;
             text-decoration: none;
+          }
+          .wc-logo-default,
+          .wc-logo-hover {
+            display: inline-block;
+            font-size: inherit;
+            line-height: 1;
+            transition: opacity 0.45s ease;
+          }
+          .wc-logo-hover {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+            font-weight: 500;
+            font-style: italic;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+          }
+          .wc-logo:hover .wc-logo-default {
+            opacity: 0;
+          }
+          .wc-logo:hover .wc-logo-hover {
+            opacity: 1;
           }
           .wc-nav-right {
             display: flex;
