@@ -6,11 +6,8 @@ import Link from 'next/link';
 let allProjects = [];
 try { allProjects = require('../data/projects-generated'); } catch (e) { /* not synced yet */ }
 
-// Visible projects (exclude brand + hidden — kept in data for future use)
-const visibleProjects = allProjects.filter((p) => p.category !== 'brand' && !p.hidden);
-
 // Hardcoded slugs that have dedicated pages
-const HARDCODED_SLUGS = new Set(['tofug', 'benson', 'bodyguard', 'gagga', 'soldam', 'shabusangha', 'squidgame', 'gyedanbread', 'handonday']);
+const HARDCODED_SLUGS = new Set(['tofug', 'benson', 'bodyguard', 'gagga', 'soldam']);
 
 // Category filter config
 const CATEGORIES = [
@@ -144,19 +141,51 @@ export default function HomePage() {
       {/* ── Navigation ── */}
       <nav ref={navRef} className={`nav${scrolled ? ' scrolled' : ''}${overlayOpen ? ' overlay-mode' : ''}`}>
         <div className="nav-left">
-          <a href="#contact" className="availability" onClick={(e) => { if (overlayOpen) { e.preventDefault(); setOverlayOpen(false); setTimeout(() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }, 400); } }}>
-            <span className="availability-dot"></span>
-            AVAILABLE FOR PROJECT
+          <a
+            href="#"
+            className="nav-logo"
+            onClick={(e) => {
+              e.preventDefault();
+              if (overlayOpen) setOverlayOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            <span className="nav-logo-text">夏陰</span>
           </a>
         </div>
-        <a href="#" className="nav-center" onClick={(e) => { e.preventDefault(); toggleOverlay(); }}>
-          <span className="nav-logo-text">夏陰</span>
-        </a>
         <div className="nav-right">
-          <button className="menu-btn" aria-label="Menu" onClick={toggleOverlay}>
-            <span></span>
-            <span></span>
-          </button>
+          <ul className="nav-menu">
+            <li>
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); toggleOverlay(); }}
+              >WORK</a>
+            </li>
+            <li>
+              <a href="#" onClick={(e) => e.preventDefault()}>WORK(CORP.)</a>
+            </li>
+            <li>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  if (overlayOpen) {
+                    e.preventDefault();
+                    setOverlayOpen(false);
+                    setTimeout(() => {
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 400);
+                  }
+                }}
+              >INFO</a>
+            </li>
+            <li>
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >INSTA</a>
+            </li>
+          </ul>
         </div>
       </nav>
 
@@ -240,7 +269,7 @@ export default function HomePage() {
 
             {/* Mini project preview grid */}
             <div className="mini-preview">
-              {visibleProjects.map((p) => {
+              {allProjects.filter((p) => !p.hidden && p.category !== 'brand').map((p) => {
                 const hasSections = p.sections && p.sections.length > 0;
                 const hasPage = HARDCODED_SLUGS.has(p.slug) || hasSections;
                 const hasThumb = p.grid_image || p.cover_image;
@@ -349,6 +378,7 @@ export default function HomePage() {
               <p className="project-name">TOFUG</p>
               <span className="project-tag">Singapore &middot; Malaysia</span>
             </div>
+            <div className="project-expand"><ExpandSVG /></div>
           </div>
         </Link>
 
@@ -361,6 +391,7 @@ export default function HomePage() {
               <p className="project-name">BENSON</p>
               <span className="project-tag">Branding &amp; Spatial Design</span>
             </div>
+            <div className="project-expand"><ExpandSVG /></div>
           </div>
         </Link>
 
@@ -373,6 +404,7 @@ export default function HomePage() {
               <p className="project-name">BODY GUARD</p>
               <span className="project-tag">Rebranding</span>
             </div>
+            <div className="project-expand"><ExpandSVG /></div>
           </div>
         </Link>
 
@@ -385,6 +417,7 @@ export default function HomePage() {
               <p className="project-name">GAGGA</p>
               <span className="project-tag">Brand &amp; Spatial Design</span>
             </div>
+            <div className="project-expand"><ExpandSVG /></div>
           </div>
         </Link>
 
@@ -397,6 +430,7 @@ export default function HomePage() {
               <p className="project-name">SOLDAM MARKET</p>
               <span className="project-tag">Brand &amp; Spatial Design</span>
             </div>
+            <div className="project-expand"><ExpandSVG /></div>
           </div>
         </Link>
       </section>
@@ -540,20 +574,21 @@ export default function HomePage() {
         </h2>
 
         {/* Project Count */}
-        {visibleProjects.length > 0 && (
+        {allProjects.length > 0 && (
           <p className="browse-count">
             {(() => {
-              const filtered = activeFilter === 'all' ? visibleProjects : visibleProjects.filter((p) => p.category === activeFilter);
+              const visible = allProjects.filter((p) => !p.hidden);
+              const filtered = activeFilter === 'all' ? visible : visible.filter((p) => p.category === activeFilter);
               return isKo ? `총 ${filtered.length}개 프로젝트` : `${filtered.length} projects total`;
             })()}
           </p>
         )}
 
         {/* Category Filter Pills */}
-        {visibleProjects.length > 0 && (
+        {allProjects.length > 0 && (
           <div className="filter-pills">
             {CATEGORIES.map((cat) => {
-              const cnt = cat.key === 'all' ? visibleProjects.length : visibleProjects.filter((p) => p.category === cat.key).length;
+              const cnt = cat.key === 'all' ? allProjects.filter((p) => !p.hidden).length : allProjects.filter((p) => !p.hidden && p.category === cat.key).length;
               return (
                 <button
                   key={cat.key}
@@ -569,9 +604,9 @@ export default function HomePage() {
 
         {/* Project Image Grid */}
         <div className="browse-grid">
-          {(visibleProjects.length > 0
-            ? visibleProjects
-                .filter((p) => activeFilter === 'all' || p.category === activeFilter)
+          {(allProjects.length > 0
+            ? allProjects
+                .filter((p) => !p.hidden && (activeFilter === 'all' || p.category === activeFilter))
                 .map((p) => {
                   const hasSections = p.sections && p.sections.length > 0;
                   const hasPage = HARDCODED_SLUGS.has(p.slug) || hasSections;
@@ -845,8 +880,8 @@ export default function HomePage() {
             z-index: 100;
             padding: 20px 40px;
             padding-bottom: 40px;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
             background: linear-gradient(rgba(16,16,16,0.7) 0%, rgba(16,16,16,0.3) 50%, transparent 100%);
             transition: background 0.4s, padding 0.4s, color 0.3s;
@@ -859,78 +894,62 @@ export default function HomePage() {
             -webkit-backdrop-filter: blur(20px);
             color: var(--fg);
         }
-        .nav.scrolled .menu-btn span {
-            background: var(--fg);
-        }
-        .nav.scrolled .availability {
-            border-color: var(--fg-15);
-        }
         .nav.overlay-mode {
             background: var(--overlay-bg);
             color: var(--overlay-fg);
         }
-        .nav.overlay-mode .nav-logo-text {
+        .nav.overlay-mode .nav-logo-text,
+        .nav.overlay-mode .nav-menu a {
             color: var(--overlay-fg);
-        }
-        .nav.overlay-mode .menu-btn span {
-            background: var(--overlay-fg);
-        }
-        .nav.overlay-mode .availability {
-            color: var(--overlay-fg);
-            border-color: rgba(15,14,14,0.15);
         }
         .nav-left {
             display: flex;
             align-items: center;
         }
-        .nav-center {
-            display: flex;
-            justify-content: center;
+        .nav-logo {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
         }
         .nav-logo-text {
             font-size: 28px;
             font-weight: 400;
             letter-spacing: 0.05em;
+            color: #fff;
+            transition: color 0.3s;
+        }
+        .nav.scrolled .nav-logo-text {
+            color: var(--fg);
         }
         .nav-right {
             display: flex;
             align-items: center;
             justify-content: flex-end;
         }
-        .availability {
+        .nav-menu {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 50px;
+            gap: 36px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-menu a {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
             font-size: 12px;
             font-weight: 500;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: rgba(255,255,255,0.85);
+            transition: color 0.3s, opacity 0.2s;
         }
-        .availability-dot {
-            width: 8px;
-            height: 8px;
-            background: #37ff33;
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
+        .nav.scrolled .nav-menu a {
+            color: var(--fg);
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(55,255,51,0.4); }
-            50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(55,255,51,0); }
-        }
-        .menu-btn {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            padding: 8px;
-        }
-        .menu-btn span {
-            display: block;
-            width: 22px;
-            height: 1.5px;
-            background: #fff;
-            transition: 0.3s;
+        .nav-menu a:hover {
+            opacity: 0.6;
         }
 
         /* ── Hero Section ── */
@@ -1123,7 +1142,7 @@ export default function HomePage() {
             font-family: 'DM Mono', monospace;
             font-size: 12px;
             letter-spacing: 0.1em;
-            color: var(--fg);
+            color: #ede8e0;
             text-transform: uppercase;
             margin-bottom: 20px;
         }
@@ -1177,7 +1196,7 @@ export default function HomePage() {
             font-family: 'DM Mono', monospace;
             font-size: 12px;
             letter-spacing: 0.08em;
-            color: var(--fg);
+            color: #ede8e0;
             white-space: nowrap;
             flex-shrink: 0;
         }
@@ -1227,7 +1246,7 @@ export default function HomePage() {
             letter-spacing: 0.04em;
         }
         .exp-role-gold {
-            color: var(--fg) !important;
+            color: #c4a882 !important;
         }
         .experience-career {
             padding-top: 80px;
@@ -1296,7 +1315,7 @@ export default function HomePage() {
             font-family: 'DM Mono', monospace;
             font-size: 11px;
             letter-spacing: 0.06em;
-            color: var(--fg);
+            color: #ede8e0;
             margin-bottom: 4px;
         }
         .exp-scope-sub {
@@ -1697,7 +1716,7 @@ export default function HomePage() {
             font-size: clamp(14px, 1.2vw, 16px);
             font-weight: 500;
             letter-spacing: 0.08em;
-            color: var(--fg);
+            color: #ede8e0;
             text-transform: uppercase;
             margin-bottom: 48px;
         }
@@ -1867,7 +1886,7 @@ export default function HomePage() {
         .pl-year {
             font-family: 'DM Mono', monospace;
             font-size: 13px;
-            color: var(--fg);
+            color: #ede8e0;
             letter-spacing: 0.05em;
         }
         .pl-name {
@@ -2002,7 +2021,7 @@ export default function HomePage() {
         .btm-card-label span {
             font-size: 12px;
             font-weight: 500;
-            color: #fff;
+            color: #ede8e0;
             letter-spacing: 0.5px;
         }
         .btm-card-label small {
@@ -2131,7 +2150,9 @@ export default function HomePage() {
 
         @media (max-width: 809px) {
             .nav { padding: 14px 20px; }
-            .availability { display: none; }
+            .nav-menu { gap: 18px; }
+            .nav-menu a { font-size: 10px; letter-spacing: 0.08em; }
+            .nav-logo-text { font-size: 22px; }
             .lang-toggle { right: 60px; top: 16px; }
             .about { padding: 80px 20px; }
             .hero-about-popup { width: calc(100vw - 40px); padding: 24px 20px; }
