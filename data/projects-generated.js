@@ -166,7 +166,7 @@ const projects = [
     type_kr: '브랜드', type_en: 'Brand',
     category_label_kr: 'Luxury / Flagship', category_label_en: 'Luxury / Flagship',
     cover_image: null, grid_image: null,
-    link: false, feat: false, wide: false, isNew: true,
+    link: false, feat: false, wide: false, isNew: true, hidden: true,
     sections: [],
   },
   {
@@ -175,7 +175,7 @@ const projects = [
     type_kr: '브랜드', type_en: 'Brand',
     category_label_kr: 'Luxury / Retail', category_label_en: 'Luxury / Retail',
     cover_image: null, grid_image: null,
-    link: false, feat: false, wide: false, isNew: true,
+    link: false, feat: false, wide: false, isNew: true, hidden: true,
     sections: [],
   },
   {
@@ -184,7 +184,7 @@ const projects = [
     type_kr: '브랜드', type_en: 'Brand',
     category_label_kr: 'Architecture / Interior', category_label_en: 'Architecture / Interior',
     cover_image: null, grid_image: null,
-    link: false, feat: false, wide: false, isNew: true,
+    link: false, feat: false, wide: false, isNew: true, hidden: true,
     sections: [],
   },
   {
@@ -193,7 +193,7 @@ const projects = [
     type_kr: '브랜드', type_en: 'Brand',
     category_label_kr: 'Brand / Spatial', category_label_en: 'Brand / Spatial',
     cover_image: null, grid_image: null,
-    link: false, feat: false, wide: false, isNew: true,
+    link: false, feat: false, wide: false, isNew: true, hidden: true,
     sections: [],
   },
   {
@@ -202,7 +202,7 @@ const projects = [
     type_kr: '브랜드', type_en: 'Brand',
     category_label_kr: 'Brand / Identity', category_label_en: 'Brand / Identity',
     cover_image: null, grid_image: null,
-    link: false, feat: false, wide: false, isNew: true,
+    link: false, feat: false, wide: false, isNew: true, hidden: true,
     sections: [],
   },
 ];
