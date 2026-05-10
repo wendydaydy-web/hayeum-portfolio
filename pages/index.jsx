@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import ScopeSection from '../components/ScopeSection';
 
 // Dynamic project data from sync script
 let allProjects = [];
 try { allProjects = require('../data/projects-generated'); } catch (e) { /* not synced yet */ }
 
 // Hardcoded slugs that have dedicated pages
-const HARDCODED_SLUGS = new Set(['tofug', 'benson', 'bodyguard', 'gagga', 'soldam']);
+const HARDCODED_SLUGS = new Set(['tofug', 'benson', 'bodyguard', 'gagga', 'soldam', 'squidgame', 'handonday', 'shabusangha', 'gyedanbread']);
 
 // Category filter config
 const CATEGORIES = [
@@ -21,7 +22,6 @@ export default function HomePage() {
   const [lang, setLangState] = useState('ko');
   const [scrolled, setScrolled] = useState(false);
   const [overlayOpen, setOverlayOpen] = useState(false);
-  const [activeScope, setActiveScope] = useState(null);
   const [activeFilter, setActiveFilter] = useState('all');
   const [aboutOpen, setAboutOpen] = useState(false);
   const revealRefs = useRef([]);
@@ -98,10 +98,6 @@ export default function HomePage() {
     }
   };
 
-  const toggleScope = (index) => {
-    setActiveScope((prev) => (prev === index ? null : index));
-  };
-
   // SVG for project expand button
   const ExpandSVG = () => (
     <svg width="24" height="25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -114,13 +110,6 @@ export default function HomePage() {
   const ArrowSVG = () => (
     <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M2 10L10 2M10 2H3M10 2v7" stroke="#0f0e0e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-
-  // Scope toggle SVG
-  const PlusSVG = () => (
-    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="1.2"/>
     </svg>
   );
 
@@ -168,18 +157,7 @@ export default function HomePage() {
               <Link href="/work-corp">WORK(CORP.)</Link>
             </li>
             <li>
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  if (overlayOpen) {
-                    e.preventDefault();
-                    setOverlayOpen(false);
-                    setTimeout(() => {
-                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                    }, 400);
-                  }
-                }}
-              >INFO</a>
+              <Link href="/info">INFO</Link>
             </li>
             <li>
               <a
@@ -381,136 +359,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Scope ── */}
-      <section className="scope reveal" ref={addRevealRef}>
-        <h2 className="scope-title">
-          CRAFTING<br/>
-          <span style={{ fontWeight: 300, color: 'var(--fg-40)' }}>FROM TIP TO TOE</span>
-        </h2>
-
-        {/* 空 */}
-        <div className={`scope-item${activeScope === 0 ? ' active' : ''}`}>
-          <div className="scope-header" onClick={() => toggleScope(0)}>
-            <div className="scope-header-left">
-              <span className="scope-kanji">空</span>
-              <div>
-                <p className="scope-label">공간 공</p>
-                <p className="scope-eng">Concept Strategy</p>
-              </div>
-            </div>
-            <div className="scope-toggle"><PlusSVG /></div>
-          </div>
-          <div className="scope-body">
-            <div className="scope-body-content">
-              {isKo ? (
-                <>
-                  <span>비어 있는 공간은 브랜드 이야기를 담기 위해 존재합니다.
-                    우리는 그 공간에 브랜드 컨셉을 입히고, 이야기가 흐르도록 만듭니다.</span>
-                  <div className="tasks">업무 · 공간 컨셉 기획, 브랜드 스토리 설계</div>
-                </>
-              ) : (
-                <>
-                  <span>Empty spaces exist to hold brand stories.
-                    We dress spaces in brand concepts, letting narratives flow naturally.</span>
-                  <div className="tasks">Scope · Space concept planning, Brand story design</div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* 間 */}
-        <div className={`scope-item${activeScope === 1 ? ' active' : ''}`}>
-          <div className="scope-header" onClick={() => toggleScope(1)}>
-            <div className="scope-header-left">
-              <span className="scope-kanji">間</span>
-              <div>
-                <p className="scope-label">사이 간</p>
-                <p className="scope-eng">Engage &amp; Experience</p>
-              </div>
-            </div>
-            <div className="scope-toggle"><PlusSVG /></div>
-          </div>
-          <div className="scope-body">
-            <div className="scope-body-content">
-              {isKo ? (
-                <>
-                  <span>브랜드와 공간을 이어주는 건 그 안에서 흘러가는 시간과 경험입니다.
-                    우리는 사람들이 머무는 모든 순간을 브랜드 경험으로 설계합니다.</span>
-                  <div className="tasks">업무 · 경험 설계, 체험 프로그램 기획</div>
-                </>
-              ) : (
-                <>
-                  <span>What connects brand and space is the time and experience flowing within.
-                    We design every moment of presence as a brand experience.</span>
-                  <div className="tasks">Scope · Experience design, Program planning</div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* 夏 */}
-        <div className={`scope-item${activeScope === 2 ? ' active' : ''}`}>
-          <div className="scope-header" onClick={() => toggleScope(2)}>
-            <div className="scope-header-left">
-              <span className="scope-kanji">夏</span>
-              <div>
-                <p className="scope-label">여름 하</p>
-                <p className="scope-eng">Branding Design</p>
-              </div>
-            </div>
-            <div className="scope-toggle"><PlusSVG /></div>
-          </div>
-          <div className="scope-body">
-            <div className="scope-body-content">
-              {isKo ? (
-                <>
-                  <span>가장 뜨거운 계절, 여름은 브랜드가 가장 빛나는 순간입니다.
-                    하음은 선명하게 기억되는 브랜드를 제안합니다.</span>
-                  <div className="tasks">업무 · 그래픽 디자인 (로고, 패키지, 포스터 etc)</div>
-                </>
-              ) : (
-                <>
-                  <span>The hottest season — summer is when a brand shines brightest.
-                    Ha-umm proposes brands that are vividly remembered.</span>
-                  <div className="tasks">Scope · Graphic design (Logo, Package, Poster etc)</div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* 陰 */}
-        <div className={`scope-item${activeScope === 3 ? ' active' : ''}`}>
-          <div className="scope-header" onClick={() => toggleScope(3)}>
-            <div className="scope-header-left">
-              <span className="scope-kanji">陰</span>
-              <div>
-                <p className="scope-label">그늘 음</p>
-                <p className="scope-eng">Spatial Design</p>
-              </div>
-            </div>
-            <div className="scope-toggle"><PlusSVG /></div>
-          </div>
-          <div className="scope-body">
-            <div className="scope-body-content">
-              {isKo ? (
-                <>
-                  <span>뜨거운 여름 속 그늘, 사람들이 머물고 싶은 자리.
-                    보이지 않는 그늘 속 시간과 디테일이 공간의 가치를 완성합니다.</span>
-                  <div className="tasks">업무 · 공간 설계, 실시 설계, 감리</div>
-                </>
-              ) : (
-                <>
-                  <span>Shade in the hot summer — a place where people want to stay.
-                    Invisible time and detail within the shade complete a space&apos;s value.</span>
-                  <div className="tasks">Scope · Spatial design, Construction documentation, Supervision</div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
+      <ScopeSection isKo={isKo} addRevealRef={addRevealRef} className="reveal" />
 
       {/* ── Explore Projects (Dynamic) ── */}
       <section className="project-cards-section reveal" ref={addRevealRef} id="browse">
@@ -636,70 +485,41 @@ export default function HomePage() {
       {/* ── Projects Grid Overlay ── */}
       <div className={`projects-overlay${overlayOpen ? ' open' : ''}`}>
         <div className="projects-grid">
-          {/* TOFUG */}
-          <Link href="/projects/tofug" className="grid-card" onClick={() => setOverlayOpen(false)}>
-            <img src="/images/main/tofug-default.jpg" alt="TOFUG" />
-            <div className="grid-card-overlay"></div>
-            <div className="grid-card-info">
-              <span className="grid-card-name">TOFU&middot;G</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </Link>
-          {/* BENSON */}
-          <Link href="/projects/benson" className="grid-card" onClick={() => setOverlayOpen(false)}>
-            <img src="/images/main/benson-default.png" alt="BENSON" />
-            <div className="grid-card-overlay"></div>
-            <div className="grid-card-info">
-              <span className="grid-card-name">BENSON</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </Link>
-          {/* BODY GUARD */}
-          <Link href="/projects/bodyguard" className="grid-card" onClick={() => setOverlayOpen(false)}>
-            <img src="/images/main/bodyguard-grid.png" alt="BODY GUARD" />
-            <div className="grid-card-overlay"></div>
-            <div className="grid-card-info">
-              <span className="grid-card-name">BODY GUARD</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </Link>
-          {/* GAGGA */}
-          <Link href="/projects/gagga" className="grid-card">
-            <img src="/images/main/gagga-grid.jpg" alt="GAGGA" />
-            <div className="grid-card-overlay"></div>
-            <div className="grid-card-info">
-              <span className="grid-card-name">GAGGA</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </Link>
-          {/* SQUID GAME 2 */}
-          <div className="grid-card no-image">
-            <div className="grid-card-info">
-              <span className="grid-card-name">SQUID GAME 2</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </div>
-          {/* NEW BALANCE */}
-          <div className="grid-card no-image">
-            <div className="grid-card-info">
-              <span className="grid-card-name">NEW BALANCE</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </div>
-          {/* SOLDAM MARKET */}
-          <Link href="/projects/soldam" className="grid-card no-image" onClick={() => setOverlayOpen(false)}>
-            <div className="grid-card-info">
-              <span className="grid-card-name">SOLDAM MARKET</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </Link>
-          {/* PAUL BASSETT */}
-          <div className="grid-card no-image">
-            <div className="grid-card-info">
-              <span className="grid-card-name">PAUL BASSETT</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </div>
+          {allProjects.map((p) => {
+            const hasSections = p.sections && p.sections.length > 0;
+            const hasPage = HARDCODED_SLUGS.has(p.slug) || hasSections;
+            const imgFile = p.grid_image || p.cover_image;
+            const imgDir = imgFile && imgFile.startsWith(p.slug) ? 'main' : p.slug;
+            const thumb = imgFile ? `/images/${imgDir}/${imgFile}` : null;
+
+            const inner = (
+              <>
+                {thumb && <img src={thumb} alt={p.name} />}
+                {thumb && <div className="grid-card-overlay"></div>}
+                <div className="grid-card-info">
+                  <span className="grid-card-name">{p.name}</span>
+                  <div className="grid-card-arrow"><ArrowSVG /></div>
+                </div>
+              </>
+            );
+
+            const className = `grid-card${thumb ? '' : ' no-image'}`;
+
+            return hasPage ? (
+              <Link
+                key={p.slug}
+                href={`/projects/${p.slug}`}
+                className={className}
+                onClick={() => setOverlayOpen(false)}
+              >
+                {inner}
+              </Link>
+            ) : (
+              <div key={p.slug} className={className}>
+                {inner}
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -1436,92 +1256,6 @@ export default function HomePage() {
             text-align: center;
         }
 
-        /* ── Scope Section ── */
-        .scope {
-            padding: 140px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .scope-title {
-            font-size: clamp(28px, 4vw, 48px);
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            margin-bottom: 80px;
-        }
-        .scope-item {
-            border-top: 1px solid var(--fg-10);
-            overflow: hidden;
-        }
-        .scope-item:last-child {
-            border-bottom: 1px solid var(--fg-10);
-        }
-        .scope-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 32px 0;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        .scope-header:hover { color: var(--fg-70); }
-        .scope-header-left {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-        .scope-kanji {
-            font-size: clamp(24px, 3vw, 36px);
-            font-weight: 300;
-            min-width: 60px;
-        }
-        .scope-label {
-            font-family: 'DM Mono', monospace;
-            font-size: 13px;
-            letter-spacing: 0.05em;
-            color: var(--fg-50);
-        }
-        .scope-eng {
-            font-size: clamp(16px, 2vw, 22px);
-            font-weight: 500;
-        }
-        .scope-toggle {
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--fg-15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.4s;
-        }
-        .scope-item.active .scope-toggle {
-            transform: rotate(45deg);
-        }
-        .scope-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease, padding 0.5s ease;
-        }
-        .scope-item.active .scope-body {
-            max-height: 300px;
-            padding-bottom: 32px;
-        }
-        .scope-body-content {
-            padding-left: 84px;
-            font-size: 15px;
-            line-height: 1.8;
-            font-weight: 300;
-            color: var(--fg-60);
-            word-break: keep-all;
-        }
-        .scope-body-content .tasks {
-            margin-top: 12px;
-            font-family: 'DM Mono', monospace;
-            font-size: 12px;
-            color: var(--fg-40);
-            letter-spacing: 0.03em;
-        }
-
         /* ── Footer / Contact ── */
         .footer {
             padding: 100px 40px;
@@ -2115,7 +1849,6 @@ export default function HomePage() {
             .about { padding: 100px 24px; }
             .experience { padding: 0 24px 80px; }
             .projects { padding: 0 24px 100px; }
-            .scope { padding: 100px 24px; }
             .footer { padding: 80px 24px; }
             .projects-grid { grid-template-columns: repeat(3, 1fr); }
             .project-cards-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2137,10 +1870,6 @@ export default function HomePage() {
             .projects { padding: 0 20px 80px; }
             .project-info { padding: 24px; }
             .project-card { aspect-ratio: 4/3; }
-            .scope { padding: 80px 20px; }
-            .scope-header-left { gap: 16px; }
-            .scope-body-content { padding-left: 0; }
-            .scope-kanji { min-width: 40px; }
             .footer { padding: 60px 20px; }
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
             .footer-bottom { flex-direction: column; gap: 16px; }
