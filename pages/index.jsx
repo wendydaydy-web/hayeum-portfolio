@@ -672,34 +672,6 @@ export default function HomePage() {
               <div className="grid-card-arrow"><ArrowSVG /></div>
             </div>
           </Link>
-          {/* SQUID GAME 2 */}
-          <div className="grid-card no-image">
-            <div className="grid-card-info">
-              <span className="grid-card-name">SQUID GAME 2</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </div>
-          {/* NEW BALANCE */}
-          <div className="grid-card no-image">
-            <div className="grid-card-info">
-              <span className="grid-card-name">NEW BALANCE</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </div>
-          {/* SOLDAM MARKET */}
-          <Link href="/projects/soldam" className="grid-card no-image" onClick={() => setOverlayOpen(false)}>
-            <div className="grid-card-info">
-              <span className="grid-card-name">SOLDAM MARKET</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </Link>
-          {/* PAUL BASSETT */}
-          <div className="grid-card no-image">
-            <div className="grid-card-info">
-              <span className="grid-card-name">PAUL BASSETT</span>
-              <div className="grid-card-arrow"><ArrowSVG /></div>
-            </div>
-          </div>
         </div>
       </div>
 
