@@ -273,7 +273,7 @@ export default function WorkCorpPage() {
             font-family: 'DM Mono', monospace;
             font-size: 12px;
             letter-spacing: 0.08em;
-            color: #ede8e0;
+            color: #aaa;
             white-space: nowrap;
             flex-shrink: 0;
           }

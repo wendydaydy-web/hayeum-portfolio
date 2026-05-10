@@ -56,7 +56,7 @@ export default function DynamicProjectPage({ project, prev, next }) {
 
   const p = project;
   const I = (name) => `/images/${p.slug}/${name}`;
-  const accentColor = '#c4a882';
+  const accentColor = '#999';
 
   // Build sections for nav
   const navSections = (p.sections || []).map((s) => ({
@@ -141,7 +141,7 @@ export default function DynamicProjectPage({ project, prev, next }) {
         @media (prefers-color-scheme: dark) {
           :global(:root) {
             --page-bg: #0f0e0e;
-            --page-fg: #f0efeb;
+            --page-fg: #e8e8e8;
             --section-bg: #1a1a1a;
             --text-mid: #aaa;
             --text-light: #999;

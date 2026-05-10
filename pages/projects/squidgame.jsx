@@ -187,7 +187,7 @@ export default function SquidGame() {
           --gray: #888;
           --max-width: 1400px;
           --page-bg: #0f0e0e;
-          --page-fg: #f0efeb;
+          --page-fg: #e8e8e8;
           --section-bg: #1a1a1a;
           --text-mid: #aaa;
           --text-light: #999;

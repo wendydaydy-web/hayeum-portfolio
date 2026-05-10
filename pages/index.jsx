@@ -135,7 +135,7 @@ export default function HomePage() {
         <meta name="description" content="공간하음(空間夏陰) - A place where people naturally gather, like summer shade." />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500&family=DM+Mono:wght@400&family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet" />
       </Head>
 
       {/* ── Navigation ── */}
@@ -800,6 +800,7 @@ export default function HomePage() {
         .nav-left {
             display: flex;
             align-items: center;
+            justify-content: flex-start;
         }
         .nav-logo {
             display: inline-flex;
@@ -812,6 +813,7 @@ export default function HomePage() {
             display: inline-flex;
             align-items: center;
             font-size: 28px;
+            line-height: 1;
             font-weight: 400;
             letter-spacing: 0.05em;
             color: #fff;
@@ -823,18 +825,19 @@ export default function HomePage() {
         .logo-default,
         .logo-hover {
             display: inline-block;
-            transition: opacity 0.4s ease;
+            font-size: inherit;
+            line-height: 1;
+            transition: opacity 0.45s ease;
         }
         .logo-hover {
             position: absolute;
             top: 50%;
             left: 0;
             transform: translateY(-50%);
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            font-size: 18px;
-            font-weight: 400;
-            letter-spacing: 0.04em;
+            font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+            font-weight: 500;
             font-style: italic;
+            letter-spacing: 0.02em;
             white-space: nowrap;
             opacity: 0;
             pointer-events: none;
@@ -1113,7 +1116,7 @@ export default function HomePage() {
             font-family: 'DM Mono', monospace;
             font-size: 12px;
             letter-spacing: 0.1em;
-            color: #ede8e0;
+            color: #aaa;
             text-transform: uppercase;
             margin-bottom: 20px;
         }
@@ -1167,7 +1170,7 @@ export default function HomePage() {
             font-family: 'DM Mono', monospace;
             font-size: 12px;
             letter-spacing: 0.08em;
-            color: #ede8e0;
+            color: #aaa;
             white-space: nowrap;
             flex-shrink: 0;
         }
@@ -1217,7 +1220,7 @@ export default function HomePage() {
             letter-spacing: 0.04em;
         }
         .exp-role-gold {
-            color: #c4a882 !important;
+            color: #999 !important;
         }
         .experience-career {
             padding-top: 80px;
@@ -1286,7 +1289,7 @@ export default function HomePage() {
             font-family: 'DM Mono', monospace;
             font-size: 11px;
             letter-spacing: 0.06em;
-            color: #ede8e0;
+            color: #aaa;
             margin-bottom: 4px;
         }
         .exp-scope-sub {
@@ -1687,7 +1690,7 @@ export default function HomePage() {
             font-size: clamp(14px, 1.2vw, 16px);
             font-weight: 500;
             letter-spacing: 0.08em;
-            color: #ede8e0;
+            color: #aaa;
             text-transform: uppercase;
             margin-bottom: 48px;
         }
@@ -1857,7 +1860,7 @@ export default function HomePage() {
         .pl-year {
             font-family: 'DM Mono', monospace;
             font-size: 13px;
-            color: #ede8e0;
+            color: #aaa;
             letter-spacing: 0.05em;
         }
         .pl-name {
@@ -1992,14 +1995,14 @@ export default function HomePage() {
         .btm-card-label span {
             font-size: 12px;
             font-weight: 500;
-            color: #ede8e0;
+            color: #aaa;
             letter-spacing: 0.5px;
         }
         .btm-card-label small {
             display: block;
             font-family: 'DM Mono', monospace;
             font-size: 9px;
-            color: #7a756e;
+            color: #777;
             margin-top: 2px;
             letter-spacing: 1px;
         }
