@@ -189,6 +189,7 @@ export default function HomePage() {
           <source src="https://framerusercontent.com/assets/MoR4uHvfn9l6Y2vXWgZEumlT0.mp4" type="video/mp4" />
         </video>
         <div className="hero-overlay"></div>
+        <div className="hero-fade-bottom"></div>
         <div className="hero-content">
           <img src="/images/main/hero-title.png" alt="空間夏陰" className="hero-title-img" />
           <p className="hero-subtitle">A place where people naturally gather, like summer shade.</p>
@@ -749,6 +750,16 @@ export default function HomePage() {
             height: 100%;
             background: rgba(0,0,0,0.15);
             z-index: 1;
+        }
+        .hero-fade-bottom {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 280px;
+            background: linear-gradient(to bottom, transparent, var(--bg));
+            z-index: 1;
+            pointer-events: none;
         }
         .hero-content {
             position: relative;
