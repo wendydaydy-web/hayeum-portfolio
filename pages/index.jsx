@@ -152,7 +152,7 @@ export default function HomePage() {
           >
             <span className="nav-logo-text">
               <span className="logo-default">夏陰</span>
-              <span className="logo-hover">summer shade</span>
+              <span className="logo-hover">{isKo ? '여름 그늘' : 'summer shade'}</span>
             </span>
           </a>
         </div>
@@ -165,7 +165,7 @@ export default function HomePage() {
               >WORK</a>
             </li>
             <li>
-              <a href="#" onClick={(e) => e.preventDefault()}>WORK(CORP.)</a>
+              <Link href="/work-corp">WORK(CORP.)</Link>
             </li>
             <li>
               <a
@@ -183,20 +183,27 @@ export default function HomePage() {
             </li>
             <li>
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/id_haumm/"
                 target="_blank"
                 rel="noopener noreferrer"
               >INSTA</a>
             </li>
+            <li className="nav-lang" aria-label="Language toggle">
+              <button
+                type="button"
+                className={lang === 'en' ? 'active' : ''}
+                onClick={() => setLang('en')}
+              >EN</button>
+              <span className="nav-lang-sep">/</span>
+              <button
+                type="button"
+                className={lang === 'ko' ? 'active' : ''}
+                onClick={() => setLang('ko')}
+              >KR</button>
+            </li>
           </ul>
         </div>
       </nav>
-
-      {/* ── Language Toggle ── */}
-      <div className={`lang-toggle${scrolled ? ' scrolled' : ''}${overlayOpen ? ' dark' : ''}`}>
-        <button className={`lang-btn${lang === 'ko' ? ' active' : ''}`} onClick={() => setLang('ko')}>KR</button>
-        <button className={`lang-btn${lang === 'en' ? ' active' : ''}`} onClick={() => setLang('en')}>EN</button>
-      </div>
 
       {/* ── Hero ── */}
       <section className="hero">
@@ -826,56 +833,6 @@ export default function HomePage() {
         button { border: none; background: none; cursor: pointer; font-family: inherit; color: inherit; }
         img { display: block; max-width: 100%; }
 
-        /* ── Language Toggle ── */
-        .lang-toggle {
-            position: fixed;
-            top: 20px;
-            right: 100px;
-            z-index: 200;
-            display: flex;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.3);
-            backdrop-filter: blur(12px);
-            transition: border-color 0.3s;
-        }
-        .lang-toggle.dark {
-            border-color: rgba(0,0,0,0.15);
-        }
-        .lang-btn {
-            padding: 6px 14px;
-            font-size: 11px;
-            letter-spacing: 1px;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            background: transparent;
-            color: rgba(255,255,255,0.6);
-            transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-        .lang-btn.active {
-            background: rgba(255,255,255,0.2);
-            color: #fff;
-        }
-        .lang-toggle.scrolled {
-            border-color: var(--fg-30);
-        }
-        .lang-toggle.scrolled .lang-btn {
-            color: var(--fg-50);
-        }
-        .lang-toggle.scrolled .lang-btn.active {
-            background: var(--fg);
-            color: var(--bg);
-        }
-        .lang-toggle.dark .lang-btn {
-            color: rgba(0,0,0,0.4);
-        }
-        .lang-toggle.dark .lang-btn.active {
-            background: #0f0e0e;
-            color: #fff;
-        }
-
         /* ── Navigation ── */
         .nav {
             position: fixed;
@@ -981,6 +938,54 @@ export default function HomePage() {
         }
         .nav-menu a:hover {
             opacity: 0.6;
+        }
+        .nav-lang {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.85);
+        }
+        .nav.scrolled .nav-lang {
+            color: var(--fg);
+        }
+        .nav.overlay-mode .nav-lang {
+            color: var(--overlay-fg);
+        }
+        .nav-lang button {
+            font: inherit;
+            letter-spacing: inherit;
+            text-transform: inherit;
+            color: rgba(255,255,255,0.4);
+            transition: color 0.3s, opacity 0.2s;
+            padding: 0;
+        }
+        .nav.scrolled .nav-lang button {
+            color: var(--fg-40);
+        }
+        .nav.overlay-mode .nav-lang button {
+            color: rgba(15,14,14,0.35);
+        }
+        .nav-lang button.active {
+            color: rgba(255,255,255,0.95);
+            font-weight: 600;
+        }
+        .nav.scrolled .nav-lang button.active {
+            color: var(--fg);
+        }
+        .nav.overlay-mode .nav-lang button.active {
+            color: var(--overlay-fg);
+        }
+        .nav-lang button:hover {
+            opacity: 0.7;
+        }
+        .nav-lang-sep {
+            color: inherit;
+            opacity: 0.4;
         }
 
         /* ── Hero Section ── */
@@ -2181,10 +2186,11 @@ export default function HomePage() {
 
         @media (max-width: 809px) {
             .nav { padding: 14px 20px; }
-            .nav-menu { gap: 18px; }
-            .nav-menu a { font-size: 10px; letter-spacing: 0.08em; }
+            .nav-menu { gap: 14px; }
+            .nav-menu a,
+            .nav-lang { font-size: 10px; letter-spacing: 0.08em; }
+            .nav-lang { gap: 4px; }
             .nav-logo-text { font-size: 22px; }
-            .lang-toggle { right: 60px; top: 16px; }
             .about { padding: 80px 20px; }
             .hero-about-popup { width: calc(100vw - 40px); padding: 24px 20px; }
             .experience { padding: 0 20px 60px; }
