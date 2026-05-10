@@ -224,144 +224,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Studio ── */}
-      <section className="experience reveal" ref={addRevealRef}>
-        <p className="about-label">Studio</p>
-        <div className="exp-list">
-          <div className="exp-item exp-featured">
-            <div className="exp-header">
-              <span className="exp-company exp-company-studio">
-                {isKo ? '공간하음' : 'Gonggan Ha-umm'}
-              </span>
-              <span className="exp-period">2024 – Present</span>
-            </div>
-            <span className="exp-role exp-role-gold">Founder · Spatial Branding Designer</span>
-            <p className="exp-scope">
-              {isKo
-                ? 'Concept — Branding — Spatial Design — Construction — Supervision'
-                : 'Concept — Branding — Spatial Design — Construction — Supervision'}
-            </p>
-            <p className="exp-scope-sub">
-              {isKo ? '컨셉 기획부터 시공 감리까지' : 'From concept planning to construction supervision'}
-            </p>
-            <ul className="exp-works">
-              <li>{isKo ? '20+ 프로젝트 총괄 (F&B · Retail · Pop-Up · Deco)' : '20+ projects directed (F&B · Retail · Pop-Up · Deco)'}</li>
-              <li>{isKo ? '4개국 프로젝트 수행 (Korea · Singapore · Malaysia · USA)' : 'Projects across 4 countries (Korea · Singapore · Malaysia · USA)'}</li>
-              <li>{isKo ? '브랜드 공간 컨셉 기획 · SI 가이드북 · 실시설계 · 현장 감리' : 'Brand spatial concept · SI guidebook · Working drawings · On-site supervision'}</li>
-              <li>
-                {isKo
-                  ? '현재 INIA GROUP 소속으로 tofuG 멀티매장 디자인 총괄 중'
-                  : 'Currently directing multi-location tofuG design under INIA GROUP'}
-              </li>
-            </ul>
-
-            {/* Mini project preview grid */}
-            <div className="mini-preview">
-              {allProjects.filter((p) => !p.hidden && p.category !== 'brand').map((p) => {
-                const hasSections = p.sections && p.sections.length > 0;
-                const hasPage = HARDCODED_SLUGS.has(p.slug) || hasSections;
-                const hasThumb = p.grid_image || p.cover_image;
-                const imgFile = p.grid_image || p.cover_image;
-                const imgDir = imgFile && imgFile.startsWith(p.slug) ? 'main' : p.slug;
-                const handleClick = hasPage
-                  ? () => { window.location.href = `/projects/${p.slug}`; }
-                  : () => { document.getElementById('browse')?.scrollIntoView({ behavior: 'smooth' }); };
-                return (
-                  <div key={p.slug} className="mini-thumb" onClick={handleClick} title={p.name}>
-                    {hasThumb ? (
-                      <img src={`/images/${imgDir}/${imgFile}`} alt={p.name} loading="lazy" />
-                    ) : (
-                      <span>{p.name.charAt(0)}</span>
-                    )}
-                    <div className="mini-tooltip">{p.name}</div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Projects Header ── */}
-      <div className="section-header reveal" ref={addRevealRef}>
-        <h2 className="section-title">
-          SELECTED
-          <span className="section-title-line">PROJECTS</span>
-        </h2>
-      </div>
-
-      {/* ── Projects ── */}
-      <section className="projects" id="project">
-        {/* Project 1: TOFUG */}
-        <Link href="/projects/tofug" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/main/tofug-default.jpg" alt="TOFUG" className="project-img-default" />
-          <img src="/images/main/tofug-hover.jpg" alt="TOFUG hover" className="project-img-hover" />
-          <div className="project-info">
-            <div>
-              <p className="project-name">TOFUG</p>
-              <span className="project-tag">Singapore &middot; Malaysia</span>
-            </div>
-            <div className="project-expand"><ExpandSVG /></div>
-          </div>
-        </Link>
-
-        {/* Project 2: BENSON */}
-        <Link href="/projects/benson" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/main/benson-default.png" alt="BENSON" className="project-img-default" />
-          <img src="/images/main/benson-hover.png" alt="BENSON hover" className="project-img-hover" />
-          <div className="project-info">
-            <div>
-              <p className="project-name">BENSON</p>
-              <span className="project-tag">Branding &amp; Spatial Design</span>
-            </div>
-            <div className="project-expand"><ExpandSVG /></div>
-          </div>
-        </Link>
-
-        {/* Project 3: BODY GUARD */}
-        <Link href="/projects/bodyguard" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/main/bodyguard-default.png" alt="BODY GUARD" className="project-img-default" />
-          <img src="/images/main/bodyguard-hover.png" alt="BODY GUARD hover" className="project-img-hover" />
-          <div className="project-info">
-            <div>
-              <p className="project-name">BODY GUARD</p>
-              <span className="project-tag">Rebranding</span>
-            </div>
-            <div className="project-expand"><ExpandSVG /></div>
-          </div>
-        </Link>
-
-        {/* Project 4: GAGGA */}
-        <Link href="/projects/gagga" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/gagga/hero.jpg" alt="GAGGA" className="project-img-default" />
-          <img src="/images/main/gagga-grid.jpg" alt="GAGGA hover" className="project-img-hover" />
-          <div className="project-info">
-            <div>
-              <p className="project-name">GAGGA</p>
-              <span className="project-tag">Brand &amp; Spatial Design</span>
-            </div>
-            <div className="project-expand"><ExpandSVG /></div>
-          </div>
-        </Link>
-
-        {/* Project 5: SOLDAM MARKET */}
-        <Link href="/projects/soldam" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/main/soldam-default.png" alt="SOLDAM MARKET" className="project-img-default" />
-          <img src="/images/main/soldam-hover.png" alt="SOLDAM MARKET hover" className="project-img-hover" />
-          <div className="project-info">
-            <div>
-              <p className="project-name">SOLDAM MARKET</p>
-              <span className="project-tag">Brand &amp; Spatial Design</span>
-            </div>
-            <div className="project-expand"><ExpandSVG /></div>
-          </div>
-        </Link>
-      </section>
-
-      {/* ── Scope ── */}
-      <ScopeSection isKo={isKo} addRevealRef={addRevealRef} className="reveal" />
-
-      {/* ── Explore Projects (Dynamic) ── */}
+      {/* ── Browse All Projects (Dynamic) ── */}
       <section className="project-cards-section reveal" ref={addRevealRef} id="browse">
         <h2 className="project-cards-heading">
           {isKo ? '프로젝트 둘러보기' : 'Browse All Projects'}
@@ -450,6 +313,119 @@ export default function HomePage() {
           })}
         </div>
       </section>
+
+      {/* ── Studio ── */}
+      <section className="experience reveal" ref={addRevealRef}>
+        <p className="about-label">Studio</p>
+        <div className="exp-list">
+          <div className="exp-item exp-featured">
+            <div className="exp-header">
+              <span className="exp-company exp-company-studio">
+                {isKo ? '공간하음' : 'Gonggan Ha-umm'}
+              </span>
+              <span className="exp-period">2024 – Present</span>
+            </div>
+            <span className="exp-role exp-role-gold">Founder · Spatial Branding Designer</span>
+            <p className="exp-scope">
+              {isKo
+                ? 'Concept — Branding — Spatial Design — Construction — Supervision'
+                : 'Concept — Branding — Spatial Design — Construction — Supervision'}
+            </p>
+            <p className="exp-scope-sub">
+              {isKo ? '컨셉 기획부터 시공 감리까지' : 'From concept planning to construction supervision'}
+            </p>
+            <ul className="exp-works">
+              <li>{isKo ? '20+ 프로젝트 총괄 (F&B · Retail · Pop-Up · Deco)' : '20+ projects directed (F&B · Retail · Pop-Up · Deco)'}</li>
+              <li>{isKo ? '4개국 프로젝트 수행 (Korea · Singapore · Malaysia · USA)' : 'Projects across 4 countries (Korea · Singapore · Malaysia · USA)'}</li>
+              <li>{isKo ? '브랜드 공간 컨셉 기획 · SI 가이드북 · 실시설계 · 현장 감리' : 'Brand spatial concept · SI guidebook · Working drawings · On-site supervision'}</li>
+              <li>
+                {isKo
+                  ? '현재 INIA GROUP 소속으로 tofuG 멀티매장 디자인 총괄 중'
+                  : 'Currently directing multi-location tofuG design under INIA GROUP'}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Projects Header ── */}
+      <div className="section-header reveal" ref={addRevealRef}>
+        <h2 className="section-title">
+          SELECTED
+          <span className="section-title-line">PROJECTS</span>
+        </h2>
+      </div>
+
+      {/* ── Projects ── */}
+      <section className="projects" id="project">
+        {/* Project 1: TOFUG */}
+        <Link href="/projects/tofug" className="project-card reveal" ref={addRevealRef}>
+          <img src="/images/main/tofug-default.jpg" alt="TOFUG" className="project-img-default" />
+          <img src="/images/main/tofug-hover.jpg" alt="TOFUG hover" className="project-img-hover" />
+          <div className="project-info">
+            <div>
+              <p className="project-name">TOFUG</p>
+              <span className="project-tag">Singapore &middot; Malaysia</span>
+            </div>
+            <div className="project-expand"><ExpandSVG /></div>
+          </div>
+        </Link>
+
+        {/* Project 2: BENSON */}
+        <Link href="/projects/benson" className="project-card reveal" ref={addRevealRef}>
+          <img src="/images/main/benson-default.png" alt="BENSON" className="project-img-default" />
+          <img src="/images/main/benson-hover.png" alt="BENSON hover" className="project-img-hover" />
+          <div className="project-info">
+            <div>
+              <p className="project-name">BENSON</p>
+              <span className="project-tag">Branding &amp; Spatial Design</span>
+            </div>
+            <div className="project-expand"><ExpandSVG /></div>
+          </div>
+        </Link>
+
+        {/* Project 3: BODY GUARD */}
+        <Link href="/projects/bodyguard" className="project-card reveal" ref={addRevealRef}>
+          <img src="/images/main/bodyguard-default.png" alt="BODY GUARD" className="project-img-default" />
+          <img src="/images/main/bodyguard-hover.png" alt="BODY GUARD hover" className="project-img-hover" />
+          <div className="project-info">
+            <div>
+              <p className="project-name">BODY GUARD</p>
+              <span className="project-tag">Rebranding</span>
+            </div>
+            <div className="project-expand"><ExpandSVG /></div>
+          </div>
+        </Link>
+
+        {/* Project 4: GAGGA */}
+        <Link href="/projects/gagga" className="project-card reveal" ref={addRevealRef}>
+          <img src="/images/gagga/hero.jpg" alt="GAGGA" className="project-img-default" />
+          <img src="/images/main/gagga-grid.jpg" alt="GAGGA hover" className="project-img-hover" />
+          <div className="project-info">
+            <div>
+              <p className="project-name">GAGGA</p>
+              <span className="project-tag">Brand &amp; Spatial Design</span>
+            </div>
+            <div className="project-expand"><ExpandSVG /></div>
+          </div>
+        </Link>
+
+        {/* Project 5: SOLDAM MARKET */}
+        <Link href="/projects/soldam" className="project-card reveal" ref={addRevealRef}>
+          <img src="/images/main/soldam-default.png" alt="SOLDAM MARKET" className="project-img-default" />
+          <img src="/images/main/soldam-hover.png" alt="SOLDAM MARKET hover" className="project-img-hover" />
+          <div className="project-info">
+            <div>
+              <p className="project-name">SOLDAM MARKET</p>
+              <span className="project-tag">Brand &amp; Spatial Design</span>
+            </div>
+            <div className="project-expand"><ExpandSVG /></div>
+          </div>
+        </Link>
+      </section>
+
+      {/* ── Scope ── */}
+      <ScopeSection isKo={isKo} addRevealRef={addRevealRef} className="reveal" />
 
       {/* ── Footer ── */}
       <footer className="footer" id="contact">
@@ -1046,65 +1022,6 @@ export default function HomePage() {
             padding-top: 80px;
         }
 
-        /* ── Mini Project Preview ── */
-        .mini-preview {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 30px;
-            opacity: 0.55;
-        }
-        .mini-thumb {
-            position: relative;
-            width: 44px;
-            height: 44px;
-            border-radius: 3px;
-            overflow: visible;
-            background: #1a1a1a;
-            flex-shrink: 0;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-        .mini-thumb:hover {
-            opacity: 1 !important;
-        }
-        .mini-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 3px;
-        }
-        .mini-thumb span {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: 300;
-            color: var(--fg-10);
-            border-radius: 3px;
-        }
-        .mini-tooltip {
-            position: absolute;
-            bottom: calc(100% + 6px);
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 4px 10px;
-            background: rgba(0,0,0,0.85);
-            border-radius: 4px;
-            font-family: 'DM Mono', monospace;
-            font-size: 9px;
-            letter-spacing: 0.5px;
-            color: #fff;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s;
-        }
-        .mini-thumb:hover .mini-tooltip {
-            opacity: 1;
-        }
         .exp-scope {
             font-family: 'DM Mono', monospace;
             font-size: 11px;
