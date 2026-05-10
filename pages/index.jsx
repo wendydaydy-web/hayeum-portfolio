@@ -150,7 +150,10 @@ export default function HomePage() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            <span className="nav-logo-text">夏陰</span>
+            <span className="nav-logo-text">
+              <span className="logo-default">夏陰</span>
+              <span className="logo-hover">summer shade</span>
+            </span>
           </a>
         </div>
         <div className="nav-right">
@@ -913,6 +916,9 @@ export default function HomePage() {
             color: inherit;
         }
         .nav-logo-text {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
             font-size: 28px;
             font-weight: 400;
             letter-spacing: 0.05em;
@@ -921,6 +927,31 @@ export default function HomePage() {
         }
         .nav.scrolled .nav-logo-text {
             color: var(--fg);
+        }
+        .logo-default,
+        .logo-hover {
+            display: inline-block;
+            transition: opacity 0.4s ease;
+        }
+        .logo-hover {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            font-style: italic;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .nav-logo:hover .logo-default {
+            opacity: 0;
+        }
+        .nav-logo:hover .logo-hover {
+            opacity: 1;
         }
         .nav-right {
             display: flex;
