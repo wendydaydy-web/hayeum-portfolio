@@ -229,42 +229,31 @@ export default function HomePage() {
         <p className="about-label">Studio</p>
         <div className="exp-list">
           <div className="exp-item exp-featured">
-            <div className="studio-layout">
-              <div className="studio-text">
-                <div className="exp-header">
-                  <span className="exp-company exp-company-studio">
-                    {isKo ? '공간하음' : 'Gonggan Ha-umm'}
-                  </span>
-                  <span className="exp-period">2024 – Present</span>
-                </div>
-                <span className="exp-role exp-role-gold">Founder · Spatial Branding Designer</span>
-                <p className="exp-scope">
-                  {isKo
-                    ? 'Concept — Branding — Spatial Design — Construction — Supervision'
-                    : 'Concept — Branding — Spatial Design — Construction — Supervision'}
-                </p>
-                <p className="exp-scope-sub">
-                  {isKo ? '컨셉 기획부터 시공 감리까지' : 'From concept planning to construction supervision'}
-                </p>
-                <ul className="exp-works">
-                  <li>{isKo ? '20+ 프로젝트 총괄 (F&B · Retail · Pop-Up · Deco)' : '20+ projects directed (F&B · Retail · Pop-Up · Deco)'}</li>
-                  <li>{isKo ? '4개국 프로젝트 수행 (Korea · Singapore · Malaysia · USA)' : 'Projects across 4 countries (Korea · Singapore · Malaysia · USA)'}</li>
-                  <li>{isKo ? '브랜드 공간 컨셉 기획 · SI 가이드북 · 실시설계 · 현장 감리' : 'Brand spatial concept · SI guidebook · Working drawings · On-site supervision'}</li>
-                  <li>
-                    {isKo
-                      ? '현재 INIA GROUP 소속으로 tofuG 멀티매장 디자인 총괄 중'
-                      : 'Currently directing multi-location tofuG design under INIA GROUP'}
-                  </li>
-                </ul>
-              </div>
-              <figure className="studio-image">
-                <img
-                  src="https://framerusercontent.com/images/fAxkcUUwS7zfG3xlqZdz7s1FNM.jpg"
-                  alt={isKo ? '공간하음 스튜디오' : 'Gonggan Ha-umm studio'}
-                  loading="lazy"
-                />
-              </figure>
+            <div className="exp-header">
+              <span className="exp-company exp-company-studio">
+                {isKo ? '공간하음' : 'Gonggan Ha-umm'}
+              </span>
+              <span className="exp-period">2024 – Present</span>
             </div>
+            <span className="exp-role exp-role-gold">Founder · Spatial Branding Designer</span>
+            <p className="exp-scope">
+              {isKo
+                ? 'Concept — Branding — Spatial Design — Construction — Supervision'
+                : 'Concept — Branding — Spatial Design — Construction — Supervision'}
+            </p>
+            <p className="exp-scope-sub">
+              {isKo ? '컨셉 기획부터 시공 감리까지' : 'From concept planning to construction supervision'}
+            </p>
+            <ul className="exp-works">
+              <li>{isKo ? '20+ 프로젝트 총괄 (F&B · Retail · Pop-Up · Deco)' : '20+ projects directed (F&B · Retail · Pop-Up · Deco)'}</li>
+              <li>{isKo ? '4개국 프로젝트 수행 (Korea · Singapore · Malaysia · USA)' : 'Projects across 4 countries (Korea · Singapore · Malaysia · USA)'}</li>
+              <li>{isKo ? '브랜드 공간 컨셉 기획 · SI 가이드북 · 실시설계 · 현장 감리' : 'Brand spatial concept · SI guidebook · Working drawings · On-site supervision'}</li>
+              <li>
+                {isKo
+                  ? '현재 INIA GROUP 소속으로 tofuG 멀티매장 디자인 총괄 중'
+                  : 'Currently directing multi-location tofuG design under INIA GROUP'}
+              </li>
+            </ul>
 
             {/* Mini project preview grid */}
             <div className="mini-preview">
@@ -1041,34 +1030,6 @@ export default function HomePage() {
             border-top: 2px solid var(--fg-30);
             padding-bottom: 40px;
             margin-bottom: 8px;
-        }
-        .studio-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
-            gap: 48px;
-            align-items: start;
-        }
-        .studio-text {
-            min-width: 0;
-        }
-        .studio-image {
-            margin: 0;
-        }
-        .studio-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 4px;
-            object-fit: cover;
-        }
-        @media (max-width: 720px) {
-            .studio-layout {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-            .studio-image {
-                max-width: 360px;
-            }
         }
         .exp-company-featured {
             font-size: clamp(18px, 1.8vw, 24px) !important;

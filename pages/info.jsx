@@ -51,8 +51,22 @@ export default function InfoPage() {
         </nav>
 
         <section className="info-hero">
-          <p className="info-eyebrow">INFO</p>
-          <h1 className="info-title">{isKo ? '스튜디오 안내' : 'Studio Information'}</h1>
+          <div className="info-hero-text">
+            <p className="info-eyebrow">INFO</p>
+            <h1 className="info-title">{isKo ? '스튜디오 안내' : 'Studio Information'}</h1>
+            <p className="info-hero-sub">
+              {isKo
+                ? '空間夏陰 — 비어 있는 공간(空)과 사이(間)에, 여름(夏)의 빛과 그늘(陰)을 담습니다.'
+                : '空間夏陰 — In the empty space (空) and the in-between (間), we hold summer’s light (夏) and its shade (陰).'}
+            </p>
+          </div>
+          <figure className="info-hero-poster">
+            <img
+              src="https://framerusercontent.com/images/fAxkcUUwS7zfG3xlqZdz7s1FNM.jpg"
+              alt={isKo ? '공간하음 空間夏陰 포스터' : 'Gonggan Ha-umm 空間夏陰 poster'}
+              loading="lazy"
+            />
+          </figure>
         </section>
 
         <section className="info-grid">
@@ -211,6 +225,13 @@ export default function InfoPage() {
             max-width: 1200px;
             margin: 0 auto;
             padding: 120px 40px 40px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+            gap: 56px;
+            align-items: center;
+          }
+          .info-hero-text {
+            min-width: 0;
           }
           .info-eyebrow {
             font-family: 'DM Mono', monospace;
@@ -224,6 +245,25 @@ export default function InfoPage() {
             font-size: clamp(36px, 5vw, 56px);
             font-weight: 300;
             letter-spacing: 0.02em;
+          }
+          .info-hero-sub {
+            margin-top: 20px;
+            max-width: 540px;
+            font-size: 14px;
+            line-height: 1.7;
+            font-weight: 300;
+            color: var(--fg-60);
+            word-break: keep-all;
+          }
+          .info-hero-poster {
+            margin: 0;
+          }
+          .info-hero-poster img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            object-fit: cover;
           }
 
           .info-grid {
@@ -325,7 +365,11 @@ export default function InfoPage() {
 
           @media (max-width: 1199px) {
             .info-nav { padding: 16px 24px; }
-            .info-hero { padding: 100px 24px 32px; }
+            .info-hero {
+              padding: 100px 24px 32px;
+              gap: 40px;
+              grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+            }
             .info-grid {
               padding: 32px 24px 60px;
               gap: 40px;
@@ -338,7 +382,12 @@ export default function InfoPage() {
             .info-nav-right { gap: 14px; }
             .info-nav-link, .info-lang { font-size: 10px; letter-spacing: 0.08em; }
             .info-lang { gap: 4px; }
-            .info-hero { padding: 80px 20px 24px; }
+            .info-hero {
+              padding: 80px 20px 24px;
+              grid-template-columns: 1fr;
+              gap: 32px;
+            }
+            .info-hero-poster { max-width: 360px; }
             .info-grid {
               padding: 24px 20px 40px;
               grid-template-columns: 1fr;
