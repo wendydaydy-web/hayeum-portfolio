@@ -741,6 +741,8 @@ export default function HomePage() {
             inset: 0;
             z-index: 2;
             color: #fff;
+            padding: 0 6vw;
+            box-sizing: border-box;
         }
         .hero-left {
             position: absolute;
@@ -750,10 +752,11 @@ export default function HomePage() {
             display: flex;
             flex-direction: column;
             gap: 0.3em;
+            padding-left: 2vw;
         }
         .hero-en {
             font-family: var(--font-gowun-batang), serif;
-            font-size: clamp(56px, 5vw, 100px);
+            font-size: clamp(70px, 6.5vw, 130px);
             font-weight: 400;
             font-style: normal;
             line-height: 1.05;
@@ -766,7 +769,7 @@ export default function HomePage() {
         }
         .hero-cn {
             font-family: var(--font-noto-serif-kr), serif;
-            font-size: clamp(100px, 9vw, 180px);
+            font-size: clamp(120px, 10.5vw, 200px);
             font-weight: 300;
             font-style: normal;
             letter-spacing: 0.04em;
@@ -779,7 +782,7 @@ export default function HomePage() {
         }
         .hero-kr {
             font-family: var(--font-noto-serif-kr), serif;
-            font-size: clamp(28px, 2.4vw, 48px);
+            font-size: clamp(32px, 2.7vw, 52px);
             font-weight: 400;
             font-style: normal;
             letter-spacing: 0.02em;
@@ -794,19 +797,22 @@ export default function HomePage() {
             right: 3vw;
             top: 0;
             height: 60%;
-            width: 55vw;
-            max-width: 900px;
+            width: 48vw;
+            max-width: 800px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: flex-end;
             text-align: right;
-            padding-top: 12vh;
-            padding-bottom: 12vh;
+            padding-top: 10vh;
+            padding-bottom: 10vh;
+            padding-right: 2vw;
+            box-sizing: border-box;
+            overflow: visible;
         }
         .hero-headline {
             font-family: var(--font-gowun-batang), serif;
-            font-size: clamp(26px, 2.6vw, 50px);
+            font-size: clamp(30px, 2.8vw, 54px);
             font-weight: 400;
             font-style: normal !important;
             white-space: normal;
@@ -820,7 +826,7 @@ export default function HomePage() {
         }
         .hero-body {
             font-family: var(--font-gowun-batang), serif;
-            font-size: clamp(14px, 1.2vw, 22px);
+            font-size: clamp(14px, 1.25vw, 24px);
             font-weight: 400;
             font-style: normal !important;
             line-height: 1.6;
