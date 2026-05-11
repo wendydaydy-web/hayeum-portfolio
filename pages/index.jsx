@@ -23,7 +23,6 @@ export default function HomePage() {
   const [scrolled, setScrolled] = useState(false);
   const [overlayOpen, setOverlayOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
-  const [aboutOpen, setAboutOpen] = useState(false);
   const revealRefs = useRef([]);
   const navRef = useRef(null);
 
@@ -124,7 +123,7 @@ export default function HomePage() {
         <meta name="description" content="공간하음(空間夏陰) - A place where people naturally gather, like summer shade." />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500&family=DM+Mono:wght@400&family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400&family=DM+Mono:wght@400&family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet" />
       </Head>
 
       {/* ── Navigation ── */}
@@ -191,36 +190,14 @@ export default function HomePage() {
         <div className="hero-overlay"></div>
         <div className="hero-fade-bottom"></div>
         <div className="hero-content">
-          <img src="/images/main/hero-title.png" alt="空間夏陰" className="hero-title-img" />
-          <p className="hero-subtitle">A place where people naturally gather, like summer shade.</p>
-          <p className="hero-subtitle-ko">공 간 하 음</p>
-          <div
-            className={`hero-about-trigger${aboutOpen ? ' active' : ''}`}
-            onMouseEnter={() => { if (window.matchMedia('(hover: hover)').matches) setAboutOpen(true); }}
-            onMouseLeave={() => { if (window.matchMedia('(hover: hover)').matches) setAboutOpen(false); }}
-          >
-            <button
-              className="hero-about-pill"
-              type="button"
-              onClick={(e) => { e.stopPropagation(); setAboutOpen((prev) => !prev); }}
-            >About Ha-umm</button>
-            <div className="hero-about-popup" onClick={(e) => e.stopPropagation()}>
-              {isKo ? (
-                <p className="about-text-ko">
-                  공간하음(空間夏陰)은 여름날의 그늘처럼,<br/>
-                  자연스레 향하는 공간을 만듭니다.<br/><br/>
-                  우리는 그 순간의 영감을 담아,<br/>
-                  브랜드와 공간이 어우러지는 경험을 디자인합니다.
-                </p>
-              ) : (
-                <p className="about-text-en">
-                  Gonggan Ha-umm (空間夏陰) creates spaces that,<br/>
-                  like summer shade, naturally draw people in.<br/><br/>
-                  Inspired by such moments, we design spaces<br/>
-                  where brand and place seamlessly become one.
-                </p>
-              )}
-            </div>
+          <div className="hero-left">
+            <h1 className="hero-en">Where shade<br/>gathers</h1>
+            <p className="hero-cn">夏陰</p>
+            <p className="hero-kr">여름 : 하&nbsp;&nbsp;그늘 : 음</p>
+          </div>
+          <div className="hero-right">
+            <p className="hero-headline">A place where people naturally gather,<br/>like summer shade.</p>
+            <p className="hero-body">Ha-umm creates spaces that,<br/>like summer shade, naturally draw people in.<br/>Inspired by such moments, we design spaces<br/>where brand and place seamlessly become one.</p>
           </div>
         </div>
       </section>
@@ -760,123 +737,103 @@ export default function HomePage() {
             pointer-events: none;
         }
         .hero-content {
-            position: relative;
+            position: absolute;
+            inset: 0;
             z-index: 2;
-            text-align: center;
-            padding: 0 20px;
             color: #fff;
         }
-        .hero-title-img {
-            width: clamp(240px, 40vw, 560px);
-            margin: 0 auto 28px;
+        .hero-left {
+            position: absolute;
+            left: 5.2vw;
+            top: 50%;
+            transform: translateY(calc(-50% + 5vh));
+            display: flex;
+            flex-direction: column;
+            gap: 0.3em;
+        }
+        .hero-en {
+            font-family: var(--font-gowun-batang), serif;
+            font-size: clamp(56px, 5vw, 100px);
+            font-weight: 400;
+            font-style: normal;
+            line-height: 1.05;
+            letter-spacing: -0.01em;
+            color: #fff;
+            margin: 0;
             opacity: 0;
             transform: translateY(30px);
-            animation: fadeUp 1s ease-out 0.5s forwards;
-            filter: none;
+            animation: fadeUp 1s ease-out 0.4s forwards;
         }
-        .hero-subtitle {
-            font-size: clamp(13px, 1.2vw, 16px);
+        .hero-cn {
+            font-family: var(--font-noto-serif-kr), serif;
+            font-size: clamp(100px, 9vw, 180px);
             font-weight: 300;
-            letter-spacing: 0.06em;
-            color: rgba(255,255,255,0.7);
+            font-style: normal;
+            letter-spacing: 0.04em;
+            line-height: 1.0;
+            color: #fff;
+            margin: 0;
             opacity: 0;
             transform: translateY(20px);
-            animation: fadeUp 1s ease-out 0.9s forwards;
+            animation: fadeUp 1s ease-out 0.7s forwards;
         }
-        .hero-subtitle-ko {
-            font-size: clamp(12px, 1.1vw, 15px);
-            font-weight: 300;
-            letter-spacing: 0.45em;
-            color: rgba(255,255,255,0.5);
-            margin-top: 10px;
+        .hero-kr {
+            font-family: var(--font-noto-serif-kr), serif;
+            font-size: clamp(28px, 2.4vw, 48px);
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 0.02em;
+            color: #fff;
+            opacity: 0;
+            margin: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease-out 0.95s forwards;
+        }
+        .hero-right {
+            position: absolute;
+            right: 3vw;
+            top: 0;
+            height: 60%;
+            width: 55vw;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            text-align: right;
+            padding-top: 12vh;
+            padding-bottom: 12vh;
+        }
+        .hero-headline {
+            font-family: var(--font-gowun-batang), serif;
+            font-size: clamp(26px, 2.6vw, 50px);
+            font-weight: 400;
+            font-style: normal !important;
+            white-space: normal;
+            line-height: 1.3;
+            letter-spacing: 0.01em;
+            color: #fff;
+            margin: 0;
             opacity: 0;
             transform: translateY(20px);
-            animation: fadeUp 1s ease-out 1.1s forwards;
+            animation: fadeUp 1s ease-out 0.6s forwards;
+        }
+        .hero-body {
+            font-family: var(--font-gowun-batang), serif;
+            font-size: clamp(14px, 1.2vw, 22px);
+            font-weight: 400;
+            font-style: normal !important;
+            line-height: 1.6;
+            letter-spacing: 0.015em;
+            max-width: 36vw;
+            color: rgba(255,255,255,0.95);
+            margin: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease-out 1s forwards;
         }
         @keyframes fadeUp {
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── Hero About Trigger ── */
-        .hero-about-trigger {
-            position: relative;
-            display: inline-block;
-            margin-top: 16px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 1s ease-out 1.4s forwards;
-        }
-
-        /* ── Hero About Pill Button ── */
-        .hero-about-pill,
-        .hero-about-trigger {
-            -webkit-tap-highlight-color: transparent;
-        }
-        .hero-about-pill {
-            display: inline-block;
-            padding: 8px 20px;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 20px;
-            background: transparent;
-            font-family: 'DM Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            color: rgba(255,255,255,0.6);
-            cursor: pointer;
-            transition: border-color 0.3s, color 0.3s;
-        }
-        .hero-about-trigger.active .hero-about-pill {
-            border-color: rgba(255,255,255,0.6);
-            color: rgba(255,255,255,0.9);
-        }
-
-        /* ── Hero About Popup ── */
-        .hero-about-popup {
-            position: absolute;
-            top: calc(100% + 12px);
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            width: 520px;
-            padding: 28px 36px;
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 12px;
-            text-align: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            z-index: 10;
-        }
-        .hero-about-trigger.active .hero-about-popup {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-            pointer-events: auto;
-        }
-        @media (hover: hover) {
-            .hero-about-trigger:hover .hero-about-pill {
-                border-color: rgba(255,255,255,0.6);
-                color: rgba(255,255,255,0.9);
-            }
-            .hero-about-trigger:hover .hero-about-popup {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-                pointer-events: auto;
-            }
-        }
-        .hero-about-popup .about-text-ko {
-            font-size: 14px;
-            line-height: 2;
-            font-weight: 300;
-            color: rgba(255,255,255,0.9);
-            word-break: keep-all;
-        }
-        .hero-about-popup .about-text-en {
-            font-size: 13px;
-            line-height: 2;
-            font-weight: 300;
-            color: rgba(255,255,255,0.85);
         }
 
         /* ── Hero Scroll Indicator ── */
@@ -1789,7 +1746,8 @@ export default function HomePage() {
             .nav-lang { gap: 4px; }
             .nav-logo-text { font-size: 22px; }
             .about { padding: 80px 20px; }
-            .hero-about-popup { width: calc(100vw - 40px); padding: 24px 20px; }
+            .hero-left { left: 24px; top: 20%; }
+            .hero-right { display: none; }
             .experience { padding: 0 20px 60px; }
             .exp-header { flex-wrap: wrap; gap: 4px; }
             .section-header { padding: 80px 20px 40px; }

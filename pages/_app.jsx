@@ -1,5 +1,20 @@
 import { useEffect } from 'react';
+import { Gowun_Batang, Noto_Serif_KR } from 'next/font/google';
 import '../styles/globals.css';
+
+const gowunBatang = Gowun_Batang({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+  variable: '--font-gowun-batang',
+});
+
+const notoSerifKR = Noto_Serif_KR({
+  weight: ['300', '400', '500'],
+  display: 'swap',
+  variable: '--font-noto-serif-kr',
+  preload: false,
+});
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -25,5 +40,9 @@ export default function App({ Component, pageProps }) {
     return () => window.removeEventListener('keydown', handleKey);
   }, []);
 
-  return <Component {...pageProps} />;
+  return (
+    <div className={`${gowunBatang.variable} ${notoSerifKR.variable}`}>
+      <Component {...pageProps} />
+    </div>
+  );
 }

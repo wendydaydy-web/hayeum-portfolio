@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@200;300;400;500;700&family=Noto+Serif+KR:wght@400;500&family=DM+Mono:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@200;300;400;500;700&family=Noto+Serif+KR:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap');
 
 /* ===== RESET ===== */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+  font-size: inherit;
 }
 
 /* ===== THEME VARIABLES ===== */
