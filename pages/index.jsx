@@ -503,8 +503,31 @@ export default function HomePage() {
       <style jsx global>{`
         /* ── Theme Variables ── */
         :root {
-            --bg: #0f0e0e;
-            --fg: #fff;
+            --bg: #ffffff;
+            --fg: #1a1a1a;
+            --fg-90: rgba(26,26,26,0.9);
+            --fg-75: rgba(26,26,26,0.75);
+            --fg-70: rgba(26,26,26,0.7);
+            --fg-60: rgba(26,26,26,0.6);
+            --fg-50: rgba(26,26,26,0.5);
+            --fg-40: rgba(26,26,26,0.4);
+            --fg-30: rgba(26,26,26,0.3);
+            --fg-25: rgba(26,26,26,0.25);
+            --fg-15: rgba(26,26,26,0.15);
+            --fg-10: rgba(26,26,26,0.1);
+            --fg-08: rgba(26,26,26,0.08);
+            --fg-06: rgba(26,26,26,0.06);
+            --nav-grad-start: rgba(255,255,255,0.7);
+            --nav-grad-mid: rgba(255,255,255,0.3);
+            --nav-scrolled: rgba(255,255,255,0.9);
+            --card-bg: #f0f0f0;
+            --overlay-bg: #0c0c0c;
+            --overlay-fg: #ffffff;
+            --hero-title-invert: 1;
+        }
+        html[data-theme='dark'] {
+            --bg: #0c0c0c;
+            --fg: #ffffff;
             --fg-90: rgba(255,255,255,0.9);
             --fg-75: rgba(255,255,255,0.75);
             --fg-70: rgba(255,255,255,0.7);
@@ -517,38 +540,13 @@ export default function HomePage() {
             --fg-10: rgba(255,255,255,0.1);
             --fg-08: rgba(255,255,255,0.08);
             --fg-06: rgba(255,255,255,0.06);
-            --nav-grad-start: rgba(16,16,16,0.7);
-            --nav-grad-mid: rgba(16,16,16,0.3);
-            --nav-scrolled: rgba(16,16,16,0.85);
+            --nav-grad-start: rgba(12,12,12,0.7);
+            --nav-grad-mid: rgba(12,12,12,0.3);
+            --nav-scrolled: rgba(12,12,12,0.85);
             --card-bg: #1a1a1a;
-            --overlay-bg: #f5f4f0;
-            --overlay-fg: #0f0e0e;
+            --overlay-bg: #ffffff;
+            --overlay-fg: #1a1a1a;
             --hero-title-invert: 0;
-        }
-        @media (prefers-color-scheme: light) {
-            :root {
-                --bg: #f5f4f0;
-                --fg: #0f0e0e;
-                --fg-90: rgba(15,14,14,0.9);
-                --fg-75: rgba(15,14,14,0.75);
-                --fg-70: rgba(15,14,14,0.7);
-                --fg-60: rgba(15,14,14,0.6);
-                --fg-50: rgba(15,14,14,0.5);
-                --fg-40: rgba(15,14,14,0.4);
-                --fg-30: rgba(15,14,14,0.3);
-                --fg-25: rgba(15,14,14,0.25);
-                --fg-15: rgba(15,14,14,0.15);
-                --fg-10: rgba(15,14,14,0.1);
-                --fg-08: rgba(15,14,14,0.08);
-                --fg-06: rgba(15,14,14,0.06);
-                --nav-grad-start: rgba(245,244,240,0.7);
-                --nav-grad-mid: rgba(245,244,240,0.3);
-                --nav-scrolled: rgba(245,244,240,0.9);
-                --card-bg: #e8e6e1;
-                --overlay-bg: #0f0e0e;
-                --overlay-fg: #fff;
-                --hero-title-invert: 1;
-            }
         }
 
         /* ── Reset ── */
@@ -575,9 +573,9 @@ export default function HomePage() {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(rgba(16,16,16,0.7) 0%, rgba(16,16,16,0.3) 50%, transparent 100%);
+            background: linear-gradient(var(--nav-grad-start) 0%, var(--nav-grad-mid) 50%, transparent 100%);
             transition: background 0.4s, padding 0.4s, color 0.3s;
-            color: #fff;
+            color: var(--fg);
         }
         .nav.scrolled {
             padding-bottom: 20px;

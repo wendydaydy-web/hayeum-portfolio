@@ -124,8 +124,8 @@ export default function WorkCorpPage() {
         <style jsx>{`
           .wc {
             min-height: 100vh;
-            background: #0f0e0e;
-            color: #fff;
+            background: var(--bg);
+            color: var(--fg);
             font-family: 'Inter', 'Noto Sans KR', sans-serif;
             -webkit-font-smoothing: antialiased;
           }
@@ -137,7 +137,7 @@ export default function WorkCorpPage() {
             justify-content: space-between;
             align-items: center;
             padding: 20px 40px;
-            background: rgba(15,14,14,0.85);
+            background: var(--nav-scrolled);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
           }
@@ -148,7 +148,7 @@ export default function WorkCorpPage() {
             font-size: 28px;
             line-height: 1;
             letter-spacing: 0.05em;
-            color: #fff;
+            color: var(--fg);
             text-decoration: none;
           }
           .wc-logo-default,
@@ -187,7 +187,7 @@ export default function WorkCorpPage() {
             font-weight: 500;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.85);
+            color: var(--fg-90);
             text-decoration: none;
             transition: opacity 0.2s;
           }
@@ -210,12 +210,12 @@ export default function WorkCorpPage() {
             font: inherit;
             letter-spacing: inherit;
             text-transform: inherit;
-            color: rgba(255,255,255,0.4);
+            color: var(--fg-40);
             padding: 0;
             transition: color 0.3s, opacity 0.2s;
           }
           .wc-lang button.active {
-            color: rgba(255,255,255,0.95);
+            color: var(--fg-90);
             font-weight: 600;
           }
           .wc-lang button:hover {
@@ -234,7 +234,7 @@ export default function WorkCorpPage() {
             font-size: 12px;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.5);
+            color: var(--fg-50);
             margin-bottom: 16px;
           }
           .wc-title {
@@ -252,12 +252,12 @@ export default function WorkCorpPage() {
             font-weight: 500;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
+            color: var(--fg-60);
             text-decoration: none;
             transition: color 0.2s;
           }
           .wc-back:hover {
-            color: #fff;
+            color: var(--fg);
           }
           @media (max-width: 600px) {
             .wc-nav { padding: 14px 20px; }
@@ -284,10 +284,10 @@ export default function WorkCorpPage() {
           }
           .exp-item {
             padding: 32px 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid var(--fg-10);
           }
           .exp-item:last-child {
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid var(--fg-10);
           }
           .exp-header {
             display: flex;
@@ -300,13 +300,13 @@ export default function WorkCorpPage() {
             font-size: clamp(15px, 1.4vw, 18px);
             font-weight: 600;
             letter-spacing: 0.02em;
-            color: rgba(255,255,255,0.9);
+            color: var(--fg-90);
           }
           .exp-period {
             font-family: 'DM Mono', monospace;
             font-size: 12px;
             letter-spacing: 0.08em;
-            color: #aaa;
+            color: var(--fg-50);
             white-space: nowrap;
             flex-shrink: 0;
           }
@@ -315,7 +315,7 @@ export default function WorkCorpPage() {
             font-size: 11px;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.5);
+            color: var(--fg-50);
             margin-bottom: 14px;
             display: block;
           }
@@ -330,7 +330,7 @@ export default function WorkCorpPage() {
           .exp-works li {
             font-size: 14px;
             font-weight: 300;
-            color: rgba(255,255,255,0.6);
+            color: var(--fg-60);
             line-height: 1.6;
             padding-left: 16px;
             position: relative;
@@ -339,17 +339,17 @@ export default function WorkCorpPage() {
             content: '—';
             position: absolute;
             left: 0;
-            color: rgba(255,255,255,0.3);
+            color: var(--fg-30);
             font-size: 12px;
           }
           .exp-link {
-            color: rgba(255,255,255,0.5);
+            color: var(--fg-50);
             text-decoration: underline;
             text-underline-offset: 3px;
             transition: color 0.2s;
           }
           .exp-link:hover {
-            color: rgba(255,255,255,0.9);
+            color: var(--fg-90);
           }
           @media (max-width: 600px) {
             .experience { padding: 0 20px 60px; }

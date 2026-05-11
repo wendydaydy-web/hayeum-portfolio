@@ -492,9 +492,8 @@ export default function BodyGuard() {
           --nav-scrolled-bg: rgba(255,255,255,0.9);
           --keyword-border: #1a1a1a;
         }
-        @media (prefers-color-scheme: dark) {
-          :global(:root) {
-            --page-bg: #0f0e0e;
+        :global(html[data-theme='dark']) {
+            --page-bg: #0c0c0c;
             --page-fg: #e8e8e8;
             --section-bg: #1a1a1a;
             --text-mid: #aaa;
@@ -502,9 +501,8 @@ export default function BodyGuard() {
             --gray: #999;
             --border-light: rgba(255,255,255,0.08);
             --border-subtle: rgba(255,255,255,0.05);
-            --nav-scrolled-bg: rgba(15,14,14,0.9);
+            --nav-scrolled-bg: rgba(12,12,12,0.9);
             --keyword-border: #e8e8e8;
-          }
         }
         :global(body) {
           background: var(--page-bg);
