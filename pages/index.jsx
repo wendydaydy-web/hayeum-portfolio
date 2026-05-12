@@ -232,7 +232,6 @@ export default function HomePage() {
             <Link key={project.slug} href={`/projects/${project.slug}`} className="pg-card">
               <div className="pg-poster">
                 <img src={project.poster} alt={project.name} loading="lazy" className="poster-img" />
-                <div className="poster-shadow-overlay"></div>
               </div>
               <div className="pg-space">
                 <picture>
@@ -809,11 +808,39 @@ export default function HomePage() {
             height: 100%;
             text-decoration: none;
             color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        .pg-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('/textures/shadow-overlay.jpg');
+            background-size: 120% auto;
+            background-position: center top;
+            background-repeat: no-repeat;
+            mix-blend-mode: multiply;
+            opacity: 0.35;
+            filter: blur(2px);
+            pointer-events: none;
+            z-index: 5;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.3) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.3) 100%);
+            animation: shadowFloat 8s ease-in-out infinite;
+        }
+        .pg-card:hover::after {
+            opacity: 0.22;
+            transition: opacity 0.5s ease;
+        }
+        @keyframes shadowFloat {
+            0%,  100% { transform: translate(0px,  0px) scale(1);    opacity: 0.35; }
+            25%        { transform: translate(-5px, 3px) scale(1.02); opacity: 0.4;  }
+            50%        { transform: translate(3px, -2px) scale(1);    opacity: 0.28; }
+            75%        { transform: translate(-2px, 4px) scale(1.01); opacity: 0.38; }
         }
         .pg-poster {
             width: 100%;
             overflow: hidden;
-            position: relative;
         }
         .pg-poster .poster-img {
             width: 100%;
@@ -821,20 +848,6 @@ export default function HomePage() {
             display: block;
             transition: transform 0.6s ease;
         }
-        .poster-shadow-overlay {
-            position: absolute;
-            inset: 0;
-            background-image: url('/textures/shadow-overlay.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            mix-blend-mode: multiply;
-            opacity: 0.5;
-            pointer-events: none;
-            z-index: 2;
-            transition: opacity 0.5s ease;
-        }
-        .pg-card:hover .poster-shadow-overlay { opacity: 0.3; }
         .pg-space {
             width: 100%;
             aspect-ratio: 16/10;
@@ -1772,6 +1785,7 @@ export default function HomePage() {
             .hero-desktop { display: none !important; }
             .pg-grid { grid-template-columns: 1fr; }
             .pg-space { aspect-ratio: 4/5; }
+            .pg-card::after { animation: none; }
             .hero-mobile {
                 display: flex;
                 flex-direction: column;
