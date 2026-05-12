@@ -502,9 +502,9 @@ export default function HomePage() {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(var(--nav-grad-start) 0%, var(--nav-grad-mid) 50%, transparent 100%);
+            background: linear-gradient(rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
             transition: background 0.4s, padding 0.4s, color 0.3s;
-            color: var(--fg);
+            color: #fff;
         }
         .nav.scrolled {
             padding-bottom: 20px;
@@ -1755,7 +1755,7 @@ export default function HomePage() {
             .hero { height: 100vh; min-height: 600px; }
             .hero-desktop { display: none !important; }
             .pg-grid { grid-template-columns: 1fr; }
-            .pg-space { aspect-ratio: 4/3; }
+            .pg-space { aspect-ratio: 4/5; }
             .hero-mobile {
                 display: flex;
                 flex-direction: column;
