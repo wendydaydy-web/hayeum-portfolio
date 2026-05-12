@@ -225,11 +225,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Hero → Projects Transition ── */}
-      <div className="hero-transition">
-        <div className="hero-transition-mist"></div>
-      </div>
-
       {/* ── Project Grid ── */}
       <section className="pg-section">
         <div className="pg-grid">
@@ -688,41 +683,22 @@ export default function HomePage() {
             left: 0;
             right: 0;
             bottom: 0;
-            height: 320px;
-            background: linear-gradient(to bottom, transparent 0%, rgba(250,250,250,0.6) 60%, #fafafa 100%);
-            z-index: 1;
-            pointer-events: none;
-        }
-        /* ── Hero → Projects Transition ── */
-        .hero-transition {
-            width: 100%;
-            height: 28vh;
-            position: relative;
-            overflow: hidden;
+            height: 50%;
             background: linear-gradient(
                 to bottom,
-                #fafafa 0%,
-                #f7f5f1 35%,
-                #f2ede5 70%,
-                #ece8df 100%
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0) 30%,
+                rgba(255,255,255,0.3) 60%,
+                rgba(255,255,255,0.82) 85%,
+                rgba(255,255,255,1) 100%
             );
-        }
-        .hero-transition-mist {
-            position: absolute;
-            inset: 0;
-            background-image: url('/textures/shadow-overlay.jpg');
-            background-size: cover;
-            background-position: center bottom;
-            background-repeat: no-repeat;
-            opacity: 0.06;
-            filter: blur(12px);
-            mix-blend-mode: multiply;
+            z-index: 5;
             pointer-events: none;
         }
         .hero-content {
             position: absolute;
             inset: 0;
-            z-index: 2;
+            z-index: 10;
             color: #fff;
             padding: 0 6vw;
             box-sizing: border-box;
@@ -826,7 +802,7 @@ export default function HomePage() {
         /* ── Project Grid ── */
         .pg-section {
             width: 100%;
-            background: #ece8df;
+            background: #fff;
             position: relative;
             overflow: hidden;
         }
@@ -1835,7 +1811,7 @@ export default function HomePage() {
                 inset: 0;
                 width: 100%;
                 height: 100%;
-                z-index: 2;
+                z-index: 10;
             }
             .hero-mobile-cn {
                 font-family: var(--font-noto-serif-kr), serif;
