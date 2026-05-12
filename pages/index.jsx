@@ -225,6 +225,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Hero → Projects Transition ── */}
+      <div className="hero-transition">
+        <div className="hero-transition-mist"></div>
+      </div>
+
       {/* ── Project Grid ── */}
       <section className="pg-section">
         <div className="pg-grid">
@@ -683,9 +688,35 @@ export default function HomePage() {
             left: 0;
             right: 0;
             bottom: 0;
-            height: 280px;
-            background: linear-gradient(to bottom, transparent, var(--bg));
+            height: 320px;
+            background: linear-gradient(to bottom, transparent 0%, rgba(250,250,250,0.6) 60%, #fafafa 100%);
             z-index: 1;
+            pointer-events: none;
+        }
+        /* ── Hero → Projects Transition ── */
+        .hero-transition {
+            width: 100%;
+            height: 28vh;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                to bottom,
+                #fafafa 0%,
+                #f7f5f1 35%,
+                #f2ede5 70%,
+                #ece8df 100%
+            );
+        }
+        .hero-transition-mist {
+            position: absolute;
+            inset: 0;
+            background-image: url('/textures/shadow-overlay.jpg');
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            filter: blur(12px);
+            mix-blend-mode: multiply;
             pointer-events: none;
         }
         .hero-content {
@@ -795,7 +826,7 @@ export default function HomePage() {
         /* ── Project Grid ── */
         .pg-section {
             width: 100%;
-            background: #fff;
+            background: #ece8df;
             position: relative;
             overflow: hidden;
         }
