@@ -1775,7 +1775,7 @@ export default function HomePage() {
                 font-family: var(--font-noto-serif-kr), serif;
                 font-weight: 300;
                 font-style: normal;
-                font-size: clamp(100px, 35vw, 180px);
+                font-size: clamp(80px, 18vw, 140px);
                 line-height: 1.0;
                 color: #fff;
                 margin: 0;
@@ -1785,10 +1785,10 @@ export default function HomePage() {
                 font-family: var(--font-gowun-batang), serif;
                 font-weight: 400;
                 font-style: italic;
-                font-size: clamp(13px, 3.5vw, 18px);
+                font-size: clamp(12px, 3vw, 16px);
                 color: #fff;
                 margin: 0;
-                margin-top: 8px;
+                margin-top: 6px;
                 letter-spacing: 0.02em;
                 text-align: center;
                 opacity: 0.95;
