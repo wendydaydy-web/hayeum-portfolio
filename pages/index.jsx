@@ -189,7 +189,7 @@ export default function HomePage() {
         </video>
         <div className="hero-overlay"></div>
         <div className="hero-fade-bottom"></div>
-        <div className="hero-content">
+        <div className="hero-content hero-desktop">
           <div className="hero-left">
             <h1 className="hero-en">Where the shade<br/>gathers</h1>
             <p className="hero-cn">夏陰</p>
@@ -199,6 +199,12 @@ export default function HomePage() {
             <p className="hero-headline">A place where people naturally gather,<br/>like summer shade.</p>
             <p className="hero-body">Ha-umm creates spaces that,<br/>like summer shade, naturally draw people in.<br/>Inspired by such moments, we design spaces<br/>where brand and place seamlessly become one.</p>
           </div>
+        </div>
+
+        {/* ── Mobile Only ── */}
+        <div className="hero-mobile">
+          <p className="hero-mobile-cn">夏陰</p>
+          <p className="hero-mobile-en">where shade gathers</p>
         </div>
       </section>
 
@@ -838,6 +844,7 @@ export default function HomePage() {
             transform: translateY(20px);
             animation: fadeUp 1s ease-out 1s forwards;
         }
+        .hero-mobile { display: none; }
         @keyframes fadeUp {
             to { opacity: 1; transform: translateY(0); }
         }
@@ -1752,8 +1759,40 @@ export default function HomePage() {
             .nav-lang { gap: 4px; }
             .nav-logo-text { font-size: 22px; }
             .about { padding: 80px 20px; }
-            .hero-left { left: 24px; top: 20%; }
-            .hero-right { display: none; }
+            .hero-desktop { display: none !important; }
+            .hero-mobile {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+            }
+            .hero-mobile-cn {
+                font-family: var(--font-noto-serif-kr), serif;
+                font-weight: 300;
+                font-style: normal;
+                font-size: clamp(100px, 35vw, 180px);
+                line-height: 1.0;
+                color: #fff;
+                margin: 0;
+                letter-spacing: 0.05em;
+            }
+            .hero-mobile-en {
+                font-family: var(--font-gowun-batang), serif;
+                font-weight: 400;
+                font-style: italic;
+                font-size: clamp(13px, 3.5vw, 18px);
+                color: #fff;
+                margin: 0;
+                margin-top: 8px;
+                letter-spacing: 0.02em;
+                text-align: center;
+                opacity: 0.95;
+            }
             .experience { padding: 0 20px 60px; }
             .exp-header { flex-wrap: wrap; gap: 4px; }
             .section-header { padding: 80px 20px 40px; }
