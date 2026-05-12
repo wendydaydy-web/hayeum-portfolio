@@ -1821,14 +1821,22 @@ export default function HomePage() {
                 opacity: 0.95;
             }
             .hero-mobile-arrow {
-                font-size: clamp(10px, 2.5vw, 13px);
+                font-size: 18px;
                 color: #fff;
                 opacity: 0.8;
-                transition: transform 0.4s ease;
                 display: inline-block;
                 line-height: 1;
+                text-shadow: 0 0 8px rgba(255,255,255,0.4);
+                animation: gentleBounce 2s ease-in-out infinite;
             }
-            .hero-mobile-arrow.open { transform: rotate(180deg); }
+            .hero-mobile-arrow.open {
+                animation: none;
+                transform: rotate(180deg);
+            }
+            @keyframes gentleBounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(4px); }
+            }
             .hero-mobile-body-wrapper {
                 max-height: 0;
                 overflow: hidden;
