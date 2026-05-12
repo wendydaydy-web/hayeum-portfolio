@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import ScopeSection from '../components/ScopeSection';
+import projects from '../data/projects';
 
 // Dynamic project data from sync script
 let allProjects = [];
@@ -224,93 +225,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Browse All Projects (Dynamic) ── */}
-      <section className="project-cards-section reveal" ref={addRevealRef} id="browse">
-        <h2 className="project-cards-heading">
-          {isKo ? '프로젝트 둘러보기' : 'Browse All Projects'}
-        </h2>
-
-        {/* Project Count */}
-        {allProjects.length > 0 && (
-          <p className="browse-count">
-            {(() => {
-              const visible = allProjects.filter((p) => !p.hidden);
-              const filtered = activeFilter === 'all' ? visible : visible.filter((p) => p.category === activeFilter);
-              return isKo ? `총 ${filtered.length}개 프로젝트` : `${filtered.length} projects total`;
-            })()}
-          </p>
-        )}
-
-        {/* Category Filter Pills */}
-        {allProjects.length > 0 && (
-          <div className="filter-pills">
-            {CATEGORIES.map((cat) => {
-              const cnt = cat.key === 'all' ? allProjects.filter((p) => !p.hidden).length : allProjects.filter((p) => !p.hidden && p.category === cat.key).length;
-              return (
-                <button
-                  key={cat.key}
-                  className={`filter-pill${activeFilter === cat.key ? ' active' : ''}`}
-                  onClick={() => setActiveFilter(cat.key)}
-                >
-                  {isKo ? cat.label_ko : cat.label_en} <span className="filter-pill-count">{cnt}</span>
-                </button>
-              );
-            })}
-          </div>
-        )}
-
-        {/* Project Image Grid */}
-        <div className="browse-grid">
-          {(allProjects.length > 0
-            ? allProjects
-                .filter((p) => !p.hidden && (activeFilter === 'all' || p.category === activeFilter))
-                .map((p) => {
-                  const hasSections = p.sections && p.sections.length > 0;
-                  const hasPage = HARDCODED_SLUGS.has(p.slug) || hasSections;
-                  const hasThumb = p.grid_image || p.cover_image;
-                  const imgFile = p.grid_image || p.cover_image;
-                  const imgDir = imgFile && imgFile.startsWith(p.slug) ? 'main' : p.slug;
-                  const thumb = hasThumb ? `/images/${imgDir}/${imgFile}` : null;
-                  return {
-                    name: p.name, href: `/projects/${p.slug}`, slug: p.slug,
-                    tag: isKo ? (p.category_label_kr || '') : (p.category_label_en || ''),
-                    year: p.year, thumb, hasPage, isNew: p.isNew,
-                  };
-                })
-            : [
-                { name: 'tofuG', href: '/projects/tofug', tag: 'Brand & Spatial Design', thumb: 'https://framerusercontent.com/images/vForpcAJWD1kBVHipRHJhWa6eM.jpg', hasPage: true, slug: 'tofug', year: '2025', isNew: false },
-                { name: 'BENSON', href: '/projects/benson', tag: 'Brand & Spatial Design', thumb: '/images/benson/page_01.png', hasPage: true, slug: 'benson', year: '2024', isNew: false },
-                { name: 'BODY GUARD', href: '/projects/bodyguard', tag: 'Brand & Spatial Design', thumb: '/images/bodyguard/page_01.png', hasPage: true, slug: 'bodyguard', year: '2024', isNew: false },
-                { name: 'GAGGA', href: '/projects/gagga', tag: 'Brand & Spatial Design', thumb: '/images/gagga/hero.jpg', hasPage: true, slug: 'gagga', year: '2024', isNew: false },
-                { name: 'SOLDAM MARKET', href: '/projects/soldam', tag: 'Brand & Spatial Design', thumb: '/images/soldam/hero.jpg', hasPage: true, slug: 'soldam', year: '2024', isNew: false },
-              ]
-          ).map((p) => {
-            const card = (
-              <div key={p.slug} className={`browse-card${p.hasPage ? '' : ' browse-card-dim'}`}>
-                {p.thumb ? (
-                  <img src={p.thumb} alt={p.name} loading="lazy" />
-                ) : (
-                  <div className="browse-card-ph">{p.name.charAt(0)}</div>
-                )}
-                {p.isNew && <span className="browse-card-badge">NEW</span>}
-                <div className="browse-card-overlay">
-                  <span className="browse-card-name">{p.name}</span>
-                  <span className="browse-card-meta">{p.tag}</span>
-                  <span className="browse-card-year">{p.year}</span>
-                </div>
+      {/* ── Project Grid ── */}
+      <section className="pg-section">
+        <div className="pg-grid">
+          {projects.map((project) => (
+            <Link key={project.slug} href={`/projects/${project.slug}`} className="pg-card">
+              <div className="pg-poster">
+                <img src={project.poster} alt={project.name} loading="lazy" />
               </div>
-            );
-
-            return p.hasPage ? (
-              <Link key={p.slug} href={p.href} className="browse-card-link">
-                {card}
-              </Link>
-            ) : (
-              <div key={p.slug} className="browse-card-link browse-card-nolink">
-                {card}
+              <div className="pg-space">
+                <picture>
+                  <source media="(max-width: 768px)" srcSet={project.spaceMobile} />
+                  <img src={project.spaceDesktop} alt={`${project.name} 공간`} loading="lazy" />
+                </picture>
               </div>
-            );
-          })}
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -724,9 +654,9 @@ export default function HomePage() {
         .hero {
             position: relative;
             width: 100%;
-            height: 100vh;
-            min-height: 600px;
-            margin-bottom: 120px;
+            height: 60vh;
+            min-height: 400px;
+            margin-bottom: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -861,6 +791,46 @@ export default function HomePage() {
             animation: fadeUp 1s ease-out 1s forwards;
         }
         .hero-mobile { display: none; }
+
+        /* ── Project Grid ── */
+        .pg-section { width: 100%; background: #fff; }
+        .pg-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+        }
+        .pg-card {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+        .pg-poster {
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+        }
+        .pg-poster img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            display: block;
+        }
+        .pg-space {
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+        }
+        .pg-space img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            display: block;
+        }
+        .pg-card:hover .pg-poster img,
+        .pg-card:hover .pg-space img { transform: scale(1.03); }
+
         @keyframes fadeUp {
             to { opacity: 1; transform: translateY(0); }
         }
@@ -1775,7 +1745,10 @@ export default function HomePage() {
             .nav-lang { gap: 4px; }
             .nav-logo-text { font-size: 22px; }
             .about { padding: 80px 20px; }
+            .hero { height: 70vh; min-height: 360px; }
             .hero-desktop { display: none !important; }
+            .pg-grid { grid-template-columns: 1fr; }
+            .pg-space { aspect-ratio: 4/3; }
             .hero-mobile {
                 display: flex;
                 flex-direction: column;
