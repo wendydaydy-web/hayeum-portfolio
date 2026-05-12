@@ -654,8 +654,8 @@ export default function HomePage() {
         .hero {
             position: relative;
             width: 100%;
-            height: 60vh;
-            min-height: 400px;
+            height: 100vh;
+            min-height: 600px;
             margin-bottom: 0;
             display: flex;
             align-items: center;
@@ -808,12 +808,13 @@ export default function HomePage() {
         }
         .pg-poster {
             width: 100%;
-            aspect-ratio: 3/4;
+            aspect-ratio: 2/3;
             overflow: hidden;
         }
         .pg-poster img {
             width: 100%; height: 100%;
             object-fit: cover;
+            object-position: center top;
             transition: transform 0.6s ease;
             display: block;
         }
@@ -1745,7 +1746,7 @@ export default function HomePage() {
             .nav-lang { gap: 4px; }
             .nav-logo-text { font-size: 22px; }
             .about { padding: 80px 20px; }
-            .hero { height: 70vh; min-height: 360px; }
+            .hero { height: 100vh; min-height: 600px; }
             .hero-desktop { display: none !important; }
             .pg-grid { grid-template-columns: 1fr; }
             .pg-space { aspect-ratio: 4/3; }
