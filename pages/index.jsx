@@ -1788,7 +1788,7 @@ export default function HomePage() {
                 font-size: clamp(12px, 3vw, 16px);
                 color: #fff;
                 margin: 0;
-                margin-top: 6px;
+                margin-top: 20px;
                 letter-spacing: 0.02em;
                 text-align: center;
                 opacity: 0.95;
