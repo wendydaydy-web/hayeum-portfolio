@@ -186,13 +186,10 @@ export default function HomePage() {
 
       {/* ── Hero ── */}
       <section className="hero">
-        <div className="hero-bg-wrapper">
-          <video className="hero-bg" autoPlay muted loop playsInline>
-            <source src="https://framerusercontent.com/assets/MoR4uHvfn9l6Y2vXWgZEumlT0.mp4" type="video/mp4" />
-          </video>
-          <div className="hero-overlay"></div>
-          <div className="hero-fade-mask"></div>
-        </div>
+        <video className="hero-bg" autoPlay muted loop playsInline>
+          <source src="https://framerusercontent.com/assets/MoR4uHvfn9l6Y2vXWgZEumlT0.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-overlay"></div>
         <div className="hero-content hero-desktop">
           <div className="hero-left">
             <h1 className="hero-en">Where the shade<br/>gathers</h1>
@@ -662,15 +659,7 @@ export default function HomePage() {
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: visible;
-        }
-        .hero-bg-wrapper {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%;
-            height: 130vh;
             overflow: hidden;
-            z-index: 0;
         }
         .hero-bg {
             position: absolute;
@@ -678,34 +667,19 @@ export default function HomePage() {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            z-index: 0;
         }
         .hero-overlay {
             position: absolute;
-            inset: 0;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0,0,0,0.15);
             z-index: 1;
-            pointer-events: none;
-        }
-        .hero-fade-mask {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(255,255,255,0) 0%,
-                rgba(255,255,255,0) 50%,
-                rgba(255,255,255,0.1) 65%,
-                rgba(255,255,255,0.4) 78%,
-                rgba(255,255,255,0.78) 88%,
-                rgba(255,255,255,1) 95%,
-                rgba(255,255,255,1) 100%
-            );
-            pointer-events: none;
-            z-index: 2;
         }
         .hero-content {
             position: absolute;
             inset: 0;
-            height: 100vh;
             z-index: 10;
             color: #fff;
             padding: 0 6vw;
@@ -813,9 +787,6 @@ export default function HomePage() {
             background: #fff;
             position: relative;
             overflow: hidden;
-            margin-top: -30vh;
-            padding-top: 30vh;
-            z-index: 2;
         }
         .pg-section::before {
             content: '';
@@ -825,15 +796,13 @@ export default function HomePage() {
             height: 120%;
             background-image: url('/textures/shadow-overlay.jpg');
             background-size: cover;
-            background-position: center top;
+            background-position: center;
             background-repeat: no-repeat;
             mix-blend-mode: multiply;
             opacity: 0.22;
             filter: blur(4px);
             pointer-events: none;
             z-index: 5;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 12%, rgba(0,0,0,0.7) 22%, rgba(0,0,0,1) 35%, rgba(0,0,0,1) 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 12%, rgba(0,0,0,0.7) 22%, rgba(0,0,0,1) 35%, rgba(0,0,0,1) 100%);
             animation: shadowDance 12s ease-in-out infinite;
         }
         @keyframes shadowDance {
@@ -1811,8 +1780,6 @@ export default function HomePage() {
             .nav-logo-text { font-size: 22px; }
             .about { padding: 80px 20px; }
             .hero { height: 100vh; min-height: 600px; }
-            .hero-bg-wrapper { height: 120vh; }
-            .pg-section { margin-top: -20vh; padding-top: 20vh; }
             .hero-desktop { display: none !important; }
             .pg-grid { grid-template-columns: 1fr; }
             .pg-space { aspect-ratio: 4/5; }
