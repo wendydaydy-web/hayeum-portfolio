@@ -798,27 +798,24 @@ export default function HomePage() {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 0;
-            align-items: stretch;
+            align-items: end;
         }
         .pg-card {
             display: flex;
             flex-direction: column;
+            justify-content: flex-end;
             width: 100%;
+            height: 100%;
             text-decoration: none;
             color: inherit;
         }
         .pg-poster {
             width: 100%;
-            aspect-ratio: 2/3;
             overflow: hidden;
-            position: relative;
         }
         .pg-poster img {
-            position: absolute;
-            inset: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: center;
+            width: 100%;
+            height: auto;
             display: block;
             transition: transform 0.6s ease;
         }
@@ -827,6 +824,7 @@ export default function HomePage() {
             aspect-ratio: 16/10;
             overflow: hidden;
             position: relative;
+            flex-shrink: 0;
         }
         .pg-space img {
             position: absolute;
