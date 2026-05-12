@@ -23,6 +23,7 @@ export default function HomePage() {
   const [scrolled, setScrolled] = useState(false);
   const [overlayOpen, setOverlayOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
+  const [mobileHeroOpen, setMobileHeroOpen] = useState(false);
   const revealRefs = useRef([]);
   const navRef = useRef(null);
 
@@ -204,7 +205,22 @@ export default function HomePage() {
         {/* ── Mobile Only ── */}
         <div className="hero-mobile">
           <p className="hero-mobile-cn">夏陰</p>
-          <p className="hero-mobile-en">where shade gathers</p>
+          <button
+            className="hero-mobile-toggle"
+            onClick={() => setMobileHeroOpen((prev) => !prev)}
+            aria-label={mobileHeroOpen ? '본문 닫기' : '본문 열기'}
+          >
+            <span className="hero-mobile-en">where shade gathers</span>
+            <span className={`hero-mobile-arrow${mobileHeroOpen ? ' open' : ''}`}>▾</span>
+          </button>
+          <div className={`hero-mobile-body-wrapper${mobileHeroOpen ? ' open' : ''}`}>
+            <p className="hero-mobile-body">
+              Ha-umm creates spaces that,<br/>
+              like summer shade, naturally draw people in.<br/>
+              Inspired by such moments, we design spaces<br/>
+              where brand and place seamlessly become one.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -1781,17 +1797,61 @@ export default function HomePage() {
                 margin: 0;
                 letter-spacing: 0.05em;
             }
+            .hero-mobile-toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: none;
+                border: none;
+                padding: 6px 0;
+                cursor: pointer;
+                color: #fff;
+                margin-top: 20px;
+                transition: opacity 0.3s ease;
+            }
+            .hero-mobile-toggle:hover { opacity: 0.85; }
+            .hero-mobile-toggle:focus { outline: none; }
             .hero-mobile-en {
                 font-family: var(--font-gowun-batang), serif;
                 font-weight: 400;
                 font-style: italic;
                 font-size: clamp(12px, 3vw, 16px);
-                color: #fff;
-                margin: 0;
-                margin-top: 20px;
                 letter-spacing: 0.02em;
-                text-align: center;
+                color: #fff;
                 opacity: 0.95;
+            }
+            .hero-mobile-arrow {
+                font-size: clamp(10px, 2.5vw, 13px);
+                color: #fff;
+                opacity: 0.8;
+                transition: transform 0.4s ease;
+                display: inline-block;
+                line-height: 1;
+            }
+            .hero-mobile-arrow.open { transform: rotate(180deg); }
+            .hero-mobile-body-wrapper {
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transition: max-height 0.5s ease, opacity 0.5s ease, margin-top 0.5s ease;
+                margin-top: 0;
+            }
+            .hero-mobile-body-wrapper.open {
+                max-height: 400px;
+                opacity: 1;
+                margin-top: 40px;
+            }
+            .hero-mobile-body {
+                font-family: var(--font-gowun-batang), serif;
+                font-weight: 400;
+                font-style: normal;
+                font-size: clamp(11px, 2.8vw, 14px);
+                line-height: 1.7;
+                color: #fff;
+                opacity: 0.95;
+                text-align: center;
+                margin: 0;
+                padding: 0 8vw;
             }
             .experience { padding: 0 20px 60px; }
             .exp-header { flex-wrap: wrap; gap: 4px; }
