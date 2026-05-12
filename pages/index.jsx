@@ -191,7 +191,7 @@ export default function HomePage() {
         <div className="hero-fade-bottom"></div>
         <div className="hero-content">
           <div className="hero-left">
-            <h1 className="hero-en">Where shade<br/>gathers</h1>
+            <h1 className="hero-en">Where the shade<br/>gathers</h1>
             <p className="hero-cn">夏陰</p>
             <p className="hero-kr">여름 : 하&nbsp;&nbsp;그늘 : 음</p>
           </div>
