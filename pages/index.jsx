@@ -231,7 +231,8 @@ export default function HomePage() {
           {projects.map((project) => (
             <Link key={project.slug} href={`/projects/${project.slug}`} className="pg-card">
               <div className="pg-poster">
-                <img src={project.poster} alt={project.name} loading="lazy" />
+                <img src={project.poster} alt={project.name} loading="lazy" className="poster-img" />
+                <div className="poster-shadow-overlay"></div>
               </div>
               <div className="pg-space">
                 <picture>
@@ -812,13 +813,28 @@ export default function HomePage() {
         .pg-poster {
             width: 100%;
             overflow: hidden;
+            position: relative;
         }
-        .pg-poster img {
+        .pg-poster .poster-img {
             width: 100%;
             height: auto;
             display: block;
             transition: transform 0.6s ease;
         }
+        .poster-shadow-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: url('/textures/shadow-overlay.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            mix-blend-mode: multiply;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 2;
+            transition: opacity 0.5s ease;
+        }
+        .pg-card:hover .poster-shadow-overlay { opacity: 0.3; }
         .pg-space {
             width: 100%;
             aspect-ratio: 16/10;
