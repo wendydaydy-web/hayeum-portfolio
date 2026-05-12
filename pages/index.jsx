@@ -793,12 +793,47 @@ export default function HomePage() {
         .hero-mobile { display: none; }
 
         /* ── Project Grid ── */
-        .pg-section { width: 100%; background: #fff; }
+        .pg-section {
+            width: 100%;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .pg-section::before {
+            content: '';
+            position: absolute;
+            inset: -10%;
+            width: 120%;
+            height: 120%;
+            background-image: url('/textures/shadow-overlay.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            mix-blend-mode: multiply;
+            opacity: 0.22;
+            filter: blur(4px);
+            pointer-events: none;
+            z-index: 5;
+            animation: shadowDance 12s ease-in-out infinite;
+        }
+        @keyframes shadowDance {
+            0%,  100% { transform: translate(0px,   0px)  scale(1)    rotate(0deg);   opacity: 0.22; }
+            20%        { transform: translate(-25px, 15px) scale(1.05) rotate(0.5deg); opacity: 0.28; }
+            40%        { transform: translate(20px, -10px) scale(1.02) rotate(-0.3deg);opacity: 0.18; }
+            60%        { transform: translate(-15px, 20px) scale(1.04) rotate(0.4deg); opacity: 0.25; }
+            80%        { transform: translate(10px, -15px) scale(1)    rotate(-0.2deg);opacity: 0.2;  }
+        }
+        @keyframes shadowDanceMobile {
+            0%,  100% { transform: translate(0px,    0px) scale(1);    }
+            50%        { transform: translate(-15px, 10px) scale(1.03); }
+        }
         .pg-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 0;
             align-items: end;
+            position: relative;
+            z-index: 1;
         }
         .pg-card {
             display: flex;
@@ -809,35 +844,9 @@ export default function HomePage() {
             text-decoration: none;
             color: inherit;
             position: relative;
-            overflow: hidden;
+            z-index: 1;
         }
-        .pg-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: url('/textures/shadow-overlay.jpg');
-            background-size: 120% auto;
-            background-position: center top;
-            background-repeat: no-repeat;
-            mix-blend-mode: multiply;
-            opacity: 0.35;
-            filter: blur(2px);
-            pointer-events: none;
-            z-index: 5;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.3) 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.3) 100%);
-            animation: shadowFloat 8s ease-in-out infinite;
-        }
-        .pg-card:hover::after {
-            opacity: 0.22;
-            transition: opacity 0.5s ease;
-        }
-        @keyframes shadowFloat {
-            0%,  100% { transform: translate(0px,  0px) scale(1);    opacity: 0.35; }
-            25%        { transform: translate(-5px, 3px) scale(1.02); opacity: 0.4;  }
-            50%        { transform: translate(3px, -2px) scale(1);    opacity: 0.28; }
-            75%        { transform: translate(-2px, 4px) scale(1.01); opacity: 0.38; }
-        }
+        .pg-card:hover { z-index: 2; }
         .pg-poster {
             width: 100%;
             overflow: hidden;
@@ -1785,7 +1794,7 @@ export default function HomePage() {
             .hero-desktop { display: none !important; }
             .pg-grid { grid-template-columns: 1fr; }
             .pg-space { aspect-ratio: 4/5; }
-            .pg-card::after { animation: none; }
+            .pg-section::before { animation: shadowDanceMobile 15s ease-in-out infinite; opacity: 0.18; }
             .hero-mobile {
                 display: flex;
                 flex-direction: column;
