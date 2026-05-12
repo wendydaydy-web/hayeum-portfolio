@@ -808,15 +808,13 @@ export default function HomePage() {
         }
         .pg-poster {
             width: 100%;
-            aspect-ratio: 2/3;
             overflow: hidden;
         }
         .pg-poster img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: center top;
-            transition: transform 0.6s ease;
+            width: 100%;
+            height: auto;
             display: block;
+            transition: transform 0.6s ease;
         }
         .pg-space {
             width: 100%;
