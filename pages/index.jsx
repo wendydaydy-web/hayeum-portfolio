@@ -189,7 +189,7 @@ export default function HomePage() {
         <video className="hero-bg" autoPlay muted loop playsInline>
           <source src="https://framerusercontent.com/assets/MoR4uHvfn9l6Y2vXWgZEumlT0.mp4" type="video/mp4" />
         </video>
-        <div className="hero-overlay"></div>
+        <div className="hero-bottom-fade"></div>
         <div className="hero-content hero-desktop">
           <div className="hero-left">
             <h1 className="hero-en">Where the shade<br/>gathers</h1>
@@ -669,13 +669,19 @@ export default function HomePage() {
             object-fit: cover;
             z-index: 0;
         }
-        .hero-overlay {
+        .hero-bottom-fade {
             position: absolute;
-            top: 0; left: 0;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.15);
-            z-index: 1;
+            height: 35%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,1) 100%
+            );
+            z-index: 2;
+            pointer-events: none;
         }
         .hero-content {
             position: absolute;
@@ -787,34 +793,6 @@ export default function HomePage() {
             background: #fff;
             position: relative;
             overflow: hidden;
-        }
-        .pg-section::before {
-            content: '';
-            position: absolute;
-            inset: -10%;
-            width: 120%;
-            height: 120%;
-            background-image: url('/textures/shadow-overlay.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            mix-blend-mode: multiply;
-            opacity: 0.22;
-            filter: blur(4px);
-            pointer-events: none;
-            z-index: 5;
-            animation: shadowDance 12s ease-in-out infinite;
-        }
-        @keyframes shadowDance {
-            0%,  100% { transform: translate(0px,   0px)  scale(1)    rotate(0deg);   opacity: 0.22; }
-            20%        { transform: translate(-25px, 15px) scale(1.05) rotate(0.5deg); opacity: 0.28; }
-            40%        { transform: translate(20px, -10px) scale(1.02) rotate(-0.3deg);opacity: 0.18; }
-            60%        { transform: translate(-15px, 20px) scale(1.04) rotate(0.4deg); opacity: 0.25; }
-            80%        { transform: translate(10px, -15px) scale(1)    rotate(-0.2deg);opacity: 0.2;  }
-        }
-        @keyframes shadowDanceMobile {
-            0%,  100% { transform: translate(0px,    0px) scale(1);    }
-            50%        { transform: translate(-15px, 10px) scale(1.03); }
         }
         .pg-grid {
             display: grid;
@@ -1783,7 +1761,6 @@ export default function HomePage() {
             .hero-desktop { display: none !important; }
             .pg-grid { grid-template-columns: 1fr; }
             .pg-space { aspect-ratio: 4/5; }
-            .pg-section::before { animation: shadowDanceMobile 15s ease-in-out infinite; opacity: 0.18; }
             .hero-mobile {
                 display: flex;
                 flex-direction: column;
