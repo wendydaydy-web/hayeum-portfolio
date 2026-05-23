@@ -314,9 +314,6 @@ export default function Benson() {
           <FadeIn className="poster-main">
             <img src={I('poster.png')} alt="BENSON poster" />
           </FadeIn>
-          <FadeIn className="poster-long">
-            <img src={I('poster-long.png')} alt="BENSON poster long format" />
-          </FadeIn>
         </div>
       </section>
 
@@ -508,17 +505,8 @@ export default function Benson() {
         :global(.poster-main) {
           overflow: hidden;
           border-radius: 4px;
-          margin-bottom: 24px;
         }
         :global(.poster-main) img {
-          width: 100%;
-          display: block;
-        }
-        :global(.poster-long) {
-          overflow: hidden;
-          border-radius: 4px;
-        }
-        :global(.poster-long) img {
           width: 100%;
           display: block;
         }
