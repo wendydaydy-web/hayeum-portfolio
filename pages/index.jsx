@@ -832,7 +832,8 @@ export default function HomePage() {
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            font-style: italic;
+            font-family: var(--font-noto-serif-kr), serif;
+            font-style: normal;
             font-weight: 300;
             letter-spacing: 0.04em;
             color: #fff;
@@ -842,12 +843,9 @@ export default function HomePage() {
             z-index: 2;
         }
         .pg-overlay-en {
-            font-family: var(--font-cormorant), serif;
-            font-size: clamp(22px, 2.6vw, 44px);
+            font-size: clamp(20px, 2.2vw, 36px);
         }
         .pg-overlay-ko {
-            font-family: var(--font-noto-serif-kr), serif;
-            font-style: normal;
             font-size: clamp(18px, 2vw, 32px);
         }
         .pg-space {
