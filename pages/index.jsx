@@ -823,17 +823,13 @@ export default function HomePage() {
         }
         .pg-space {
             width: 100%;
-            aspect-ratio: 16/10;
             overflow: hidden;
             position: relative;
             flex-shrink: 0;
         }
         .pg-space img {
-            position: absolute;
-            inset: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: center;
+            width: 100%;
+            height: auto;
             display: block;
             transition: transform 0.6s ease;
         }
@@ -1757,7 +1753,6 @@ export default function HomePage() {
             .hero { height: 100vh; min-height: 600px; }
             .hero-desktop { display: none !important; }
             .pg-grid { grid-template-columns: 1fr; }
-            .pg-space { aspect-ratio: 4/5; }
             .hero-mobile {
                 display: flex;
                 flex-direction: column;
