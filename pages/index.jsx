@@ -704,7 +704,7 @@ export default function HomePage() {
         .hero-en {
             font-family: var(--font-gowun-batang), serif;
             font-size: clamp(70px, 6.5vw, 130px);
-            font-weight: 400;
+            font-weight: 300;
             font-style: normal;
             line-height: 1.05;
             letter-spacing: -0.01em;
@@ -730,7 +730,7 @@ export default function HomePage() {
         .hero-kr {
             font-family: var(--font-noto-serif-kr), serif;
             font-size: clamp(32px, 2.7vw, 52px);
-            font-weight: 400;
+            font-weight: 300;
             font-style: normal;
             letter-spacing: 0.02em;
             color: #fff;
@@ -760,7 +760,7 @@ export default function HomePage() {
         .hero-headline {
             font-family: var(--font-gowun-batang), serif;
             font-size: clamp(30px, 2.8vw, 54px);
-            font-weight: 400;
+            font-weight: 300;
             font-style: normal !important;
             white-space: normal;
             line-height: 1.3;
@@ -774,7 +774,7 @@ export default function HomePage() {
         .hero-body {
             font-family: var(--font-gowun-batang), serif;
             font-size: clamp(14px, 1.25vw, 24px);
-            font-weight: 400;
+            font-weight: 300;
             font-style: normal !important;
             line-height: 1.6;
             letter-spacing: 0.015em;
@@ -1798,7 +1798,7 @@ export default function HomePage() {
             .hero-mobile-toggle:focus { outline: none; }
             .hero-mobile-en {
                 font-family: var(--font-gowun-batang), serif;
-                font-weight: 400;
+                font-weight: 300;
                 font-style: italic;
                 font-size: clamp(12px, 3vw, 16px);
                 letter-spacing: 0.02em;
@@ -1836,7 +1836,7 @@ export default function HomePage() {
             }
             .hero-mobile-body {
                 font-family: var(--font-gowun-batang), serif;
-                font-weight: 400;
+                font-weight: 300;
                 font-style: normal;
                 font-size: clamp(11px, 2.8vw, 14px);
                 line-height: 1.7;
