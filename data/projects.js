@@ -2,8 +2,12 @@ const projects = [
   {
     slug: 'tofug',
     name: 'TOFU·G',
-    poster: '/projects/tofug/poster.png',
+    poster: '/images/tofug-thumbnail.png',
     spaceDesktop: '/projects/tofug/space-desktop.jpg',
+    overlay: {
+      ko: '— 두부 젤라또 —',
+      en: '— Tofu Gelato —',
+    },
   },
   {
     slug: 'benson',

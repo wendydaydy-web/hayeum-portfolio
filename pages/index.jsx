@@ -231,6 +231,11 @@ export default function HomePage() {
             <Link key={project.slug} href={`/projects/${project.slug}`} className="pg-card">
               <div className="pg-poster">
                 <img src={project.poster} alt={project.name} loading="lazy" className="poster-img" />
+                {project.overlay && (
+                  <span className="pg-overlay">
+                    {isKo ? project.overlay.ko : project.overlay.en}
+                  </span>
+                )}
               </div>
               <div className="pg-space">
                 <img src={project.spaceDesktop} alt={`${project.name} 공간`} loading="lazy" />
@@ -814,12 +819,29 @@ export default function HomePage() {
         .pg-poster {
             width: 100%;
             overflow: hidden;
+            position: relative;
         }
         .pg-poster .poster-img {
             width: 100%;
             height: auto;
             display: block;
             transition: transform 0.6s ease;
+        }
+        .pg-overlay {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-cormorant), serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(20px, 2.4vw, 40px);
+            letter-spacing: 0.04em;
+            color: #fff;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 2;
         }
         .pg-space {
             width: 100%;
