@@ -232,7 +232,7 @@ export default function HomePage() {
               <div className="pg-poster">
                 <img src={project.poster} alt={project.name} loading="lazy" className="poster-img" />
                 {project.overlay && (
-                  <span className="pg-overlay">
+                  <span className={`pg-overlay pg-overlay-${isKo ? 'ko' : 'en'}`}>
                     {isKo ? project.overlay.ko : project.overlay.en}
                   </span>
                 )}
@@ -832,16 +832,23 @@ export default function HomePage() {
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            font-family: var(--font-cormorant), serif;
             font-style: italic;
             font-weight: 300;
-            font-size: clamp(20px, 2.4vw, 40px);
             letter-spacing: 0.04em;
             color: #fff;
             text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
             white-space: nowrap;
             pointer-events: none;
             z-index: 2;
+        }
+        .pg-overlay-en {
+            font-family: var(--font-cormorant), serif;
+            font-size: clamp(22px, 2.6vw, 44px);
+        }
+        .pg-overlay-ko {
+            font-family: var(--font-noto-serif-kr), serif;
+            font-style: normal;
+            font-size: clamp(18px, 2vw, 32px);
         }
         .pg-space {
             width: 100%;
