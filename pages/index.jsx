@@ -233,10 +233,7 @@ export default function HomePage() {
                 <img src={project.poster} alt={project.name} loading="lazy" className="poster-img" />
               </div>
               <div className="pg-space">
-                <picture>
-                  <source media="(max-width: 768px)" srcSet={project.spaceMobile} />
-                  <img src={project.spaceDesktop} alt={`${project.name} 공간`} loading="lazy" />
-                </picture>
+                <img src={project.spaceDesktop} alt={`${project.name} 공간`} loading="lazy" />
               </div>
             </Link>
           ))}

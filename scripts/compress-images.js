@@ -18,13 +18,6 @@ const tasks = [
     format: 'png',
   },
   {
-    src: "G:\\내 드라이브\\portfolio\\2024.04-06 BENSON (NEW)\\벤슨 포트폴리오 최종 모음\\인테리어-2 - 복사본.png",
-    dest: "public/projects/benson/space-mobile.png",
-    maxWidth: 1200,
-    quality: 90,
-    format: 'png',
-  },
-  {
     src: "G:\\내 드라이브\\portfolio\\2025.04 TOFUG (NEW)\\image\\Untitled-1.png",
     dest: "public/projects/tofug/poster.png",
     maxWidth: 2400,
@@ -35,13 +28,6 @@ const tasks = [
     src: "G:\\내 드라이브\\portfolio\\2025.04 TOFUG (NEW)\\image\\DSC09571-28.jpg",
     dest: "public/projects/tofug/space-desktop.jpg",
     maxWidth: 2400,
-    quality: 92,
-    format: 'jpg',
-  },
-  {
-    src: "G:\\내 드라이브\\portfolio\\2025.04 TOFUG (NEW)\\image\\DSC09428-7.jpg",
-    dest: "public/projects/tofug/space-mobile.jpg",
-    maxWidth: 1200,
     quality: 92,
     format: 'jpg',
   },
