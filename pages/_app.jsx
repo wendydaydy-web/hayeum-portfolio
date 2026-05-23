@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import { Gowun_Batang, Noto_Serif_KR } from 'next/font/google';
+import { Cormorant_Garamond, Noto_Serif_KR } from 'next/font/google';
 import '../styles/globals.css';
 
-const gowunBatang = Gowun_Batang({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['300', '400'],
+  style: ['normal', 'italic'],
   display: 'swap',
-  variable: '--font-gowun-batang',
+  variable: '--font-cormorant',
 });
 
 const notoSerifKR = Noto_Serif_KR({
@@ -41,7 +42,7 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <div className={`${gowunBatang.variable} ${notoSerifKR.variable}`}>
+    <div className={`${cormorant.variable} ${notoSerifKR.variable}`}>
       <Component {...pageProps} />
     </div>
   );

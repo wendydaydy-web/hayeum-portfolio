@@ -702,7 +702,7 @@ export default function HomePage() {
             padding-left: 2vw;
         }
         .hero-en {
-            font-family: var(--font-gowun-batang), serif;
+            font-family: var(--font-cormorant), serif;
             font-size: clamp(70px, 6.5vw, 130px);
             font-weight: 300;
             font-style: normal;
@@ -758,7 +758,7 @@ export default function HomePage() {
             overflow: visible;
         }
         .hero-headline {
-            font-family: var(--font-gowun-batang), serif;
+            font-family: var(--font-cormorant), serif;
             font-size: clamp(30px, 2.8vw, 54px);
             font-weight: 300;
             font-style: normal !important;
@@ -772,7 +772,7 @@ export default function HomePage() {
             animation: fadeUp 1s ease-out 0.6s forwards;
         }
         .hero-body {
-            font-family: var(--font-gowun-batang), serif;
+            font-family: var(--font-cormorant), serif;
             font-size: clamp(14px, 1.25vw, 24px);
             font-weight: 300;
             font-style: normal !important;
@@ -1797,7 +1797,7 @@ export default function HomePage() {
             .hero-mobile-toggle:hover { opacity: 0.85; }
             .hero-mobile-toggle:focus { outline: none; }
             .hero-mobile-en {
-                font-family: var(--font-gowun-batang), serif;
+                font-family: var(--font-cormorant), serif;
                 font-weight: 300;
                 font-style: italic;
                 font-size: clamp(12px, 3vw, 16px);
@@ -1835,7 +1835,7 @@ export default function HomePage() {
                 margin-top: 40px;
             }
             .hero-mobile-body {
-                font-family: var(--font-gowun-batang), serif;
+                font-family: var(--font-cormorant), serif;
                 font-weight: 300;
                 font-style: normal;
                 font-size: clamp(11px, 2.8vw, 14px);
