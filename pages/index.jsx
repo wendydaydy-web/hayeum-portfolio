@@ -823,6 +823,7 @@ export default function HomePage() {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            container-type: inline-size;
         }
         .pg-poster .poster-img {
             width: 100%;
@@ -835,12 +836,12 @@ export default function HomePage() {
         .pg-overlay {
             position: absolute;
             left: 50%;
-            top: 31.75%;
+            top: 30%;
             transform: translate(-50%, -50%);
             font-family: var(--font-noto-serif-kr), serif;
             font-style: normal;
             font-weight: 300;
-            font-size: clamp(18px, 2vw, 32px);
+            font-size: clamp(10px, 5cqw, 32px);
             letter-spacing: 0.04em;
             color: #fff;
             white-space: nowrap;
