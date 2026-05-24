@@ -800,16 +800,14 @@ export default function HomePage() {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 0;
-            align-items: end;
             position: relative;
             z-index: 1;
         }
         .pg-card {
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
             width: 100%;
-            align-self: end;
+            height: 100%;
             text-decoration: none;
             color: inherit;
             position: relative;
@@ -817,13 +815,17 @@ export default function HomePage() {
         }
         .pg-card:hover { z-index: 2; }
         .pg-poster {
+            flex: 1 1 auto;
+            min-height: 0;
             width: 100%;
             overflow: hidden;
             position: relative;
         }
         .pg-poster .poster-img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
             display: block;
             transition: transform 0.6s ease;
         }
@@ -844,13 +846,15 @@ export default function HomePage() {
         }
         .pg-space {
             width: 100%;
+            aspect-ratio: 3 / 2;
             overflow: hidden;
             position: relative;
             flex-shrink: 0;
         }
         .pg-space img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
             transition: transform 0.6s ease;
         }
