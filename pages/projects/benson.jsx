@@ -404,7 +404,7 @@ export default function Benson() {
 
         /* ── SPACE / STOREFRONT ── */
         .bspace { max-width: 1320px; margin: 0 auto; padding: 0 40px 40px; }
-        .bspace-head { margin-bottom: 48px; }
+        .bspace-head { margin-bottom: 0; }
         .bspace-num { display: inline-flex; align-items: center; gap: 12px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 18px; color: #fff; background: var(--b-red); padding: 3px 10px; border-radius: 3px; margin: 0 0 22px; }
         .bspace-num-label { letter-spacing: 0.18em; font-size: 13px; }
         .bspace-title { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(48px, 9vw, 130px); line-height: 0.92; letter-spacing: -0.02em; margin: 0; }
