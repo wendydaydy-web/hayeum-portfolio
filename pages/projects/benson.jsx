@@ -417,7 +417,7 @@ export default function Benson() {
         /* ===== Section shell + corner tags ===== */
         .bsec {
           position: relative;
-          padding: 140px 60px 120px;
+          padding: 0 60px;
           background: var(--page-bg);
           color: var(--page-fg);
           overflow: hidden;
@@ -734,7 +734,7 @@ export default function Benson() {
 
         /* ===== Responsive ===== */
         @media (max-width: 1100px) {
-          .bsec { padding: 120px 36px 80px; }
+          .bsec { padding: 0 36px; }
           :global(.corner-tags) { padding: 0 36px; top: 24px; }
           .space-collage { min-height: 460px; }
           :global(.collage-1) { width: 70%; }
@@ -757,7 +757,7 @@ export default function Benson() {
           :global(.sticker) { max-width: 22vw; }
         }
         @media (max-width: 640px) {
-          .bsec { padding: 90px 20px 60px; }
+          .bsec { padding: 0 20px; }
           :global(.corner-tags) { padding: 0 20px; top: 16px; }
           :global(.corner-tag) { font-size: 10px; letter-spacing: 2px; }
           .space-collage {
