@@ -798,7 +798,7 @@ export default function HomePage() {
         }
         .pg-grid {
             display: flex;
-            align-items: stretch;
+            align-items: flex-end;
             gap: 0;
             position: relative;
             z-index: 1;
@@ -815,17 +815,13 @@ export default function HomePage() {
         }
         .pg-card:hover { z-index: 2; }
         .pg-poster {
-            flex: 1 1 auto;
-            min-height: 0;
             width: 100%;
             overflow: hidden;
             position: relative;
         }
         .pg-poster .poster-img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center bottom;
+            height: auto;
             display: block;
             transition: transform 0.6s ease;
         }
@@ -846,16 +842,13 @@ export default function HomePage() {
         }
         .pg-space {
             width: 100%;
-            aspect-ratio: 3 / 2;
             overflow: hidden;
             position: relative;
             flex-shrink: 0;
         }
         .pg-space img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center bottom;
+            height: auto;
             display: block;
             transition: transform 0.6s ease;
         }
