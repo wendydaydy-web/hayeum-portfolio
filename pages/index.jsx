@@ -797,18 +797,17 @@ export default function HomePage() {
             overflow: hidden;
         }
         .pg-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
+            align-items: flex-end;
             gap: 0;
-            align-items: end;
             position: relative;
             z-index: 1;
         }
         .pg-card {
             display: flex;
             flex-direction: column;
-            width: 100%;
-            align-self: end;
+            flex: 1 1 0;
+            min-width: 0;
             text-decoration: none;
             color: inherit;
             position: relative;
@@ -1772,7 +1771,7 @@ export default function HomePage() {
             .about { padding: 80px 20px; }
             .hero { height: 100vh; min-height: 600px; }
             .hero-desktop { display: none !important; }
-            .pg-grid { grid-template-columns: 1fr; }
+            .pg-grid { flex-direction: column; align-items: stretch; }
             .hero-mobile {
                 display: flex;
                 flex-direction: column;
