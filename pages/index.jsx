@@ -809,7 +809,7 @@ export default function HomePage() {
             flex-direction: column;
             justify-content: flex-end;
             width: 100%;
-            height: 100%;
+            align-self: end;
             text-decoration: none;
             color: inherit;
             position: relative;
