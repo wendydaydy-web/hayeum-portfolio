@@ -25,6 +25,7 @@ export default function HomePage() {
   const [overlayOpen, setOverlayOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
   const [mobileHeroOpen, setMobileHeroOpen] = useState(false);
+  const [combinedOpen, setCombinedOpen] = useState(false);
   const revealRefs = useRef([]);
   const navRef = useRef(null);
 
@@ -80,9 +81,17 @@ export default function HomePage() {
 
   // Lock body scroll when overlay is open
   useEffect(() => {
-    document.body.style.overflow = overlayOpen ? 'hidden' : '';
+    document.body.style.overflow = (overlayOpen || combinedOpen) ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
-  }, [overlayOpen]);
+  }, [overlayOpen, combinedOpen]);
+
+  // Close combined modal with Escape
+  useEffect(() => {
+    if (!combinedOpen) return;
+    const onKey = (e) => { if (e.key === 'Escape') setCombinedOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [combinedOpen]);
 
   const addRevealRef = (el) => {
     if (el && !revealRefs.current.includes(el)) {
@@ -427,6 +436,133 @@ export default function HomePage() {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* ── Floating combined button ── */}
+      <button
+        type="button"
+        className="combined-fab"
+        onClick={() => setCombinedOpen(true)}
+        aria-label={isKo ? '전체 보기 열기' : 'Open combined view'}
+      >
+        <img src="/images/work-button.png" alt="" />
+      </button>
+
+      {/* ── Combined WORK + WORK(CORP.) Modal ── */}
+      <div
+        className={`combined-modal${combinedOpen ? ' open' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!combinedOpen}
+      >
+        <div className="combined-backdrop" onClick={() => setCombinedOpen(false)} />
+        <div className="combined-panel">
+          <button
+            type="button"
+            className="combined-close"
+            onClick={() => setCombinedOpen(false)}
+            aria-label={isKo ? '닫기' : 'Close'}
+          >×</button>
+
+          <div className="combined-scroll">
+            <div className="combined-grid">
+              {/* ── WORK column ── */}
+              <section className="combined-col">
+                <h2 className="combined-heading">WORK</h2>
+                <p className="combined-sub">{isKo ? '프로젝트' : 'Selected projects'}</p>
+                <div className="combined-projects">
+                  {allProjects.map((p) => {
+                    const hasSections = p.sections && p.sections.length > 0;
+                    const hasPage = HARDCODED_SLUGS.has(p.slug) || hasSections;
+                    const imgFile = p.grid_image || p.cover_image;
+                    const imgDir = imgFile && imgFile.startsWith(p.slug) ? 'main' : p.slug;
+                    const thumb = imgFile ? `/images/${imgDir}/${imgFile}` : null;
+                    const inner = (
+                      <>
+                        {thumb && <img src={thumb} alt={p.name} loading="lazy" />}
+                        <div className="cm-card-info">
+                          <span className="cm-card-name">{p.name}</span>
+                        </div>
+                      </>
+                    );
+                    const klass = `cm-card${thumb ? '' : ' no-image'}`;
+                    return hasPage ? (
+                      <Link
+                        key={p.slug}
+                        href={`/projects/${p.slug}`}
+                        className={klass}
+                        onClick={() => setCombinedOpen(false)}
+                      >{inner}</Link>
+                    ) : (
+                      <div key={p.slug} className={klass}>{inner}</div>
+                    );
+                  })}
+                </div>
+              </section>
+
+              {/* ── WORK(CORP.) column ── */}
+              <section className="combined-col">
+                <h2 className="combined-heading">WORK (CORP.)</h2>
+                <p className="combined-sub">{isKo ? '경력' : 'Career'}</p>
+                <div className="combined-career">
+                  <div className="cm-exp">
+                    <div className="cm-exp-header">
+                      <span className="cm-exp-company">PRADA Korea</span>
+                      <span className="cm-exp-period">2022.05 – 2022.12</span>
+                    </div>
+                    <span className="cm-exp-role">Interior Tech</span>
+                    <ul className="cm-exp-works">
+                      <li>{isKo ? 'TROPICO POP-UP (롯데 동탄 · 더현대 서울 · 갤러리아 압구정)' : 'TROPICO POP-UP (Lotte Dongtan · The Hyundai Seoul · Galleria Apgujeong)'}</li>
+                      <li>{isKo ? 'HOLIDAY POP-UP (신세계 강남 · 더현대 서울 · 롯데 동탄)' : 'HOLIDAY POP-UP (Shinsegae Gangnam · The Hyundai Seoul · Lotte Dongtan)'}</li>
+                      <li>{isKo ? '신세계 대전 오프닝' : 'SHINSEGAE DAEJEON OPENING'}</li>
+                    </ul>
+                  </div>
+                  <div className="cm-exp">
+                    <div className="cm-exp-header">
+                      <span className="cm-exp-company">{isKo ? '대혜 건축' : 'DaeHye Architecture'}</span>
+                      <span className="cm-exp-period">2023.03 – 2024.03</span>
+                    </div>
+                    <span className="cm-exp-role">Space Design</span>
+                    <ul className="cm-exp-works">
+                      <li>{isKo ? '스타필드 부산 창원' : 'STARFIELD BUSAN CHANGWON'}</li>
+                      <li>{isKo ? '스타필드 빌리지 별내' : 'STARFIELD VILLAGE BYEOLLAE'}</li>
+                      <li>{isKo ? '현대자동차, 애틀랜타, 조지아 USA' : 'HYUNDAI MOTORS COMPANY, Atlanta, Georgia USA'}</li>
+                    </ul>
+                  </div>
+                  <div className="cm-exp">
+                    <div className="cm-exp-header">
+                      <span className="cm-exp-company">Lotte GRS</span>
+                      <span className="cm-exp-period">2025.04 – 2025.09</span>
+                    </div>
+                    <span className="cm-exp-role">Construction Cost Management</span>
+                    <ul className="cm-exp-works">
+                      <li>{isKo ? '롯데리아 매장 시공비 표준화' : 'Construction cost standardization for Lotteria stores'}</li>
+                      <li>{isKo ? '입찰 서류 분석, 인력/비인력 비용 구조 분류' : 'Analyzed bid documents, categorized manual vs non-manual cost structures'}</li>
+                    </ul>
+                  </div>
+                  <div className="cm-exp">
+                    <div className="cm-exp-header">
+                      <span className="cm-exp-company">INITIA</span>
+                      <span className="cm-exp-period">2025 – Present</span>
+                    </div>
+                    <span className="cm-exp-role">Spatial Branding Designer</span>
+                    <ul className="cm-exp-works">
+                      <li>
+                        <Link
+                          href="/projects/tofug"
+                          className="cm-exp-link"
+                          onClick={() => setCombinedOpen(false)}
+                        >
+                          {isKo ? 'tofuG 브랜드 & 공간 디자인' : 'tofuG Brand & Spatial Design'}
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1750,6 +1886,222 @@ export default function HomePage() {
             margin-top: 2px;
         }
 
+        /* ── Floating FAB + Combined Modal ── */
+        .combined-fab {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 999;
+            width: 80px;
+            height: 80px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .combined-fab:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.24);
+        }
+        .combined-fab img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+        .combined-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .combined-modal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .combined-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(12,12,12,0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        .combined-panel {
+            position: relative;
+            width: min(1280px, 92vw);
+            height: min(86vh, 880px);
+            background: var(--bg);
+            color: var(--fg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            transform: translateY(20px) scale(0.98);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .combined-modal.open .combined-panel { transform: translateY(0) scale(1); }
+        .combined-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            z-index: 5;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.06);
+            color: var(--fg);
+            font-size: 22px;
+            font-weight: 300;
+            line-height: 1;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            border: none;
+        }
+        .combined-close:hover { background: rgba(0,0,0,0.12); transform: rotate(90deg); }
+        .combined-scroll {
+            height: 100%;
+            overflow-y: auto;
+            padding: 60px 48px 48px;
+        }
+        .combined-grid {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            gap: 56px;
+            align-items: flex-start;
+        }
+        .combined-col { min-width: 0; }
+        .combined-heading {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(20px, 2vw, 28px);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-bottom: 4px;
+        }
+        .combined-sub {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--fg-50);
+            margin-bottom: 24px;
+        }
+        .combined-projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .cm-card {
+            position: relative;
+            aspect-ratio: 3/4;
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--card-bg);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .cm-card:hover { transform: scale(1.02); }
+        .cm-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .cm-card:hover img { transform: scale(1.05); }
+        .cm-card.no-image { display: flex; align-items: center; justify-content: center; }
+        .cm-card-info {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 10px 12px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+        }
+        .cm-card-name {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #fff;
+        }
+        .cm-card.no-image .cm-card-info { background: transparent; position: static; padding: 0; text-align: center; }
+        .cm-card.no-image .cm-card-name { color: var(--fg-60); font-size: 13px; }
+        .combined-career {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .cm-exp {
+            padding: 22px 0;
+            border-top: 1px solid var(--fg-10);
+        }
+        .cm-exp:last-child { border-bottom: 1px solid var(--fg-10); }
+        .cm-exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+        .cm-exp-company {
+            font-size: clamp(14px, 1.2vw, 16px);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--fg-90);
+        }
+        .cm-exp-period {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            color: var(--fg-50);
+            white-space: nowrap;
+        }
+        .cm-exp-role {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--fg-50);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .cm-exp-works {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .cm-exp-works li {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--fg-60);
+            line-height: 1.55;
+            padding-left: 14px;
+            position: relative;
+        }
+        .cm-exp-works li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--fg-30);
+            font-size: 11px;
+        }
+        .cm-exp-link {
+            color: var(--fg-50);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 0.2s;
+        }
+        .cm-exp-link:hover { color: var(--fg-90); }
+
         /* ── Responsive ── */
         @media (max-width: 1199px) {
             .nav { padding: 16px 24px; }
@@ -1763,6 +2115,11 @@ export default function HomePage() {
         }
 
         @media (max-width: 809px) {
+            .combined-fab { bottom: 24px; right: 24px; width: 64px; height: 64px; }
+            .combined-panel { width: 96vw; height: 92vh; border-radius: 8px; }
+            .combined-scroll { padding: 56px 20px 28px; }
+            .combined-grid { grid-template-columns: 1fr; gap: 36px; }
+            .combined-projects { grid-template-columns: repeat(2, 1fr); gap: 8px; }
             .nav { padding: 14px 20px; }
             .nav-menu { gap: 14px; }
             .nav-menu a,
