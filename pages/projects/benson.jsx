@@ -423,7 +423,12 @@ export default function Benson() {
 
       <style jsx>{`
         /* ── HERO ── */
-        .hero { padding: 130px 60px 60px; max-width: 1600px; margin: 0 auto; }
+        .hero {
+          padding: 130px 60px 60px;
+          max-width: 1600px;
+          margin: 0 auto;
+          background: linear-gradient(to bottom, rgba(200,17,26,0), rgba(200,17,26,0.5));
+        }
         .hero-title { font-size: 36px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 36px; line-height: 1.3; }
         .hero-client { font-weight: 700; color: #000; }
         .hero-desc { font-size: 15px; line-height: 1.85; color: #333; max-width: 1100px; word-break: keep-all; margin-bottom: 28px; text-align: justify; }
