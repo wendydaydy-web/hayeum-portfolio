@@ -247,13 +247,11 @@ export default function Benson() {
           <div><p className="info-label">Area</p><p className="info-value">— PY (— m²)</p></div>
         </section>
 
-        <div className="full-img hero-poster-wrap">
-          <img src={IMG.heroPoster} alt="BENSON Poster" />
-          <div className="hero-poster-overlay" aria-hidden="true"></div>
-        </div>
+        <div className="full-img"><img src={IMG.heroPoster} alt="BENSON Poster" /></div>
 
         {/* ── BENSON POSTER ── */}
         <section className="benson-poster">
+          <div className="benson-poster-overlay" aria-hidden="true"></div>
           <img className="pstk pstk-oval" src={STK('oval.png')} alt="" aria-hidden="true" />
           <img className="pstk pstk-board" src={STK('board.png')} alt="" aria-hidden="true" />
           <img className="pstk pstk-spoon" src={STK('spoon.png')} alt="" aria-hidden="true" />
@@ -443,13 +441,6 @@ export default function Benson() {
 
         .full-img { width: 100%; line-height: 0; }
         .full-img img { width: 100%; object-fit: cover; }
-        .hero-poster-wrap { position: relative; }
-        .hero-poster-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to bottom, rgba(200,17,26,0), rgba(200,17,26,0.5));
-          pointer-events: none;
-        }
 
         .two-col { display: grid; grid-template-columns: 1fr 1fr; line-height: 0; }
         .two-col img { width: 100%; height: 460px; object-fit: cover; }
@@ -493,6 +484,16 @@ export default function Benson() {
             linear-gradient(110deg, transparent 38%, rgba(0,0,0,0.05) 38.04%, rgba(0,0,0,0.05) 38.1%, transparent 38.14%),
             linear-gradient(110deg, transparent 71%, rgba(0,0,0,0.07) 71.05%, rgba(0,0,0,0.07) 71.18%, transparent 71.22%);
           pointer-events: none; z-index: 2;
+        }
+        .benson-poster-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to bottom, rgba(200,17,26,0) 0%, rgba(200,17,26,0.5) 100%);
+          pointer-events: none;
+          z-index: 3;
         }
         .poster-top-nav { display: flex; justify-content: space-between; position: relative; z-index: 10; }
         .poster-top-nav span {
