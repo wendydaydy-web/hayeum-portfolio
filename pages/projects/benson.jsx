@@ -15,6 +15,7 @@ const IMG = {
   poster: '/images/benson/hg-poster.jpg',
   film: '/images/benson/hg-film.mp4',
   red: '/images/benson/red.jpg',
+  heroPoster: '/images/benson/final-4.png',
 };
 const STK = (n) => `/images/benson/stickers/${n}`;
 
@@ -246,7 +247,7 @@ export default function Benson() {
           <div><p className="info-label">Area</p><p className="info-value">— PY (— m²)</p></div>
         </section>
 
-        <div className="full-img"><img src={IMG.facade} alt="BENSON Facade" /></div>
+        <div className="full-img"><img src={IMG.heroPoster} alt="BENSON Poster" /></div>
 
         {/* ── BENSON POSTER ── */}
         <section className="benson-poster">
