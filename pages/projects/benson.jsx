@@ -1,45 +1,23 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
-import { ProjectFooter } from '../../components/project';
+import { useState, useEffect } from 'react';
 
-/* asset helpers */
-const I = (n) => `/images/benson/${n}`;
-const S = (n) => `/images/benson/stickers/${n}`;
+/* image map — sources copied from 공간 / 포스터 / 스티커 folders */
+const IMG = {
+  facade: '/images/benson/hg-facade.jpg',
+  storefront: '/images/benson/hg-storefront.jpg',
+  exterior: '/images/benson/hg-exterior.jpg',
+  seating: '/images/benson/hg-seating.jpg',
+  counter: '/images/benson/hg-counter.jpg',
+  pegboard: '/images/benson/hg-pegboard.jpg',
+  scoop: '/images/benson/hg-scoop.jpg',
+  wordmark: '/images/benson/hg-wordmark.png',
+  poster: '/images/benson/hg-poster.jpg',
+  film: '/images/benson/hg-film.mp4',
+};
+const STK = (n) => `/images/benson/stickers/${n}`;
 
-/* ── Project meta (참고 1.png 헤더) ── */
-const META = [
-  { label: 'Work Scope', lines: ['SPACE, BRANDING'] },
-  { label: 'Site Address', lines: ['SEOUL, REPUBLIC OF KOREA'] },
-  { label: 'Partner', lines: ['CLIENT | Hanwha Galleria', 'BRANDING | BENSON'] },
-  { label: 'Area', lines: ['— PY (— m²)'] },
-];
-
-/* 무드 키워드 (참고 1.png) */
-const KEYWORDS = [
-  ['CONCRETE', 'STREET', 'FLAVOR', 'CURVE'],
-  ['BOLD', 'RAW', 'RED', 'RHYTHM'],
-  ['SCOOP', 'SUBCULTURE'],
-  ['SKATE', 'TASTE'],
-];
-
-/* ── Scroll-reveal wrapper ── */
-function FadeIn({ children, className = '', style }) {
-  const ref = useRef(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) el.classList.add('visible'); },
-      { threshold: 0.12 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  return <div ref={ref} className={`fade-in ${className}`} style={style}>{children}</div>;
-}
-
-/* ── Top navigation — 메인 페이지(pages/index.jsx) 네비바 재현 ── */
+/* ── Top navigation — pages/index.jsx 네비바 100% 재현 ── */
 function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [lang, setLang] = useState('ko');
@@ -52,420 +30,504 @@ function SiteNav() {
   }, []);
 
   useEffect(() => {
-    const saved = localStorage.getItem('site-lang') || 'ko';
-    setLang(saved);
-    document.documentElement.lang = saved;
+    const saved = localStorage.getItem('site-lang');
+    if (saved === 'ko' || saved === 'en') setLang(saved);
   }, []);
 
-  const switchLang = (next) => {
-    setLang(next);
-    document.documentElement.lang = next;
-    localStorage.setItem('site-lang', next);
+  const setLangPersist = (l) => {
+    setLang(l);
+    if (typeof window !== 'undefined') localStorage.setItem('site-lang', l);
   };
 
-  const isKo = lang === 'ko';
-
   return (
-    <nav className={`bnav${scrolled ? ' scrolled' : ''}`}>
-      <div className="bnav-left">
-        <Link href="/" className="bnav-logo">
-          <span className="bnav-logo-text">
+    <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
+      <div className="nav-left">
+        <Link href="/" className="nav-logo">
+          <span className="nav-logo-text">
             <span className="logo-default">夏陰</span>
-            <span className="logo-hover">{isKo ? '여름 그늘' : 'summer shade'}</span>
+            <span className="logo-hover">{lang === 'ko' ? '여름 그늘' : 'summer shade'}</span>
           </span>
         </Link>
       </div>
-      <div className="bnav-right">
-        <ul className="bnav-menu">
+      <div className="nav-right">
+        <ul className="nav-menu">
           <li><Link href="/#project">WORK</Link></li>
           <li><Link href="/work-corp">WORK(CORP.)</Link></li>
           <li><Link href="/info">INFO</Link></li>
           <li>
             <a href="https://www.instagram.com/id_haumm/" target="_blank" rel="noopener noreferrer">INSTA</a>
           </li>
-          <li className="bnav-lang" aria-label="Language toggle">
-            <button type="button" className={lang === 'en' ? 'active' : ''} onClick={() => switchLang('en')}>EN</button>
-            <span className="bnav-lang-sep">/</span>
-            <button type="button" className={lang === 'ko' ? 'active' : ''} onClick={() => switchLang('ko')}>KR</button>
+          <li className="nav-lang" aria-label="Language toggle">
+            <button type="button" className={lang === 'en' ? 'active' : ''} onClick={() => setLangPersist('en')}>EN</button>
+            <span className="nav-lang-sep">/</span>
+            <button type="button" className={lang === 'ko' ? 'active' : ''} onClick={() => setLangPersist('ko')}>KR</button>
           </li>
         </ul>
       </div>
-    </nav>
-  );
-}
-
-export default function Benson() {
-  return (
-    <>
-      <Head>
-        <title>BENSON _ Hanwha Galleria — 공간하음</title>
-        <meta name="description" content="BENSON — 미국 스트릿 컬처와 스케이트 무드를 담은 한화 갤러리아 벤슨 아이스크림 플래그십." />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-
-      <SiteNav />
-
-      <main className="bpage">
-
-        {/* ══ 01 · HEADER ══════════════════════════════════════ */}
-        <section className="bhead">
-          <FadeIn>
-            <h1 className="bhead-title">BENSON<span className="bhead-title-thin">_Hanwha Galleria</span></h1>
-          </FadeIn>
-
-          <FadeIn>
-            <p className="bhead-intro" data-ko>
-              볼드한 토핑과 풍부한 유지방의 깊은 맛이 감각을 깨우는 곳. 벤슨(BENSON)은 단순히 아이스크림을 즐기는 공간을 넘어, 미국의 서브컬처와 스트릿 무드가 교차하며 만들어내는 역동적인 순간을 담았다. 공간을 가로지르는 대담한 곡선은 스케이트 파크의 에너지에서 시작되었다. 거칠면서도 정제된 콘크리트 질감 위로, 벤슨의 시그니처 레드가 맥박처럼 흐르며 공간에 강렬한 생동감을 불어넣는다. 파사드에서 내부로 부드럽게 이어지는 곡선형 퍼니처와 천장 조형물은 경계를 허물고 당신을 이 자유로운 아웃도어 무드 속으로 자연스럽게 이끈다. 이곳에서 아이스크림 한 스쿱은 단순한 디저트가 아니다. 페그보드 위에 펼쳐진 다채로운 플레이버의 향연 그리고 그 속에 스며든 스트릿 무드의 자유로움이 당신의 오감을 자극한다. 부드러운 텍스처와 청키한 토핑이 입안에서 리듬을 만들 때, 당신은 비로소 이 역동적인 세계의 일부가 된다.
-            </p>
-            <p className="bhead-intro" data-en>
-              A place where bold toppings and the deep richness of high-butterfat ice cream awaken the senses. BENSON is more than a place to enjoy ice cream — it captures the dynamic moments born where American subculture meets street mood. The bold curves cutting across the space begin in the energy of the skate park. Over raw yet refined concrete textures, Benson&apos;s signature red flows like a pulse, breathing intense vitality into the space. Curved furniture and a ceiling sculpture flowing gently from the facade into the interior dissolve boundaries and draw you naturally into this free, outdoor mood. Here, a single scoop is more than dessert. A feast of vivid flavors spread across the pegboard — and the freedom of street mood steeped within it — stimulate every sense. When soft textures and chunky toppings build a rhythm in your mouth, you finally become part of this dynamic world.
-            </p>
-          </FadeIn>
-
-          <FadeIn>
-            <p className="bhead-quote" data-ko>&ldquo;당신이 마주하는 이 모든 역동성이 곧 벤슨의 맛이다.&rdquo;</p>
-            <p className="bhead-quote" data-en>&ldquo;All this dynamism you encounter is the taste of Benson.&rdquo;</p>
-          </FadeIn>
-
-          <FadeIn className="bhead-meta">
-            {META.map((m) => (
-              <div className="bmeta-col" key={m.label}>
-                <span className="bmeta-label">{m.label}</span>
-                {m.lines.map((l) => <span className="bmeta-val" key={l}>{l}</span>)}
-              </div>
-            ))}
-          </FadeIn>
-        </section>
-
-        {/* ══ 02 · BRAND HERO (gradient + wordmark + stickers) ══ */}
-        <section className="bhero">
-          <img className="stk stk-oval" src={S('oval.png')} alt="BENSON ICECREAM sticker" />
-          <div className="bhero-inner">
-            <p className="bhero-eyebrow"><span className="b-star">✺</span> STREET MOOD · SCOOP UP YOUR TASTE</p>
-            <div className="bhero-wordmark" role="img" aria-label="BENSON" />
-            <p className="bhero-sub">WHERE STREET MEETS SWEET</p>
-            <p className="bhero-spatial">SPATIAL CONCEPT</p>
-          </div>
-          <img className="stk stk-board" src={S('board.png')} alt="BENSON skateboard sticker" />
-        </section>
-
-        {/* ══ 03 · STREET EDITORIAL (red statement + skate bands) ══ */}
-        <section className="bstreet">
-          <FadeIn className="bstreet-head">
-            <p className="b-section-tag"><span className="b-star">✺</span> DYNAMIC NARRATIVE</p>
-            <p className="bstreet-statement">
-              BOLD TOPPINGS, COLD CONCRETE, VIVID RED.<br />
-              ALL THIS DYNAMISM IS THE TASTE OF BENSON.<br />
-              FROM THE STREET TO YOUR SENSES.
-            </p>
-            <p className="bstreet-ksub" data-ko>볼드한 토핑과 차가운 콘크리트가 만들어내는 공간 — 붉은 아이스크림 한 입의 역동성이 만드는 미감.</p>
-            <p className="bstreet-ksub" data-en>A space shaped by bold toppings and cold concrete — the aesthetic born of one vivid red bite. 한 스쿱의 자유로움.</p>
-
-            <div className="bkeywords">
-              {KEYWORDS.map((row, i) => (
-                <div className="bkw-row" key={i}>
-                  {row.map((k) => <span className="bkw" key={k}>{k}</span>)}
-                </div>
-              ))}
-            </div>
-          </FadeIn>
-
-          {/* skate park photo band — stickers overlaid */}
-          <div className="bband bband-skate">
-            <img className="bband-img" src={I('skate-hero.png')} alt="Skate park — street culture" />
-            <img className="stk stk-skater" src={S('skater.png')} alt="BENSON skater sticker" />
-            <img className="stk stk-boardice" src={S('board-icecream.png')} alt="BENSON ice-cream skateboard sticker" />
-          </div>
-
-          {/* concrete bowl band — spoon sticker */}
-          <div className="bband bband-bowl">
-            <img className="bband-img" src={I('skate-bowl.png')} alt="Concrete skate bowl" />
-            <img className="stk stk-spoon" src={S('spoon.png')} alt="BENSON wooden spoon sticker" />
-          </div>
-
-          {/* graffiti / skaters band — rect + circle stickers */}
-          <div className="bband bband-graf">
-            <img className="bband-img" src={I('skate-graffiti.png')} alt="Skaters and BENSON graffiti" />
-            <img className="stk stk-rect" src={S('rect.png')} alt="BENSON ICECREAM sticker" />
-            <img className="stk stk-circle" src={S('circle.png')} alt="BENSON badge sticker" />
-          </div>
-        </section>
-
-        {/* ══ 04 · SPACE — STOREFRONT & INTERIOR ══════════════ */}
-        <section className="bspace">
-          <FadeIn className="bspace-head">
-            <p className="bspace-num">1 <span className="bspace-num-label">SPACE</span></p>
-            <h2 className="bspace-title">STOREFRONT<br />&amp; INTERIOR</h2>
-          </FadeIn>
-
-          <FadeIn className="bspace-hero">
-            <img src={I('storefront.jpg')} alt="BENSON storefront — Hanwha Galleria" />
-          </FadeIn>
-
-          <div className="bspace-grid">
-            <FadeIn className="bcell bcell-wide">
-              <img src={I('interior-counter.jpg')} alt="Interior — order counter & menu board" />
-            </FadeIn>
-            <FadeIn className="bcell">
-              <img src={I('interior-bench.jpg')} alt="Interior — curved bench seating" />
-            </FadeIn>
-            <FadeIn className="bcell">
-              <img src={I('interior-flavor.jpg')} alt="Interior — flavor posters" />
-            </FadeIn>
-          </div>
-        </section>
-
-        {/* ══ 05 · SIGNATURE ELEMENT — FLAVOR LINE ════════════ */}
-        <section className="bflavor">
-          <FadeIn className="bflavor-head">
-            <p className="b-section-tag b-tag-light"><span className="b-star">✺</span> SIGNATURE ELEMENT · CONCEPT STORY · CHAPTER 01</p>
-            <h2 className="bflavor-title">FLAVOR LINE</h2>
-            <p className="bflavor-kicker">A SUBWAY MAP OF TASTE</p>
-          </FadeIn>
-
-          <FadeIn className="bflavor-photo">
-            <img src={I('flavorline.jpg')} alt="BENSON's Flavor Line — pegboard subway map" />
-          </FadeIn>
-
-          <div className="bflavor-text">
-            <FadeIn>
-              <p className="b-body" data-ko>
-                벤슨의 플레이버 라인은 공간의 서사적 중심이 되는 작품으로, 스틸 타공 보드를 지하철 노선도의 형식으로 재해석하여 각 정거장에는 플레이버를, 각 라인에는 맛의 카테고리를 부여한다. 미국 서브컬처의 자유로운 언어와 스케이트 파크의 열린 기하학에서 출발한 이 거대한 페그보드는, 만지고 읽고 발견하게 만드는 인터랙티브한 그래픽 월이다. 역동적인 노선들은 단순한 메뉴 선택을 하나의 탐험으로 바꾸어 놓으며, 설명 없이도 브랜드의 캐릭터를 말하는 벽으로 자리한다.
-              </p>
-              <p className="b-body" data-en>
-                Benson&apos;s Flavor Line is the narrative centerpiece of the space — a pegboard wall reinterpreted as a subway map, where each station is a flavor and each line is a family of taste. Inspired by the freewheeling language of American sub-culture and the open geometry of skate parks, the perforated metal field invites touch, reading, and discovery. Its dynamic pathways turn ordering ice cream into an act of exploration — a wall that explains the brand without ever asking to be read.
-              </p>
-            </FadeIn>
-          </div>
-
-          <FadeIn className="bflagship">
-            <span className="bflagship-tag">FLAGSHIP 01</span>
-            <span className="bflagship-name">BENSON</span>
-            <span className="bflagship-by">Hanwha Galleria × 공간하음</span>
-          </FadeIn>
-        </section>
-
-        {/* ══ 06 · BRAND FILM ═════════════════════════════════ */}
-        <section className="bfilm">
-          <div className="bfilm-meta">
-            <span>OUTDOOR</span>
-            <span>12:00:11</span>
-          </div>
-          <FadeIn className="bfilm-frame">
-            <video src={I('video.mp4')} autoPlay muted loop playsInline controls />
-          </FadeIn>
-        </section>
-
-        {/* ══ 07 · CLOSING ════════════════════════════════════ */}
-        <section className="bclose">
-          <FadeIn>
-            <p className="bclose-en">
-              FROM CONCRETE CURVES TO SOFT-SERVE TEXTURES,<br />
-              BENSON IS WHERE STREET BECOMES SWEETNESS.
-            </p>
-            <p className="bclose-ko" data-ko>콘크리트의 곡선이 부드러운 아이스크림의 텍스처와 만나는 곳, 거리의 무드가 한 스쿱의 달콤함이 되는 공간.</p>
-            <p className="bclose-ko" data-en>Where concrete curves meet soft-serve textures — a place where the mood of the street becomes the sweetness of a single scoop.</p>
-          </FadeIn>
-          <div className="bclose-index">
-            <span>CONCEPT STORY</span>
-            <span>FURNITURE</span>
-            <span>ARCHIVE</span>
-            <span>BLOG</span>
-            <span>PROCESS</span>
-            <span>LIST</span>
-          </div>
-        </section>
-
-      </main>
-
-      <ProjectFooter
-        prevProject={{ name: 'TOFUG', href: '/projects/tofug' }}
-        nextProject={{ name: 'BODY GUARD', href: '/projects/bodyguard' }}
-      />
-
-      <style jsx global>{`
-        /* page-scoped i18n (html[lang] driven) */
-        .bpage [data-en] { display: none; }
-        html[lang='en'] .bpage [data-ko] { display: none; }
-        html[lang='en'] .bpage [data-en] { display: block; }
-        html[lang='ko'] .bpage [data-ko] { display: block; }
-        html[lang='ko'] .bpage [data-en] { display: none; }
-      `}</style>
 
       <style jsx>{`
-        :global(:root) { --b-red: #e5241b; --b-ink: #141414; }
-
-        .bpage {
-          background: #fff;
-          color: var(--b-ink);
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-          overflow-x: hidden;
-        }
-        :global(.fade-in) {
-          opacity: 0; transform: translateY(36px);
-          transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        :global(.fade-in.visible) { opacity: 1; transform: translateY(0); }
-        .b-star { color: var(--b-red); margin-right: 8px; }
-
-        /* ── NAV (메인 페이지 재현) ── */
-        .bnav {
-          position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+        .nav {
+          position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+          padding: 20px 40px 40px;
           display: flex; justify-content: space-between; align-items: center;
-          padding: 22px 40px; color: var(--b-ink);
-          background: transparent; transition: background 0.4s, padding 0.4s, box-shadow 0.3s;
+          background: transparent;
+          transition: background 0.4s, padding 0.4s, color 0.3s, box-shadow 0.3s;
+          color: #0d0d0d;
+          font-family: 'Inter', 'Noto Sans KR', sans-serif;
         }
-        .bnav.scrolled {
-          padding: 14px 40px;
+        .nav.scrolled {
+          padding-bottom: 20px;
           background: rgba(255,255,255,0.9);
           backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
           box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+          color: #0d0d0d;
         }
-        .bnav-logo { display: inline-flex; align-items: center; text-decoration: none; color: inherit; }
-        .bnav-logo-text { position: relative; display: inline-flex; align-items: center; font-size: 28px; line-height: 1; font-weight: 400; letter-spacing: 0.05em; }
+        .nav-left { display: flex; align-items: center; }
+        .nav-logo { display: inline-flex; align-items: center; text-decoration: none; color: inherit; }
+        .nav-logo-text {
+          position: relative; display: inline-flex; align-items: center;
+          font-size: 28px; line-height: 1; font-weight: 400; letter-spacing: 0.05em;
+          color: inherit; transition: color 0.3s;
+        }
         .logo-default, .logo-hover { display: inline-block; font-size: inherit; line-height: 1; transition: opacity 0.45s ease; }
         .logo-hover {
           position: absolute; top: 50%; left: 0; transform: translateY(-50%);
           font-family: 'Cormorant Garamond', 'Noto Serif KR', serif; font-weight: 500; font-style: italic;
           letter-spacing: 0.02em; white-space: nowrap; opacity: 0; pointer-events: none;
         }
-        .bnav-logo:hover .logo-default { opacity: 0; }
-        .bnav-logo:hover .logo-hover { opacity: 1; }
-        .bnav-menu { display: flex; align-items: center; gap: 34px; list-style: none; margin: 0; padding: 0; }
-        .bnav-menu a {
+        .nav-logo:hover .logo-default { opacity: 0; }
+        .nav-logo:hover .logo-hover { opacity: 1; }
+        .nav-right { display: flex; align-items: center; justify-content: flex-end; }
+        .nav-menu { display: flex; align-items: center; gap: 36px; list-style: none; margin: 0; padding: 0; }
+        .nav-menu a {
+          font-family: 'Inter', 'Noto Sans KR', sans-serif;
           font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
-          text-decoration: none; color: var(--b-ink); transition: opacity 0.2s;
+          text-decoration: none; color: inherit; transition: opacity 0.2s;
         }
-        .bnav-menu a:hover { opacity: 0.55; }
-        .bnav-lang { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; }
-        .bnav-lang button { font: inherit; letter-spacing: inherit; color: rgba(20,20,20,0.4); padding: 0; background: none; border: none; cursor: pointer; transition: color 0.2s; }
-        .bnav-lang button.active { color: var(--b-ink); font-weight: 700; }
-        .bnav-lang-sep { opacity: 0.4; }
-
-        /* ── HEADER ── */
-        .bhead { max-width: 1180px; margin: 0 auto; padding: 150px 40px 90px; }
-        .bhead-title { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(34px, 5vw, 70px); letter-spacing: -0.02em; line-height: 1; margin: 0 0 40px; }
-        .bhead-title-thin { font-weight: 500; color: rgba(20,20,20,0.55); }
-        .bhead-intro { font-size: clamp(14px, 1.1vw, 16px); line-height: 2; font-weight: 300; color: #333; max-width: 900px; word-break: keep-all; margin: 0 0 28px; }
-        .bhead-quote { font-family: 'Archivo', sans-serif; font-size: clamp(16px, 1.6vw, 22px); font-weight: 600; font-style: italic; color: var(--b-red); margin: 0 0 56px; }
-        .bhead-meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-top: 34px; border-top: 1px solid rgba(20,20,20,0.12); }
-        .bmeta-col { display: flex; flex-direction: column; gap: 7px; }
-        .bmeta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--b-red); margin-bottom: 4px; }
-        .bmeta-val { font-size: 12px; letter-spacing: 0.06em; color: #444; }
-
-        /* ── BRAND HERO ── */
-        .bhero {
-          position: relative; overflow: hidden;
-          padding: 90px 40px 120px;
-          background: linear-gradient(180deg, #ffffff 0%, #fde7e1 62%, #f7b9ab 100%);
+        .nav-menu a:hover { opacity: 0.55; }
+        .nav-lang {
+          display: inline-flex; align-items: center; gap: 6px;
+          font-family: 'Inter', 'Noto Sans KR', sans-serif;
+          font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+          color: inherit;
         }
-        .bhero-inner { max-width: 1180px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
-        .bhero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--b-red); margin: 0 0 36px; }
-        .bhero-wordmark {
-          width: min(78vw, 880px); aspect-ratio: 959 / 270; margin: 0 auto;
-          background: var(--b-red);
-          -webkit-mask: url(/images/benson/wordmark.png) center / contain no-repeat;
-          mask: url(/images/benson/wordmark.png) center / contain no-repeat;
+        .nav-lang button {
+          font: inherit; letter-spacing: inherit; text-transform: inherit;
+          color: rgba(13,13,13,0.4); background: none; border: none; padding: 0; cursor: pointer;
+          transition: color 0.3s, opacity 0.2s;
         }
-        .bhero-sub { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(18px, 2.6vw, 36px); letter-spacing: 0.04em; color: var(--b-red); margin: 18px 0 0; }
-        .bhero-spatial { font-size: 11px; font-weight: 600; letter-spacing: 0.4em; color: rgba(20,20,20,0.45); margin: 24px 0 0; }
+        .nav-lang button.active { color: #0d0d0d; font-weight: 600; }
+        .nav-lang button:hover { opacity: 0.7; }
+        .nav-lang-sep { color: inherit; opacity: 0.4; }
+        @media (max-width: 768px) {
+          .nav { padding: 16px 20px; }
+          .nav-menu { gap: 16px; }
+          .nav-menu a, .nav-lang { font-size: 10px; letter-spacing: 0.08em; }
+          .nav-logo-text { font-size: 22px; }
+        }
+      `}</style>
+    </nav>
+  );
+}
 
-        /* stickers */
-        .stk { position: absolute; z-index: 5; display: block; height: auto; filter: drop-shadow(0 10px 22px rgba(0,0,0,0.22)); pointer-events: none; }
-        .stk-oval { top: 92px; right: 5%; width: clamp(120px, 15vw, 220px); transform: rotate(-9deg); }
-        .stk-board { bottom: 56px; right: 9%; width: clamp(80px, 9vw, 132px); transform: rotate(11deg); }
+export default function Benson() {
+  const toTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        /* ── STREET EDITORIAL ── */
-        .bstreet { background: #fff; }
-        .bstreet-head { max-width: 980px; margin: 0 auto; padding: 110px 40px 70px; text-align: center; }
-        .b-section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--b-red); margin: 0 0 28px; }
-        .bstreet-statement { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(18px, 2.4vw, 34px); line-height: 1.32; letter-spacing: 0.01em; color: var(--b-red); margin: 0 0 26px; }
-        .bstreet-ksub { font-size: clamp(13px, 1.1vw, 15px); font-weight: 300; line-height: 1.9; color: #555; word-break: keep-all; margin: 0 auto 8px; max-width: 720px; }
-        .bkeywords { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 44px; }
-        .bkw-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-        .bkw { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #222; border: 1px solid rgba(20,20,20,0.2); border-radius: 999px; padding: 7px 16px; }
+  return (
+    <>
+      <Head>
+        <title>BENSON _ Hanwha Galleria — 공간하음 GONGGAN HA-UMM</title>
+        <meta name="description" content="BENSON — 미국 서브컬처와 스트릿 무드를 담은 한화 갤러리아 벤슨 아이스크림 플래그십. 공간하음." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Bowlby+One&family=Barlow+Condensed:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
 
-        /* photo bands */
-        .bband { position: relative; width: 100%; overflow: hidden; line-height: 0; }
-        .bband-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .bband-skate { aspect-ratio: 1954 / 520; }
-        .bband-bowl { aspect-ratio: 1954 / 470; }
-        .bband-graf { aspect-ratio: 1954 / 545; }
-        .stk-skater { bottom: 6%; left: 4%; width: clamp(110px, 14vw, 210px); transform: rotate(-4deg); }
-        .stk-boardice { top: 8%; right: 5%; width: clamp(72px, 8.5vw, 128px); transform: rotate(8deg); }
-        .stk-spoon { top: 38%; right: 7%; width: clamp(150px, 19vw, 290px); transform: rotate(-16deg); }
-        .stk-rect { bottom: 9%; left: 4%; width: clamp(140px, 17vw, 250px); transform: rotate(-7deg); }
-        .stk-circle { bottom: 8%; right: 5%; width: clamp(90px, 10vw, 150px); transform: rotate(6deg); }
+      <SiteNav />
 
-        /* ── SPACE / STOREFRONT ── */
-        .bspace { max-width: 1320px; margin: 0 auto; padding: 0 40px 40px; }
-        .bspace-head { margin-bottom: 0; }
-        .bspace-num { display: inline-flex; align-items: center; gap: 12px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 18px; color: #fff; background: var(--b-red); padding: 3px 10px; border-radius: 3px; margin: 0 0 22px; }
-        .bspace-num-label { letter-spacing: 0.18em; font-size: 13px; }
-        .bspace-title { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(48px, 9vw, 130px); line-height: 0.92; letter-spacing: -0.02em; margin: 0; }
-        .bspace-hero { overflow: hidden; border-radius: 4px; margin-bottom: 14px; }
-        .bspace-hero img { width: 100%; display: block; }
-        .bspace-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; }
-        .bcell { overflow: hidden; border-radius: 4px; background: #f0ede8; }
-        .bcell img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; display: block; transition: transform 0.7s ease; }
-        .bcell:hover img { transform: scale(1.04); }
-        .bcell-wide img { aspect-ratio: 16 / 11; }
+      <main className="benson-page">
+
+        {/* ── HERO ── */}
+        <section className="hero">
+          <h1 className="hero-title">BENSON_<span className="hero-client">Hanwha Galleria</span></h1>
+          <p className="hero-desc">볼드한 토핑과 풍부한 유지방의 깊은 맛이 감각을 깨우는 곳. 벤슨(BENSON)은 단순히 아이스크림을 즐기는 공간을 넘어, 미국의 서브컬처와 스트릿 무드가 교차하며 만들어내는 역동적인 순간을 담았다. 공간을 가로지르는 대담한 곡선은 스케이트 파크의 에너지에서 시작되었다. 거칠면서도 정제된 콘크리트 질감 위로, 벤슨의 시그니처 레드가 맥박처럼 흐르며 공간에 강렬한 생동감을 불어넣는다. 파사드에서 내부로 부드럽게 이어지는 곡선형 퍼니처와 천장 조형물은 경계를 허물고 당신을 이 자유로운 아웃도어 무드 속으로 자연스럽게 이끈다. 이곳에서 아이스크림 한 스쿱은 단순한 디저트가 아니다. 페그보드 위에 펼쳐진 다채로운 플레이버의 향연 그리고 그 속에 스며든 스트릿 무드의 자유로움이 당신의 오감을 자극한다. 부드러운 텍스처와 청키한 토핑이 입안에서 리듬을 만들 때, 당신은 비로소 이 역동적인 세계의 일부가 된다.</p>
+          <p className="hero-quote">“당신이 마주하는 이 모든 역동성이 곧 벤슨의 맛이다.”</p>
+        </section>
+
+        {/* ── PROJECT INFO ── */}
+        <section className="project-info">
+          <div><p className="info-label">Work Scope</p><p className="info-value">SPACE, BRANDING</p></div>
+          <div><p className="info-label">Site Address</p><p className="info-value">SEOUL, REPUBLIC OF KOREA</p></div>
+          <div><p className="info-label">Partner</p><p className="info-value">CLIENT | Hanwha Galleria<br />BRANDING | BENSON</p></div>
+          <div><p className="info-label">Area</p><p className="info-value">— PY (— m²)</p></div>
+        </section>
+
+        <div className="full-img"><img src={IMG.facade} alt="BENSON Facade" /></div>
+
+        {/* ── BENSON POSTER ── */}
+        <section className="benson-poster">
+          <img className="pstk pstk-oval" src={STK('oval.png')} alt="" aria-hidden="true" />
+          <img className="pstk pstk-board" src={STK('board.png')} alt="" aria-hidden="true" />
+          <img className="pstk pstk-spoon" src={STK('spoon.png')} alt="" aria-hidden="true" />
+          <img className="pstk pstk-circle" src={STK('circle.png')} alt="" aria-hidden="true" />
+
+          <div className="poster-top-nav">
+            <span className="active">STREET MOOD</span>
+            <span>SCOOP UP YOUR TASTE</span>
+            <span className="active">SPATIAL CONCEPT</span>
+          </div>
+
+          <div className="poster-title-block">
+            <img className="poster-main-title" src={IMG.wordmark} alt="BENSON" />
+            <span className="poster-sub-title">WHERE STREET MEETS SWEET</span>
+          </div>
+
+          <div className="poster-keywords">
+            <p>CONCRETE, STREET, FLAVOR, CURVE</p>
+            <p>BOLD, RAW, RED, RHYTHM</p>
+            <p>SCOOP, SUBCULTURE</p>
+            <p>SKATE, TASTE</p>
+          </div>
+
+          <div className="poster-bottom-text">
+            <p>BOLD TOPPINGS, COLD CONCRETE, VIVID RED.</p>
+            <p className="ko">볼드한 토핑과 차가운 콘크리트가 만들어내는 공간</p>
+            <p className="ko">붉은 아이스크림 한 입의 역동성이 만드는 미감</p>
+            <p>DYNAMIC NARRATIVE — ALL THIS DYNAMISM IS THE TASTE OF BENSON.</p>
+            <p className="ko">한 스쿱의 자유로움. FROM THE STREET TO YOUR SENSES.</p>
+          </div>
+        </section>
+
+        <div className="two-col">
+          <img src={IMG.counter} alt="" />
+          <img src={IMG.seating} alt="" />
+        </div>
+
+        <div className="video-section">
+          <div className="video-wrapper portrait">
+            <video autoPlay muted loop playsInline>
+              <source src={IMG.film} type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
+        <div className="full-img"><img src={IMG.pegboard} alt="" /></div>
+
+        {/* ── FLAVOR LINE ── */}
+        <section className="flavor-feature">
+          <p className="flavor-text-top">벤슨의 플레이버 라인은 공간의 서사적 중심이 되는 작품으로, 스틸 타공 보드를 지하철 노선도의 형식으로 재해석하여 각 정거장에는 플레이버를, 각 라인에는 맛의 카테고리를 부여한다. 미국 서브컬처의 자유로운 언어와 스케이트 파크의 열린 기하학에서 출발한 이 거대한 페그보드는, 만지고 읽고 발견하게 만드는 인터랙티브한 그래픽 월이다. 역동적인 노선들은 단순한 메뉴 선택을 하나의 탐험으로 바꾸어 놓으며, 설명 없이도 브랜드의 캐릭터를 말하는 벽으로 자리한다.</p>
+
+          <div className="flavor-stage">
+            <p className="flavor-label-top">SIGNATURE ELEMENT</p>
+            <h2 className="flavor-title">FLAVOR LINE</h2>
+            <div className="flavor-image">
+              <img src={IMG.pegboard} alt="BENSON's Flavor Line pegboard" />
+            </div>
+            <p className="flavor-tagline">A SUBWAY MAP OF TASTE</p>
+          </div>
+
+          <p className="flavor-text-bottom">Benson&apos;s Flavor Line is the narrative centerpiece of the space — a pegboard wall reinterpreted as a subway map, where each station is a flavor and each line is a family of taste. Inspired by the freewheeling language of American sub-culture and the open geometry of skate parks, the perforated metal field invites touch, reading, and discovery. Its dynamic pathways turn ordering ice cream into an act of exploration — a wall that explains the brand without ever asking to be read.</p>
+        </section>
+
+        <div className="full-img"><img src={IMG.scoop} alt="" /></div>
+        <div className="full-img"><img src={IMG.counter} alt="" /></div>
+
+        <div className="video-section"><div className="video-wrapper"></div></div>
+
+        <div className="three-col">
+          <img src={IMG.seating} alt="" />
+          <img src={IMG.scoop} alt="" />
+          <img src={IMG.pegboard} alt="" />
+        </div>
+
+        <div className="two-col">
+          <img src={IMG.facade} alt="" />
+          <img src={IMG.counter} alt="" />
+        </div>
+
+        <div className="video-section"><div className="video-wrapper"></div></div>
+
+        {/* real BENSON poster (포스터 폴더) */}
+        <div className="poster-showcase"><img src={IMG.poster} alt="BENSON poster — where street meets sweet" /></div>
+
+        <div className="video-section"><div className="video-wrapper"></div></div>
+
+        <div className="full-img"><img src={IMG.pegboard} alt="" /></div>
+        <div className="full-img"><img src={IMG.scoop} alt="BENSON Design Boards" /></div>
+
+        <section className="outside-section">
+          <p className="outside-label">OUTDOOR</p>
+          <p className="outside-time">12:00:11</p>
+        </section>
+
+        <div className="video-section"><div className="video-wrapper"></div></div>
+
+        <section className="arch-section">
+          <h3 className="arch-headline">FROM CONCRETE CURVES TO SOFT-SERVE TEXTURES,<br />BENSON IS WHERE STREET BECOMES SWEETNESS.</h3>
+          <p className="arch-sub">콘크리트의 곡선이 부드러운 아이스크림의 텍스처와 만나는 곳, 거리의 무드가 한 스쿱의 달콤함이 되는 공간.</p>
+          <div className="arch-img"><img src={IMG.counter} alt="FLAGSHIP01" /></div>
+          <p className="room-label">FLAGSHIP<sup>01</sup></p>
+        </section>
+
+        <div className="three-col three-col-dark">
+          <img src={IMG.counter} alt="" />
+          <img src={IMG.scoop} alt="" />
+          <img src={IMG.storefront} alt="" />
+        </div>
+
+        <div className="video-section"><div className="video-wrapper"></div></div>
+
+        {/* ── RELATED ── */}
+        <section className="related-section">
+          <div className="related-grid">
+            <a href="#" className="related-item" onClick={(e) => e.preventDefault()}>
+              <img src={IMG.storefront} alt="" />
+              <div className="related-overlay">
+                <p className="related-title">BENSON</p>
+                <p className="related-sub">Hanwha Galleria x 공간하음</p>
+              </div>
+            </a>
+            <a href="#" className="related-item" onClick={(e) => e.preventDefault()}>
+              <img src={IMG.scoop} alt="" />
+              <div className="related-overlay">
+                <p className="related-title">CONCEPT STORY</p>
+                <p className="related-sub">CHAPTER 01</p>
+              </div>
+            </a>
+            <div className="related-item related-item-dark">
+              <div className="furniture-panel">
+                <p className="furniture-title">FURNITURE</p>
+                <p className="furniture-sub">ARCHIVE</p>
+              </div>
+              <div className="furniture-grid">
+                <img src={IMG.counter} alt="" />
+                <img src={IMG.scoop} alt="" />
+                <img src={IMG.storefront} alt="" />
+                <img src={IMG.pegboard} alt="" />
+              </div>
+            </div>
+            <a href="#" className="related-item" onClick={(e) => e.preventDefault()}>
+              <img src={IMG.exterior} alt="" style={{ height: '380px', width: '100%', objectFit: 'cover' }} />
+              <div className="related-overlay">
+                <p className="related-title">BLOG</p>
+                <p className="related-sub">PROCESS</p>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <div className="list-bar"><a href="#" onClick={(e) => { e.preventDefault(); toTop(); }}>LIST</a></div>
+        <button className="top-btn" onClick={toTop} aria-label="Back to top">&#8593;</button>
+      </main>
+
+      <style jsx global>{`
+        html { scroll-behavior: smooth; }
+        .benson-page *, .benson-page *::before, .benson-page *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        .benson-page {
+          background: #fff;
+          font-family: 'Helvetica Neue', Helvetica, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+          color: #000;
+          overflow-x: hidden;
+        }
+        .benson-page a { text-decoration: none; color: inherit; }
+        .benson-page img { display: block; max-width: 100%; height: auto; }
+      `}</style>
+
+      <style jsx>{`
+        /* ── HERO ── */
+        .hero { padding: 130px 60px 60px; max-width: 1600px; margin: 0 auto; }
+        .hero-title { font-size: 36px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 36px; line-height: 1.3; }
+        .hero-client { font-weight: 700; color: #000; }
+        .hero-desc { font-size: 15px; line-height: 1.85; color: #333; max-width: 1100px; word-break: keep-all; margin-bottom: 28px; text-align: justify; }
+        .hero-quote { font-size: 15px; color: #111; }
+
+        /* ── PROJECT INFO ── */
+        .project-info {
+          padding: 50px 60px 60px; max-width: 1600px; margin: 0 auto;
+          display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px 20px;
+          border-top: 1px solid #e0e0e0;
+        }
+        .info-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+        .info-value { font-size: 13px; line-height: 1.7; color: #444; }
+
+        .full-img { width: 100%; line-height: 0; }
+        .full-img img { width: 100%; object-fit: cover; }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; line-height: 0; }
+        .two-col img { width: 100%; height: 460px; object-fit: cover; }
+        .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; line-height: 0; }
+        .three-col img { width: 100%; height: 320px; object-fit: cover; }
+        .three-col-dark { background: #0d0d0d; }
+
+        .video-section { background: #000; padding: 60px; display: flex; justify-content: center; }
+        .video-wrapper { width: 100%; max-width: 900px; aspect-ratio: 16/9; background: #0a0a0a; }
+        .video-wrapper.portrait { max-width: 420px; aspect-ratio: 4/5; }
+        .video-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* ── BENSON POSTER ── */
+        .benson-poster {
+          width: 100%;
+          min-height: 92vh;
+          background:
+            radial-gradient(ellipse at 15% 60%, rgba(200,0,0,0.5) 0%, transparent 55%),
+            radial-gradient(ellipse at 85% 25%, rgba(240,40,0,0.35) 0%, transparent 45%),
+            radial-gradient(ellipse at 50% 90%, rgba(120,0,0,0.4) 0%, transparent 50%),
+            linear-gradient(155deg, #1a0000 0%, #7a0000 25%, #cc0000 50%, #900000 70%, #0d0000 100%);
+          position: relative;
+          overflow: hidden;
+          padding: 50px 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          color: rgba(0,0,0,0.55);
+        }
+        .benson-poster::before {
+          content: '';
+          position: absolute; inset: 0;
+          background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px);
+          pointer-events: none; z-index: 1;
+        }
+        .benson-poster::after {
+          content: '';
+          position: absolute; inset: 0;
+          background:
+            linear-gradient(110deg, transparent 22%, rgba(0,0,0,0.08) 22.05%, rgba(0,0,0,0.08) 22.15%, transparent 22.2%),
+            linear-gradient(110deg, transparent 38%, rgba(0,0,0,0.05) 38.04%, rgba(0,0,0,0.05) 38.1%, transparent 38.14%),
+            linear-gradient(110deg, transparent 71%, rgba(0,0,0,0.07) 71.05%, rgba(0,0,0,0.07) 71.18%, transparent 71.22%);
+          pointer-events: none; z-index: 2;
+        }
+        .poster-top-nav { display: flex; justify-content: space-between; position: relative; z-index: 10; }
+        .poster-top-nav span {
+          font-family: 'Barlow Condensed', sans-serif;
+          font-size: 12px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+          color: rgba(0,0,0,0.5);
+        }
+        .poster-top-nav span.active { color: rgba(0,0,0,0.7); }
+        .poster-title-block { text-align: center; position: relative; z-index: 10; margin: 30px 0 20px; }
+        .poster-main-title {
+          display: block; width: clamp(280px, 60vw, 900px); height: auto; margin: 0 auto;
+          filter: drop-shadow(0 0 30px rgba(0,0,0,0.18)); opacity: 0.82;
+        }
+        .poster-sub-title {
+          font-family: 'Barlow Condensed', sans-serif;
+          font-size: clamp(16px, 2.4vw, 32px); font-weight: 700; letter-spacing: 0.28em;
+          color: rgba(0,0,0,0.48); text-transform: uppercase; margin-top: 14px; display: block;
+        }
+        .poster-keywords { text-align: center; position: relative; z-index: 10; }
+        .poster-keywords p {
+          font-family: 'Barlow Condensed', sans-serif;
+          font-size: clamp(13px, 1.5vw, 20px); font-weight: 400; letter-spacing: 0.2em;
+          color: rgba(0,0,0,0.4); text-transform: uppercase; line-height: 1.85;
+        }
+        .poster-bottom-text { text-align: center; position: relative; z-index: 10; margin-top: 12px; }
+        .poster-bottom-text p {
+          font-family: 'Barlow Condensed', sans-serif;
+          font-size: clamp(13px, 1.1vw, 15px); font-weight: 600; letter-spacing: 0.12em;
+          color: rgba(0,0,0,0.55); text-transform: uppercase; line-height: 2.05;
+        }
+        .poster-bottom-text .ko {
+          font-family: 'Barlow Condensed', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+          font-weight: 400; color: rgba(0,0,0,0.42); letter-spacing: 0.04em; text-transform: none;
+        }
+        /* stickers (스티커 폴더) */
+        .pstk { position: absolute; z-index: 6; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.3)); pointer-events: none; }
+        .pstk-oval { top: 9%; right: 6%; width: clamp(110px, 13vw, 200px); transform: rotate(-8deg); }
+        .pstk-board { bottom: 10%; right: 8%; width: clamp(70px, 8vw, 120px); transform: rotate(10deg); }
+        .pstk-spoon { top: 12%; left: 5%; width: clamp(120px, 16vw, 240px); transform: rotate(-18deg); }
+        .pstk-circle { bottom: 9%; left: 6%; width: clamp(80px, 9vw, 140px); transform: rotate(7deg); }
+
+        /* real poster showcase (포스터 폴더) */
+        .poster-showcase { background: #000; padding: 60px 20px; display: flex; justify-content: center; }
+        .poster-showcase img { width: auto; max-width: 100%; max-height: 92vh; }
 
         /* ── FLAVOR LINE ── */
-        .bflavor { background: var(--b-ink); color: #fff; padding: 120px 40px; margin-top: 80px; }
-        .bflavor-head { max-width: 1180px; margin: 0 auto 50px; }
-        .b-tag-light { color: #ff6a5e; }
-        .bflavor-title { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(48px, 9vw, 140px); line-height: 0.9; letter-spacing: -0.02em; margin: 0; }
-        .bflavor-kicker { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: clamp(16px, 2vw, 28px); letter-spacing: 0.06em; color: #ff6a5e; margin: 14px 0 0; }
-        .bflavor-photo { max-width: 1180px; margin: 0 auto 48px; overflow: hidden; border-radius: 4px; border: 5px solid #fff; }
-        .bflavor-photo img { width: 100%; display: block; }
-        .bflavor-text { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .b-body { font-size: clamp(14px, 1.05vw, 15px); line-height: 2; font-weight: 300; color: rgba(255,255,255,0.82); word-break: keep-all; margin: 0; }
-        .bflagship { max-width: 1180px; margin: 56px auto 0; display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.18); }
-        .bflagship-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; color: #ff6a5e; }
-        .bflagship-name { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: 0.04em; }
-        .bflagship-by { font-size: 13px; color: rgba(255,255,255,0.6); letter-spacing: 0.04em; }
-
-        /* ── FILM ── */
-        .bfilm { max-width: 1320px; margin: 0 auto; padding: 90px 40px; }
-        .bfilm-meta { display: flex; justify-content: space-between; font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.24em; color: var(--b-red); margin-bottom: 18px; }
-        .bfilm-frame { overflow: hidden; border-radius: 4px; border: 5px solid var(--b-red); background: #000; }
-        .bfilm-frame video { width: 100%; height: auto; display: block; }
-
-        /* ── CLOSING ── */
-        .bclose { max-width: 1180px; margin: 0 auto; padding: 60px 40px 120px; text-align: center; }
-        .bclose-en { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 46px); line-height: 1.25; letter-spacing: 0.01em; color: var(--b-ink); margin: 0 0 24px; }
-        .bclose-ko { font-size: clamp(13px, 1.1vw, 16px); font-weight: 300; line-height: 1.9; color: #555; word-break: keep-all; margin: 0 auto; max-width: 760px; }
-        .bclose-index { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin-top: 64px; }
-        .bclose-index span { font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(20,20,20,0.35); }
-
-        /* ── Responsive ── */
-        @media (max-width: 900px) {
-          .bnav, .bnav.scrolled { padding-left: 22px; padding-right: 22px; }
-          .bnav-menu { gap: 16px; }
-          .bnav-menu a, .bnav-lang { font-size: 10px; letter-spacing: 0.08em; }
-          .bnav-logo-text { font-size: 22px; }
-          .bhead { padding: 120px 22px 70px; }
-          .bhead-meta { grid-template-columns: 1fr 1fr; gap: 22px; }
-          .bspace, .bfilm { padding-left: 22px; padding-right: 22px; }
-          .bspace-grid { grid-template-columns: 1fr 1fr; }
-          .bcell-wide { grid-column: 1 / -1; }
-          .bflavor { padding: 90px 22px; }
-          .bflavor-text { grid-template-columns: 1fr; gap: 8px; }
-          .bstreet-head { padding: 80px 22px 50px; }
-          .bband-skate, .bband-bowl, .bband-graf { aspect-ratio: 16 / 11; }
-          .bclose { padding: 50px 22px 90px; }
+        .flavor-feature { background: #000; padding: 100px 40px 120px; overflow: hidden; }
+        .flavor-text-top, .flavor-text-bottom { color: #c8111a; max-width: 1500px; margin: 0 auto; word-break: keep-all; text-align: justify; }
+        .flavor-text-top { font-size: clamp(20px, 1.7vw, 30px); font-weight: 700; line-height: 1.55; letter-spacing: -0.005em; }
+        .flavor-text-bottom {
+          font-family: 'Playfair Display', serif; font-weight: 700; text-transform: uppercase;
+          font-size: clamp(20px, 1.7vw, 30px); line-height: 1.35; letter-spacing: 0.01em;
         }
-        @media (max-width: 560px) {
-          .bnav-menu { gap: 11px; }
-          .bhead-meta { grid-template-columns: 1fr; }
-          .bspace-grid { grid-template-columns: 1fr; }
-          .stk-spoon { width: 120px; }
+        .flavor-stage { position: relative; text-align: center; margin: 70px auto; max-width: 1500px; }
+        .flavor-label-top {
+          color: #c8111a; font-size: clamp(13px, 1vw, 17px); letter-spacing: 0.55em;
+          text-transform: uppercase; font-weight: 400; margin-bottom: 0; position: relative; z-index: 3;
+        }
+        .flavor-title {
+          font-family: 'Playfair Display', serif; font-weight: 900; color: #c8111a;
+          font-size: clamp(90px, 17vw, 260px); line-height: 0.95; letter-spacing: -0.025em;
+          margin: 8px 0 -90px 0; position: relative; z-index: 3;
+        }
+        .flavor-image { margin: 0 auto; max-width: 60%; position: relative; z-index: 1; line-height: 0; }
+        .flavor-image img {
+          width: 100%; display: block;
+          filter: grayscale(1) brightness(0.55) contrast(1.5) sepia(1) hue-rotate(-25deg) saturate(7) brightness(0.95);
+        }
+        .flavor-tagline {
+          color: #c8111a; font-size: clamp(13px, 1vw, 17px); letter-spacing: 0.55em;
+          text-transform: uppercase; font-weight: 400; margin-top: -50px; position: relative; z-index: 3;
+        }
+
+        .outside-section {
+          min-height: 480px;
+          display: flex; flex-direction: column; align-items: center; justify-content: center;
+          position: relative;
+          background-image: url('/images/benson/hg-facade.jpg');
+          background-size: cover; background-position: center;
+        }
+        .outside-section::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.72); }
+        .outside-label, .outside-time { position: relative; z-index: 1; color: #c8111a; letter-spacing: 0.2em; text-transform: uppercase; }
+        .outside-label { font-size: 11px; margin-bottom: 8px; }
+        .outside-time { font-size: 20px; }
+
+        .arch-section { background: #0d0d0d; padding: 80px 60px; text-align: center; }
+        .arch-headline { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.5; margin-bottom: 10px; }
+        .arch-sub { font-size: 14px; color: #888; margin-bottom: 40px; }
+        .arch-img { max-width: 820px; margin: 0 auto; line-height: 0; }
+        .arch-img img { width: 100%; }
+        .room-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #555; margin-top: 10px; }
+
+        .related-section { background: #000; }
+        .related-grid { display: grid; grid-template-columns: 1fr 1fr; }
+        .related-item { position: relative; overflow: hidden; display: block; }
+        .related-item > img { width: 100%; height: 380px; object-fit: cover; transition: transform 0.4s; }
+        .related-item:hover > img { transform: scale(1.04); }
+        .related-item-dark { background: #000; cursor: pointer; }
+        .related-overlay { position: absolute; top: 0; left: 0; right: 0; padding: 24px 20px; background: rgba(0,0,0,0.35); color: #fff; }
+        .related-title { font-size: 18px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+        .related-sub { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #ccc; margin-top: 4px; }
+        .furniture-panel { background: #000; padding: 20px 16px 0; text-align: center; }
+        .furniture-title { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+        .furniture-sub { color: #888; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; margin-bottom: 14px; }
+        .furniture-grid { display: grid; grid-template-columns: 1fr 1fr; line-height: 0; }
+        .furniture-grid img { width: 100%; }
+
+        .list-bar { position: fixed; bottom: 24px; left: 24px; z-index: 600; }
+        .list-bar a { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: underline; color: #000; }
+        .top-btn {
+          position: fixed; bottom: 24px; right: 24px; z-index: 600; width: 48px; height: 48px;
+          background: #000; color: #fff; font-size: 18px; border: none; cursor: pointer;
+          display: flex; align-items: center; justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+          .hero { padding: 100px 20px 40px; }
+          .project-info { padding: 40px 20px; grid-template-columns: 1fr 1fr; }
+          .two-col { grid-template-columns: 1fr; }
+          .two-col img { height: 280px; }
+          .three-col { grid-template-columns: 1fr; }
+          .three-col img { height: 280px; }
+          .video-section { padding: 30px 16px; }
+          .arch-section { padding: 50px 20px; }
+          .flavor-feature { padding: 60px 20px 80px; }
+          .flavor-image { max-width: 88%; }
+          .flavor-title { margin-bottom: -50px; }
+          .flavor-label-top, .flavor-tagline { letter-spacing: 0.3em; }
+          .related-grid { grid-template-columns: 1fr; }
+          .pstk-spoon, .pstk-circle { width: 90px; }
         }
       `}</style>
     </>
