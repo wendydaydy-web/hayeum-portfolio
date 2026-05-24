@@ -23,7 +23,7 @@ function SiteNav() {
   const [lang, setLang] = useState('ko');
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => setScrolled(window.scrollY > 80);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -66,63 +66,158 @@ function SiteNav() {
       </div>
 
       <style jsx>{`
+        /* pages/index.jsx .nav 스타일 그대로 (CSS 변수는 라이트 테마 값으로 치환) */
         .nav {
-          position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-          padding: 20px 40px 40px;
-          display: flex; justify-content: space-between; align-items: center;
-          background: transparent;
-          transition: background 0.4s, padding 0.4s, color 0.3s, box-shadow 0.3s;
-          color: #0d0d0d;
-          font-family: 'Inter', 'Noto Sans KR', sans-serif;
+          position: fixed;
+          top: 0; left: 0; right: 0;
+          z-index: 100;
+          padding: 20px 40px;
+          padding-bottom: 40px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: linear-gradient(rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+          transition: background 0.4s, padding 0.4s, color 0.3s;
+          color: #fff;
         }
         .nav.scrolled {
           padding-bottom: 20px;
           background: rgba(255,255,255,0.9);
-          backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-          box-shadow: 0 1px 0 rgba(0,0,0,0.06);
-          color: #0d0d0d;
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          color: #1a1a1a;
         }
-        .nav-left { display: flex; align-items: center; }
-        .nav-logo { display: inline-flex; align-items: center; text-decoration: none; color: inherit; }
-        .nav-logo-text {
-          position: relative; display: inline-flex; align-items: center;
-          font-size: 28px; line-height: 1; font-weight: 400; letter-spacing: 0.05em;
-          color: inherit; transition: color 0.3s;
+        .nav-left {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
         }
-        .logo-default, .logo-hover { display: inline-block; font-size: inherit; line-height: 1; transition: opacity 0.45s ease; }
-        .logo-hover {
-          position: absolute; top: 50%; left: 0; transform: translateY(-50%);
-          font-family: 'Cormorant Garamond', 'Noto Serif KR', serif; font-weight: 500; font-style: italic;
-          letter-spacing: 0.02em; white-space: nowrap; opacity: 0; pointer-events: none;
-        }
-        .nav-logo:hover .logo-default { opacity: 0; }
-        .nav-logo:hover .logo-hover { opacity: 1; }
-        .nav-right { display: flex; align-items: center; justify-content: flex-end; }
-        .nav-menu { display: flex; align-items: center; gap: 36px; list-style: none; margin: 0; padding: 0; }
-        .nav-menu a {
-          font-family: 'Inter', 'Noto Sans KR', sans-serif;
-          font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
-          text-decoration: none; color: inherit; transition: opacity 0.2s;
-        }
-        .nav-menu a:hover { opacity: 0.55; }
-        .nav-lang {
-          display: inline-flex; align-items: center; gap: 6px;
-          font-family: 'Inter', 'Noto Sans KR', sans-serif;
-          font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+        .nav-logo {
+          display: inline-flex;
+          align-items: center;
+          text-decoration: none;
           color: inherit;
         }
-        .nav-lang button {
-          font: inherit; letter-spacing: inherit; text-transform: inherit;
-          color: rgba(13,13,13,0.4); background: none; border: none; padding: 0; cursor: pointer;
+        .nav-logo-text {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          font-size: 28px;
+          line-height: 1;
+          font-weight: 400;
+          letter-spacing: 0.05em;
+          color: #fff;
+          transition: color 0.3s;
+        }
+        .nav.scrolled .nav-logo-text {
+          color: #1a1a1a;
+        }
+        .logo-default,
+        .logo-hover {
+          display: inline-block;
+          font-size: inherit;
+          line-height: 1;
+          transition: opacity 0.45s ease;
+        }
+        .logo-hover {
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+          font-weight: 500;
+          font-style: italic;
+          letter-spacing: 0.02em;
+          white-space: nowrap;
+          opacity: 0;
+          pointer-events: none;
+        }
+        .nav-logo:hover .logo-default {
+          opacity: 0;
+        }
+        .nav-logo:hover .logo-hover {
+          opacity: 1;
+        }
+        .nav-right {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+        }
+        .nav-menu {
+          display: flex;
+          align-items: center;
+          gap: 36px;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+        .nav-menu a {
+          font-family: 'Inter', 'Noto Sans KR', sans-serif;
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          text-decoration: none;
+          color: rgba(255,255,255,0.85);
           transition: color 0.3s, opacity 0.2s;
         }
-        .nav-lang button.active { color: #0d0d0d; font-weight: 600; }
-        .nav-lang button:hover { opacity: 0.7; }
-        .nav-lang-sep { color: inherit; opacity: 0.4; }
-        @media (max-width: 768px) {
-          .nav { padding: 16px 20px; }
-          .nav-menu { gap: 16px; }
-          .nav-menu a, .nav-lang { font-size: 10px; letter-spacing: 0.08em; }
+        .nav.scrolled .nav-menu a {
+          color: #1a1a1a;
+        }
+        .nav-menu a:hover {
+          opacity: 0.6;
+        }
+        .nav-lang {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-family: 'Inter', 'Noto Sans KR', sans-serif;
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.85);
+        }
+        .nav.scrolled .nav-lang {
+          color: #1a1a1a;
+        }
+        .nav-lang button {
+          font: inherit;
+          letter-spacing: inherit;
+          text-transform: inherit;
+          color: rgba(255,255,255,0.4);
+          transition: color 0.3s, opacity 0.2s;
+          padding: 0;
+          background: none;
+          border: none;
+          cursor: pointer;
+        }
+        .nav.scrolled .nav-lang button {
+          color: rgba(26,26,26,0.4);
+        }
+        .nav-lang button.active {
+          color: rgba(255,255,255,0.95);
+          font-weight: 600;
+        }
+        .nav.scrolled .nav-lang button.active {
+          color: #1a1a1a;
+        }
+        .nav-lang button:hover {
+          opacity: 0.7;
+        }
+        .nav-lang-sep {
+          color: inherit;
+          opacity: 0.4;
+        }
+        @media (max-width: 1199px) {
+          .nav { padding: 16px 24px; }
+        }
+        @media (max-width: 809px) {
+          .nav { padding: 14px 20px; }
+          .nav-menu { gap: 14px; }
+          .nav-menu a,
+          .nav-lang { font-size: 10px; letter-spacing: 0.08em; }
+          .nav-lang { gap: 4px; }
           .nav-logo-text { font-size: 22px; }
         }
       `}</style>
