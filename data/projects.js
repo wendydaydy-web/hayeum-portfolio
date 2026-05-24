@@ -2,7 +2,7 @@ const projects = [
   {
     slug: 'tofug',
     name: 'TOFU·G',
-    poster: '/images/tofug-thumbnail.png',
+    poster: '/images/tofug-poster-final.jpg',
     spaceDesktop: '/projects/tofug/space-desktop.jpg',
     overlay: {
       ko: '— 두부 젤라또 —',
@@ -12,7 +12,7 @@ const projects = [
   {
     slug: 'benson',
     name: 'BENSON',
-    poster: '/projects/benson/poster.png',
+    poster: '/projects/benson/poster-final.jpg',
     spaceDesktop: '/projects/benson/space-desktop.png',
   },
 ];
