@@ -1898,9 +1898,10 @@ export default function HomePage() {
             border: none;
             background: transparent;
             cursor: pointer;
-            border-radius: 50%;
+            border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.18);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
+            overflow: hidden;
         }
         .combined-fab:hover {
             transform: translateY(-2px) scale(1.04);
@@ -1910,7 +1911,7 @@ export default function HomePage() {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 12px;
             display: block;
         }
         .combined-modal {
