@@ -841,7 +841,7 @@ export default function HomePage() {
             font-family: var(--font-noto-serif-kr), serif;
             font-style: normal;
             font-weight: 300;
-            font-size: clamp(10px, 5cqw, 32px);
+            font-size: clamp(8px, 4cqw, 26px);
             letter-spacing: 0.04em;
             color: #fff;
             white-space: nowrap;
