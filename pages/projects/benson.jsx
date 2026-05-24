@@ -247,7 +247,10 @@ export default function Benson() {
           <div><p className="info-label">Area</p><p className="info-value">— PY (— m²)</p></div>
         </section>
 
-        <div className="full-img"><img src={IMG.heroPoster} alt="BENSON Poster" /></div>
+        <div className="full-img hero-poster-wrap">
+          <img src={IMG.heroPoster} alt="BENSON Poster" />
+          <div className="hero-poster-overlay" aria-hidden="true"></div>
+        </div>
 
         {/* ── BENSON POSTER ── */}
         <section className="benson-poster">
@@ -423,12 +426,7 @@ export default function Benson() {
 
       <style jsx>{`
         /* ── HERO ── */
-        .hero {
-          padding: 130px 60px 60px;
-          max-width: 1600px;
-          margin: 0 auto;
-          background: linear-gradient(to bottom, rgba(200,17,26,0), rgba(200,17,26,0.5));
-        }
+        .hero { padding: 130px 60px 60px; max-width: 1600px; margin: 0 auto; }
         .hero-title { font-size: 36px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 36px; line-height: 1.3; }
         .hero-client { font-weight: 700; color: #000; }
         .hero-desc { font-size: 15px; line-height: 1.85; color: #333; max-width: 1100px; word-break: keep-all; margin-bottom: 28px; text-align: justify; }
@@ -445,6 +443,13 @@ export default function Benson() {
 
         .full-img { width: 100%; line-height: 0; }
         .full-img img { width: 100%; object-fit: cover; }
+        .hero-poster-wrap { position: relative; }
+        .hero-poster-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom, rgba(200,17,26,0), rgba(200,17,26,0.5));
+          pointer-events: none;
+        }
 
         .two-col { display: grid; grid-template-columns: 1fr 1fr; line-height: 0; }
         .two-col img { width: 100%; height: 460px; object-fit: cover; }
