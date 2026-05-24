@@ -66,7 +66,7 @@ function SiteNav() {
       </div>
 
       <style jsx>{`
-        /* pages/index.jsx .nav 스타일 그대로 (CSS 변수는 라이트 테마 값으로 치환) */
+        /* index.jsx 네비바 기반 — 배경 투명(메인처럼), 라이트 페이지용 다크 텍스트 */
         .nav {
           position: fixed;
           top: 0; left: 0; right: 0;
@@ -76,16 +76,15 @@ function SiteNav() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          background: linear-gradient(rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+          background: transparent;
           transition: background 0.4s, padding 0.4s, color 0.3s;
-          color: #fff;
+          color: #1a1a1a;
         }
         .nav.scrolled {
           padding-bottom: 20px;
           background: rgba(255,255,255,0.9);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          color: #1a1a1a;
         }
         .nav-left {
           display: flex;
@@ -106,11 +105,8 @@ function SiteNav() {
           line-height: 1;
           font-weight: 400;
           letter-spacing: 0.05em;
-          color: #fff;
-          transition: color 0.3s;
-        }
-        .nav.scrolled .nav-logo-text {
           color: #1a1a1a;
+          transition: color 0.3s;
         }
         .logo-default,
         .logo-hover {
@@ -151,20 +147,18 @@ function SiteNav() {
           margin: 0;
           padding: 0;
         }
-        .nav-menu a {
+        /* :global(a) so it also reaches the <a> rendered by next/link (no underscore class) */
+        .nav-menu :global(a) {
           font-family: 'Inter', 'Noto Sans KR', sans-serif;
           font-size: 12px;
           font-weight: 500;
           letter-spacing: 0.12em;
           text-transform: uppercase;
           text-decoration: none;
-          color: rgba(255,255,255,0.85);
+          color: #1a1a1a;
           transition: color 0.3s, opacity 0.2s;
         }
-        .nav.scrolled .nav-menu a {
-          color: #1a1a1a;
-        }
-        .nav-menu a:hover {
+        .nav-menu :global(a):hover {
           opacity: 0.6;
         }
         .nav-lang {
@@ -176,31 +170,22 @@ function SiteNav() {
           font-weight: 500;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.85);
-        }
-        .nav.scrolled .nav-lang {
           color: #1a1a1a;
         }
         .nav-lang button {
           font: inherit;
           letter-spacing: inherit;
           text-transform: inherit;
-          color: rgba(255,255,255,0.4);
+          color: rgba(26,26,26,0.4);
           transition: color 0.3s, opacity 0.2s;
           padding: 0;
           background: none;
           border: none;
           cursor: pointer;
         }
-        .nav.scrolled .nav-lang button {
-          color: rgba(26,26,26,0.4);
-        }
         .nav-lang button.active {
-          color: rgba(255,255,255,0.95);
-          font-weight: 600;
-        }
-        .nav.scrolled .nav-lang button.active {
           color: #1a1a1a;
+          font-weight: 600;
         }
         .nav-lang button:hover {
           opacity: 0.7;
@@ -215,7 +200,7 @@ function SiteNav() {
         @media (max-width: 809px) {
           .nav { padding: 14px 20px; }
           .nav-menu { gap: 14px; }
-          .nav-menu a,
+          .nav-menu :global(a),
           .nav-lang { font-size: 10px; letter-spacing: 0.08em; }
           .nav-lang { gap: 4px; }
           .nav-logo-text { font-size: 22px; }
