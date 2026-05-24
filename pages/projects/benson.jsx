@@ -1,103 +1,29 @@
 import Head from 'next/head';
-import { ProjectNav, ProjectHero, ProjectFooter } from '../../components/project';
-import { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { useState, useEffect, useRef } from 'react';
+import { ProjectFooter } from '../../components/project';
 
-const SECTIONS = [
-  { id: 'space', label: 'Space' },
-  { id: 'concept', label: 'Concept' },
-  { id: 'details', label: 'Details' },
-  { id: 'materials', label: 'Materials' },
-  { id: 'poster', label: 'Poster' },
-  { id: 'film', label: 'Film' },
-  { id: 'extras', label: 'Extras' },
+/* asset helpers */
+const I = (n) => `/images/benson/${n}`;
+const S = (n) => `/images/benson/stickers/${n}`;
+
+/* ── Project meta (참고 1.png 헤더) ── */
+const META = [
+  { label: 'Work Scope', lines: ['SPACE, BRANDING'] },
+  { label: 'Site Address', lines: ['SEOUL, REPUBLIC OF KOREA'] },
+  { label: 'Partner', lines: ['CLIENT | Hanwha Galleria', 'BRANDING | BENSON'] },
+  { label: 'Area', lines: ['— PY (— m²)'] },
 ];
 
-const HERO_META = [
-  { label: 'Work Scope', value: 'Space, Branding, SI Design' },
-  { label: 'Location', value: 'Hanwha Galleria Seoul' },
-  { label: 'Year', value: '2024' },
+/* 무드 키워드 (참고 1.png) */
+const KEYWORDS = [
+  ['CONCRETE', 'STREET', 'FLAVOR', 'CURVE'],
+  ['BOLD', 'RAW', 'RED', 'RHYTHM'],
+  ['SCOOP', 'SUBCULTURE'],
+  ['SKATE', 'TASTE'],
 ];
 
-const I = (name) => `/images/benson/${name}`;
-
-const CONCEPT_ITEMS = [
-  { n: '01', ko: '내부와 이어지는 파사드 디자인', en: 'Facade design flowing seamlessly into the interior' },
-  { n: '02', ko: '외부와 내부를 연결하는 천장 조형물', en: 'Ceiling sculptural element connecting exterior and interior' },
-  { n: '03', ko: '외부와 내부를 연결하는 실내 취식 공간', en: 'Indoor dining area bridging outdoor and indoor zones' },
-  { n: '04', ko: '아이스크림 카운터와 전면 창의 곡선이 어우러지는 디자인', en: 'Ice cream counter harmonized with the curved front window' },
-  { n: '05', ko: '벤치에서 테이블로 이어지는 곡선형 메인 퍼니처', en: 'Curved main furniture flowing from bench to table' },
-];
-
-const DETAIL_ITEMS = [
-  { n: '09', ko: '벤슨 아이스크림의 플레이버를 설명하는 페그보드 VMD', en: "Pegboard VMD showcasing Benson's ice cream flavors" },
-  { n: '11', ko: '스트릿 무드를 표현한 바닥과 곡선 디자인', en: 'Street-mood flooring and curved design' },
-  { n: '10', ko: '보드 형태에서 모티브를 받은 스탠딩 테이블', en: 'Standing tables inspired by skateboard forms' },
-];
-
-const MATERIALS = [
-  { name: 'METAL', hex: '#A8A8A8', swatch: 'linear-gradient(135deg, #c0c0c0, #a0a0a0)', ko: '헤어라인 실버 메탈', en: 'Hairline silver metal' },
-  { name: 'CONCRETE', hex: '#707070', swatch: 'linear-gradient(135deg, #808080, #606060)', ko: '시멘트 콘크리트', en: 'Cement concrete' },
-  { name: 'EPOXY (MATTE)', hex: '#1F1F1F', swatch: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)', ko: '에폭시 무광 코팅', en: 'Matte-coated epoxy' },
-  { name: 'PAINT', hex: '#EFE6D4', swatch: 'linear-gradient(135deg, #f5efe0, #e8dcc8)', ko: '도장 마감', en: 'Painted finish' },
-  { name: 'BIRCH WOOD', hex: '#CCA888', swatch: 'linear-gradient(135deg, #d4b896, #c4a87a)', ko: '자작목', en: 'Natural birch plywood' },
-  { name: 'ENGINEERED STONE', hex: '#DCCEB4', swatch: 'linear-gradient(135deg, #e2d5c0, #d5c5a8)', ko: '인조대리석', en: 'Engineered marble' },
-  { name: 'RED TILE', hex: '#CC0000', swatch: '#CC0000', ko: '레드 포인트 타일', en: 'Accent red tile' },
-];
-
-const EXTRAS = [
-  'extra-scoop.png', 'extra-storefront-window.png', 'extra-overhead-flatlay.png',
-  'extra-puddle.png', 'extra-birdseye.png', 'extra-silhouette.png',
-  'extra-hands.png', 'extra-product-closeup.png', 'extra-drizzle.png',
-  'extra-skater-feet.png', 'extra-skater-editorial.png', 'extra-product-lifestyle.png',
-  'extra-melt.png', 'extra-cup-skateboard.png', 'extra-product-flatlay.png',
-  'extra-cups-arranged.png', 'extra-product-detail.png', 'extra-packaging.png',
-  'extra-product-artful.png', 'extra-product-multi.png', 'extra-cup-concrete.png',
-  'extra-poster-ice-cream.png', 'extra-stilllife.png', 'extra-product-stylized.png',
-  'extra-urban-street.png',
-];
-
-/* ── Visual primitives ── */
-const Star = ({ className = '' }) => (
-  <svg className={`star ${className}`} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <path d="M12 1 L13.5 9.5 L22 8 L15.5 13.5 L20 22 L12 17 L4 22 L8.5 13.5 L2 8 L10.5 9.5 Z"
-      fill="currentColor" stroke="currentColor" strokeWidth="0.5" strokeLinejoin="round" />
-  </svg>
-);
-
-/* Ice-cream bucket badge — red trapezoid (wider top, narrower bottom),
-   white number inside. A subtle white stroke keeps the silhouette
-   readable when the badge sits on the red panel background. */
-const Bucket = ({ n, className = '' }) => (
-  <svg className={`bucket ${className}`} viewBox="0 0 64 64" aria-hidden="true">
-    <path
-      d="M 7 8 L 57 8 L 51 58 L 13 58 Z"
-      fill="#c8111a"
-      stroke="#ffffff"
-      strokeWidth="1.5"
-      strokeLinejoin="round"
-    />
-    <text
-      x="32" y="36"
-      textAnchor="middle"
-      dominantBaseline="central"
-      fontFamily="'Bebas Neue', sans-serif"
-      fontSize="24"
-      fontWeight="700"
-      fill="#ffffff"
-      letterSpacing="0.5"
-    >{n}</text>
-  </svg>
-);
-
-function CornerTags({ left = 'BENSON', right = '2024' }) {
-  return (
-    <div className="corner-tags" aria-hidden="true">
-      <span className="corner-tag corner-tag-left"><Star /> {left}</span>
-      <span className="corner-tag corner-tag-right">{right} <Star /></span>
-    </div>
-  );
-}
-
+/* ── Scroll-reveal wrapper ── */
 function FadeIn({ children, className = '', style }) {
   const ref = useRef(null);
   useEffect(() => {
@@ -105,7 +31,7 @@ function FadeIn({ children, className = '', style }) {
     if (!el) return;
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) el.classList.add('visible'); },
-      { threshold: 0.1 }
+      { threshold: 0.12 }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -113,674 +39,433 @@ function FadeIn({ children, className = '', style }) {
   return <div ref={ref} className={`fade-in ${className}`} style={style}>{children}</div>;
 }
 
+/* ── Top navigation — 메인 페이지(pages/index.jsx) 네비바 재현 ── */
+function SiteNav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [lang, setLang] = useState('ko');
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('site-lang') || 'ko';
+    setLang(saved);
+    document.documentElement.lang = saved;
+  }, []);
+
+  const switchLang = (next) => {
+    setLang(next);
+    document.documentElement.lang = next;
+    localStorage.setItem('site-lang', next);
+  };
+
+  const isKo = lang === 'ko';
+
+  return (
+    <nav className={`bnav${scrolled ? ' scrolled' : ''}`}>
+      <div className="bnav-left">
+        <Link href="/" className="bnav-logo">
+          <span className="bnav-logo-text">
+            <span className="logo-default">夏陰</span>
+            <span className="logo-hover">{isKo ? '여름 그늘' : 'summer shade'}</span>
+          </span>
+        </Link>
+      </div>
+      <div className="bnav-right">
+        <ul className="bnav-menu">
+          <li><Link href="/#project">WORK</Link></li>
+          <li><Link href="/work-corp">WORK(CORP.)</Link></li>
+          <li><Link href="/info">INFO</Link></li>
+          <li>
+            <a href="https://www.instagram.com/id_haumm/" target="_blank" rel="noopener noreferrer">INSTA</a>
+          </li>
+          <li className="bnav-lang" aria-label="Language toggle">
+            <button type="button" className={lang === 'en' ? 'active' : ''} onClick={() => switchLang('en')}>EN</button>
+            <span className="bnav-lang-sep">/</span>
+            <button type="button" className={lang === 'ko' ? 'active' : ''} onClick={() => switchLang('ko')}>KR</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
+}
+
 export default function Benson() {
   return (
     <>
       <Head>
-        <title>BENSON Ice Cream — Flagship Store</title>
+        <title>BENSON _ Hanwha Galleria — 공간하음</title>
+        <meta name="description" content="BENSON — 미국 스트릿 컬처와 스케이트 무드를 담은 한화 갤러리아 벤슨 아이스크림 플래그십." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
-      <ProjectNav sections={SECTIONS} accentColor="#CC0000" />
+      <SiteNav />
 
-      <ProjectHero
-        title="BENSON"
-        label="Brand Space Concept &amp; Strategy"
-        image={I('facade.png')}
-        subtitleKo={'미국 스트릿 디저트의 다이내믹한 에너지를 담은\n벤슨 아이스크림 플래그십 스토어'}
-        subtitleEn={'A flagship ice cream store capturing the dynamic energy\nof authentic American street dessert culture.'}
-        meta={HERO_META}
-      />
+      <main className="bpage">
 
-      {/* ── 01 SPACE — Best-Project overlap composition ── */}
-      <section className="bsec bsec-space" id="space">
-        <CornerTags left="BENSON" right="STOREFRONT" />
-
-        <div className="bsec-inner">
-          <FadeIn className="display-block">
-            <p className="display-label"><Star /> 01 / Space</p>
-            <h2 className="display-title">STOREFRONT<br/>&amp; INTERIOR</h2>
+        {/* ══ 01 · HEADER ══════════════════════════════════════ */}
+        <section className="bhead">
+          <FadeIn>
+            <h1 className="bhead-title">BENSON<span className="bhead-title-thin">_Hanwha Galleria</span></h1>
           </FadeIn>
 
-          {/* overlap collage — 참고1 page 11 (Best Project) inspired */}
-          <div className="space-collage">
-            <FadeIn className="collage-photo collage-1">
-              <img src={I('interior-1.png')} alt="Interior — main view" />
-            </FadeIn>
-            <FadeIn className="collage-photo collage-2">
-              <img src={I('space-architectural.png')} alt="Architectural detail" />
-            </FadeIn>
-            <FadeIn className="collage-photo collage-3">
-              <img src={I('space-detail.jpg')} alt="Space detail" />
-            </FadeIn>
-            <div className="collage-tag">
-              <Star /> Flagship<br/>since 2024
-            </div>
-          </div>
-
-          {/* 3-col strip */}
-          <div className="strip-row strip-3">
-            <FadeIn className="strip-cell">
-              <img src={I('interior-2.png')} alt="Interior — counter" />
-            </FadeIn>
-            <FadeIn className="strip-cell">
-              <img src={I('interior-3.png')} alt="Interior — seating" />
-            </FadeIn>
-            <FadeIn className="strip-cell">
-              <img src={I('interior-4.png')} alt="Interior — display" />
-            </FadeIn>
-          </div>
-
-          <div className="strip-row strip-2">
-            <FadeIn className="strip-cell strip-wide">
-              <img src={I('facade.png')} alt="Facade" />
-            </FadeIn>
-            <FadeIn className="strip-cell">
-              <img src={I('space-detail.jpg')} alt="Space detail close" />
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 04 DESIGN CONCEPT — red panel split, sticker corners ── */}
-      <section className="bsec bsec-concept bsec-red" id="concept">
-        <CornerTags left="04 / CONCEPT" right="OUTDOOR → INSIDE" />
-
-        <div className="bsec-inner">
-          <FadeIn className="display-block">
-            <p className="display-label display-label-on-red"><Star /> 04 / Design Concept</p>
-            <h2 className="display-title display-title-on-red">
-              OUTDOOR<br/>ZONE&nbsp;<span className="display-arrow">→</span><br/>CONNECT INSIDE
-            </h2>
+          <FadeIn>
+            <p className="bhead-intro" data-ko>
+              볼드한 토핑과 풍부한 유지방의 깊은 맛이 감각을 깨우는 곳. 벤슨(BENSON)은 단순히 아이스크림을 즐기는 공간을 넘어, 미국의 서브컬처와 스트릿 무드가 교차하며 만들어내는 역동적인 순간을 담았다. 공간을 가로지르는 대담한 곡선은 스케이트 파크의 에너지에서 시작되었다. 거칠면서도 정제된 콘크리트 질감 위로, 벤슨의 시그니처 레드가 맥박처럼 흐르며 공간에 강렬한 생동감을 불어넣는다. 파사드에서 내부로 부드럽게 이어지는 곡선형 퍼니처와 천장 조형물은 경계를 허물고 당신을 이 자유로운 아웃도어 무드 속으로 자연스럽게 이끈다. 이곳에서 아이스크림 한 스쿱은 단순한 디저트가 아니다. 페그보드 위에 펼쳐진 다채로운 플레이버의 향연 그리고 그 속에 스며든 스트릿 무드의 자유로움이 당신의 오감을 자극한다. 부드러운 텍스처와 청키한 토핑이 입안에서 리듬을 만들 때, 당신은 비로소 이 역동적인 세계의 일부가 된다.
+            </p>
+            <p className="bhead-intro" data-en>
+              A place where bold toppings and the deep richness of high-butterfat ice cream awaken the senses. BENSON is more than a place to enjoy ice cream — it captures the dynamic moments born where American subculture meets street mood. The bold curves cutting across the space begin in the energy of the skate park. Over raw yet refined concrete textures, Benson&apos;s signature red flows like a pulse, breathing intense vitality into the space. Curved furniture and a ceiling sculpture flowing gently from the facade into the interior dissolve boundaries and draw you naturally into this free, outdoor mood. Here, a single scoop is more than dessert. A feast of vivid flavors spread across the pegboard — and the freedom of street mood steeped within it — stimulate every sense. When soft textures and chunky toppings build a rhythm in your mouth, you finally become part of this dynamic world.
+            </p>
           </FadeIn>
 
-          <div className="concept-split">
-            <div className="concept-text">
-              <FadeIn>
-                <p className="lead lead-on-red" data-ko>
-                  벤슨 아이스크림 샵은 폴딩도어와 전면 곡선으로 부드럽게 이어지는 파사드 구조물, 매장 전체를 관통하는 사이니지, 벤치-테이블로 이어지는 곡선형 메인 퍼니처를 이용해 내외부를 연결함으로써, 내부 뿐 아니라 외부에서도 벤슨 아이스크림을 즐길 수 있는 아웃도어 형태로 디자인하였습니다.
-                </p>
-              </FadeIn>
-              <FadeIn>
-                <p className="lead lead-on-red" data-en>
-                  By connecting interior and exterior through folding doors, a gently curving facade, store-spanning signage, and a flowing bench-to-table main furniture piece, the Benson Ice Cream shop is designed as an outdoor-oriented space where guests can enjoy ice cream both inside and out.
-                </p>
-              </FadeIn>
-            </div>
-            <FadeIn className="concept-photo">
-              <img src={I('interior-1.png')} alt="Design concept — outdoor connect" />
-            </FadeIn>
-          </div>
+          <FadeIn>
+            <p className="bhead-quote" data-ko>&ldquo;당신이 마주하는 이 모든 역동성이 곧 벤슨의 맛이다.&rdquo;</p>
+            <p className="bhead-quote" data-en>&ldquo;All this dynamism you encounter is the taste of Benson.&rdquo;</p>
+          </FadeIn>
 
-          {/* Bulleted list — 참고1 page 5 (Education) style */}
-          <ul className="bullet-list bullet-list-on-red">
-            {CONCEPT_ITEMS.map(({ n, ko, en }) => (
-              <FadeIn key={n} className="bullet-row">
-                <li>
-                  <span className="bullet-num"><Bucket n={n} /></span>
-                  <span className="bullet-text" data-ko>{ko}</span>
-                  <span className="bullet-text" data-en>{en}</span>
-                </li>
-              </FadeIn>
+          <FadeIn className="bhead-meta">
+            {META.map((m) => (
+              <div className="bmeta-col" key={m.label}>
+                <span className="bmeta-label">{m.label}</span>
+                {m.lines.map((l) => <span className="bmeta-val" key={l}>{l}</span>)}
+              </div>
             ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ── 05 DESIGN DETAILS — beige panel + photo right ── */}
-      <section className="bsec bsec-details" id="details">
-        <CornerTags left="05 / DETAILS" right="SHAPE & MOTIF" />
-
-        <div className="bsec-inner">
-          <FadeIn className="display-block">
-            <p className="display-label"><Star /> 05 / Design Details</p>
-            <h2 className="display-title">SHAPE<br/>&amp; MOTIF</h2>
           </FadeIn>
+        </section>
 
-          <div className="details-split">
-            <FadeIn className="details-photo">
-              <img src={I('interior-3.png')} alt="Design detail — sub-culture motif" />
-            </FadeIn>
-            <ul className="bullet-list">
-              {DETAIL_ITEMS.map(({ n, ko, en }) => (
-                <FadeIn key={n} className="bullet-row">
-                  <li>
-                    <span className="bullet-num"><Bucket n={n} /></span>
-                    <span className="bullet-text" data-ko>{ko}</span>
-                    <span className="bullet-text" data-en>{en}</span>
-                  </li>
-                </FadeIn>
+        {/* ══ 02 · BRAND HERO (gradient + wordmark + stickers) ══ */}
+        <section className="bhero">
+          <img className="stk stk-oval" src={S('oval.png')} alt="BENSON ICECREAM sticker" />
+          <div className="bhero-inner">
+            <p className="bhero-eyebrow"><span className="b-star">✺</span> STREET MOOD · SCOOP UP YOUR TASTE</p>
+            <div className="bhero-wordmark" role="img" aria-label="BENSON" />
+            <p className="bhero-sub">WHERE STREET MEETS SWEET</p>
+            <p className="bhero-spatial">SPATIAL CONCEPT</p>
+          </div>
+          <img className="stk stk-board" src={S('board.png')} alt="BENSON skateboard sticker" />
+        </section>
+
+        {/* ══ 03 · STREET EDITORIAL (red statement + skate bands) ══ */}
+        <section className="bstreet">
+          <FadeIn className="bstreet-head">
+            <p className="b-section-tag"><span className="b-star">✺</span> DYNAMIC NARRATIVE</p>
+            <p className="bstreet-statement">
+              BOLD TOPPINGS, COLD CONCRETE, VIVID RED.<br />
+              ALL THIS DYNAMISM IS THE TASTE OF BENSON.<br />
+              FROM THE STREET TO YOUR SENSES.
+            </p>
+            <p className="bstreet-ksub" data-ko>볼드한 토핑과 차가운 콘크리트가 만들어내는 공간 — 붉은 아이스크림 한 입의 역동성이 만드는 미감.</p>
+            <p className="bstreet-ksub" data-en>A space shaped by bold toppings and cold concrete — the aesthetic born of one vivid red bite. 한 스쿱의 자유로움.</p>
+
+            <div className="bkeywords">
+              {KEYWORDS.map((row, i) => (
+                <div className="bkw-row" key={i}>
+                  {row.map((k) => <span className="bkw" key={k}>{k}</span>)}
+                </div>
               ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 06 MATERIALS — Personal-Skill (참고1 p6) editorial list ── */}
-      <section className="bsec bsec-materials" id="materials">
-        <CornerTags left="06 / MATERIALS" right="RAW MATERIAL" />
-
-        <div className="bsec-inner">
-          <FadeIn className="display-block">
-            <p className="display-label"><Star /> 06 / Materials</p>
-            <h2 className="display-title">RAW<br/>MATERIAL</h2>
+            </div>
           </FadeIn>
 
-          <div className="materials-split">
-            <div className="materials-text">
-              <FadeIn>
-                <p className="lead" data-ko>
-                  전체적으로 외부 트랙에서 사용하는 콘크리트와 같은 익스트림하고 로우한 소재를 활용해, 메탈소재로 현대적이고 세련된 이미지를, 콘크리트와 에폭시로 벤슨의 스트릿한 브랜드 무드를 표현하였습니다.
-                </p>
-              </FadeIn>
-              <FadeIn>
-                <p className="lead" data-en>
-                  Raw, extreme materials like concrete &mdash; reminiscent of outdoor skate tracks &mdash; are paired with metal for a modern, refined image, while concrete and epoxy finishes convey Benson&apos;s street-inspired brand mood.
-                </p>
-              </FadeIn>
-            </div>
-            <FadeIn className="materials-photo">
-              <img src={I('space-architectural.png')} alt="Material atmosphere" />
+          {/* skate park photo band — stickers overlaid */}
+          <div className="bband bband-skate">
+            <img className="bband-img" src={I('skate-hero.png')} alt="Skate park — street culture" />
+            <img className="stk stk-skater" src={S('skater.png')} alt="BENSON skater sticker" />
+            <img className="stk stk-boardice" src={S('board-icecream.png')} alt="BENSON ice-cream skateboard sticker" />
+          </div>
+
+          {/* concrete bowl band — spoon sticker */}
+          <div className="bband bband-bowl">
+            <img className="bband-img" src={I('skate-bowl.png')} alt="Concrete skate bowl" />
+            <img className="stk stk-spoon" src={S('spoon.png')} alt="BENSON wooden spoon sticker" />
+          </div>
+
+          {/* graffiti / skaters band — rect + circle stickers */}
+          <div className="bband bband-graf">
+            <img className="bband-img" src={I('skate-graffiti.png')} alt="Skaters and BENSON graffiti" />
+            <img className="stk stk-rect" src={S('rect.png')} alt="BENSON ICECREAM sticker" />
+            <img className="stk stk-circle" src={S('circle.png')} alt="BENSON badge sticker" />
+          </div>
+        </section>
+
+        {/* ══ 04 · SPACE — STOREFRONT & INTERIOR ══════════════ */}
+        <section className="bspace">
+          <FadeIn className="bspace-head">
+            <p className="bspace-num">1 <span className="bspace-num-label">SPACE</span></p>
+            <h2 className="bspace-title">STOREFRONT<br />&amp; INTERIOR</h2>
+          </FadeIn>
+
+          <FadeIn className="bspace-hero">
+            <img src={I('storefront.jpg')} alt="BENSON storefront — Hanwha Galleria" />
+          </FadeIn>
+
+          <div className="bspace-grid">
+            <FadeIn className="bcell bcell-wide">
+              <img src={I('interior-counter.jpg')} alt="Interior — order counter & menu board" />
+            </FadeIn>
+            <FadeIn className="bcell">
+              <img src={I('interior-bench.jpg')} alt="Interior — curved bench seating" />
+            </FadeIn>
+            <FadeIn className="bcell">
+              <img src={I('interior-flavor.jpg')} alt="Interior — flavor posters" />
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* ══ 05 · SIGNATURE ELEMENT — FLAVOR LINE ════════════ */}
+        <section className="bflavor">
+          <FadeIn className="bflavor-head">
+            <p className="b-section-tag b-tag-light"><span className="b-star">✺</span> SIGNATURE ELEMENT · CONCEPT STORY · CHAPTER 01</p>
+            <h2 className="bflavor-title">FLAVOR LINE</h2>
+            <p className="bflavor-kicker">A SUBWAY MAP OF TASTE</p>
+          </FadeIn>
+
+          <FadeIn className="bflavor-photo">
+            <img src={I('flavorline.jpg')} alt="BENSON's Flavor Line — pegboard subway map" />
+          </FadeIn>
+
+          <div className="bflavor-text">
+            <FadeIn>
+              <p className="b-body" data-ko>
+                벤슨의 플레이버 라인은 공간의 서사적 중심이 되는 작품으로, 스틸 타공 보드를 지하철 노선도의 형식으로 재해석하여 각 정거장에는 플레이버를, 각 라인에는 맛의 카테고리를 부여한다. 미국 서브컬처의 자유로운 언어와 스케이트 파크의 열린 기하학에서 출발한 이 거대한 페그보드는, 만지고 읽고 발견하게 만드는 인터랙티브한 그래픽 월이다. 역동적인 노선들은 단순한 메뉴 선택을 하나의 탐험으로 바꾸어 놓으며, 설명 없이도 브랜드의 캐릭터를 말하는 벽으로 자리한다.
+              </p>
+              <p className="b-body" data-en>
+                Benson&apos;s Flavor Line is the narrative centerpiece of the space — a pegboard wall reinterpreted as a subway map, where each station is a flavor and each line is a family of taste. Inspired by the freewheeling language of American sub-culture and the open geometry of skate parks, the perforated metal field invites touch, reading, and discovery. Its dynamic pathways turn ordering ice cream into an act of exploration — a wall that explains the brand without ever asking to be read.
+              </p>
             </FadeIn>
           </div>
 
-          {/* Material list — bulleted editorial style with swatches */}
-          <ul className="mat-list">
-            {MATERIALS.map((m, idx) => (
-              <FadeIn key={m.name} className="mat-row">
-                <li>
-                  <span className="mat-idx">M.{String(idx + 1).padStart(2, '0')}</span>
-                  <span className="mat-swatch" style={{ background: m.swatch }} aria-hidden="true"></span>
-                  <span className="mat-name">{m.name}</span>
-                  <span className="mat-hex">{m.hex}</span>
-                  <span className="mat-desc">
-                    <span data-ko>{m.ko}</span>
-                    <span data-en>{m.en}</span>
-                  </span>
-                </li>
-              </FadeIn>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ── 02 POSTER — red panel hero card ── */}
-      <section className="bsec bsec-poster bsec-red" id="poster">
-        <CornerTags left="02 / POSTER" right="VISUAL IDENTITY" />
-
-        <div className="bsec-inner">
-          <FadeIn className="display-block">
-            <p className="display-label display-label-on-red"><Star /> 02 / Poster</p>
-            <h2 className="display-title display-title-on-red">VISUAL<br/>IDENTITY</h2>
+          <FadeIn className="bflagship">
+            <span className="bflagship-tag">FLAGSHIP 01</span>
+            <span className="bflagship-name">BENSON</span>
+            <span className="bflagship-by">Hanwha Galleria × 공간하음</span>
           </FadeIn>
+        </section>
 
-          <FadeIn className="poster-frame">
-            <img src={I('poster.png')} alt="BENSON poster" />
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ── 03 FILM — dark panel ── */}
-      <section className="bsec bsec-film" id="film">
-        <CornerTags left="03 / FILM" right="BRAND FILM" />
-
-        <div className="bsec-inner">
-          <FadeIn className="display-block">
-            <p className="display-label display-label-on-dark"><Star /> 03 / Film</p>
-            <h2 className="display-title display-title-on-dark">BRAND<br/>FILM</h2>
-          </FadeIn>
-
-          <FadeIn className="film-frame">
+        {/* ══ 06 · BRAND FILM ═════════════════════════════════ */}
+        <section className="bfilm">
+          <div className="bfilm-meta">
+            <span>OUTDOOR</span>
+            <span>12:00:11</span>
+          </div>
+          <FadeIn className="bfilm-frame">
             <video src={I('video.mp4')} autoPlay muted loop playsInline controls />
           </FadeIn>
-        </div>
-      </section>
+        </section>
 
-      {/* ── 04 EXTRAS — Project-Portfolio collage ── */}
-      <section className="bsec bsec-extras" id="extras">
-        <CornerTags left="04 / EXTRAS" right="SUPPLEMENTARY" />
-
-        <div className="bsec-inner">
-          <FadeIn className="display-block">
-            <p className="display-label"><Star /> 04 / Extras</p>
-            <h2 className="display-title">SUPPLE-<br/>MENTARY</h2>
+        {/* ══ 07 · CLOSING ════════════════════════════════════ */}
+        <section className="bclose">
+          <FadeIn>
+            <p className="bclose-en">
+              FROM CONCRETE CURVES TO SOFT-SERVE TEXTURES,<br />
+              BENSON IS WHERE STREET BECOMES SWEETNESS.
+            </p>
+            <p className="bclose-ko" data-ko>콘크리트의 곡선이 부드러운 아이스크림의 텍스처와 만나는 곳, 거리의 무드가 한 스쿱의 달콤함이 되는 공간.</p>
+            <p className="bclose-ko" data-en>Where concrete curves meet soft-serve textures — a place where the mood of the street becomes the sweetness of a single scoop.</p>
           </FadeIn>
-
-          <div className="extras-grid">
-            {EXTRAS.map((name) => (
-              <FadeIn key={name} className="extras-cell">
-                <img src={I(name)} alt={name.replace(/^extra-/, '').replace(/\.[a-z]+$/, '').replace(/-/g, ' ')} loading="lazy" />
-              </FadeIn>
-            ))}
+          <div className="bclose-index">
+            <span>CONCEPT STORY</span>
+            <span>FURNITURE</span>
+            <span>ARCHIVE</span>
+            <span>BLOG</span>
+            <span>PROCESS</span>
+            <span>LIST</span>
           </div>
-        </div>
-      </section>
+        </section>
+
+      </main>
 
       <ProjectFooter
         prevProject={{ name: 'TOFUG', href: '/projects/tofug' }}
         nextProject={{ name: 'BODY GUARD', href: '/projects/bodyguard' }}
       />
 
+      <style jsx global>{`
+        /* page-scoped i18n (html[lang] driven) */
+        .bpage [data-en] { display: none; }
+        html[lang='en'] .bpage [data-ko] { display: none; }
+        html[lang='en'] .bpage [data-en] { display: block; }
+        html[lang='ko'] .bpage [data-ko] { display: block; }
+        html[lang='ko'] .bpage [data-en] { display: none; }
+      `}</style>
+
       <style jsx>{`
-        :global(:root) {
-          --benson-red: #CC0000;
-          --dark: #1a1a1a;
-          --light: #f5f2ed;
-          --gray: #888;
-          --max-width: 1400px;
-          --page-bg: #fff;
-          --page-fg: #1a1a1a;
-          --section-bg: #f5f2ed;
-          --text-mid: #555;
-          --text-light: #666;
-          --border-light: rgba(0,0,0,0.08);
-        }
-        :global(html[data-theme='dark']) {
-          --page-bg: #0c0c0c;
-          --page-fg: #e8e8e8;
-          --section-bg: #1a1a1a;
-          --text-mid: #aaa;
-          --text-light: #999;
-          --gray: #999;
-        }
-        :global(body) { background: var(--page-bg); color: var(--page-fg); }
+        :global(:root) { --b-red: #e5241b; --b-ink: #141414; }
 
-        /* ===== I18N ===== */
-        :global([data-en]) { display: none; }
-        :global(html[lang="en"] [data-ko]) { display: none; }
-        :global(html[lang="en"] [data-en]) { display: inline; }
-        :global(html[lang="en"] p[data-en]),
-        :global(html[lang="en"] h2[data-en]),
-        :global(html[lang="en"] div[data-en]),
-        :global(html[lang="en"] span[data-en]) { display: block; }
-        :global(html[lang="ko"] p[data-ko]),
-        :global(html[lang="ko"] h2[data-ko]),
-        :global(html[lang="ko"] div[data-ko]),
-        :global(html[lang="ko"] span[data-ko]) { display: block; }
-        :global(html[lang="ko"] p[data-en]),
-        :global(html[lang="ko"] h2[data-en]),
-        :global(html[lang="ko"] div[data-en]),
-        :global(html[lang="ko"] span[data-en]) { display: none; }
-
+        .bpage {
+          background: #fff;
+          color: var(--b-ink);
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          overflow-x: hidden;
+        }
         :global(.fade-in) {
-          opacity: 0;
-          transform: translateY(40px);
+          opacity: 0; transform: translateY(36px);
           transition: opacity 0.8s ease, transform 0.8s ease;
         }
         :global(.fade-in.visible) { opacity: 1; transform: translateY(0); }
+        .b-star { color: var(--b-red); margin-right: 8px; }
 
-        /* ===== Star (red asterisk) ===== */
-        :global(.star) {
-          width: 1em; height: 1em; display: inline-block;
-          color: var(--benson-red); vertical-align: -0.15em; flex-shrink: 0;
-        }
-
-        /* ===== Section shell + corner tags ===== */
-        .bsec {
-          position: relative;
-          padding: 0 60px;
-          background: var(--page-bg);
-          color: var(--page-fg);
-          overflow: hidden;
-        }
-        .bsec-inner { max-width: var(--max-width); margin: 0 auto; position: relative; z-index: 2; }
-        :global(.corner-tags) {
-          position: absolute; top: 32px; left: 0; right: 0;
+        /* ── NAV (메인 페이지 재현) ── */
+        .bnav {
+          position: fixed; top: 0; left: 0; right: 0; z-index: 100;
           display: flex; justify-content: space-between; align-items: center;
-          padding: 0 60px; pointer-events: none; z-index: 4;
+          padding: 22px 40px; color: var(--b-ink);
+          background: transparent; transition: background 0.4s, padding 0.4s, box-shadow 0.3s;
         }
-        :global(.corner-tag) {
-          display: inline-flex; align-items: center; gap: 6px;
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
-          color: var(--page-fg);
+        .bnav.scrolled {
+          padding: 14px 40px;
+          background: rgba(255,255,255,0.9);
+          backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+          box-shadow: 0 1px 0 rgba(0,0,0,0.06);
         }
-        .bsec-red :global(.corner-tag),
-        .bsec-film :global(.corner-tag) { color: rgba(255,255,255,0.85); }
-        .bsec-red :global(.corner-tag .star),
-        .bsec-film :global(.corner-tag .star) { color: #fff; }
+        .bnav-logo { display: inline-flex; align-items: center; text-decoration: none; color: inherit; }
+        .bnav-logo-text { position: relative; display: inline-flex; align-items: center; font-size: 28px; line-height: 1; font-weight: 400; letter-spacing: 0.05em; }
+        .logo-default, .logo-hover { display: inline-block; font-size: inherit; line-height: 1; transition: opacity 0.45s ease; }
+        .logo-hover {
+          position: absolute; top: 50%; left: 0; transform: translateY(-50%);
+          font-family: 'Cormorant Garamond', 'Noto Serif KR', serif; font-weight: 500; font-style: italic;
+          letter-spacing: 0.02em; white-space: nowrap; opacity: 0; pointer-events: none;
+        }
+        .bnav-logo:hover .logo-default { opacity: 0; }
+        .bnav-logo:hover .logo-hover { opacity: 1; }
+        .bnav-menu { display: flex; align-items: center; gap: 34px; list-style: none; margin: 0; padding: 0; }
+        .bnav-menu a {
+          font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+          text-decoration: none; color: var(--b-ink); transition: opacity 0.2s;
+        }
+        .bnav-menu a:hover { opacity: 0.55; }
+        .bnav-lang { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; }
+        .bnav-lang button { font: inherit; letter-spacing: inherit; color: rgba(20,20,20,0.4); padding: 0; background: none; border: none; cursor: pointer; transition: color 0.2s; }
+        .bnav-lang button.active { color: var(--b-ink); font-weight: 700; }
+        .bnav-lang-sep { opacity: 0.4; }
 
-        /* ===== Display block ===== */
-        :global(.display-block) { margin-bottom: 0; }
-        .display-label {
-          display: inline-flex; align-items: center; gap: 8px;
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 14px; letter-spacing: 4px; text-transform: uppercase;
-          color: var(--benson-red);
-          margin-bottom: 24px; font-weight: 600;
-        }
-        .display-label-on-red { color: #fff; }
-        .display-label-on-red :global(.star) { color: #fff; }
-        .display-label-on-dark { color: var(--benson-red); }
-        .display-title {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(64px, 11vw, 180px);
-          line-height: 0.88; letter-spacing: -2px; margin: 0;
-        }
-        .display-title-on-red { color: #fff; }
-        .display-title-on-dark { color: #fff; }
-        .display-arrow {
-          color: var(--benson-red); background: #fff;
-          padding: 0 0.18em; display: inline-block; line-height: 1;
-        }
+        /* ── HEADER ── */
+        .bhead { max-width: 1180px; margin: 0 auto; padding: 150px 40px 90px; }
+        .bhead-title { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(34px, 5vw, 70px); letter-spacing: -0.02em; line-height: 1; margin: 0 0 40px; }
+        .bhead-title-thin { font-weight: 500; color: rgba(20,20,20,0.55); }
+        .bhead-intro { font-size: clamp(14px, 1.1vw, 16px); line-height: 2; font-weight: 300; color: #333; max-width: 900px; word-break: keep-all; margin: 0 0 28px; }
+        .bhead-quote { font-family: 'Archivo', sans-serif; font-size: clamp(16px, 1.6vw, 22px); font-weight: 600; font-style: italic; color: var(--b-red); margin: 0 0 56px; }
+        .bhead-meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-top: 34px; border-top: 1px solid rgba(20,20,20,0.12); }
+        .bmeta-col { display: flex; flex-direction: column; gap: 7px; }
+        .bmeta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--b-red); margin-bottom: 4px; }
+        .bmeta-val { font-size: 12px; letter-spacing: 0.06em; color: #444; }
 
-        .lead {
-          font-size: clamp(15px, 1.4vw, 18px); line-height: 1.9;
-          color: var(--text-mid); max-width: 680px; font-weight: 300;
-          margin: 0 0 24px; word-break: keep-all;
+        /* ── BRAND HERO ── */
+        .bhero {
+          position: relative; overflow: hidden;
+          padding: 90px 40px 120px;
+          background: linear-gradient(180deg, #ffffff 0%, #fde7e1 62%, #f7b9ab 100%);
         }
-        .lead-on-red { color: rgba(255,255,255,0.92); max-width: 720px; }
+        .bhero-inner { max-width: 1180px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+        .bhero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--b-red); margin: 0 0 36px; }
+        .bhero-wordmark {
+          width: min(78vw, 880px); aspect-ratio: 959 / 270; margin: 0 auto;
+          background: var(--b-red);
+          -webkit-mask: url(/images/benson/wordmark.png) center / contain no-repeat;
+          mask: url(/images/benson/wordmark.png) center / contain no-repeat;
+        }
+        .bhero-sub { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(18px, 2.6vw, 36px); letter-spacing: 0.04em; color: var(--b-red); margin: 18px 0 0; }
+        .bhero-spatial { font-size: 11px; font-weight: 600; letter-spacing: 0.4em; color: rgba(20,20,20,0.45); margin: 24px 0 0; }
 
-        /* ===== Variants ===== */
-        .bsec-space { background: var(--page-bg); }
-        .bsec-concept.bsec-red,
-        .bsec-poster.bsec-red { background: var(--benson-red); color: #fff; }
-        .bsec-details { background: var(--section-bg); }
-        .bsec-materials { background: var(--page-bg); }
-        .bsec-film { background: var(--dark); color: #fff; }
-        .bsec-extras { background: var(--page-bg); }
+        /* stickers */
+        .stk { position: absolute; z-index: 5; display: block; height: auto; filter: drop-shadow(0 10px 22px rgba(0,0,0,0.22)); pointer-events: none; }
+        .stk-oval { top: 92px; right: 5%; width: clamp(120px, 15vw, 220px); transform: rotate(-9deg); }
+        .stk-board { bottom: 56px; right: 9%; width: clamp(80px, 9vw, 132px); transform: rotate(11deg); }
 
-        /* ===== Space collage (참고1 page 11 inspired) ===== */
-        .space-collage {
-          position: relative;
-          margin: 0 -20px 0;
-          padding: 0 20px;
-          min-height: 540px;
-        }
-        :global(.collage-photo) {
-          position: absolute;
-          overflow: hidden;
-          border: 6px solid #fff;
-          background: #fff;
-          box-shadow: 0 18px 40px rgba(0,0,0,0.18);
-          transition: transform 0.5s ease;
-        }
-        :global(.collage-photo) img {
-          width: 100%; height: 100%; display: block; object-fit: cover;
-          transition: transform 0.7s ease;
-        }
-        :global(.collage-photo:hover) img { transform: scale(1.04); }
-        :global(.collage-1) {
-          top: 0; left: 4%; width: 56%; aspect-ratio: 16 / 10;
-          transform: rotate(-2deg); z-index: 2;
-        }
-        :global(.collage-2) {
-          top: 80px; right: 4%; width: 38%; aspect-ratio: 4 / 5;
-          transform: rotate(3deg); z-index: 3;
-        }
-        :global(.collage-3) {
-          bottom: 0; left: 18%; width: 44%; aspect-ratio: 16 / 11;
-          transform: rotate(1deg); z-index: 1;
-        }
-        .collage-tag {
-          position: absolute;
-          right: 14%; bottom: 60px;
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 14px; letter-spacing: 2px;
-          color: var(--benson-red);
-          background: #fff;
-          padding: 14px 18px;
-          border-radius: 999px;
-          box-shadow: 0 10px 22px rgba(0,0,0,0.15);
-          transform: rotate(-4deg);
-          z-index: 5;
-          display: inline-flex; align-items: center; gap: 8px;
-        }
-        .strip-row { display: grid; gap: 0; margin-bottom: 0; }
-        .strip-2 { grid-template-columns: 1.6fr 1fr; }
-        .strip-3 { grid-template-columns: repeat(3, 1fr); }
-        :global(.strip-cell) {
-          overflow: hidden; border-radius: 0; background: var(--section-bg);
-          border: 0; box-shadow: none;
-        }
-        :global(.strip-cell) img {
-          width: 100%; height: 100%; object-fit: cover;
-          aspect-ratio: 4 / 3; display: block;
-          transition: transform 0.6s ease;
-        }
-        :global(.strip-cell:hover) img { transform: scale(1.03); }
-        :global(.strip-wide) img { aspect-ratio: 16 / 10; }
+        /* ── STREET EDITORIAL ── */
+        .bstreet { background: #fff; }
+        .bstreet-head { max-width: 980px; margin: 0 auto; padding: 110px 40px 70px; text-align: center; }
+        .b-section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--b-red); margin: 0 0 28px; }
+        .bstreet-statement { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(18px, 2.4vw, 34px); line-height: 1.32; letter-spacing: 0.01em; color: var(--b-red); margin: 0 0 26px; }
+        .bstreet-ksub { font-size: clamp(13px, 1.1vw, 15px); font-weight: 300; line-height: 1.9; color: #555; word-break: keep-all; margin: 0 auto 8px; max-width: 720px; }
+        .bkeywords { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 44px; }
+        .bkw-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .bkw { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #222; border: 1px solid rgba(20,20,20,0.2); border-radius: 999px; padding: 7px 16px; }
 
-        /* ===== Concept (red panel) ===== */
-        .concept-split {
-          display: grid;
-          grid-template-columns: 1fr 1.1fr;
-          gap: 48px;
-          margin: 40px 0 60px;
-          align-items: center;
-        }
-        .concept-text { display: flex; flex-direction: column; gap: 8px; }
-        :global(.concept-photo) {
-          overflow: hidden;
-          border: 6px solid #fff;
-          background: #fff;
-          box-shadow: 0 16px 36px rgba(0,0,0,0.25);
-          transform: rotate(2deg);
-        }
-        :global(.concept-photo) img {
-          width: 100%; display: block; aspect-ratio: 4 / 3; object-fit: cover;
-        }
+        /* photo bands */
+        .bband { position: relative; width: 100%; overflow: hidden; line-height: 0; }
+        .bband-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .bband-skate { aspect-ratio: 1954 / 520; }
+        .bband-bowl { aspect-ratio: 1954 / 470; }
+        .bband-graf { aspect-ratio: 1954 / 545; }
+        .stk-skater { bottom: 6%; left: 4%; width: clamp(110px, 14vw, 210px); transform: rotate(-4deg); }
+        .stk-boardice { top: 8%; right: 5%; width: clamp(72px, 8.5vw, 128px); transform: rotate(8deg); }
+        .stk-spoon { top: 38%; right: 7%; width: clamp(150px, 19vw, 290px); transform: rotate(-16deg); }
+        .stk-rect { bottom: 9%; left: 4%; width: clamp(140px, 17vw, 250px); transform: rotate(-7deg); }
+        .stk-circle { bottom: 8%; right: 5%; width: clamp(90px, 10vw, 150px); transform: rotate(6deg); }
 
-        /* ===== Bullet list (참고1 page 5 Education-style) ===== */
-        .bullet-list {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 12px 32px;
-        }
-        :global(.bullet-row) > li {
-          display: grid;
-          grid-template-columns: 56px 1fr;
-          gap: 16px;
-          align-items: start;
-          padding: 14px 0;
-          border-top: 1px solid rgba(255,255,255,0.18);
-        }
-        .bsec-details :global(.bullet-row) > li {
-          border-top: 1px solid var(--border-light);
-        }
-        .bullet-num {
-          display: inline-flex;
-          align-items: center;
-          justify-content: flex-start;
-          line-height: 1;
-        }
-        :global(.bucket) {
-          width: 44px;
-          height: 44px;
-          display: block;
-          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
-          flex-shrink: 0;
-        }
-        .bullet-text {
-          font-size: 14px;
-          line-height: 1.6;
-          font-weight: 300;
-          color: rgba(255,255,255,0.92);
-          word-break: keep-all;
-          display: block;
-        }
-        .bsec-details .bullet-text { color: var(--text-mid); }
-        .bullet-list-on-red {
-          /* placeholder — already handled above */
-        }
+        /* ── SPACE / STOREFRONT ── */
+        .bspace { max-width: 1320px; margin: 0 auto; padding: 0 40px 40px; }
+        .bspace-head { margin-bottom: 48px; }
+        .bspace-num { display: inline-flex; align-items: center; gap: 12px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 18px; color: #fff; background: var(--b-red); padding: 3px 10px; border-radius: 3px; margin: 0 0 22px; }
+        .bspace-num-label { letter-spacing: 0.18em; font-size: 13px; }
+        .bspace-title { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(48px, 9vw, 130px); line-height: 0.92; letter-spacing: -0.02em; margin: 0; }
+        .bspace-hero { overflow: hidden; border-radius: 4px; margin-bottom: 14px; }
+        .bspace-hero img { width: 100%; display: block; }
+        .bspace-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; }
+        .bcell { overflow: hidden; border-radius: 4px; background: #f0ede8; }
+        .bcell img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; display: block; transition: transform 0.7s ease; }
+        .bcell:hover img { transform: scale(1.04); }
+        .bcell-wide img { aspect-ratio: 16 / 11; }
 
-        /* ===== Details split ===== */
-        .details-split {
-          margin-top: 60px;
-          display: grid;
-          grid-template-columns: 1.2fr 1fr;
-          gap: 48px;
-          align-items: center;
-        }
-        :global(.details-photo) {
-          overflow: hidden;
-          border: 6px solid #fff;
-          background: #fff;
-          box-shadow: 0 14px 32px rgba(0,0,0,0.15);
-          transform: rotate(-2deg);
-        }
-        :global(.details-photo) img {
-          width: 100%; display: block; aspect-ratio: 4 / 3; object-fit: cover;
-        }
-        .details-split .bullet-list { grid-template-columns: 1fr; }
+        /* ── FLAVOR LINE ── */
+        .bflavor { background: var(--b-ink); color: #fff; padding: 120px 40px; margin-top: 80px; }
+        .bflavor-head { max-width: 1180px; margin: 0 auto 50px; }
+        .b-tag-light { color: #ff6a5e; }
+        .bflavor-title { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: clamp(48px, 9vw, 140px); line-height: 0.9; letter-spacing: -0.02em; margin: 0; }
+        .bflavor-kicker { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: clamp(16px, 2vw, 28px); letter-spacing: 0.06em; color: #ff6a5e; margin: 14px 0 0; }
+        .bflavor-photo { max-width: 1180px; margin: 0 auto 48px; overflow: hidden; border-radius: 4px; border: 5px solid #fff; }
+        .bflavor-photo img { width: 100%; display: block; }
+        .bflavor-text { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .b-body { font-size: clamp(14px, 1.05vw, 15px); line-height: 2; font-weight: 300; color: rgba(255,255,255,0.82); word-break: keep-all; margin: 0; }
+        .bflagship { max-width: 1180px; margin: 56px auto 0; display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.18); }
+        .bflagship-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; color: #ff6a5e; }
+        .bflagship-name { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: 0.04em; }
+        .bflagship-by { font-size: 13px; color: rgba(255,255,255,0.6); letter-spacing: 0.04em; }
 
-        /* ===== Materials — editorial list (참고1 page 6 Personal Skill) ===== */
-        .materials-split {
-          margin: 40px 0 64px;
-          display: grid;
-          grid-template-columns: 1.1fr 1fr;
-          gap: 48px;
-          align-items: center;
-        }
-        :global(.materials-photo) {
-          overflow: hidden;
-          border: 6px solid #fff;
-          background: #fff;
-          box-shadow: 0 14px 32px rgba(0,0,0,0.15);
-          transform: rotate(1deg);
-        }
-        :global(.materials-photo) img {
-          width: 100%; display: block; aspect-ratio: 4 / 3; object-fit: cover;
-        }
-        .mat-list {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          border-top: 2px solid var(--benson-red);
-        }
-        :global(.mat-row) > li {
-          display: grid;
-          grid-template-columns: 60px 56px 240px 80px 1fr;
-          gap: 20px;
-          align-items: center;
-          padding: 22px 0;
-          border-bottom: 1px solid var(--border-light);
-        }
-        .mat-idx {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 16px;
-          letter-spacing: 2px;
-          color: var(--benson-red);
-        }
-        .mat-swatch {
-          width: 48px;
-          height: 48px;
-          border-radius: 2px;
-          flex-shrink: 0;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-        }
-        .mat-name {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(18px, 1.6vw, 24px);
-          letter-spacing: 1px;
-          color: var(--page-fg);
-        }
-        .mat-hex {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 13px;
-          letter-spacing: 2px;
-          color: var(--gray);
-        }
-        .mat-desc {
-          font-size: 14px;
-          line-height: 1.6;
-          font-weight: 300;
-          color: var(--text-mid);
-          word-break: keep-all;
-        }
-        .mat-desc span { display: block; }
+        /* ── FILM ── */
+        .bfilm { max-width: 1320px; margin: 0 auto; padding: 90px 40px; }
+        .bfilm-meta { display: flex; justify-content: space-between; font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.24em; color: var(--b-red); margin-bottom: 18px; }
+        .bfilm-frame { overflow: hidden; border-radius: 4px; border: 5px solid var(--b-red); background: #000; }
+        .bfilm-frame video { width: 100%; height: auto; display: block; }
 
-        /* ===== Poster ===== */
-        :global(.poster-frame) {
-          overflow: hidden;
-          background: #fff;
-          padding: 14px;
-          border-radius: 2px;
-          box-shadow: 0 18px 40px rgba(0,0,0,0.25);
-        }
-        :global(.poster-frame) img { width: 100%; display: block; }
+        /* ── CLOSING ── */
+        .bclose { max-width: 1180px; margin: 0 auto; padding: 60px 40px 120px; text-align: center; }
+        .bclose-en { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(20px, 3vw, 46px); line-height: 1.25; letter-spacing: 0.01em; color: var(--b-ink); margin: 0 0 24px; }
+        .bclose-ko { font-size: clamp(13px, 1.1vw, 16px); font-weight: 300; line-height: 1.9; color: #555; word-break: keep-all; margin: 0 auto; max-width: 760px; }
+        .bclose-index { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin-top: 64px; }
+        .bclose-index span { font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(20,20,20,0.35); }
 
-        /* ===== Film ===== */
-        :global(.film-frame) {
-          overflow: hidden;
-          border-radius: 2px;
-          background: #000;
-          border: 6px solid var(--benson-red);
-          box-shadow: 0 14px 30px rgba(0,0,0,0.4);
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+          .bnav, .bnav.scrolled { padding-left: 22px; padding-right: 22px; }
+          .bnav-menu { gap: 16px; }
+          .bnav-menu a, .bnav-lang { font-size: 10px; letter-spacing: 0.08em; }
+          .bnav-logo-text { font-size: 22px; }
+          .bhead { padding: 120px 22px 70px; }
+          .bhead-meta { grid-template-columns: 1fr 1fr; gap: 22px; }
+          .bspace, .bfilm { padding-left: 22px; padding-right: 22px; }
+          .bspace-grid { grid-template-columns: 1fr 1fr; }
+          .bcell-wide { grid-column: 1 / -1; }
+          .bflavor { padding: 90px 22px; }
+          .bflavor-text { grid-template-columns: 1fr; gap: 8px; }
+          .bstreet-head { padding: 80px 22px 50px; }
+          .bband-skate, .bband-bowl, .bband-graf { aspect-ratio: 16 / 11; }
+          .bclose { padding: 50px 22px 90px; }
         }
-        :global(.film-frame) video { width: 100%; height: auto; display: block; }
-
-        /* ===== Extras ===== */
-        .extras-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 12px;
-        }
-        :global(.extras-cell) {
-          overflow: hidden;
-          border-radius: 2px;
-          background: var(--section-bg);
-          border: 3px solid #fff;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        :global(.extras-cell) img {
-          width: 100%; height: 100%; object-fit: cover;
-          aspect-ratio: 1 / 1; display: block;
-          transition: transform 0.6s ease;
-        }
-        :global(.extras-cell:hover) img { transform: scale(1.04); }
-
-        /* ===== Responsive ===== */
-        @media (max-width: 1100px) {
-          .bsec { padding: 0 36px; }
-          :global(.corner-tags) { padding: 0 36px; top: 24px; }
-          .space-collage { min-height: 460px; }
-          :global(.collage-1) { width: 70%; }
-          :global(.collage-2) { width: 46%; }
-          :global(.collage-3) { width: 50%; }
-          .concept-split,
-          .details-split,
-          .materials-split { grid-template-columns: 1fr; }
-          .bullet-list { grid-template-columns: 1fr; }
-          :global(.mat-row) > li {
-            grid-template-columns: 56px 48px 1fr;
-            grid-template-rows: auto auto;
-            gap: 12px 16px;
-          }
-          .mat-desc { grid-column: 1 / -1; }
-          .mat-hex { grid-column: 2 / -1; }
-          .extras-grid { grid-template-columns: repeat(3, 1fr); }
-          .strip-3 { grid-template-columns: 1fr 1fr; }
-          .strip-2 { grid-template-columns: 1fr; }
-          :global(.sticker) { max-width: 22vw; }
-        }
-        @media (max-width: 640px) {
-          .bsec { padding: 0 20px; }
-          :global(.corner-tags) { padding: 0 20px; top: 16px; }
-          :global(.corner-tag) { font-size: 10px; letter-spacing: 2px; }
-          .space-collage {
-            min-height: auto;
-            display: flex; flex-direction: column; gap: 16px;
-            padding: 0;
-          }
-          :global(.collage-photo) {
-            position: relative !important;
-            inset: auto !important;
-            width: 100% !important;
-            transform: none !important;
-            top: auto !important; bottom: auto !important; left: auto !important; right: auto !important;
-          }
-          .collage-tag {
-            position: relative;
-            right: auto; bottom: auto;
-            transform: none;
-            align-self: flex-start;
-          }
-          .strip-3 { grid-template-columns: 1fr; }
-          .extras-grid { grid-template-columns: repeat(2, 1fr); }
-          :global(.sticker) { max-width: 32vw; }
+        @media (max-width: 560px) {
+          .bnav-menu { gap: 11px; }
+          .bhead-meta { grid-template-columns: 1fr; }
+          .bspace-grid { grid-template-columns: 1fr; }
+          .stk-spoon { width: 120px; }
         }
       `}</style>
     </>
