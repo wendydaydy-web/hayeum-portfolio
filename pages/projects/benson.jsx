@@ -440,7 +440,7 @@ export default function Benson() {
         .bsec-film :global(.corner-tag .star) { color: #fff; }
 
         /* ===== Display block ===== */
-        :global(.display-block) { margin-bottom: 64px; }
+        :global(.display-block) { margin-bottom: 0; }
         .display-label {
           display: inline-flex; align-items: center; gap: 8px;
           font-family: 'Bebas Neue', sans-serif;
@@ -529,8 +529,8 @@ export default function Benson() {
         .strip-2 { grid-template-columns: 1.6fr 1fr; }
         .strip-3 { grid-template-columns: repeat(3, 1fr); }
         :global(.strip-cell) {
-          overflow: hidden; border-radius: 2px; background: var(--section-bg);
-          border: 3px solid #fff; box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+          overflow: hidden; border-radius: 0; background: var(--section-bg);
+          border: 0; box-shadow: none;
         }
         :global(.strip-cell) img {
           width: 100%; height: 100%; object-fit: cover;
