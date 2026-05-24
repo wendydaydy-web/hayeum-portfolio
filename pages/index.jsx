@@ -836,7 +836,7 @@ export default function HomePage() {
         .pg-overlay {
             position: absolute;
             left: 50%;
-            top: 25%;
+            top: 27%;
             transform: translate(-50%, -50%);
             font-family: var(--font-noto-serif-kr), serif;
             font-style: normal;
