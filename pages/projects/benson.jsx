@@ -18,8 +18,7 @@ const HERO_META = [
   { label: 'Year', value: '2024' },
 ];
 
-const I  = (name) => `/images/benson/${name}`;
-const ST = (name) => `/images/benson/sticker/${name}`;
+const I = (name) => `/images/benson/${name}`;
 
 const CONCEPT_ITEMS = [
   { n: '01', ko: '내부와 이어지는 파사드 디자인', en: 'Facade design flowing seamlessly into the interior' },
@@ -99,15 +98,6 @@ function CornerTags({ left = 'BENSON', right = '2024' }) {
   );
 }
 
-function Sticker({ src, top, left, right, bottom, w = '180px', rot = 0, z = 3, className = '' }) {
-  const style = { width: w, transform: `rotate(${rot}deg)`, zIndex: z };
-  if (top    !== undefined) style.top = top;
-  if (left   !== undefined) style.left = left;
-  if (right  !== undefined) style.right = right;
-  if (bottom !== undefined) style.bottom = bottom;
-  return <img src={src} alt="" className={`sticker ${className}`} style={style} aria-hidden="true" loading="lazy" />;
-}
-
 function FadeIn({ children, className = '', style }) {
   const ref = useRef(null);
   useEffect(() => {
@@ -144,8 +134,6 @@ export default function Benson() {
       {/* ── 01 SPACE — Best-Project overlap composition ── */}
       <section className="bsec bsec-space" id="space">
         <CornerTags left="BENSON" right="STOREFRONT" />
-        <Sticker src={ST('accents.png')} top="120px"  right="40px"  w="180px" rot={9}  />
-        <Sticker src={ST('icons.png')}   bottom="80px" left="-30px"  w="220px" rot={-12} />
 
         <div className="bsec-inner">
           <FadeIn className="display-block">
@@ -196,8 +184,6 @@ export default function Benson() {
       {/* ── 04 DESIGN CONCEPT — red panel split, sticker corners ── */}
       <section className="bsec bsec-concept bsec-red" id="concept">
         <CornerTags left="04 / CONCEPT" right="OUTDOOR → INSIDE" />
-        <Sticker src={ST('wordplay.png')} top="80px"   right="30px"  w="200px" rot={12}  />
-        <Sticker src={ST('mascots-1.png')} bottom="40px" left="20px"  w="200px" rot={-9}  />
 
         <div className="bsec-inner">
           <FadeIn className="display-block">
@@ -243,8 +229,6 @@ export default function Benson() {
       {/* ── 05 DESIGN DETAILS — beige panel + photo right ── */}
       <section className="bsec bsec-details" id="details">
         <CornerTags left="05 / DETAILS" right="SHAPE & MOTIF" />
-        <Sticker src={ST('patterns-1.png')} top="60px" right="-20px" w="200px" rot={6} />
-        <Sticker src={ST('skate.png')}      bottom="60px" left="0px"  w="220px" rot={-8} />
 
         <div className="bsec-inner">
           <FadeIn className="display-block">
@@ -274,8 +258,6 @@ export default function Benson() {
       {/* ── 06 MATERIALS — Personal-Skill (참고1 p6) editorial list ── */}
       <section className="bsec bsec-materials" id="materials">
         <CornerTags left="06 / MATERIALS" right="RAW MATERIAL" />
-        <Sticker src={ST('ice-cream.png')} top="80px" left="-20px" w="180px" rot={-10} />
-        <Sticker src={ST('brand.png')}     bottom="80px" right="-10px" w="220px" rot={11} />
 
         <div className="bsec-inner">
           <FadeIn className="display-block">
@@ -324,8 +306,6 @@ export default function Benson() {
       {/* ── 02 POSTER — red panel hero card ── */}
       <section className="bsec bsec-poster bsec-red" id="poster">
         <CornerTags left="02 / POSTER" right="VISUAL IDENTITY" />
-        <Sticker src={ST('badges.png')}  top="60px" left="10px" w="200px" rot={-8} />
-        <Sticker src={ST('special.png')} bottom="60px" right="20px" w="210px" rot={10} />
 
         <div className="bsec-inner">
           <FadeIn className="display-block">
@@ -342,8 +322,6 @@ export default function Benson() {
       {/* ── 03 FILM — dark panel ── */}
       <section className="bsec bsec-film" id="film">
         <CornerTags left="03 / FILM" right="BRAND FILM" />
-        <Sticker src={ST('characters.png')} top="60px"   right="20px"  w="200px" rot={10}  />
-        <Sticker src={ST('mascots-2.png')}  bottom="40px" left="20px"  w="200px" rot={-7}  />
 
         <div className="bsec-inner">
           <FadeIn className="display-block">
@@ -360,8 +338,6 @@ export default function Benson() {
       {/* ── 04 EXTRAS — Project-Portfolio collage ── */}
       <section className="bsec bsec-extras" id="extras">
         <CornerTags left="04 / EXTRAS" right="SUPPLEMENTARY" />
-        <Sticker src={ST('typography.png')} top="80px"   left="-20px" w="200px" rot={-9} />
-        <Sticker src={ST('patterns-2.png')} bottom="40px" right="-20px" w="210px" rot={8}  />
 
         <div className="bsec-inner">
           <FadeIn className="display-block">
@@ -436,15 +412,6 @@ export default function Benson() {
         :global(.star) {
           width: 1em; height: 1em; display: inline-block;
           color: var(--benson-red); vertical-align: -0.15em; flex-shrink: 0;
-        }
-
-        /* ===== Stickers (decorative absolute, no interaction) ===== */
-        :global(.sticker) {
-          position: absolute;
-          pointer-events: none;
-          filter: drop-shadow(0 6px 14px rgba(0,0,0,0.18));
-          z-index: 3;
-          max-width: 30vw;
         }
 
         /* ===== Section shell + corner tags ===== */
