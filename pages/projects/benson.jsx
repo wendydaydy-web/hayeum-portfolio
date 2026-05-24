@@ -324,7 +324,7 @@ export default function Benson() {
       </main>
 
       <style jsx global>{`
-        html { scroll-behavior: smooth; }
+        /* all rules are .benson-page-scoped so nothing leaks to other pages (e.g. index.jsx) */
         .benson-page *, .benson-page *::before, .benson-page *::after { box-sizing: border-box; margin: 0; padding: 0; }
         .benson-page {
           background: #fff;
