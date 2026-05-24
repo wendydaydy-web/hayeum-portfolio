@@ -482,8 +482,8 @@ export default function Benson() {
         /* ===== Space collage (참고1 page 11 inspired) ===== */
         .space-collage {
           position: relative;
-          margin: 0 -20px 80px;
-          padding: 40px 20px;
+          margin: 0 -20px 0;
+          padding: 0 20px;
           min-height: 540px;
         }
         :global(.collage-photo) {
@@ -525,7 +525,7 @@ export default function Benson() {
           z-index: 5;
           display: inline-flex; align-items: center; gap: 8px;
         }
-        .strip-row { display: grid; gap: 16px; margin-bottom: 16px; }
+        .strip-row { display: grid; gap: 0; margin-bottom: 0; }
         .strip-2 { grid-template-columns: 1.6fr 1fr; }
         .strip-3 { grid-template-columns: repeat(3, 1fr); }
         :global(.strip-cell) {
