@@ -14,6 +14,7 @@ const IMG = {
   wordmark: '/images/benson/hg-wordmark.png',
   poster: '/images/benson/hg-poster.jpg',
   film: '/images/benson/hg-film.mp4',
+  red: '/images/benson/red.jpg',
 };
 const STK = (n) => `/images/benson/stickers/${n}`;
 
@@ -332,6 +333,9 @@ export default function Benson() {
 
         {/* real BENSON poster (포스터 폴더) */}
         <div className="poster-showcase"><img src={IMG.poster} alt="BENSON poster — where street meets sweet" /></div>
+
+        {/* red BENSON poster (포스터 폴더) — full width, 스케이트파크 섹션 바로 다음 */}
+        <div className="full-img"><img src={IMG.red} alt="BENSON poster — red" /></div>
 
         <div className="video-section"><div className="video-wrapper"></div></div>
 
