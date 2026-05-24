@@ -65,6 +65,31 @@ const Star = ({ className = '' }) => (
   </svg>
 );
 
+/* Ice-cream bucket badge — red trapezoid (wider top, narrower bottom),
+   white number inside. A subtle white stroke keeps the silhouette
+   readable when the badge sits on the red panel background. */
+const Bucket = ({ n, className = '' }) => (
+  <svg className={`bucket ${className}`} viewBox="0 0 64 64" aria-hidden="true">
+    <path
+      d="M 7 8 L 57 8 L 51 58 L 13 58 Z"
+      fill="#c8111a"
+      stroke="#ffffff"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+    <text
+      x="32" y="36"
+      textAnchor="middle"
+      dominantBaseline="central"
+      fontFamily="'Bebas Neue', sans-serif"
+      fontSize="24"
+      fontWeight="700"
+      fill="#ffffff"
+      letterSpacing="0.5"
+    >{n}</text>
+  </svg>
+);
+
 function CornerTags({ left = 'BENSON', right = '2024' }) {
   return (
     <div className="corner-tags" aria-hidden="true">
@@ -205,7 +230,7 @@ export default function Benson() {
             {CONCEPT_ITEMS.map(({ n, ko, en }) => (
               <FadeIn key={n} className="bullet-row">
                 <li>
-                  <span className="bullet-num"><Star /> {n}</span>
+                  <span className="bullet-num"><Bucket n={n} /></span>
                   <span className="bullet-text" data-ko>{ko}</span>
                   <span className="bullet-text" data-en>{en}</span>
                 </li>
@@ -235,7 +260,7 @@ export default function Benson() {
               {DETAIL_ITEMS.map(({ n, ko, en }) => (
                 <FadeIn key={n} className="bullet-row">
                   <li>
-                    <span className="bullet-num"><Star /> {n}</span>
+                    <span className="bullet-num"><Bucket n={n} /></span>
                     <span className="bullet-text" data-ko>{ko}</span>
                     <span className="bullet-text" data-en>{en}</span>
                   </li>
@@ -589,16 +614,18 @@ export default function Benson() {
           border-top: 1px solid var(--border-light);
         }
         .bullet-num {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 22px;
-          letter-spacing: 2px;
-          color: #fff;
           display: inline-flex;
           align-items: center;
-          gap: 6px;
+          justify-content: flex-start;
           line-height: 1;
         }
-        .bsec-details .bullet-num { color: var(--benson-red); }
+        :global(.bucket) {
+          width: 44px;
+          height: 44px;
+          display: block;
+          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+          flex-shrink: 0;
+        }
         .bullet-text {
           font-size: 14px;
           line-height: 1.6;
