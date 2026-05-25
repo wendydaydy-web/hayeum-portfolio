@@ -15,6 +15,12 @@ const projects = [
     poster: '/projects/benson/poster-final.jpg',
     spaceDesktop: '/projects/benson/space-desktop.png',
   },
+  {
+    slug: 'bodyguard',
+    name: 'BODY GUARD',
+    poster: '/images/bodyguard/bodyguard-main-poster.png',
+    spaceDesktop: '/images/bodyguard/bodyguard-interior.png',
+  },
 ];
 
 module.exports = projects;

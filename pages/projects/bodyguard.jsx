@@ -52,6 +52,12 @@ export default function BodyGuard() {
         meta={HERO_META}
       />
 
+      {/* ── 새 메인 이미지 2장 (맨 앞 노출) ── */}
+      <section className="intro-images">
+        <img src={I('bodyguard-main-poster.png')} alt="BODYGUARD main poster" />
+        <img src={I('bodyguard-interior.png')} alt="BODYGUARD interior" />
+      </section>
+
       {/* ── 01 DESIGN STRATEGY ── */}
       <section className="strategy" id="concept">
         <div className="section-inner">
@@ -522,6 +528,10 @@ export default function BodyGuard() {
 
         /* ===== SECTION COMMON ===== */
         section { padding: 120px 60px; }
+
+        /* ===== INTRO IMAGES (full-bleed, 맨 앞 2장) ===== */
+        .intro-images { padding: 0; line-height: 0; }
+        .intro-images img { width: 100%; display: block; }
         .section-inner { max-width: var(--max-width); margin: 0 auto; }
         .section-label {
           font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
