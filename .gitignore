@@ -4,5 +4,6 @@ out/
 .vercel
 .DS_Store
 *.log
+.claude/settings.local.json
 
 .vercel
