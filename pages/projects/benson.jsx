@@ -15,6 +15,7 @@ const IMG = {
   poster: '/images/benson/hg-poster.jpg',
   film: '/images/benson/hg-film.mp4',
   red: '/images/benson/red.jpg',
+  redPoster: '/images/benson/benson-red-poster.png',
   heroPoster: '/images/benson/final-4.png',
 };
 const STK = (n) => `/images/benson/stickers/${n}`;
@@ -246,6 +247,9 @@ export default function Benson() {
           <div><p className="info-label">Partner</p><p className="info-value">CLIENT | Hanwha Galleria<br />BRANDING | BENSON</p></div>
           <div><p className="info-label">Area</p><p className="info-value">— PY (— m²)</p></div>
         </section>
+
+        {/* red poster (포스터 폴더 red.png 복사본) — 첫 이미지로 노출 */}
+        <div className="full-img"><img src={IMG.redPoster} alt="BENSON Red Poster" /></div>
 
         <div className="full-img"><img src={IMG.heroPoster} alt="BENSON Poster" /></div>
 

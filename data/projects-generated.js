@@ -20,6 +20,7 @@ const projects = [
     category_label_kr: 'Brand & Spatial Design', category_label_en: 'Brand & Spatial Design',
     cover_image: 'page_01.png',
     grid_image: null,
+    images: ['/images/benson/benson-red-poster.png'],
     link: true, feat: true, wide: false, isNew: false,
     sections: [],
   },
