@@ -314,7 +314,7 @@ export default function HomePage() {
         {/* Project 2: BENSON */}
         <Link href="/projects/benson" className="project-card reveal" ref={addRevealRef}>
           <img src="/images/main/benson-default.png" alt="BENSON" className="project-img-default" />
-          <img src="/images/main/benson-hover.png" alt="BENSON hover" className="project-img-hover" />
+          <img src="/images/main/benson-hover.webp" alt="BENSON hover" className="project-img-hover" />
           <div className="project-info">
             <div>
               <p className="project-name">BENSON</p>
@@ -326,7 +326,7 @@ export default function HomePage() {
 
         {/* Project 3: BODY GUARD */}
         <Link href="/projects/bodyguard" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/main/bodyguard-default.png" alt="BODY GUARD" className="project-img-default" />
+          <img src="/images/main/bodyguard-default.webp" alt="BODY GUARD" className="project-img-default" />
           <img src="/images/main/bodyguard-hover.png" alt="BODY GUARD hover" className="project-img-hover" />
           <div className="project-info">
             <div>
@@ -352,8 +352,8 @@ export default function HomePage() {
 
         {/* Project 5: SOLDAM MARKET */}
         <Link href="/projects/soldam" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/main/soldam-default.png" alt="SOLDAM MARKET" className="project-img-default" />
-          <img src="/images/main/soldam-hover.png" alt="SOLDAM MARKET hover" className="project-img-hover" />
+          <img src="/images/main/soldam-default.webp" alt="SOLDAM MARKET" className="project-img-default" />
+          <img src="/images/main/soldam-hover.webp" alt="SOLDAM MARKET hover" className="project-img-hover" />
           <div className="project-info">
             <div>
               <p className="project-name">SOLDAM MARKET</p>

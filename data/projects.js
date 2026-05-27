@@ -13,7 +13,7 @@ const projects = [
     slug: 'benson',
     name: 'BENSON',
     poster: '/projects/benson/poster-final.jpg',
-    spaceDesktop: '/projects/benson/space-desktop.png',
+    spaceDesktop: '/projects/benson/space-desktop.webp',
   },
   {
     slug: 'bodyguard',

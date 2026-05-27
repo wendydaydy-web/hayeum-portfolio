@@ -184,12 +184,12 @@ export default function Gagga() {
           </FadeIn>
           <div className="gallery-grid" style={{ marginTop: 60 }}>
             <div className="gallery-item"><img src={I('branding.jpg')} alt="GAGGA Branding" /></div>
-            <div className="gallery-item"><img src={I('render-00.png')} alt="GAGGA Logo" /></div>
+            <div className="gallery-item"><img src={I('render-00.webp')} alt="GAGGA Logo" /></div>
           </div>
           <div className="gallery-3col" style={{ marginTop: 20 }}>
-            <div className="gallery-item"><img src={I('render-01.png')} alt="Symbol A" /></div>
-            <div className="gallery-item"><img src={I('render-02.png')} alt="Symbol B" /></div>
-            <div className="gallery-item"><img src={I('render-03.png')} alt="Character" /></div>
+            <div className="gallery-item"><img src={I('render-01.webp')} alt="Symbol A" /></div>
+            <div className="gallery-item"><img src={I('render-02.webp')} alt="Symbol B" /></div>
+            <div className="gallery-item"><img src={I('render-03.webp')} alt="Character" /></div>
           </div>
         </div>
       </section>
@@ -247,7 +247,7 @@ export default function Gagga() {
               <p data-en>Light wood + green terrazzo island + solid wood floor. A bright and open spatial proposal.</p>
             </div>
             <div className="concept-img">
-              <img src={I('render-04.png')} alt="Option A rendering" />
+              <img src={I('render-04.webp')} alt="Option A rendering" />
             </div>
           </FadeIn>
 
@@ -259,7 +259,7 @@ export default function Gagga() {
               <p data-en>Dark wood paneling + imitation marble terrazzo + gray tile floor. The final design that best captured the refined apothecary atmosphere.</p>
             </div>
             <div className="concept-img">
-              <img src={I('render-05.png')} alt="Option B rendering (adopted)" />
+              <img src={I('render-05.webp')} alt="Option B rendering (adopted)" />
             </div>
           </FadeIn>
 
@@ -277,8 +277,8 @@ export default function Gagga() {
           </FadeIn>
 
           <div className="gallery-grid" style={{ marginTop: 40 }}>
-            <div className="gallery-item"><img src={I('render-06.png')} alt="Rendering detail 1" /></div>
-            <div className="gallery-item"><img src={I('render-07.png')} alt="Rendering detail 2" /></div>
+            <div className="gallery-item"><img src={I('render-06.webp')} alt="Rendering detail 1" /></div>
+            <div className="gallery-item"><img src={I('render-07.webp')} alt="Rendering detail 2" /></div>
           </div>
         </div>
       </section>

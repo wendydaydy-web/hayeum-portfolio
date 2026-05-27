@@ -15,8 +15,8 @@ const IMG = {
   poster: '/images/benson/hg-poster.jpg',
   film: '/images/benson/hg-film.mp4',
   red: '/images/benson/red.jpg',
-  redPoster: '/images/benson/benson-red-poster.png',
-  heroPoster: '/images/benson/final-4.png',
+  redPoster: '/images/benson/benson-red-poster.webp',
+  heroPoster: '/images/benson/final-4.webp',
 };
 const STK = (n) => `/images/benson/stickers/${n}`;
 
@@ -257,7 +257,7 @@ export default function Benson() {
         <section className="benson-poster">
           <div className="benson-poster-overlay" aria-hidden="true"></div>
           <img className="pstk pstk-oval" src={STK('oval.png')} alt="" aria-hidden="true" />
-          <img className="pstk pstk-board" src={STK('board.png')} alt="" aria-hidden="true" />
+          <img className="pstk pstk-board" src={STK('board.webp')} alt="" aria-hidden="true" />
           <img className="pstk pstk-spoon" src={STK('spoon.png')} alt="" aria-hidden="true" />
           <img className="pstk pstk-circle" src={STK('circle.png')} alt="" aria-hidden="true" />
 

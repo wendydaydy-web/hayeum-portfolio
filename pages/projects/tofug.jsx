@@ -72,7 +72,7 @@ export default function TofuG() {
               </div>
             </FadeIn>
             <FadeIn className="story-visual">
-              <img src={I('은서-수정-tofug.png')} alt="TOFU G Gelato" />
+              <img src={I('은서-수정-tofug.webp')} alt="TOFU G Gelato" />
             </FadeIn>
           </div>
         </div>
@@ -97,12 +97,12 @@ export default function TofuG() {
           </FadeIn>
           <div className="inspiration-grid">
             <FadeIn className="inspiration-card">
-              <img src={I('inspiration-kitchenware.png')} alt="Traditional kitchenware" />
+              <img src={I('inspiration-kitchenware.webp')} alt="Traditional kitchenware" />
               <span className="caption" data-ko>전통 집기</span>
               <span className="caption" data-en>Traditional Kitchenware</span>
             </FadeIn>
             <FadeIn className="inspiration-card">
-              <img src={I('inspiration-cotton.png')} alt="Unbleached cotton" />
+              <img src={I('inspiration-cotton.webp')} alt="Unbleached cotton" />
               <span className="caption" data-ko>헝겊</span>
               <span className="caption" data-en>Unbleached Cotton</span>
             </FadeIn>
@@ -132,7 +132,7 @@ export default function TofuG() {
               <p data-en>Traditional food mirrors its country&apos;s culture. And the kitchen where that food is made is the space where cultural texture is most vividly felt — even among the traditional houses of Korea, China, and Japan. With linen, unbleached cotton, and wood finishes, a serene Korean kitchen was brought to life within Orchard Road&apos;s luxury retail environment.</p>
             </div>
             <div className="concept-img">
-              <img src={I('concept-interior.png')} alt="TOFU G Interior" />
+              <img src={I('concept-interior.webp')} alt="TOFU G Interior" />
             </div>
           </FadeIn>
 

@@ -104,7 +104,7 @@ export default function BodyGuard() {
               </div>
             </FadeIn>
             <FadeIn className="strategy-visual">
-              <img src={I('page_04.png')} alt="Design Strategy - Korean elements" />
+              <img src={I('page_04.webp')} alt="Design Strategy - Korean elements" />
               <div className="strategy-visual-content">
                 <p className="strategy-visual-title">BODYGUARD</p>
                 <div className="strategy-circles">
@@ -142,7 +142,7 @@ export default function BodyGuard() {
           </FadeIn>
           <FadeIn className="concept-grid">
             <div className="concept-card-with-text">
-              <img src={I('page_05.png')} alt="ENT - Store entrance" />
+              <img src={I('page_05.webp')} alt="ENT - Store entrance" />
               <div className="concept-card-text">
                 <h3>ENTRANCE</h3>
                 <p data-ko>
@@ -160,7 +160,7 @@ export default function BodyGuard() {
               </div>
             </div>
             <div className="concept-card-with-text">
-              <img src={I('page_06.png')} alt="Optimize Module" />
+              <img src={I('page_06.webp')} alt="Optimize Module" />
               <div className="concept-card-text">
                 <h3>OPTIMIZE MODULE</h3>
                 <p data-ko>
@@ -178,7 +178,7 @@ export default function BodyGuard() {
               </div>
             </div>
             <div className="concept-card-with-text">
-              <img src={I('page_07.png')} alt="Display Line" />
+              <img src={I('page_07.webp')} alt="Display Line" />
               <div className="concept-card-text">
                 <h3>DISPLAY LINE</h3>
                 <p data-ko>
@@ -196,7 +196,7 @@ export default function BodyGuard() {
               </div>
             </div>
             <div className="concept-card-with-text">
-              <img src={I('page_33.png')} alt="Fitting Room concept" />
+              <img src={I('page_33.webp')} alt="Fitting Room concept" />
               <div className="concept-card-text">
                 <h3>FITTING ROOM</h3>
                 <p data-ko>사적인 공간이면서도 편안함과 안락함을 느낄 수 있는 곳입니다. 외부에서 보이는 차분한 인상과 시그니처 패턴으로 반전의 인상을 주었으며, 외부와 단절되어 있으면서도 보디가드 브랜드와의 연결성을 유지합니다. 패브릭 패턴과 은은한 조명은 고객의 프라이버시를 보호하면서도 따뜻한 분위기를 제공합니다.</p>
@@ -222,7 +222,7 @@ export default function BodyGuard() {
           </FadeIn>
           <FadeIn className="facade-grid">
             <div className="facade-item">
-              <img src={I('page_10.png')} alt="Facade view" />
+              <img src={I('page_10.webp')} alt="Facade view" />
               <div className="caption" data-ko>파사드</div>
               <div className="caption" data-en>Facade View</div>
             </div>
@@ -245,28 +245,28 @@ export default function BodyGuard() {
           </FadeIn>
           <div className="gallery-grid">
             <FadeIn className="gallery-item wide">
-              <img src={I('page_11.png')} alt="Store front view" />
+              <img src={I('page_11.webp')} alt="Store front view" />
             </FadeIn>
             <FadeIn className="gallery-item">
-              <img src={I('page_12.png')} alt="Side view L" />
+              <img src={I('page_12.webp')} alt="Side view L" />
             </FadeIn>
             <FadeIn className="gallery-item">
-              <img src={I('page_13.png')} alt="Side view R" />
+              <img src={I('page_13.webp')} alt="Side view R" />
             </FadeIn>
             <FadeIn className="gallery-item">
-              <img src={I('page_14.png')} alt="Counter view" />
+              <img src={I('page_14.webp')} alt="Counter view" />
             </FadeIn>
             <FadeIn className="gallery-item">
-              <img src={I('page_15.png')} alt="Counter display detail" />
+              <img src={I('page_15.webp')} alt="Counter display detail" />
             </FadeIn>
             <FadeIn className="gallery-item wide">
-              <img src={I('page_23.png')} alt="Center display wide view" />
+              <img src={I('page_23.webp')} alt="Center display wide view" />
             </FadeIn>
             <FadeIn className="gallery-item">
-              <img src={I('page_16.png')} alt="Showroom W - detail" />
+              <img src={I('page_16.webp')} alt="Showroom W - detail" />
             </FadeIn>
             <FadeIn className="gallery-item">
-              <img src={I('page_21.png')} alt="Showroom M" />
+              <img src={I('page_21.webp')} alt="Showroom M" />
             </FadeIn>
           </div>
         </div>
@@ -293,7 +293,7 @@ export default function BodyGuard() {
                 <p data-en>Signature messages &ldquo;OPTIMIZE YOUR BODY&rdquo; and &ldquo;K-UNDERWEAR SINCE 1995&rdquo; are paired with modular hangers and drawer details for an organized shopping experience.</p>
               </div>
             </div>
-            <img src={I('page_26.png')} alt="Display zone - special products" className="detail-block-img" />
+            <img src={I('page_26.webp')} alt="Display zone - special products" className="detail-block-img" />
           </FadeIn>
 
           <FadeIn className="detail-block reverse">
@@ -304,7 +304,7 @@ export default function BodyGuard() {
                 <p data-en>The fitting room features BODYGUARD&apos;s signature geometric pattern with circular mirrors, maintaining brand continuity while ensuring privacy through warm, diffused lighting and fabric curtains.</p>
               </div>
             </div>
-            <img src={I('page_33.png')} alt="Fitting room detail" className="detail-block-img" />
+            <img src={I('page_33.webp')} alt="Fitting room detail" className="detail-block-img" />
           </FadeIn>
         </div>
       </section>
@@ -392,7 +392,7 @@ export default function BodyGuard() {
               </div>
             </div>
             <div>
-              <img src={I('page_35.png')} alt="Material board" />
+              <img src={I('page_35.webp')} alt="Material board" />
             </div>
           </FadeIn>
         </div>
@@ -408,7 +408,7 @@ export default function BodyGuard() {
         </div>
         <FadeIn className="color-split">
           <div className="color-image">
-            <img src={I('page_37.png')} alt="Material spec with colors" />
+            <img src={I('page_37.webp')} alt="Material spec with colors" />
           </div>
           <div className="color-info">
             <h3>Signature Palette</h3>
@@ -443,7 +443,7 @@ export default function BodyGuard() {
             </p>
           </FadeIn>
           <FadeIn className="layout-image">
-            <img src={I('page_09.png')} alt="Floor layout" />
+            <img src={I('page_09.webp')} alt="Floor layout" />
           </FadeIn>
           <FadeIn className="zone-list">
             <span className="zone-tag">Fitting Room</span>
@@ -467,9 +467,9 @@ export default function BodyGuard() {
             <h2 className="section-title">Detail &amp; Spec</h2>
           </FadeIn>
           <FadeIn className="tech-images">
-            <div><img src={I('page_29.png')} alt="Easy wear module detail" /></div>
-            <div><img src={I('page_31.png')} alt="Fitting room perspective" /></div>
-            <div><img src={I('page_34.png')} alt="Fitting room pattern detail" /></div>
+            <div><img src={I('page_29.webp')} alt="Easy wear module detail" /></div>
+            <div><img src={I('page_31.webp')} alt="Fitting room perspective" /></div>
+            <div><img src={I('page_34.webp')} alt="Fitting room pattern detail" /></div>
           </FadeIn>
         </div>
       </section>
