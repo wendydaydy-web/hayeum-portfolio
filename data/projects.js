@@ -10,16 +10,16 @@ const projects = [
     },
   },
   {
+    slug: 'bodyguard',
+    name: 'BODY GUARD',
+    poster: '/projects/bodyguard/final-body.webp',
+    spaceDesktop: '/images/bodyguard/bodyguard-interior.webp',
+  },
+  {
     slug: 'benson',
     name: 'BENSON',
     poster: '/projects/benson/poster-final.jpg',
     spaceDesktop: '/projects/benson/space-desktop.webp',
-  },
-  {
-    slug: 'bodyguard',
-    name: 'BODY GUARD',
-    poster: '/images/bodyguard/bodyguard-main-poster.webp',
-    spaceDesktop: '/images/bodyguard/bodyguard-interior.webp',
   },
 ];
 

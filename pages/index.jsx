@@ -311,20 +311,7 @@ export default function HomePage() {
           </div>
         </Link>
 
-        {/* Project 2: BENSON */}
-        <Link href="/projects/benson" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/main/benson-default.png" alt="BENSON" className="project-img-default" />
-          <img src="/images/main/benson-hover.webp" alt="BENSON hover" className="project-img-hover" />
-          <div className="project-info">
-            <div>
-              <p className="project-name">BENSON</p>
-              <span className="project-tag">Branding &amp; Spatial Design</span>
-            </div>
-            <div className="project-expand"><ExpandSVG /></div>
-          </div>
-        </Link>
-
-        {/* Project 3: BODY GUARD */}
+        {/* Project 2: BODY GUARD */}
         <Link href="/projects/bodyguard" className="project-card reveal" ref={addRevealRef}>
           <img src="/images/main/bodyguard-default.webp" alt="BODY GUARD" className="project-img-default" />
           <img src="/images/main/bodyguard-hover.png" alt="BODY GUARD hover" className="project-img-hover" />
@@ -332,6 +319,19 @@ export default function HomePage() {
             <div>
               <p className="project-name">BODY GUARD</p>
               <span className="project-tag">Rebranding</span>
+            </div>
+            <div className="project-expand"><ExpandSVG /></div>
+          </div>
+        </Link>
+
+        {/* Project 3: BENSON */}
+        <Link href="/projects/benson" className="project-card reveal" ref={addRevealRef}>
+          <img src="/images/main/benson-default.png" alt="BENSON" className="project-img-default" />
+          <img src="/images/main/benson-hover.webp" alt="BENSON hover" className="project-img-hover" />
+          <div className="project-info">
+            <div>
+              <p className="project-name">BENSON</p>
+              <span className="project-tag">Branding &amp; Spatial Design</span>
             </div>
             <div className="project-expand"><ExpandSVG /></div>
           </div>
