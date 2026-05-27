@@ -18,8 +18,8 @@ const projects = [
   {
     slug: 'bodyguard',
     name: 'BODY GUARD',
-    poster: '/images/bodyguard/bodyguard-main-poster.png',
-    spaceDesktop: '/images/bodyguard/bodyguard-interior.png',
+    poster: '/images/bodyguard/bodyguard-main-poster.webp',
+    spaceDesktop: '/images/bodyguard/bodyguard-interior.webp',
   },
 ];
 

@@ -54,8 +54,8 @@ export default function BodyGuard() {
 
       {/* ── 새 메인 이미지 2장 (맨 앞 노출) ── */}
       <section className="intro-images">
-        <img src={I('bodyguard-main-poster.png')} alt="BODYGUARD main poster" />
-        <img src={I('bodyguard-interior.png')} alt="BODYGUARD interior" />
+        <img src={I('bodyguard-main-poster.webp')} alt="BODYGUARD main poster" />
+        <img src={I('bodyguard-interior.webp')} alt="BODYGUARD interior" />
       </section>
 
       {/* ── 01 DESIGN STRATEGY ── */}
