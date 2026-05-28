@@ -25,6 +25,7 @@ const projects = [
     slug: 'gagga',
     name: 'GAGGA',
     poster: '/projects/gagga/main-poster.webp',
+    band: '/projects/gagga/gagga-band.webp',
     spaceDesktop: '/projects/gagga/gagga-space.webp',
   },
 ];

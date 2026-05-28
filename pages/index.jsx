@@ -246,6 +246,14 @@ export default function HomePage() {
                   </span>
                 )}
               </div>
+              {project.band && (
+                <div className="pg-band" aria-hidden="true">
+                  <div className="pg-band-track">
+                    <img src={project.band} alt="" loading="lazy" />
+                    <img src={project.band} alt="" loading="lazy" />
+                  </div>
+                </div>
+              )}
               <div className="pg-space">
                 <img src={project.spaceDesktop} alt={`${project.name} 공간`} loading="lazy" />
               </div>
@@ -994,6 +1002,28 @@ export default function HomePage() {
         }
         .pg-card:hover .pg-poster img,
         .pg-card:hover .pg-space img { transform: scale(1.03); }
+        /* ── scrolling band (marquee) — used by GAGGA card, between poster and space ── */
+        .pg-band {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            line-height: 0;
+        }
+        .pg-band-track {
+            display: flex;
+            width: max-content;
+            animation: pg-band-scroll 25s linear infinite;
+        }
+        .pg-band-track img {
+            display: block;
+            height: clamp(24px, 3.5vw, 60px);
+            width: auto;
+            flex-shrink: 0;
+        }
+        @keyframes pg-band-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
         /* mobile: stack cards in 1 column — DOM order (tofuG → BENSON → BODYGUARD → GAGGA) is preserved */
         @media (max-width: 809px) {
             .pg-grid { grid-template-columns: 1fr; }
