@@ -537,7 +537,7 @@ export default function Benson() {
         .pstk-oval { top: 9%; right: 6%; width: clamp(110px, 13vw, 200px); transform: rotate(-8deg); }
         .pstk-board { bottom: 10%; right: 8%; width: clamp(70px, 8vw, 120px); transform: rotate(10deg); }
         .pstk-spoon { top: 12%; left: 5%; width: clamp(120px, 16vw, 240px); transform: rotate(-18deg); }
-        .pstk-circle { bottom: 3%; left: 3%; width: clamp(70px, 8vw, 120px); transform: rotate(7deg); }
+        .pstk-circle { bottom: 20%; left: 3%; width: clamp(70px, 8vw, 120px); transform: rotate(7deg); }
 
         /* real poster showcase (포스터 폴더) */
         .poster-showcase { background: #000; padding: 60px 20px; display: flex; justify-content: center; }
