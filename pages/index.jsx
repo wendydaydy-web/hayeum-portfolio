@@ -994,6 +994,10 @@ export default function HomePage() {
         }
         .pg-card:hover .pg-poster img,
         .pg-card:hover .pg-space img { transform: scale(1.03); }
+        /* mobile: stack cards in 1 column — DOM order (tofuG → BENSON → BODYGUARD → GAGGA) is preserved */
+        @media (max-width: 809px) {
+            .pg-grid { grid-template-columns: 1fr; }
+        }
 
         @keyframes fadeUp {
             to { opacity: 1; transform: translateY(0); }
