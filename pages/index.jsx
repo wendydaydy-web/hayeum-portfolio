@@ -980,13 +980,15 @@ export default function HomePage() {
         }
         .pg-space {
             width: 100%;
+            aspect-ratio: 2560 / 1429;
             overflow: hidden;
             position: relative;
             flex-shrink: 0;
         }
         .pg-space img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
             transition: transform 0.6s ease;
         }
