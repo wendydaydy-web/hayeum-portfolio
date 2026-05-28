@@ -251,8 +251,6 @@ export default function Benson() {
         {/* red poster (포스터 폴더 red.png 복사본) — 첫 이미지로 노출 */}
         <div className="full-img"><img src={IMG.redPoster} alt="BENSON Red Poster" /></div>
 
-        <div className="full-img"><img src={IMG.heroPoster} alt="BENSON Poster" /></div>
-
         {/* ── BENSON POSTER ── */}
         <section className="benson-poster">
           <div className="benson-poster-overlay" aria-hidden="true"></div>
