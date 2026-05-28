@@ -933,8 +933,9 @@ export default function HomePage() {
             overflow: hidden;
         }
         .pg-grid {
-            display: flex;
-            align-items: flex-end;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: end;
             gap: 0;
             position: relative;
             z-index: 1;
