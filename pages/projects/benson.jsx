@@ -537,7 +537,20 @@ export default function Benson() {
         .pstk-oval { top: 9%; right: 6%; width: clamp(110px, 13vw, 200px); transform: rotate(-8deg); }
         .pstk-board { bottom: 10%; right: 8%; width: clamp(70px, 8vw, 120px); transform: rotate(10deg); }
         .pstk-spoon { top: 12%; left: 5%; width: clamp(120px, 16vw, 240px); transform: rotate(-18deg); }
-        .pstk-circle { bottom: 20%; left: 3%; width: clamp(70px, 8vw, 120px); transform: rotate(7deg); }
+        .pstk-circle { bottom: 20%; left: 3%; width: clamp(75px, 7vw, 120px); transform: rotate(7deg); }
+        /* responsive — shrink + relocate so the sticker never covers any text */
+        @media (max-width: 1024px) {
+          .pstk-circle { bottom: 17%; left: 2%; width: clamp(55px, 5.5vw, 80px); }
+        }
+        @media (max-width: 768px) {
+          /* on tablets/phones the gap between keywords and bottom-text shrinks — move
+             into the 50px bottom padding zone (safely below all text) and shrink */
+          .pstk-circle { bottom: 1%; left: 1%; width: clamp(35px, 6vw, 50px); }
+        }
+        @media (max-width: 480px) {
+          /* very narrow viewports — guarantee 100% text visibility by hiding the sticker */
+          .pstk-circle { display: none; }
+        }
 
         /* real poster showcase (포스터 폴더) */
         .poster-showcase { background: #000; padding: 60px 20px; display: flex; justify-content: center; }
