@@ -245,15 +245,23 @@ export default function HomePage() {
                     {isKo ? project.overlay.ko : project.overlay.en}
                   </span>
                 )}
+                {project.band && (
+                  <>
+                    <div className="pg-band pg-band-top" aria-hidden="true">
+                      <div className="pg-band-track">
+                        <img src={project.band} alt="" loading="lazy" />
+                        <img src={project.band} alt="" loading="lazy" />
+                      </div>
+                    </div>
+                    <div className="pg-band pg-band-bottom" aria-hidden="true">
+                      <div className="pg-band-track">
+                        <img src={project.band} alt="" loading="lazy" />
+                        <img src={project.band} alt="" loading="lazy" />
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
-              {project.band && (
-                <div className="pg-band" aria-hidden="true">
-                  <div className="pg-band-track">
-                    <img src={project.band} alt="" loading="lazy" />
-                    <img src={project.band} alt="" loading="lazy" />
-                  </div>
-                </div>
-              )}
               <div className="pg-space">
                 <img src={project.spaceDesktop} alt={`${project.name} 공간`} loading="lazy" />
               </div>
@@ -1002,13 +1010,18 @@ export default function HomePage() {
         }
         .pg-card:hover .pg-poster img,
         .pg-card:hover .pg-space img { transform: scale(1.03); }
-        /* ── scrolling band (marquee) — used by GAGGA card, between poster and space ── */
+        /* ── scrolling band (marquee) — used by GAGGA card, overlaid on space image top & bottom ── */
         .pg-band {
-            width: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
             overflow: hidden;
-            position: relative;
             line-height: 0;
+            z-index: 2;
+            pointer-events: none;
         }
+        .pg-band-top { top: 0; }
+        .pg-band-bottom { bottom: 0; }
         .pg-band-track {
             display: flex;
             width: max-content;
