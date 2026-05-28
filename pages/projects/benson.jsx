@@ -266,7 +266,7 @@ export default function Benson() {
           </div>
 
           <div className="poster-title-block">
-            <img className="poster-main-title" src={IMG.wordmark} alt="BENSON" />
+            <span className="poster-main-title" role="img" aria-label="BENSON" />
             <span className="poster-sub-title">WHERE STREET MEETS SWEET</span>
           </div>
 
@@ -459,18 +459,14 @@ export default function Benson() {
         .benson-poster {
           width: 100%;
           min-height: 92vh;
-          background:
-            radial-gradient(ellipse at 15% 60%, rgba(200,0,0,0.5) 0%, transparent 55%),
-            radial-gradient(ellipse at 85% 25%, rgba(240,40,0,0.35) 0%, transparent 45%),
-            radial-gradient(ellipse at 50% 90%, rgba(120,0,0,0.4) 0%, transparent 50%),
-            linear-gradient(155deg, #1a0000 0%, #7a0000 25%, #cc0000 50%, #900000 70%, #0d0000 100%);
+          background: #FFF8E7;
           position: relative;
           overflow: hidden;
           padding: 50px 40px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          color: rgba(0,0,0,0.55);
+          color: #000;
         }
         .benson-poster::before {
           content: '';
@@ -493,7 +489,7 @@ export default function Benson() {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(to bottom, rgba(200,17,26,0) 0%, rgba(200,17,26,0.5) 100%);
+          background: none;
           pointer-events: none;
           z-index: 3;
         }
@@ -501,34 +497,40 @@ export default function Benson() {
         .poster-top-nav span {
           font-family: 'Barlow Condensed', sans-serif;
           font-size: 12px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
-          color: rgba(0,0,0,0.5);
+          color: #000;
         }
-        .poster-top-nav span.active { color: rgba(0,0,0,0.7); }
+        .poster-top-nav span.active { color: #000; }
         .poster-title-block { text-align: center; position: relative; z-index: 10; margin: 30px 0 20px; }
+        /* BENSON wordmark — colored mask so PNG renders in exact brand red (#c8111a) */
         .poster-main-title {
-          display: block; width: clamp(280px, 60vw, 900px); height: auto; margin: 0 auto;
-          filter: drop-shadow(0 0 30px rgba(0,0,0,0.18)); opacity: 0.82;
+          display: block;
+          width: clamp(280px, 60vw, 900px);
+          aspect-ratio: 959 / 270;
+          margin: 0 auto;
+          background-color: #c8111a;
+          -webkit-mask: url('/images/benson/hg-wordmark.png') center / contain no-repeat;
+                  mask: url('/images/benson/hg-wordmark.png') center / contain no-repeat;
         }
         .poster-sub-title {
           font-family: 'Barlow Condensed', sans-serif;
           font-size: clamp(16px, 2.4vw, 32px); font-weight: 700; letter-spacing: 0.28em;
-          color: rgba(0,0,0,0.48); text-transform: uppercase; margin-top: 14px; display: block;
+          color: #c8111a; text-transform: uppercase; margin-top: 14px; display: block;
         }
         .poster-keywords { text-align: center; position: relative; z-index: 10; }
         .poster-keywords p {
           font-family: 'Barlow Condensed', sans-serif;
           font-size: clamp(13px, 1.5vw, 20px); font-weight: 400; letter-spacing: 0.2em;
-          color: rgba(0,0,0,0.4); text-transform: uppercase; line-height: 1.85;
+          color: #000; text-transform: uppercase; line-height: 1.85;
         }
         .poster-bottom-text { text-align: center; position: relative; z-index: 10; margin-top: 12px; }
         .poster-bottom-text p {
           font-family: 'Barlow Condensed', sans-serif;
           font-size: clamp(13px, 1.1vw, 15px); font-weight: 600; letter-spacing: 0.12em;
-          color: rgba(0,0,0,0.55); text-transform: uppercase; line-height: 2.05;
+          color: #000; text-transform: uppercase; line-height: 2.05;
         }
         .poster-bottom-text .ko {
           font-family: 'Barlow Condensed', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-          font-weight: 400; color: rgba(0,0,0,0.42); letter-spacing: 0.04em; text-transform: none;
+          font-weight: 400; color: #000; letter-spacing: 0.04em; text-transform: none;
         }
         /* stickers (스티커 폴더) */
         .pstk { position: absolute; z-index: 6; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.3)); pointer-events: none; }
