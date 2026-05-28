@@ -248,8 +248,14 @@ export default function Benson() {
           <div><p className="info-label">Area</p><p className="info-value">— PY (— m²)</p></div>
         </section>
 
-        {/* red poster (포스터 폴더 red.png 복사본) — 첫 이미지로 노출 */}
-        <div className="full-img"><img src={IMG.redPoster} alt="BENSON Red Poster" /></div>
+        {/* red poster (스케이트 사진) + 4 corner stickers in ㄹ-pattern, hover-shake */}
+        <div className="full-img full-img-stickers">
+          <img src={IMG.redPoster} alt="BENSON Red Poster" />
+          <img className="skstk skstk-tl" src="/projects/benson/skate-sticker-tl.webp" alt="" aria-hidden="true" />
+          <img className="skstk skstk-tr" src="/projects/benson/skate-sticker-tr.webp" alt="" aria-hidden="true" />
+          <img className="skstk skstk-bl" src="/projects/benson/skate-sticker-bl.webp" alt="" aria-hidden="true" />
+          <img className="skstk skstk-br" src="/projects/benson/skate-sticker-br.webp" alt="" aria-hidden="true" />
+        </div>
 
         {/* ── BENSON POSTER ── */}
         <section className="benson-poster">
@@ -443,6 +449,36 @@ export default function Benson() {
 
         .full-img { width: 100%; line-height: 0; }
         .full-img img { width: 100%; object-fit: cover; }
+
+        /* ── 첫 이미지(스케이트 사진) 4-corner 스티커 (ㄹ-pattern) ── */
+        .full-img-stickers { position: relative; }
+        .full-img-stickers .skstk {
+          position: absolute;
+          width: clamp(60px, 8vw, 130px);
+          height: auto;
+          z-index: 5;
+          pointer-events: none;
+          filter: drop-shadow(0 6px 14px rgba(0,0,0,0.32));
+          transform: rotate(var(--rot, 0deg));
+          transform-origin: center;
+        }
+        .full-img-stickers .skstk-tl { top: 3%;    left: 3%;  --rot: -8deg; }
+        .full-img-stickers .skstk-tr { top: 3%;    right: 3%; --rot:  7deg; }
+        .full-img-stickers .skstk-bl { bottom: 3%; left: 3%;  --rot:  5deg; }
+        .full-img-stickers .skstk-br { bottom: 3%; right: 3%; --rot: -6deg; }
+
+        /* hover 시 4 스티커가 각자의 베이스 회전 주위로 흔들림 */
+        .full-img-stickers:hover .skstk { animation: skstk-shake 0.6s ease-in-out infinite; }
+        @keyframes skstk-shake {
+          0%, 100% { transform: rotate(var(--rot)); }
+          25%      { transform: rotate(calc(var(--rot) - 5deg)); }
+          50%      { transform: rotate(calc(var(--rot) + 3deg)); }
+          75%      { transform: rotate(calc(var(--rot) + 5deg)); }
+        }
+
+        @media (max-width: 768px) {
+          .full-img-stickers .skstk { width: clamp(40px, 10vw, 70px); }
+        }
 
         .two-col { display: grid; grid-template-columns: 1fr 1fr; line-height: 0; }
         .two-col img { width: 100%; height: 460px; object-fit: cover; }
