@@ -598,7 +598,7 @@ export default function Benson() {
         /* ── FLAVOR LINE ── */
         .flavor-feature { background: #FFF8E7; padding: 100px 40px 120px; overflow: hidden; }
         .flavor-text-ko, .flavor-text-en { max-width: 1500px; margin: 0 auto; word-break: keep-all; text-align: justify; }
-        .flavor-text-ko { color: #c8111a; font-family: 'Playfair Display', 'Noto Serif KR', serif; font-size: clamp(20px, 1.7vw, 30px); font-weight: 700; line-height: 1.55; letter-spacing: -0.005em; }
+        .flavor-text-ko { color: #c8111a; font-size: clamp(20px, 1.7vw, 30px); font-weight: 700; line-height: 1.55; letter-spacing: -0.005em; }
         .flavor-text-en {
           color: #c8111a;
           font-family: 'Playfair Display', serif; font-weight: 700; text-transform: uppercase;
