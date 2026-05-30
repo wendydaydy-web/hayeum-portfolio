@@ -34,12 +34,17 @@ function SiteNav() {
 
   useEffect(() => {
     const saved = localStorage.getItem('site-lang');
-    if (saved === 'ko' || saved === 'en') setLang(saved);
+    const initial = saved === 'ko' || saved === 'en' ? saved : 'ko';
+    setLang(initial);
+    document.documentElement.lang = initial;
   }, []);
 
   const setLangPersist = (l) => {
     setLang(l);
-    if (typeof window !== 'undefined') localStorage.setItem('site-lang', l);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('site-lang', l);
+      document.documentElement.lang = l;
+    }
   };
 
   return (
