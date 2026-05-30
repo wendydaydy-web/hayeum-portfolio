@@ -12,9 +12,7 @@ const IMG = {
   pegboard: '/images/benson/hg-pegboard.jpg',
   scoop: '/images/benson/hg-scoop.jpg',
   wordmark: '/images/benson/hg-wordmark.png',
-  poster: '/images/benson/hg-poster.jpg',
   film: '/images/benson/hg-film.mp4',
-  red: '/images/benson/red.jpg',
   redPoster: '/images/benson/benson-red-poster.webp',
   heroPoster: '/images/benson/final-4.webp',
 };
@@ -346,12 +344,6 @@ export default function Benson() {
 
         <div className="video-section"><div className="video-wrapper"></div></div>
 
-        {/* real BENSON poster (포스터 폴더) */}
-        <div className="poster-showcase"><img src={IMG.poster} alt="BENSON poster — where street meets sweet" /></div>
-
-        {/* red BENSON poster (포스터 폴더) — full width, 스케이트파크 섹션 바로 다음 */}
-        <div className="full-img"><img src={IMG.red} alt="BENSON poster — red" /></div>
-
         <div className="video-section"><div className="video-wrapper"></div></div>
 
         <div className="full-img"><img src={IMG.pegboard} alt="" /></div>
@@ -590,10 +582,6 @@ export default function Benson() {
         @media (max-width: 480px) {
           .pstk-circle { left: 1%; width: clamp(28px, 6vw, 40px); }
         }
-
-        /* real poster showcase (포스터 폴더) */
-        .poster-showcase { background: #000; padding: 60px 20px; display: flex; justify-content: center; }
-        .poster-showcase img { width: auto; max-width: 100%; max-height: 92vh; }
 
         /* ── FLAVOR LINE ── */
         .flavor-feature { background: #FFF8E7; padding: 100px 40px 120px; overflow: hidden; }
