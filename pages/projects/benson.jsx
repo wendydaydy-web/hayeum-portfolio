@@ -591,16 +591,17 @@ export default function Benson() {
         .poster-showcase img { width: auto; max-width: 100%; max-height: 92vh; }
 
         /* ── FLAVOR LINE ── */
-        .flavor-feature { background: #000; padding: 100px 40px 120px; overflow: hidden; }
-        .flavor-text-top, .flavor-text-bottom { color: #c8111a; max-width: 1500px; margin: 0 auto; word-break: keep-all; text-align: justify; }
-        .flavor-text-top { font-size: clamp(20px, 1.7vw, 30px); font-weight: 700; line-height: 1.55; letter-spacing: -0.005em; }
+        .flavor-feature { background: #FFF8E7; padding: 100px 40px 120px; overflow: hidden; }
+        .flavor-text-top, .flavor-text-bottom { max-width: 1500px; margin: 0 auto; word-break: keep-all; text-align: justify; }
+        .flavor-text-top { color: #000; font-size: clamp(20px, 1.7vw, 30px); font-weight: 700; line-height: 1.55; letter-spacing: -0.005em; }
         .flavor-text-bottom {
+          color: #c8111a;
           font-family: 'Playfair Display', serif; font-weight: 700; text-transform: uppercase;
           font-size: clamp(20px, 1.7vw, 30px); line-height: 1.35; letter-spacing: 0.01em;
         }
         .flavor-stage { position: relative; text-align: center; margin: 70px auto; max-width: 1500px; }
         .flavor-label-top {
-          color: #c8111a; font-size: clamp(13px, 1vw, 17px); letter-spacing: 0.55em;
+          color: #000; font-size: clamp(13px, 1vw, 17px); letter-spacing: 0.55em;
           text-transform: uppercase; font-weight: 400; margin-bottom: 0; position: relative; z-index: 3;
         }
         .flavor-title {
