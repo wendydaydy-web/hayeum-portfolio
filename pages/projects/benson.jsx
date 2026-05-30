@@ -309,8 +309,6 @@ export default function Benson() {
 
         {/* ── FLAVOR LINE ── */}
         <section className="flavor-feature">
-          <p className="flavor-text-top">벤슨의 플레이버 라인은 공간의 서사적 중심이 되는 작품으로, 스틸 타공 보드를 지하철 노선도의 형식으로 재해석하여 각 정거장에는 플레이버를, 각 라인에는 맛의 카테고리를 부여한다. 미국 서브컬처의 자유로운 언어와 스케이트 파크의 열린 기하학에서 출발한 이 거대한 페그보드는, 만지고 읽고 발견하게 만드는 인터랙티브한 그래픽 월이다. 역동적인 노선들은 단순한 메뉴 선택을 하나의 탐험으로 바꾸어 놓으며, 설명 없이도 브랜드의 캐릭터를 말하는 벽으로 자리한다.</p>
-
           <div className="flavor-stage">
             <p className="flavor-label-top">SIGNATURE ELEMENT</p>
             <h2 className="flavor-title">FLAVOR LINE</h2>
@@ -320,7 +318,9 @@ export default function Benson() {
             <p className="flavor-tagline">A SUBWAY MAP OF TASTE</p>
           </div>
 
-          <p className="flavor-text-bottom">Benson&apos;s Flavor Line is the narrative centerpiece of the space — a pegboard wall reinterpreted as a subway map, where each station is a flavor and each line is a family of taste. Inspired by the freewheeling language of American sub-culture and the open geometry of skate parks, the perforated metal field invites touch, reading, and discovery. Its dynamic pathways turn ordering ice cream into an act of exploration — a wall that explains the brand without ever asking to be read.</p>
+          <p className="flavor-text-ko" data-ko>벤슨의 플레이버 라인은 공간의 서사적 중심이 되는 작품으로, 스틸 타공 보드를 지하철 노선도의 형식으로 재해석하여 각 정거장에는 플레이버를, 각 라인에는 맛의 카테고리를 부여한다. 미국 서브컬처의 자유로운 언어와 스케이트 파크의 열린 기하학에서 출발한 이 거대한 페그보드는, 만지고 읽고 발견하게 만드는 인터랙티브한 그래픽 월이다. 역동적인 노선들은 단순한 메뉴 선택을 하나의 탐험으로 바꾸어 놓으며, 설명 없이도 브랜드의 캐릭터를 말하는 벽으로 자리한다.</p>
+
+          <p className="flavor-text-en" data-en>Benson&apos;s Flavor Line is the narrative centerpiece of the space — a pegboard wall reinterpreted as a subway map, where each station is a flavor and each line is a family of taste. Inspired by the freewheeling language of American sub-culture and the open geometry of skate parks, the perforated metal field invites touch, reading, and discovery. Its dynamic pathways turn ordering ice cream into an act of exploration — a wall that explains the brand without ever asking to be read.</p>
         </section>
 
         <div className="full-img"><img src={IMG.scoop} alt="" /></div>
@@ -592,9 +592,9 @@ export default function Benson() {
 
         /* ── FLAVOR LINE ── */
         .flavor-feature { background: #FFF8E7; padding: 100px 40px 120px; overflow: hidden; }
-        .flavor-text-top, .flavor-text-bottom { max-width: 1500px; margin: 0 auto; word-break: keep-all; text-align: justify; }
-        .flavor-text-top { color: #000; font-size: clamp(20px, 1.7vw, 30px); font-weight: 700; line-height: 1.55; letter-spacing: -0.005em; }
-        .flavor-text-bottom {
+        .flavor-text-ko, .flavor-text-en { max-width: 1500px; margin: 0 auto; word-break: keep-all; text-align: justify; }
+        .flavor-text-ko { color: #000; font-size: clamp(20px, 1.7vw, 30px); font-weight: 700; line-height: 1.55; letter-spacing: -0.005em; }
+        .flavor-text-en {
           color: #c8111a;
           font-family: 'Playfair Display', serif; font-weight: 700; text-transform: uppercase;
           font-size: clamp(20px, 1.7vw, 30px); line-height: 1.35; letter-spacing: 0.01em;
