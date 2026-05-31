@@ -521,6 +521,7 @@ export default function Benson() {
           position: fixed; bottom: 24px; right: 24px; z-index: 600; width: 48px; height: 48px;
           background: #000; color: #fff; font-size: 18px; border: none; cursor: pointer;
           display: flex; align-items: center; justify-content: center;
+          clip-path: polygon(0% 0%, 100% 0%, 82% 100%, 18% 100%);
         }
 
         @media (max-width: 768px) {
