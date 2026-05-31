@@ -5,16 +5,11 @@ import { useState, useEffect } from 'react';
 /* image map — sources copied from 공간 / 포스터 / 스티커 folders */
 const IMG = {
   facade: '/images/benson/hg-facade.jpg',
-  storefront: '/images/benson/hg-storefront.jpg',
-  exterior: '/images/benson/hg-exterior.jpg',
   seating: '/images/benson/hg-seating.jpg',
   counter: '/images/benson/hg-counter.jpg',
   pegboard: '/images/benson/hg-pegboard.jpg',
   scoop: '/images/benson/hg-scoop.jpg',
-  wordmark: '/images/benson/hg-wordmark.png',
-  film: '/images/benson/hg-film.mp4',
   redPoster: '/images/benson/benson-red-poster.webp',
-  heroPoster: '/images/benson/final-4.webp',
 };
 
 /* ── Top navigation — pages/index.jsx 네비바 100% 재현 ── */
@@ -310,62 +305,6 @@ export default function Benson() {
           <p className="outside-time">12:00:11</p>
         </section>
 
-        <div className="video-section"><div className="video-wrapper"></div></div>
-
-        <section className="arch-section">
-          <h3 className="arch-headline">FROM CONCRETE CURVES TO SOFT-SERVE TEXTURES,<br />BENSON IS WHERE STREET BECOMES SWEETNESS.</h3>
-          <p className="arch-sub">콘크리트의 곡선이 부드러운 아이스크림의 텍스처와 만나는 곳, 거리의 무드가 한 스쿱의 달콤함이 되는 공간.</p>
-          <div className="arch-img"><img src={IMG.counter} alt="FLAGSHIP01" /></div>
-          <p className="room-label">FLAGSHIP<sup>01</sup></p>
-        </section>
-
-        <div className="three-col three-col-dark">
-          <img src={IMG.counter} alt="" />
-          <img src={IMG.scoop} alt="" />
-          <img src={IMG.storefront} alt="" />
-        </div>
-
-        <div className="video-section"><div className="video-wrapper"></div></div>
-
-        {/* ── RELATED ── */}
-        <section className="related-section">
-          <div className="related-grid">
-            <a href="#" className="related-item" onClick={(e) => e.preventDefault()}>
-              <img src={IMG.storefront} alt="" />
-              <div className="related-overlay">
-                <p className="related-title">BENSON</p>
-                <p className="related-sub">Hanwha Galleria x 공간하음</p>
-              </div>
-            </a>
-            <a href="#" className="related-item" onClick={(e) => e.preventDefault()}>
-              <img src={IMG.scoop} alt="" />
-              <div className="related-overlay">
-                <p className="related-title">CONCEPT STORY</p>
-                <p className="related-sub">CHAPTER 01</p>
-              </div>
-            </a>
-            <div className="related-item related-item-dark">
-              <div className="furniture-panel">
-                <p className="furniture-title">FURNITURE</p>
-                <p className="furniture-sub">ARCHIVE</p>
-              </div>
-              <div className="furniture-grid">
-                <img src={IMG.counter} alt="" />
-                <img src={IMG.scoop} alt="" />
-                <img src={IMG.storefront} alt="" />
-                <img src={IMG.pegboard} alt="" />
-              </div>
-            </div>
-            <a href="#" className="related-item" onClick={(e) => e.preventDefault()}>
-              <img src={IMG.exterior} alt="" style={{ height: '380px', width: '100%', objectFit: 'cover' }} />
-              <div className="related-overlay">
-                <p className="related-title">BLOG</p>
-                <p className="related-sub">PROCESS</p>
-              </div>
-            </a>
-          </div>
-        </section>
-
         <div className="list-bar"><a href="#" onClick={(e) => { e.preventDefault(); toTop(); }}>LIST</a></div>
         <button className="top-btn" onClick={toTop} aria-label="Back to top">&#8593;</button>
       </main>
@@ -437,7 +376,6 @@ export default function Benson() {
         .two-col img { width: 100%; height: 460px; object-fit: cover; }
         .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; line-height: 0; }
         .three-col img { width: 100%; height: 320px; object-fit: cover; }
-        .three-col-dark { background: #0d0d0d; }
 
         .video-section { background: #000; padding: 60px; display: flex; justify-content: center; }
         .video-wrapper { width: 100%; max-width: 900px; aspect-ratio: 16/9; background: #0a0a0a; }
@@ -485,28 +423,6 @@ export default function Benson() {
         .outside-label { font-size: 11px; margin-bottom: 8px; }
         .outside-time { font-size: 20px; }
 
-        .arch-section { background: #0d0d0d; padding: 80px 60px; text-align: center; }
-        .arch-headline { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.5; margin-bottom: 10px; }
-        .arch-sub { font-size: 14px; color: #888; margin-bottom: 40px; }
-        .arch-img { max-width: 820px; margin: 0 auto; line-height: 0; }
-        .arch-img img { width: 100%; }
-        .room-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #555; margin-top: 10px; }
-
-        .related-section { background: #000; }
-        .related-grid { display: grid; grid-template-columns: 1fr 1fr; }
-        .related-item { position: relative; overflow: hidden; display: block; }
-        .related-item > img { width: 100%; height: 380px; object-fit: cover; transition: transform 0.4s; }
-        .related-item:hover > img { transform: scale(1.04); }
-        .related-item-dark { background: #000; cursor: pointer; }
-        .related-overlay { position: absolute; top: 0; left: 0; right: 0; padding: 24px 20px; background: rgba(0,0,0,0.35); color: #fff; }
-        .related-title { font-size: 18px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
-        .related-sub { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #ccc; margin-top: 4px; }
-        .furniture-panel { background: #000; padding: 20px 16px 0; text-align: center; }
-        .furniture-title { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-        .furniture-sub { color: #888; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; margin-bottom: 14px; }
-        .furniture-grid { display: grid; grid-template-columns: 1fr 1fr; line-height: 0; }
-        .furniture-grid img { width: 100%; }
-
         .list-bar { position: fixed; bottom: 24px; left: 24px; z-index: 600; }
         .list-bar a { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: underline; color: #000; }
         .top-btn {
@@ -524,12 +440,10 @@ export default function Benson() {
           .three-col { grid-template-columns: 1fr; }
           .three-col img { height: 280px; }
           .video-section { padding: 30px 16px; }
-          .arch-section { padding: 50px 20px; }
           .flavor-feature { padding: 60px 20px 80px; }
           .flavor-image { max-width: 88%; }
           .flavor-title { margin-bottom: -50px; }
           .flavor-label-top, .flavor-tagline { letter-spacing: 0.3em; }
-          .related-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </>
