@@ -314,6 +314,282 @@ export default function Benson() {
 
         <div className="full-img"><img src={IMG.facade} alt="" /></div>
 
+        {/* ── SI GUIDE — 9 SECTIONS PORTED FROM SOURCE INDEX.HTML ── */}
+        <div className="si-sections">
+          {/* 01 — Design Strategy */}
+          <section className="si-section si-concept">
+            <div className="si-section-inner">
+              <div className="si-concept-grid">
+                <div>
+                  <p className="si-section-label">01 — Design Strategy</p>
+                  <h2 className="si-section-title">Authentic American<br />Street Dessert</h2>
+                  <p className="si-section-desc" data-ko>벤슨 아이스크림 샵은 벤슨이 전개하는 미국스타일 아이스크림의 다이내믹한 플레이버, 볼드한 토핑, 풍부한 유지방이 만들어내는 부드러움을 미국의 서브컬쳐를 모티브로 풀어낸 공간입니다.</p>
+                  <p className="si-section-desc" data-en>The Benson Ice Cream shop is a space that channels the dynamic flavors, bold toppings, and rich creaminess of American-style ice cream through the lens of American subculture.</p>
+                  <div className="si-concept-keywords">
+                    <span className="si-keyword">Dynamic</span>
+                    <span className="si-keyword">Connect</span>
+                    <span className="si-keyword">Authentic</span>
+                  </div>
+                </div>
+                <div className="si-concept-image si-img-crop-en si-crop-04">
+                  <img src="/images/benson/siguide/page_04.png" alt="Design Strategy" />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 02 — Facade */}
+          <section className="si-section" id="si-facade">
+            <div className="si-section-inner">
+              <p className="si-section-label">02 — Facade</p>
+              <h2 className="si-section-title">Storefront Design</h2>
+              <p className="si-section-desc" data-ko>폴딩도어와 전면 곡선으로 부드럽게 이어지는 파사드 구조물로 내외부를 연결하여 접근성을 높이고, 스트릿 푸드가 가진 자유로움과 활기참을 표현하였습니다.</p>
+              <p className="si-section-desc" data-en>Folding doors and a gently curving facade structure seamlessly bridge the interior and exterior, enhancing accessibility while embodying the freedom and vibrancy of street food culture.</p>
+              <div className="si-facade-grid">
+                <div className="si-facade-item">
+                  <img src="/images/benson/siguide/page_05.png" alt="Facade Day" />
+                  <div className="si-caption">Day View</div>
+                </div>
+                <div className="si-facade-item">
+                  <img src="/images/benson/siguide/page_06.png" alt="Facade Night" />
+                  <div className="si-caption">Night View</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 03 — Perspectives */}
+          <section className="si-section si-perspectives">
+            <div className="si-section-inner">
+              <p className="si-section-label">03 — Perspectives</p>
+              <h2 className="si-section-title">Interior Views</h2>
+              <p className="si-section-desc" data-ko>곡선형 메인 퍼니처와 레드 포인트 컬러가 어우러진 역동적인 내부 공간</p>
+              <p className="si-section-desc" data-en>A dynamic interior where curvilinear main furniture meets bold red accent colors</p>
+              <div className="si-gallery-grid">
+                <div className="si-gallery-item si-wide"><img src="/images/benson/siguide/page_09.png" alt="Interior wide view" /></div>
+                <div className="si-gallery-item"><img src="/images/benson/siguide/page_07.png" alt="Interior view - VMD zone" /></div>
+                <div className="si-gallery-item"><img src="/images/benson/siguide/page_08.png" alt="Interior view - counter" /></div>
+                <div className="si-gallery-item si-wide"><img src="/images/benson/siguide/page_12.png" alt="Interior view - counter area" /></div>
+                <div className="si-gallery-item"><img src="/images/benson/siguide/page_10.png" alt="Interior view - pegboard" /></div>
+                <div className="si-gallery-item"><img src="/images/benson/siguide/page_11.png" alt="Interior view - VMD display" /></div>
+                <div className="si-gallery-item si-wide"><img src="/images/benson/siguide/page_13.png" alt="Interior wide view - seating" /></div>
+              </div>
+            </div>
+          </section>
+
+          {/* 04 — Design Concept */}
+          <section className="si-section" id="si-details">
+            <div className="si-section-inner">
+              <p className="si-section-label">04 — Design Concept</p>
+              <h2 className="si-section-title">Outdoor Zone → Connect Inside</h2>
+              <p className="si-section-desc" data-ko>벤슨 아이스크림 샵은 폴딩도어와 전면 곡선으로 부드럽게 이어지는 파사드 구조물, 매장 전체를 관통하는 사이니지, 벤치-테이블로 이어지는 곡선형 메인 퍼니처를 이용해 내외부를 연결함으로써, 내부 뿐 아니라 외부에서도 벤슨 아이스크림을 즐길 수 있는 아웃도어 형태로 디자인하였습니다.</p>
+              <p className="si-section-desc" data-en>By connecting interior and exterior through folding doors, a gently curving facade, store-spanning signage, and a flowing bench-to-table main furniture piece, the Benson Ice Cream shop is designed as an outdoor-oriented space where guests can enjoy ice cream both inside and out.</p>
+              <div className="si-concept-detail-grid">
+                <img src="/images/benson/siguide/page_14.png" alt="Design concept - outdoor connect" className="si-concept-detail-img" />
+                <div className="si-concept-detail-list">
+                  <div className="si-concept-detail-item">
+                    <span className="si-concept-num">1</span>
+                    <div>
+                      <span data-ko>내부와 이어지는 파사드 디자인</span>
+                      <span data-en>Facade design flowing seamlessly into the interior</span>
+                    </div>
+                  </div>
+                  <div className="si-concept-detail-item">
+                    <span className="si-concept-num">2</span>
+                    <div>
+                      <span data-ko>외부와 내부를 연결하는 천장 조형물</span>
+                      <span data-en>Ceiling sculptural element connecting exterior and interior</span>
+                    </div>
+                  </div>
+                  <div className="si-concept-detail-item">
+                    <span className="si-concept-num">3</span>
+                    <div>
+                      <span data-ko>외부와 내부를 연결하는 실내 취식 공간</span>
+                      <span data-en>Indoor dining area bridging outdoor and indoor zones</span>
+                    </div>
+                  </div>
+                  <div className="si-concept-detail-item">
+                    <span className="si-concept-num">4</span>
+                    <div>
+                      <span data-ko>아이스크림 카운터와 전면 창의 곡선이 어우러지는 디자인</span>
+                      <span data-en>Ice cream counter harmonized with the curved front window</span>
+                    </div>
+                  </div>
+                  <div className="si-concept-detail-item">
+                    <span className="si-concept-num">5</span>
+                    <div>
+                      <span data-ko>벤치에서 테이블로 이어지는 곡선형 메인 퍼니처</span>
+                      <span data-en>Curved main furniture flowing from bench to table</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 05 — Design Details */}
+          <section className="si-section si-design-details-section">
+            <div className="si-section-inner">
+              <p className="si-section-label">05 — Design Details</p>
+              <h2 className="si-section-title">Shape &amp; Motif</h2>
+              <div className="si-concept-detail-grid">
+                <img src="/images/benson/siguide/page_16.png" alt="Design detail - Sub-culture motif" className="si-concept-detail-img" />
+                <div className="si-concept-detail-list">
+                  <div className="si-concept-detail-item">
+                    <span className="si-concept-num">9</span>
+                    <div>
+                      <span data-ko>벤슨 아이스크림의 플레이버를 설명하는 페그보드 VMD</span>
+                      <span data-en>Pegboard VMD showcasing Benson&apos;s ice cream flavors</span>
+                    </div>
+                  </div>
+                  <div className="si-concept-detail-item">
+                    <span className="si-concept-num">11</span>
+                    <div>
+                      <span data-ko>스트릿 무드를 표현한 바닥과 곡선 디자인</span>
+                      <span data-en>Street-mood flooring and curved design</span>
+                    </div>
+                  </div>
+                  <div className="si-concept-detail-item">
+                    <span className="si-concept-num">10</span>
+                    <div>
+                      <span data-ko>보드 형태에서 모티브를 받은 스탠딩 테이블</span>
+                      <span data-en>Standing tables inspired by skateboard forms</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 06 — Materials */}
+          <section className="si-section si-materials" id="si-materials">
+            <div className="si-section-inner">
+              <p className="si-section-label">06 — Materials</p>
+              <h2 className="si-section-title">Raw Material</h2>
+              <p className="si-section-desc" data-ko>전체적으로 외부 트랙에서 사용하는 콘크리트와 같은 익스트림하고 로우한 소재를 활용해, 메탈소재로 현대적이고 세련된 이미지를, 콘크리트와 에폭시로 벤슨의 스트릿한 브랜드 무드를 표현하였습니다.</p>
+              <p className="si-section-desc" data-en>Raw, extreme materials like concrete — reminiscent of outdoor skate tracks — are paired with metal for a modern, refined image, while concrete and epoxy finishes convey Benson&apos;s street-inspired brand mood.</p>
+              <div className="si-materials-grid">
+                <div>
+                  <div className="si-material-list">
+                    <div className="si-material-item">
+                      <div className="si-material-swatch" style={{ background: 'linear-gradient(135deg, #c0c0c0, #a0a0a0)' }}></div>
+                      <div>
+                        <div className="si-mat-name">Metal</div>
+                        <div className="si-mat-desc" data-ko>헤어라인 실버 메탈</div>
+                        <div className="si-mat-desc" data-en>Hairline silver metal</div>
+                      </div>
+                    </div>
+                    <div className="si-material-item">
+                      <div className="si-material-swatch" style={{ background: 'linear-gradient(135deg, #808080, #606060)' }}></div>
+                      <div>
+                        <div className="si-mat-name">Concrete</div>
+                        <div className="si-mat-desc" data-ko>시멘트 콘크리트</div>
+                        <div className="si-mat-desc" data-en>Cement concrete</div>
+                      </div>
+                    </div>
+                    <div className="si-material-item">
+                      <div className="si-material-swatch" style={{ background: 'linear-gradient(135deg, #2a2a2a, #1a1a1a)' }}></div>
+                      <div>
+                        <div className="si-mat-name">Epoxy (Matte)</div>
+                        <div className="si-mat-desc" data-ko>에폭시 무광 코팅</div>
+                        <div className="si-mat-desc" data-en>Matte-coated epoxy</div>
+                      </div>
+                    </div>
+                    <div className="si-material-item">
+                      <div className="si-material-swatch" style={{ background: 'linear-gradient(135deg, #f5efe0, #e8dcc8)' }}></div>
+                      <div>
+                        <div className="si-mat-name">Paint</div>
+                        <div className="si-mat-desc" data-ko>도장 마감</div>
+                        <div className="si-mat-desc" data-en>Painted finish</div>
+                      </div>
+                    </div>
+                    <div className="si-material-item">
+                      <div className="si-material-swatch" style={{ background: 'linear-gradient(135deg, #d4b896, #c4a87a)' }}></div>
+                      <div>
+                        <div className="si-mat-name">Birch Wood</div>
+                        <div className="si-mat-desc" data-ko>자작목</div>
+                        <div className="si-mat-desc" data-en>Natural birch plywood</div>
+                      </div>
+                    </div>
+                    <div className="si-material-item">
+                      <div className="si-material-swatch" style={{ background: 'linear-gradient(135deg, #e2d5c0, #d5c5a8)' }}></div>
+                      <div>
+                        <div className="si-mat-name">Engineered Stone</div>
+                        <div className="si-mat-desc" data-ko>인조대리석</div>
+                        <div className="si-mat-desc" data-en>Engineered marble</div>
+                      </div>
+                    </div>
+                    <div className="si-material-item">
+                      <div className="si-material-swatch" style={{ background: 'var(--si-benson-red)' }}></div>
+                      <div>
+                        <div className="si-mat-name">Red Tile</div>
+                        <div className="si-mat-desc" data-ko>레드 포인트 타일</div>
+                        <div className="si-mat-desc" data-en>Accent red tile</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <img src="/images/benson/siguide/page_20.png" alt="Material board" />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 07 — Color */}
+          <section className="si-section si-color-section">
+            <div className="si-section-inner">
+              <p className="si-section-label">07 — Color</p>
+              <h2 className="si-section-title">Benson Red</h2>
+            </div>
+            <div className="si-color-split">
+              <div className="si-color-image si-img-crop-en si-crop-18">
+                <img src="/images/benson/siguide/page_18.png" alt="Color perspective" />
+              </div>
+              <div className="si-color-info">
+                <h3>Color Point</h3>
+                <p data-ko>벤슨 아이스크림의 다채로운 아이스크림 특성을 반영해, 레드 포인트 컬러를 활용하여 경쾌하고 밝은 느낌을 더해 공간에 활기와 생동감을 불어넣고자 하였습니다.</p>
+                <p data-en>Reflecting the vibrant variety of Benson&apos;s ice cream lineup, a bold red accent color is used throughout the space to add a lively, upbeat energy and inject a sense of vitality into every corner.</p>
+                <span className="si-pantone-tag">PANTONE 485C</span>
+              </div>
+            </div>
+          </section>
+
+          {/* 08 — Layout */}
+          <section className="si-section si-layout-section" id="si-layout">
+            <div className="si-section-inner">
+              <p className="si-section-label">08 — Layout</p>
+              <h2 className="si-section-title">Space Planning</h2>
+              <p className="si-section-desc" data-ko>아이스크림 제조 동선과 고객 체험 공간을 효율적으로 분리하면서도 시각적 연결을 유지한 레이아웃</p>
+              <p className="si-section-desc" data-en>A layout that efficiently separates ice cream production flow from the customer experience zone while maintaining visual connectivity throughout.</p>
+              <div className="si-layout-image">
+                <img src="/images/benson/siguide/page_19.png" alt="Floor layout" />
+              </div>
+              <div className="si-zone-list">
+                <span className="si-zone-tag">Stock</span>
+                <span className="si-zone-tag">Work Zone</span>
+                <span className="si-zone-tag">Sanitary Zone</span>
+                <span className="si-zone-tag">VMD Zone</span>
+                <span className="si-zone-tag">Tasting Zone</span>
+                <span className="si-zone-tag">Outdoor Zone</span>
+              </div>
+            </div>
+          </section>
+
+          {/* 09 — Technical */}
+          <section className="si-section si-technical">
+            <div className="si-section-inner">
+              <p className="si-section-label">09 — Technical</p>
+              <h2 className="si-section-title">Detail &amp; VMD</h2>
+              <div className="si-tech-images">
+                <div className="si-img-crop-en si-crop-17"><img src="/images/benson/siguide/page_17.png" alt="Material rendering" /></div>
+                <img src="/images/benson/siguide/page_26.png" alt="Pegboard detail" />
+                <img src="/images/benson/siguide/page_30.png" alt="Menu board detail" />
+              </div>
+            </div>
+          </section>
+        </div>
+
         <div className="list-bar"><a href="#" onClick={(e) => { e.preventDefault(); toTop(); }}>LIST</a></div>
         <button className="top-btn" onClick={toTop} aria-label="Back to top">&#8593;</button>
       </main>
@@ -525,6 +801,135 @@ export default function Benson() {
           .flavor-title { margin-bottom: -50px; }
           .flavor-label-top, .flavor-tagline { letter-spacing: 0.3em; }
           .pstk-spoon, .pstk-circle { width: 90px; }
+        }
+
+        /* ── SI GUIDE SECTIONS — ported from source index.html (class prefix: si-) ── */
+        .si-sections {
+          --si-benson-red: #CC0000;
+          --si-dark: #1a1a1a;
+          --si-light: #f5f2ed;
+          --si-gray: #888;
+          --si-max-width: 1400px;
+          --si-page-bg: #fff;
+          --si-page-fg: #1a1a1a;
+          --si-section-bg: #f5f2ed;
+          --si-text-mid: #555;
+          --si-text-light: #666;
+          --si-keyword-border: #1a1a1a;
+          font-family: 'Inter', 'Noto Sans KR', sans-serif;
+          color: var(--si-page-fg);
+          background: var(--si-page-bg);
+        }
+        .si-sections .si-section { padding: 120px 60px; }
+        .si-sections .si-section-inner { max-width: var(--si-max-width); margin: 0 auto; }
+        .si-sections .si-section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--si-benson-red); margin-bottom: 16px; font-weight: 600; }
+        .si-sections .si-section-title { font-family: 'Barlow Condensed', 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 56px); line-height: 1.1; margin-bottom: 24px; letter-spacing: 1px; font-weight: 700; }
+        .si-sections .si-section-desc { font-size: 15px; line-height: 1.9; color: var(--si-text-mid); max-width: 680px; font-weight: 300; }
+
+        /* KR/EN toggle scoped to si-sections (default: KR) */
+        .si-sections [data-en] { display: none; }
+        :global(html[lang="en"]) .si-sections [data-ko] { display: none; }
+        :global(html[lang="en"]) .si-sections [data-en] { display: revert; }
+
+        /* 01 CONCEPT */
+        .si-sections .si-concept { background: var(--si-section-bg); }
+        .si-sections .si-concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+        .si-sections .si-concept-image img { width: 100%; border-radius: 4px; }
+        .si-sections .si-concept-keywords { display: flex; gap: 20px; margin-top: 40px; }
+        .si-sections .si-keyword { padding: 12px 28px; border: 1px solid var(--si-keyword-border); border-radius: 50px; font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* EN-mode image crops (translation removes Korean text strip at bottom of renders) */
+        :global(html[lang="en"]) .si-sections .si-img-crop-en { overflow: hidden; }
+        :global(html[lang="en"]) .si-sections .si-img-crop-en img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+        :global(html[lang="en"]) .si-sections .si-img-crop-en.si-crop-04 { aspect-ratio: 16 / 7; }
+        :global(html[lang="en"]) .si-sections .si-img-crop-en.si-crop-18 { aspect-ratio: 16 / 9; }
+        :global(html[lang="en"]) .si-sections .si-img-crop-en.si-crop-17 { aspect-ratio: 16 / 8; }
+
+        /* 02 FACADE */
+        .si-sections .si-facade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 60px; }
+        .si-sections .si-facade-grid .si-facade-item { position: relative; overflow: hidden; border-radius: 4px; }
+        .si-sections .si-facade-grid img { width: 100%; display: block; transition: transform 0.6s ease; }
+        .si-sections .si-facade-item:hover img { transform: scale(1.03); }
+        .si-sections .si-facade-item .si-caption {
+          position: absolute; bottom: 20px; left: 20px; color: #fff;
+          font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500;
+          background: rgba(0,0,0,0.4); padding: 8px 16px; border-radius: 2px;
+          backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+        }
+
+        /* 03 PERSPECTIVES */
+        .si-sections .si-perspectives { background: var(--si-dark); color: #fff; }
+        .si-sections .si-perspectives .si-section-label { color: var(--si-benson-red); }
+        .si-sections .si-perspectives .si-section-desc { color: rgba(255,255,255,0.5); }
+        .si-sections .si-gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 60px; }
+        .si-sections .si-gallery-grid .si-gallery-item { overflow: hidden; border-radius: 4px; aspect-ratio: 16/10; }
+        .si-sections .si-gallery-grid .si-gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .si-sections .si-gallery-item:hover img { transform: scale(1.05); }
+        .si-sections .si-gallery-grid .si-gallery-item.si-wide { grid-column: span 2; aspect-ratio: 21/9; }
+
+        /* 04 / 05 CONCEPT DETAIL */
+        .si-sections .si-concept-detail-grid { margin-top: 60px; }
+        .si-sections .si-concept-detail-img { width: 100%; border-radius: 4px; }
+        .si-sections .si-concept-detail-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; margin-top: 32px; padding: 0 20px; }
+        .si-sections .si-concept-detail-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.6; font-weight: 300; color: var(--si-text-mid); }
+        .si-sections .si-concept-num { flex-shrink: 0; width: 24px; height: 24px; background: var(--si-benson-red); color: #fff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; }
+
+        /* 05 DESIGN DETAILS SECTION */
+        .si-sections .si-design-details-section { background: var(--si-section-bg); }
+
+        /* 06 MATERIALS */
+        .si-sections .si-materials { background: var(--si-section-bg); }
+        .si-sections .si-materials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 60px; }
+        .si-sections .si-material-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .si-sections .si-material-item { display: flex; align-items: center; gap: 16px; }
+        .si-sections .si-material-swatch { width: 48px; height: 48px; border-radius: 4px; flex-shrink: 0; }
+        .si-sections .si-material-item .si-mat-name { font-size: 13px; font-weight: 500; }
+        .si-sections .si-material-item .si-mat-desc { font-size: 11px; color: var(--si-gray); margin-top: 2px; }
+        .si-sections .si-materials-grid img { width: 100%; border-radius: 4px; }
+
+        /* 07 COLOR */
+        .si-sections .si-color-section { position: relative; overflow: hidden; }
+        .si-sections .si-color-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 60px; }
+        .si-sections .si-color-image { overflow: hidden; }
+        .si-sections .si-color-image img { width: 100%; height: 100%; object-fit: cover; }
+        .si-sections .si-color-info { background: var(--si-benson-red); color: #fff; padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+        .si-sections .si-color-info h3 { font-family: 'Barlow Condensed', 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 3px; margin-bottom: 20px; font-weight: 700; }
+        .si-sections .si-color-info p { font-size: 14px; line-height: 1.9; opacity: 0.8; font-weight: 300; }
+        .si-sections .si-pantone-tag { display: inline-block; margin-top: 30px; padding: 10px 24px; border: 1px solid rgba(255,255,255,0.4); font-size: 12px; letter-spacing: 3px; font-weight: 500; }
+
+        /* 08 LAYOUT */
+        .si-sections .si-layout-section { text-align: center; }
+        .si-sections .si-layout-section .si-section-desc { margin: 0 auto 60px; text-align: center; }
+        .si-sections .si-layout-image { max-width: 1000px; margin: 0 auto; }
+        .si-sections .si-layout-image img { width: 100%; border-radius: 4px; }
+        .si-sections .si-zone-list { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin-top: 40px; }
+        .si-sections .si-zone-tag { padding: 10px 24px; background: var(--si-section-bg); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; border-radius: 2px; }
+
+        /* 09 TECHNICAL */
+        .si-sections .si-technical { background: var(--si-dark); color: #fff; }
+        .si-sections .si-technical .si-section-label { color: var(--si-benson-red); }
+        .si-sections .si-tech-images { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 60px; }
+        .si-sections .si-tech-images img { width: 100%; border-radius: 4px; opacity: 0.9; transition: opacity 0.3s; }
+        .si-sections .si-tech-images img:hover { opacity: 1; }
+
+        @media (max-width: 1024px) {
+          .si-sections .si-section { padding: 80px 40px; }
+          .si-sections .si-concept-grid,
+          .si-sections .si-facade-grid,
+          .si-sections .si-materials-grid,
+          .si-sections .si-color-split { grid-template-columns: 1fr; }
+          .si-sections .si-concept-detail-list { grid-template-columns: 1fr; }
+          .si-sections .si-gallery-grid { grid-template-columns: 1fr; }
+          .si-sections .si-gallery-grid .si-gallery-item.si-wide { grid-column: span 1; }
+          .si-sections .si-tech-images { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+          .si-sections .si-section { padding: 60px 24px; }
+          .si-sections .si-concept-keywords { flex-wrap: wrap; }
+          .si-sections .si-material-list { grid-template-columns: 1fr; }
+          .si-sections .si-concept-detail-list { grid-template-columns: 1fr; }
+          .si-sections .si-tech-images { grid-template-columns: 1fr; }
+          .si-sections .si-color-info { padding: 40px 24px; }
         }
       `}</style>
     </>
