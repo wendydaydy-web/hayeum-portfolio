@@ -332,7 +332,7 @@ export default function Benson() {
                   </div>
                 </div>
                 <div className="si-concept-image si-img-crop-en si-crop-04">
-                  <img src="/images/benson/siguide/page_04.png" alt="Design Strategy" />
+                  <img src="/images/benson/siguide/strategy-lifestyle.png" alt="Design Strategy" />
                 </div>
               </div>
             </div>
