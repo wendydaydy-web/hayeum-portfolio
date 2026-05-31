@@ -10,6 +10,7 @@ const IMG = {
   pegboard: '/images/benson/hg-pegboard.jpg',
   redPoster: '/images/benson/benson-red-poster.webp',
 };
+const STK = (n) => `/images/benson/stickers/${n}`;
 
 /* ── Top navigation — pages/index.jsx 네비바 100% 재현 ── */
 function SiteNav() {
@@ -253,6 +254,41 @@ export default function Benson() {
           <img className="skstk skstk-br" src="/projects/benson/skate-sticker-br.webp" alt="" aria-hidden="true" />
         </div>
 
+        {/* ── BENSON POSTER ── */}
+        <section className="benson-poster">
+          <div className="benson-poster-overlay" aria-hidden="true"></div>
+          <img className="pstk pstk-oval" src={STK('oval.png')} alt="" aria-hidden="true" />
+          <img className="pstk pstk-board" src={STK('board.webp')} alt="" aria-hidden="true" />
+          <img className="pstk pstk-spoon" src={STK('spoon.png')} alt="" aria-hidden="true" />
+          <img className="pstk pstk-circle" src="/projects/benson/circle-sticker.webp" alt="" aria-hidden="true" />
+
+          <div className="poster-top-nav">
+            <span className="active">STREET MOOD</span>
+            <span>SCOOP UP YOUR TASTE</span>
+            <span className="active">SPATIAL CONCEPT</span>
+          </div>
+
+          <div className="poster-title-block">
+            <span className="poster-main-title" role="img" aria-label="BENSON" />
+            <span className="poster-sub-title">WHERE STREET MEETS SWEET</span>
+          </div>
+
+          <div className="poster-keywords">
+            <p>CONCRETE, STREET, FLAVOR, CURVE</p>
+            <p>BOLD, RAW, RED, RHYTHM</p>
+            <p>SCOOP, SUBCULTURE</p>
+            <p>SKATE, TASTE</p>
+          </div>
+
+          <div className="poster-bottom-text">
+            <p>BOLD TOPPINGS, COLD CONCRETE, VIVID RED.</p>
+            <p className="ko">볼드한 토핑과 차가운 콘크리트가 만들어내는 공간</p>
+            <p className="ko">붉은 아이스크림 한 입의 역동성이 만드는 미감</p>
+            <p>DYNAMIC NARRATIVE — ALL THIS DYNAMISM IS THE TASTE OF BENSON.</p>
+            <p className="ko">한 스쿱의 자유로움. FROM THE STREET TO YOUR SENSES.</p>
+          </div>
+        </section>
+
         <div className="two-col">
           <img src={IMG.counter} alt="" />
           <img src={IMG.seating} alt="" />
@@ -348,6 +384,99 @@ export default function Benson() {
         .two-col { display: grid; grid-template-columns: 1fr 1fr; line-height: 0; }
         .two-col img { width: 100%; height: 460px; object-fit: cover; }
 
+        /* ── BENSON POSTER ── */
+        .benson-poster {
+          width: 100%;
+          min-height: 92vh;
+          background: #FFF8E7;
+          position: relative;
+          overflow: hidden;
+          padding: 50px 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          color: #000;
+        }
+        .benson-poster::before {
+          content: '';
+          position: absolute; inset: 0;
+          background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px);
+          pointer-events: none; z-index: 1;
+        }
+        .benson-poster::after {
+          content: '';
+          position: absolute; inset: 0;
+          background:
+            linear-gradient(110deg, transparent 22%, rgba(0,0,0,0.08) 22.05%, rgba(0,0,0,0.08) 22.15%, transparent 22.2%),
+            linear-gradient(110deg, transparent 38%, rgba(0,0,0,0.05) 38.04%, rgba(0,0,0,0.05) 38.1%, transparent 38.14%),
+            linear-gradient(110deg, transparent 71%, rgba(0,0,0,0.07) 71.05%, rgba(0,0,0,0.07) 71.18%, transparent 71.22%);
+          pointer-events: none; z-index: 2;
+        }
+        .benson-poster-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: none;
+          pointer-events: none;
+          z-index: 3;
+        }
+        .poster-top-nav { display: flex; justify-content: space-between; position: relative; z-index: 10; }
+        .poster-top-nav span {
+          font-family: 'Barlow Condensed', sans-serif;
+          font-size: 12px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+          color: #000;
+        }
+        .poster-top-nav span.active { color: #000; }
+        .poster-title-block { text-align: center; position: relative; z-index: 10; margin: 30px 0 20px; }
+        /* BENSON wordmark — colored mask so PNG renders in exact brand red (#c8111a) */
+        .poster-main-title {
+          display: block;
+          width: clamp(280px, 60vw, 900px);
+          aspect-ratio: 959 / 270;
+          margin: 0 auto;
+          background-color: #c8111a;
+          -webkit-mask: url('/images/benson/hg-wordmark.png') center / contain no-repeat;
+                  mask: url('/images/benson/hg-wordmark.png') center / contain no-repeat;
+        }
+        .poster-sub-title {
+          font-family: 'Barlow Condensed', sans-serif;
+          font-size: clamp(16px, 2.4vw, 32px); font-weight: 700; letter-spacing: 0.28em;
+          color: #c8111a; text-transform: uppercase; margin-top: 14px; display: block;
+        }
+        .poster-keywords { text-align: center; position: relative; z-index: 10; }
+        .poster-keywords p {
+          font-family: 'Barlow Condensed', sans-serif;
+          font-size: clamp(13px, 1.5vw, 20px); font-weight: 400; letter-spacing: 0.2em;
+          color: #000; text-transform: uppercase; line-height: 1.85;
+        }
+        .poster-bottom-text { text-align: center; position: relative; z-index: 10; margin-top: 12px; }
+        .poster-bottom-text p {
+          font-family: 'Barlow Condensed', sans-serif;
+          font-size: clamp(13px, 1.1vw, 15px); font-weight: 600; letter-spacing: 0.12em;
+          color: #000; text-transform: uppercase; line-height: 2.05;
+        }
+        .poster-bottom-text .ko {
+          font-family: 'Barlow Condensed', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+          font-weight: 400; color: #000; letter-spacing: 0.04em; text-transform: none;
+        }
+        /* stickers (스티커 폴더) */
+        .pstk { position: absolute; z-index: 6; height: auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.3)); pointer-events: none; }
+        .pstk-oval { top: 9%; right: 6%; width: clamp(110px, 13vw, 200px); transform: rotate(-8deg); }
+        .pstk-board { bottom: 10%; right: 8%; width: clamp(70px, 8vw, 120px); transform: rotate(10deg); }
+        .pstk-spoon { top: 12%; left: 5%; width: clamp(120px, 16vw, 240px); transform: rotate(-18deg); }
+        .pstk-circle { bottom: 20%; left: 3%; width: clamp(75px, 7vw, 120px); transform: rotate(7deg); }
+        @media (max-width: 1024px) {
+          .pstk-circle { left: 2%; width: clamp(55px, 5.5vw, 80px); }
+        }
+        @media (max-width: 768px) {
+          .pstk-circle { left: 1%; width: clamp(38px, 5vw, 55px); }
+        }
+        @media (max-width: 480px) {
+          .pstk-circle { left: 1%; width: clamp(28px, 6vw, 40px); }
+        }
+
         /* ── FLAVOR LINE ── */
         .flavor-feature { background: #FFF8E7; padding: 100px 40px 120px; overflow: hidden; }
         .flavor-text-ko, .flavor-text-en { max-width: 1500px; margin: 0 auto; word-break: keep-all; text-align: justify; }
@@ -395,6 +524,7 @@ export default function Benson() {
           .flavor-image { max-width: 88%; }
           .flavor-title { margin-bottom: -50px; }
           .flavor-label-top, .flavor-tagline { letter-spacing: 0.3em; }
+          .pstk-spoon, .pstk-circle { width: 90px; }
         }
       `}</style>
     </>
