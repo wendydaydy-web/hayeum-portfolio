@@ -264,14 +264,6 @@ export default function Benson() {
           <img src={IMG.seating} alt="" />
         </div>
 
-        <div className="video-section">
-          <div className="video-wrapper portrait">
-            <video autoPlay muted loop playsInline>
-              <source src={IMG.film} type="video/mp4" />
-            </video>
-          </div>
-        </div>
-
         <div className="full-img"><img src={IMG.pegboard} alt="" /></div>
 
         {/* ── FLAVOR LINE ── */}
