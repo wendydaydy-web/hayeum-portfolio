@@ -331,7 +331,7 @@ export default function Benson() {
                     <span className="si-keyword">Authentic</span>
                   </div>
                 </div>
-                <div className="si-concept-image si-img-crop-en si-crop-04">
+                <div className="si-concept-image">
                   <img src="/images/benson/siguide/strategy-lifestyle.png" alt="Design Strategy" />
                 </div>
               </div>
