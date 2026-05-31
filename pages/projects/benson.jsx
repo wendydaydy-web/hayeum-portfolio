@@ -8,7 +8,6 @@ const IMG = {
   seating: '/images/benson/hg-seating.jpg',
   counter: '/images/benson/hg-counter.jpg',
   pegboard: '/images/benson/hg-pegboard.jpg',
-  scoop: '/images/benson/hg-scoop.jpg',
   redPoster: '/images/benson/benson-red-poster.webp',
 };
 
@@ -277,33 +276,7 @@ export default function Benson() {
           <p className="flavor-text-en" data-en>Benson&apos;s Flavor Line is the narrative centerpiece of the space — a pegboard wall reinterpreted as a subway map, where each station is a flavor and each line is a family of taste. Inspired by the freewheeling language of American sub-culture and the open geometry of skate parks, the perforated metal field invites touch, reading, and discovery. Its dynamic pathways turn ordering ice cream into an act of exploration — a wall that explains the brand without ever asking to be read.</p>
         </section>
 
-        <div className="full-img"><img src={IMG.scoop} alt="" /></div>
-        <div className="full-img"><img src={IMG.counter} alt="" /></div>
-
-        <div className="video-section"><div className="video-wrapper"></div></div>
-
-        <div className="three-col">
-          <img src={IMG.seating} alt="" />
-          <img src={IMG.scoop} alt="" />
-          <img src={IMG.pegboard} alt="" />
-        </div>
-
-        <div className="two-col">
-          <img src={IMG.facade} alt="" />
-          <img src={IMG.counter} alt="" />
-        </div>
-
-        <div className="video-section"><div className="video-wrapper"></div></div>
-
-        <div className="video-section"><div className="video-wrapper"></div></div>
-
-        <div className="full-img"><img src={IMG.pegboard} alt="" /></div>
-        <div className="full-img"><img src={IMG.scoop} alt="BENSON Design Boards" /></div>
-
-        <section className="outside-section">
-          <p className="outside-label">OUTDOOR</p>
-          <p className="outside-time">12:00:11</p>
-        </section>
+        <div className="full-img"><img src={IMG.facade} alt="" /></div>
 
         <div className="list-bar"><a href="#" onClick={(e) => { e.preventDefault(); toTop(); }}>LIST</a></div>
         <button className="top-btn" onClick={toTop} aria-label="Back to top">&#8593;</button>
@@ -374,13 +347,6 @@ export default function Benson() {
 
         .two-col { display: grid; grid-template-columns: 1fr 1fr; line-height: 0; }
         .two-col img { width: 100%; height: 460px; object-fit: cover; }
-        .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; line-height: 0; }
-        .three-col img { width: 100%; height: 320px; object-fit: cover; }
-
-        .video-section { background: #000; padding: 60px; display: flex; justify-content: center; }
-        .video-wrapper { width: 100%; max-width: 900px; aspect-ratio: 16/9; background: #0a0a0a; }
-        .video-wrapper.portrait { max-width: 420px; aspect-ratio: 4/5; }
-        .video-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         /* ── FLAVOR LINE ── */
         .flavor-feature { background: #FFF8E7; padding: 100px 40px 120px; overflow: hidden; }
@@ -411,18 +377,6 @@ export default function Benson() {
           text-transform: uppercase; font-weight: 400; margin-top: -50px; position: relative; z-index: 3;
         }
 
-        .outside-section {
-          min-height: 480px;
-          display: flex; flex-direction: column; align-items: center; justify-content: center;
-          position: relative;
-          background-image: url('/images/benson/hg-facade.jpg');
-          background-size: cover; background-position: center;
-        }
-        .outside-section::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.72); }
-        .outside-label, .outside-time { position: relative; z-index: 1; color: #c8111a; letter-spacing: 0.2em; text-transform: uppercase; }
-        .outside-label { font-size: 11px; margin-bottom: 8px; }
-        .outside-time { font-size: 20px; }
-
         .list-bar { position: fixed; bottom: 24px; left: 24px; z-index: 600; }
         .list-bar a { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: underline; color: #000; }
         .top-btn {
@@ -437,9 +391,6 @@ export default function Benson() {
           .project-info { padding: 40px 20px; grid-template-columns: 1fr 1fr; }
           .two-col { grid-template-columns: 1fr; }
           .two-col img { height: 280px; }
-          .three-col { grid-template-columns: 1fr; }
-          .three-col img { height: 280px; }
-          .video-section { padding: 30px 16px; }
           .flavor-feature { padding: 60px 20px 80px; }
           .flavor-image { max-width: 88%; }
           .flavor-title { margin-bottom: -50px; }
