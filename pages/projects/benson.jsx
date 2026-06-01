@@ -876,13 +876,13 @@ export default function Benson() {
         .si-sections .si-concept-detail-img { width: 100%; border-radius: 4px; }
         .si-sections .si-img-marker {
           position: absolute;
-          width: clamp(22px, 3.5vw, 36px);
-          height: clamp(22px, 3.5vw, 36px);
+          width: clamp(14px, 1.8vw, 20px);
+          height: clamp(14px, 1.8vw, 20px);
           background: var(--si-benson-red);
           color: #fff;
           clip-path: polygon(0% 0%, 100% 0%, 82% 100%, 18% 100%);
           display: flex; align-items: center; justify-content: center;
-          font-size: clamp(12px, 1.8vw, 16px);
+          font-size: clamp(9px, 1.1vw, 11px);
           font-weight: 700;
           transform: translate(-50%, -50%);
           pointer-events: none;
@@ -891,7 +891,7 @@ export default function Benson() {
         }
         @media (max-width: 768px) {
           .si-sections .si-img-marker {
-            width: 28px; height: 28px; font-size: 13px;
+            width: 16px; height: 16px; font-size: 10px;
           }
         }
         .si-sections .si-concept-detail-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; margin-top: 32px; padding: 0 20px; }
@@ -942,6 +942,8 @@ export default function Benson() {
           .si-sections .si-gallery-grid { grid-template-columns: 1fr; }
           .si-sections .si-gallery-grid .si-gallery-item.si-wide { grid-column: span 1; }
           .si-sections .si-tech-images { grid-template-columns: 1fr 1fr; }
+          .si-sections .si-concept-detail-img-wrap { margin-left: -40px; margin-right: -40px; }
+          .si-sections .si-concept-detail-img { border-radius: 0; }
         }
         @media (max-width: 600px) {
           .si-sections .si-section { padding: 60px 24px; }
@@ -950,6 +952,7 @@ export default function Benson() {
           .si-sections .si-concept-detail-list { grid-template-columns: 1fr; }
           .si-sections .si-tech-images { grid-template-columns: 1fr; }
           .si-sections .si-color-info { padding: 40px 24px; }
+          .si-sections .si-concept-detail-img-wrap { margin-left: -24px; margin-right: -24px; }
         }
       `}</style>
     </>
