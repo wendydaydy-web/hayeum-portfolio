@@ -387,10 +387,10 @@ export default function Benson() {
               <div className="si-concept-detail-grid">
                 <div className="si-concept-detail-img-wrap">
                   <img src="/images/benson/siguide/page_14.png" alt="Design concept - outdoor connect" className="si-concept-detail-img" />
-                  <span className="si-img-marker" style={{ top: '22%', left: '42%' }}>1</span>
-                  <span className="si-img-marker" style={{ top: '45%', left: '51%' }}>2</span>
-                  <span className="si-img-marker" style={{ top: '80%', left: '44%' }}>3</span>
-                  <span className="si-img-marker" style={{ top: '78%', left: '83%' }}>4</span>
+                  <span className="si-img-marker" style={{ top: '35%', left: '42%' }}>1</span>
+                  <span className="si-img-marker" style={{ top: '53%', left: '53%' }}>2</span>
+                  <span className="si-img-marker" style={{ top: '86%', left: '47%' }}>3</span>
+                  <span className="si-img-marker" style={{ top: '86%', left: '83%' }}>4</span>
                 </div>
                 <div className="si-concept-detail-list">
                   <div className="si-concept-detail-item">
