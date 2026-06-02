@@ -385,12 +385,15 @@ export default function Benson() {
               <p className="si-section-desc" data-ko>벤슨 아이스크림 샵은 폴딩도어와 전면 곡선으로 부드럽게 이어지는 파사드 구조물, 매장 전체를 관통하는 사이니지, 벤치-테이블로 이어지는 곡선형 메인 퍼니처를 이용해 내외부를 연결함으로써, 내부 뿐 아니라 외부에서도 벤슨 아이스크림을 즐길 수 있는 아웃도어 형태로 디자인하였습니다.</p>
               <p className="si-section-desc" data-en>By connecting interior and exterior through folding doors, a gently curving facade, store-spanning signage, and a flowing bench-to-table main furniture piece, the Benson Ice Cream shop is designed as an outdoor-oriented space where guests can enjoy ice cream both inside and out.</p>
               <div className="si-concept-detail-grid">
-                <div className="si-concept-detail-img-wrap">
-                  <img src="/images/benson/siguide/page_14.png" alt="Design concept - outdoor connect" className="si-concept-detail-img" />
-                  <span className="si-img-marker" style={{ top: '35%', left: '42%' }}>1</span>
-                  <span className="si-img-marker" style={{ top: '53%', left: '53%' }}>2</span>
-                  <span className="si-img-marker" style={{ top: '86%', left: '47%' }}>3</span>
-                  <span className="si-img-marker" style={{ top: '86%', left: '83%' }}>4</span>
+                <div className="si-concept-detail-pair">
+                  <img src="/images/benson/siguide/page_14-left.png" alt="Outdoor zone" className="si-concept-detail-img si-pair-left" />
+                  <div className="si-concept-detail-img-wrap si-pair-right">
+                    <img src="/images/benson/siguide/page_14-right.png" alt="Connect inside" className="si-concept-detail-img" />
+                    <span className="si-img-marker" style={{ top: '18%', left: '12%' }}>1</span>
+                    <span className="si-img-marker" style={{ top: '30%', left: '38%' }}>2</span>
+                    <span className="si-img-marker" style={{ top: '73%', left: '22%' }}>3</span>
+                    <span className="si-img-marker" style={{ top: '72%', left: '80%' }}>4</span>
+                  </div>
                 </div>
                 <div className="si-concept-detail-list">
                   <div className="si-concept-detail-item">
@@ -872,12 +875,14 @@ export default function Benson() {
 
         /* 04 / 05 CONCEPT DETAIL */
         .si-sections .si-concept-detail-grid { margin-top: 60px; }
+        .si-sections .si-concept-detail-pair { display: grid; grid-template-columns: 814fr 1567fr; gap: 16px; align-items: stretch; }
+        .si-sections .si-concept-detail-pair .si-pair-left { width: 100%; height: 100%; object-fit: cover; }
         .si-sections .si-concept-detail-img-wrap { position: relative; line-height: 0; }
         .si-sections .si-concept-detail-img { width: 100%; border-radius: 4px; }
         .si-sections .si-img-marker {
           position: absolute;
-          width: clamp(30px, 3.4vw, 40px);
-          height: clamp(30px, 3.4vw, 40px);
+          width: clamp(38px, 4.4vw, 52px);
+          height: clamp(38px, 4.4vw, 52px);
           background: var(--si-benson-red);
           color: #fff;
           clip-path: polygon(0% 0%, 100% 0%, 82% 100%, 18% 100%);
@@ -885,7 +890,7 @@ export default function Benson() {
           align-items: center;
           justify-content: center;
           font-family: 'Inter', 'Noto Sans KR', sans-serif;
-          font-size: clamp(14px, 1.5vw, 18px);
+          font-size: clamp(16px, 1.9vw, 22px);
           font-weight: 700;
           line-height: 1;
           color: #fff;
@@ -894,9 +899,12 @@ export default function Benson() {
           z-index: 2;
           filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
         }
+        @media (max-width: 1024px) {
+          .si-sections .si-concept-detail-pair { grid-template-columns: 1fr; gap: 12px; }
+        }
         @media (max-width: 768px) {
           .si-sections .si-img-marker {
-            width: 32px; height: 32px; font-size: 15px;
+            width: 36px; height: 36px; font-size: 17px;
           }
         }
         .si-sections .si-concept-detail-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; margin-top: 32px; padding: 0 20px; }
@@ -947,7 +955,7 @@ export default function Benson() {
           .si-sections .si-gallery-grid { grid-template-columns: 1fr; }
           .si-sections .si-gallery-grid .si-gallery-item.si-wide { grid-column: span 1; }
           .si-sections .si-tech-images { grid-template-columns: 1fr 1fr; }
-          .si-sections .si-concept-detail-img-wrap { margin-left: -40px; margin-right: -40px; }
+          .si-sections .si-concept-detail-pair { margin-left: -40px; margin-right: -40px; }
           .si-sections .si-concept-detail-img { border-radius: 0; }
         }
         @media (max-width: 600px) {
@@ -957,7 +965,7 @@ export default function Benson() {
           .si-sections .si-concept-detail-list { grid-template-columns: 1fr; }
           .si-sections .si-tech-images { grid-template-columns: 1fr; }
           .si-sections .si-color-info { padding: 40px 24px; }
-          .si-sections .si-concept-detail-img-wrap { margin-left: -24px; margin-right: -24px; }
+          .si-sections .si-concept-detail-pair { margin-left: -24px; margin-right: -24px; }
         }
       `}</style>
     </>
