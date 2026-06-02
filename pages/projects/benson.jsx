@@ -388,11 +388,11 @@ export default function Benson() {
                 <div className="si-concept-detail-pair">
                   <img src="/images/benson/siguide/page_14-left.png" alt="Outdoor zone" className="si-concept-detail-img si-pair-left" />
                   <div className="si-concept-detail-img-wrap si-pair-right">
-                    <img src="/images/benson/siguide/page_14-right.png" alt="Connect inside" className="si-concept-detail-img" />
-                    <span className="si-img-marker" style={{ top: '18%', left: '12%' }}>1</span>
-                    <span className="si-img-marker" style={{ top: '30%', left: '38%' }}>2</span>
-                    <span className="si-img-marker" style={{ top: '73%', left: '22%' }}>3</span>
-                    <span className="si-img-marker" style={{ top: '72%', left: '80%' }}>4</span>
+                    <img src="/images/benson/siguide/connect-inside-clean.png" alt="Connect inside" className="si-concept-detail-img" />
+                    <span className="si-img-marker" style={{ top: '20%', left: '24%' }}>1</span>
+                    <span className="si-img-marker" style={{ top: '34%', left: '50%' }}>2</span>
+                    <span className="si-img-marker" style={{ top: '60%', left: '22%' }}>3</span>
+                    <span className="si-img-marker" style={{ top: '58%', left: '72%' }}>4</span>
                   </div>
                 </div>
                 <div className="si-concept-detail-list">
@@ -875,7 +875,7 @@ export default function Benson() {
 
         /* 04 / 05 CONCEPT DETAIL */
         .si-sections .si-concept-detail-grid { margin-top: 60px; }
-        .si-sections .si-concept-detail-pair { display: grid; grid-template-columns: 814fr 1567fr; gap: 16px; align-items: stretch; }
+        .si-sections .si-concept-detail-pair { display: grid; grid-template-columns: 755fr 1778fr; gap: 16px; align-items: stretch; }
         .si-sections .si-concept-detail-pair .si-pair-left { width: 100%; height: 100%; object-fit: cover; }
         .si-sections .si-concept-detail-img-wrap { position: relative; line-height: 0; }
         .si-sections .si-concept-detail-img { width: 100%; border-radius: 4px; }
