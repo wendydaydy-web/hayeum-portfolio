@@ -385,7 +385,13 @@ export default function Benson() {
               <p className="si-section-desc" data-ko>벤슨 아이스크림 샵은 폴딩도어와 전면 곡선으로 부드럽게 이어지는 파사드 구조물, 매장 전체를 관통하는 사이니지, 벤치-테이블로 이어지는 곡선형 메인 퍼니처를 이용해 내외부를 연결함으로써, 내부 뿐 아니라 외부에서도 벤슨 아이스크림을 즐길 수 있는 아웃도어 형태로 디자인하였습니다.</p>
               <p className="si-section-desc" data-en>By connecting interior and exterior through folding doors, a gently curving facade, store-spanning signage, and a flowing bench-to-table main furniture piece, the Benson Ice Cream shop is designed as an outdoor-oriented space where guests can enjoy ice cream both inside and out.</p>
               <div className="si-concept-detail-grid">
-                <img src="/images/benson/siguide/page_14.png" alt="Design concept - outdoor connect" className="si-concept-detail-img" />
+                <div className="si-concept-detail-img-wrap">
+                  <img src="/images/benson/siguide/page_14.png" alt="Design concept - outdoor connect" className="si-concept-detail-img" />
+                  <span className="si-img-marker" style={{ top: '35%', left: '42%' }}>1</span>
+                  <span className="si-img-marker" style={{ top: '53%', left: '53%' }}>2</span>
+                  <span className="si-img-marker" style={{ top: '86%', left: '47%' }}>3</span>
+                  <span className="si-img-marker" style={{ top: '86%', left: '83%' }}>4</span>
+                </div>
                 <div className="si-concept-detail-list">
                   <div className="si-concept-detail-item">
                     <span className="si-concept-num">1</span>
@@ -866,7 +872,33 @@ export default function Benson() {
 
         /* 04 / 05 CONCEPT DETAIL */
         .si-sections .si-concept-detail-grid { margin-top: 60px; }
+        .si-sections .si-concept-detail-img-wrap { position: relative; line-height: 0; }
         .si-sections .si-concept-detail-img { width: 100%; border-radius: 4px; }
+        .si-sections .si-img-marker {
+          position: absolute;
+          width: clamp(30px, 3.4vw, 40px);
+          height: clamp(30px, 3.4vw, 40px);
+          background: var(--si-benson-red);
+          color: #fff;
+          clip-path: polygon(0% 0%, 100% 0%, 82% 100%, 18% 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: 'Inter', 'Noto Sans KR', sans-serif;
+          font-size: clamp(14px, 1.5vw, 18px);
+          font-weight: 700;
+          line-height: 1;
+          color: #fff;
+          transform: translate(-50%, -50%);
+          pointer-events: none;
+          z-index: 2;
+          filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
+        }
+        @media (max-width: 768px) {
+          .si-sections .si-img-marker {
+            width: 32px; height: 32px; font-size: 15px;
+          }
+        }
         .si-sections .si-concept-detail-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; margin-top: 32px; padding: 0 20px; }
         .si-sections .si-concept-detail-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.6; font-weight: 300; color: var(--si-text-mid); }
         .si-sections .si-concept-num { flex-shrink: 0; width: 28px; height: 28px; background: var(--si-benson-red); color: #fff; clip-path: polygon(0% 0%, 100% 0%, 82% 100%, 18% 100%); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; }
@@ -915,7 +947,8 @@ export default function Benson() {
           .si-sections .si-gallery-grid { grid-template-columns: 1fr; }
           .si-sections .si-gallery-grid .si-gallery-item.si-wide { grid-column: span 1; }
           .si-sections .si-tech-images { grid-template-columns: 1fr 1fr; }
-          .si-sections .si-concept-detail-img { margin-left: -40px; margin-right: -40px; width: calc(100% + 80px); max-width: none; border-radius: 0; }
+          .si-sections .si-concept-detail-img-wrap { margin-left: -40px; margin-right: -40px; }
+          .si-sections .si-concept-detail-img { border-radius: 0; }
         }
         @media (max-width: 600px) {
           .si-sections .si-section { padding: 60px 24px; }
@@ -924,7 +957,7 @@ export default function Benson() {
           .si-sections .si-concept-detail-list { grid-template-columns: 1fr; }
           .si-sections .si-tech-images { grid-template-columns: 1fr; }
           .si-sections .si-color-info { padding: 40px 24px; }
-          .si-sections .si-concept-detail-img { margin-left: -24px; margin-right: -24px; width: calc(100% + 48px); max-width: none; }
+          .si-sections .si-concept-detail-img-wrap { margin-left: -24px; margin-right: -24px; }
         }
       `}</style>
     </>
