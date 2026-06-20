@@ -275,11 +275,17 @@ export default function Benson() {
               <span data-en>New F&amp;B Brand · Flagship Concept</span>
             </p>
           </div>
-          <div>
+          <div className="info-partner">
             <p className="info-label">Partner</p>
             <p className="info-value">
-              <span className="info-line">CLIENT |&nbsp;<span data-ko>한화갤러리아 — <span className="info-nowrap">한화그룹 (Fortune Global 500)</span></span><span data-en>Hanwha Galleria — <span className="info-nowrap">Hanwha Group (Fortune Global 500)</span></span></span>
-              <span className="info-line">AGENCY |&nbsp;<span data-ko>스프레드웍스</span><span data-en>Spreadworks</span></span>
+              <span className="info-line">
+                <span data-ko className="info-nowrap">CLIENT | 한화갤러리아 — 한화그룹 (Fortune Global 500)</span>
+                <span data-en className="info-nowrap">CLIENT | Hanwha Galleria — Hanwha Group (Fortune Global 500)</span>
+              </span>
+              <span className="info-line">
+                <span data-ko className="info-nowrap">AGENCY | 스프레드웍스</span>
+                <span data-en className="info-nowrap">AGENCY | Spreadworks</span>
+              </span>
             </p>
           </div>
         </section>
@@ -672,11 +678,8 @@ export default function Benson() {
         }
         .info-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
         .info-value { font-size: 13px; line-height: 1.7; color: #444; }
-        .info-value .info-line { display: block; word-break: keep-all; }
+        .info-value .info-line { display: block; }
         .info-value .info-nowrap { white-space: nowrap; }
-        @media (min-width: 769px) {
-          .info-value .info-line { white-space: nowrap; }
-        }
 
         .full-img { width: 100%; line-height: 0; }
         .full-img img { width: 100%; object-fit: cover; }
@@ -848,6 +851,7 @@ export default function Benson() {
         @media (max-width: 768px) {
           .hero { padding: 100px 20px 40px; }
           .project-info { padding: 40px 20px; grid-template-columns: 1fr 1fr; }
+          .project-info .info-partner { grid-column: 1 / -1; }
           .two-col { grid-template-columns: 1fr; }
           .two-col img { height: 280px; }
           .flavor-feature { padding: 60px 20px 80px; }
