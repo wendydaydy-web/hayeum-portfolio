@@ -234,8 +234,8 @@ export default function Benson() {
         <section className="hero">
           <h1 className="hero-title">BENSON_<span className="hero-client">Hanwha Galleria</span></h1>
           <p className="hero-positioning">
-            <span data-ko>Fortune Global 500 기업 한화그룹의 프리미엄 유통 부문, 한화갤러리아를 위해 독립 스튜디오로서 제안한 브랜드·공간 컨셉.</span>
-            <span data-en>Brand &amp; spatial concept for Hanwha Galleria, the luxury retail arm of Hanwha Group — a Fortune Global 500 conglomerate — proposed as an independent studio.</span>
+            <span data-ko>Fortune Global 500 기업 한화갤러리아의 신규 F&amp;B 브랜드 BENSON — 스프레드웍스의 의뢰로 공간·SI 디자인을 맡았습니다.</span>
+            <span data-en>Space &amp; SI design for BENSON, a new F&amp;B brand for Hanwha Galleria (Fortune Global 500), commissioned by Spreadworks.</span>
           </p>
           <p className="hero-desc">볼드한 토핑과 풍부한 유지방의 깊은 맛이 감각을 깨우는 곳. 벤슨(BENSON)은 단순히 아이스크림을 즐기는 공간을 넘어, 미국의 서브컬처와 스트릿 무드가 교차하며 만들어내는 역동적인 순간을 담았다. 공간을 가로지르는 대담한 곡선은 스케이트 파크의 에너지에서 시작되었다. 거칠면서도 정제된 콘크리트 질감 위로, 벤슨의 시그니처 레드가 맥박처럼 흐르며 공간에 강렬한 생동감을 불어넣는다. 파사드에서 내부로 부드럽게 이어지는 곡선형 퍼니처와 천장 조형물은 경계를 허물고 당신을 이 자유로운 아웃도어 무드 속으로 자연스럽게 이끈다. 이곳에서 아이스크림 한 스쿱은 단순한 디저트가 아니다. 페그보드 위에 펼쳐진 다채로운 플레이버의 향연 그리고 그 속에 스며든 스트릿 무드의 자유로움이 당신의 오감을 자극한다. 부드러운 텍스처와 청키한 토핑이 입안에서 리듬을 만들 때, 당신은 비로소 이 역동적인 세계의 일부가 된다.</p>
           <p className="hero-quote">“당신이 마주하는 이 모든 역동성이 곧 벤슨의 맛이다.”</p>
