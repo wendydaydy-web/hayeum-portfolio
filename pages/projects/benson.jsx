@@ -263,13 +263,9 @@ export default function Benson() {
           <div>
             <p className="info-label">Partner</p>
             <p className="info-value">
-              <span className="info-line">CLIENT |&nbsp;<span data-ko>한화갤러리아 — 한화그룹 (Fortune Global 500)</span><span data-en>Hanwha Galleria — Hanwha Group (Fortune Global 500)</span></span>
+              <span className="info-line">CLIENT |&nbsp;<span data-ko>한화갤러리아 — 한화그룹&nbsp;<span className="info-nowrap">(Fortune Global 500)</span></span><span data-en>Hanwha Galleria — Hanwha Group&nbsp;<span className="info-nowrap">(Fortune Global 500)</span></span></span>
               <span className="info-line">AGENCY |&nbsp;<span data-ko>스프레드웍스</span><span data-en>Spreadworks</span></span>
             </p>
-          </div>
-          <div>
-            <p className="info-label">Area</p>
-            <p className="info-value">{/* TODO: AREA 평수 입력 */}</p>
           </div>
         </section>
 
@@ -656,12 +652,13 @@ export default function Benson() {
         /* ── PROJECT INFO ── */
         .project-info {
           padding: 50px 60px 60px; max-width: 1600px; margin: 0 auto;
-          display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px 20px;
+          display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 20px;
           border-top: 1px solid #e0e0e0;
         }
         .info-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
         .info-value { font-size: 13px; line-height: 1.7; color: #444; }
         .info-value .info-line { display: block; word-break: keep-all; }
+        .info-value .info-nowrap { white-space: nowrap; }
 
         .full-img { width: 100%; line-height: 0; }
         .full-img img { width: 100%; object-fit: cover; }
