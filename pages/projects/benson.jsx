@@ -652,7 +652,7 @@ export default function Benson() {
         /* ── PROJECT INFO ── */
         .project-info {
           padding: 50px 60px 60px; max-width: 1600px; margin: 0 auto;
-          display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 20px;
+          display: grid; grid-template-columns: 1fr 1fr 3fr; gap: 32px 20px;
           border-top: 1px solid #e0e0e0;
         }
         .info-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
