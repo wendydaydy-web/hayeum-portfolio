@@ -147,6 +147,11 @@ function SiteNav() {
           margin: 0;
           padding: 0;
         }
+        .nav-menu li {
+          display: inline-flex;
+          align-items: center;
+          line-height: 1;
+        }
         /* :global(a) so it also reaches the <a> rendered by next/link (no underscore class) */
         .nav-menu :global(a) {
           font-family: 'Inter', 'Noto Sans KR', sans-serif;
@@ -156,6 +161,7 @@ function SiteNav() {
           text-transform: uppercase;
           text-decoration: none;
           color: #1a1a1a;
+          line-height: 1;
           transition: color 0.3s, opacity 0.2s;
         }
         .nav-menu :global(a):hover {
@@ -171,14 +177,17 @@ function SiteNav() {
           letter-spacing: 0.12em;
           text-transform: uppercase;
           color: #1a1a1a;
+          line-height: 1;
         }
         .nav-lang button {
           font: inherit;
+          line-height: 1;
           letter-spacing: inherit;
           text-transform: inherit;
           color: rgba(26,26,26,0.4);
           transition: color 0.3s, opacity 0.2s;
           padding: 0;
+          margin: 0;
           background: none;
           border: none;
           cursor: pointer;
@@ -659,6 +668,9 @@ export default function Benson() {
         .info-value { font-size: 13px; line-height: 1.7; color: #444; }
         .info-value .info-line { display: block; word-break: keep-all; }
         .info-value .info-nowrap { white-space: nowrap; }
+        @media (min-width: 769px) {
+          .info-value .info-line { white-space: nowrap; }
+        }
 
         .full-img { width: 100%; line-height: 0; }
         .full-img img { width: 100%; object-fit: cover; }
