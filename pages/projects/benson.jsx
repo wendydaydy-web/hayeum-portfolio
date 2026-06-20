@@ -248,11 +248,11 @@ export default function Benson() {
           </p>
           <p className="hero-desc">
             <span data-ko>볼드한 토핑과 풍부한 유지방의 깊은 맛이 감각을 깨우는 곳. 벤슨(BENSON)은 단순히 아이스크림을 즐기는 공간을 넘어, 미국의 서브컬처와 스트릿 무드가 교차하며 만들어내는 역동적인 순간을 담았다. 공간을 가로지르는 대담한 곡선은 스케이트 파크의 에너지에서 시작되었다. 거칠면서도 정제된 콘크리트 질감 위로, 벤슨의 시그니처 레드가 맥박처럼 흐르며 공간에 강렬한 생동감을 불어넣는다. 파사드에서 내부로 부드럽게 이어지는 곡선형 퍼니처와 천장 조형물은 경계를 허물고 당신을 이 자유로운 아웃도어 무드 속으로 자연스럽게 이끈다. 이곳에서 아이스크림 한 스쿱은 단순한 디저트가 아니다. 페그보드 위에 펼쳐진 다채로운 플레이버의 향연 그리고 그 속에 스며든 스트릿 무드의 자유로움이 당신의 오감을 자극한다. 부드러운 텍스처와 청키한 토핑이 입안에서 리듬을 만들 때, 당신은 비로소 이 역동적인 세계의 일부가 된다.</span>
-            <span data-en>A place where bold toppings and deeply rich, creamy ice cream awaken the senses. BENSON is more than just an ice cream shop — it captures the dynamic moments born where American sub-culture and street mood intersect. The bold curves sweeping through the space draw their energy from skate-park geometry. Across raw yet refined concrete, BENSON&apos;s signature red runs like a pulse, breathing intense vitality into every corner. Curvilinear furniture and ceiling sculptures flow gently from facade to interior, dissolving boundaries and guiding you naturally into a free, outdoor mood. Here, a single scoop is more than dessert. The pegboard&apos;s vivid procession of flavors — laced with the freedom of street mood — awakens every sense. When soft textures and chunky toppings build a rhythm on your tongue, you finally become part of this dynamic world.</span>
+            <span data-en>A place where bold toppings and deeply rich, creamy ice cream awaken the senses. BENSON is more than an ice cream shop — it captures the dynamic energy born where American subculture meets the street. The bold curves sweeping through the space draw their energy from skate-park geometry. Across raw yet refined concrete, BENSON&apos;s signature red runs like a pulse, breathing vitality into every corner. Curvilinear furniture and ceiling sculptures flow gently from facade to interior, dissolving boundaries and drawing you into a free, open-air atmosphere. Here, a single scoop is more than dessert. The pegboard&apos;s vivid procession of flavors — charged with the freedom of the street — awakens every sense. When soft textures and chunky toppings build a rhythm on your tongue, you become part of this dynamic world.</span>
           </p>
           <p className="hero-quote">
             <span data-ko>“당신이 마주하는 이 모든 역동성이 곧 벤슨의 맛이다.”</span>
-            <span data-en>“All this dynamism you encounter — that is the taste of BENSON.”</span>
+            <span data-en>“All this energy you encounter — that is the taste of BENSON.”</span>
           </p>
         </section>
 
