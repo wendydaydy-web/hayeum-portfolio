@@ -263,7 +263,7 @@ export default function Benson() {
           <div>
             <p className="info-label">Partner</p>
             <p className="info-value">
-              <span className="info-line">CLIENT |&nbsp;<span data-ko>한화갤러리아 — 한화그룹&nbsp;<span className="info-nowrap">(Fortune Global 500)</span></span><span data-en>Hanwha Galleria — Hanwha Group&nbsp;<span className="info-nowrap">(Fortune Global 500)</span></span></span>
+              <span className="info-line">CLIENT |&nbsp;<span data-ko>한화갤러리아 — <span className="info-nowrap">한화그룹 (Fortune Global 500)</span></span><span data-en>Hanwha Galleria — <span className="info-nowrap">Hanwha Group (Fortune Global 500)</span></span></span>
               <span className="info-line">AGENCY |&nbsp;<span data-ko>스프레드웍스</span><span data-en>Spreadworks</span></span>
             </p>
           </div>
