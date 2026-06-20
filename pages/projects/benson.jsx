@@ -266,10 +266,7 @@ export default function Benson() {
             </p>
           </div>
           <div>
-            <p className="info-label">
-              <span data-ko>프로젝트 유형</span>
-              <span data-en>Project Type</span>
-            </p>
+            <p className="info-label">Project Type</p>
             <p className="info-value">
               <span data-ko>신규 F&amp;B 브랜드 · 플래그십 컨셉</span>
               <span data-en>New F&amp;B Brand · Flagship Concept</span>
