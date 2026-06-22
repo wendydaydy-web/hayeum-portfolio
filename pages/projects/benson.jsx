@@ -360,6 +360,10 @@ export default function Benson() {
           <p className="flavor-text-en" data-en>Benson&apos;s Flavor Line is the narrative centerpiece of the space — a pegboard wall reinterpreted as a subway map, where each station is a flavor and each line is a family of taste. Inspired by the freewheeling language of American sub-culture and the open geometry of skate parks, the perforated metal field invites touch, reading, and discovery. Its dynamic pathways turn ordering ice cream into an act of exploration — a wall that explains the brand without ever asking to be read.</p>
         </section>
 
+        <div className="cup-feature">
+          <img src="/images/benson/cup-stack.png" alt="BENSON ice cream cup lineup — packaging across flavor range" />
+        </div>
+
         {/* ── SI GUIDE — 9 SECTIONS PORTED FROM SOURCE INDEX.HTML ── */}
         <div className="si-sections">
           {/* 01 — Design Strategy */}
