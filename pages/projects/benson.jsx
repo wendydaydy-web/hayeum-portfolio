@@ -361,7 +361,7 @@ export default function Benson() {
         </section>
 
         <div className="cup-feature">
-          <img src="/images/benson/cup-stack.png" alt="BENSON ice cream cup lineup — packaging across flavor range" />
+          <img src="/images/benson/cup-stack.webp" alt="BENSON ice cream cup lineup — packaging across flavor range" />
         </div>
 
         {/* ── SI GUIDE — 9 SECTIONS PORTED FROM SOURCE INDEX.HTML ── */}
