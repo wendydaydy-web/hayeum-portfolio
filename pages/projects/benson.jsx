@@ -296,6 +296,8 @@ export default function Benson() {
           <img className="skstk skstk-br" src="/projects/benson/skate-sticker-br.webp" alt="" aria-hidden="true" />
         </div>
 
+        <div className="full-img"><img src={IMG.facade} alt="BENSON storefront facade" /></div>
+
         {/* ── BENSON POSTER ── */}
         <section className="benson-poster">
           <div className="benson-poster-overlay" aria-hidden="true"></div>
