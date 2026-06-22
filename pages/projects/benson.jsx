@@ -684,7 +684,7 @@ export default function Benson() {
 
         /* 세로 컵 제품 컷 — 풀폭 깔면 너무 키 커서 max-height로 제한 + 가운데 정렬 */
         .cup-feature {
-          width: 100%; background: #fff; padding: 80px 24px;
+          width: 100%; background: #fff;
           display: flex; justify-content: center; align-items: center;
         }
         .cup-feature img { max-width: 100%; max-height: 85vh; width: auto; height: auto; display: block; }
