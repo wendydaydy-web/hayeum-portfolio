@@ -354,8 +354,6 @@ export default function Benson() {
           <p className="flavor-text-en" data-en>Benson&apos;s Flavor Line is the narrative centerpiece of the space — a pegboard wall reinterpreted as a subway map, where each station is a flavor and each line is a family of taste. Inspired by the freewheeling language of American sub-culture and the open geometry of skate parks, the perforated metal field invites touch, reading, and discovery. Its dynamic pathways turn ordering ice cream into an act of exploration — a wall that explains the brand without ever asking to be read.</p>
         </section>
 
-        <div className="full-img"><img src={IMG.facade} alt="" /></div>
-
         {/* ── SI GUIDE — 9 SECTIONS PORTED FROM SOURCE INDEX.HTML ── */}
         <div className="si-sections">
           {/* 01 — Design Strategy */}
@@ -387,15 +385,8 @@ export default function Benson() {
               <h2 className="si-section-title">Storefront Design</h2>
               <p className="si-section-desc" data-ko>폴딩도어와 전면 곡선으로 부드럽게 이어지는 파사드 구조물로 내외부를 연결하여 접근성을 높이고, 스트릿 푸드가 가진 자유로움과 활기참을 표현하였습니다.</p>
               <p className="si-section-desc" data-en>Folding doors and a gently curving facade structure seamlessly bridge the interior and exterior, enhancing accessibility while embodying the freedom and vibrancy of street food culture.</p>
-              <div className="si-facade-grid">
-                <div className="si-facade-item">
-                  <img src="/images/benson/siguide/page_05.png" alt="Facade Day" />
-                  <div className="si-caption">Day View</div>
-                </div>
-                <div className="si-facade-item">
-                  <img src="/images/benson/siguide/page_06.png" alt="Facade Night" />
-                  <div className="si-caption">Night View</div>
-                </div>
+              <div className="si-facade-image">
+                <img src={IMG.facade} alt="Storefront facade" />
               </div>
             </div>
           </section>
@@ -906,16 +897,9 @@ export default function Benson() {
         :global(html[lang="en"]) .si-sections .si-img-crop-en.si-crop-17 { aspect-ratio: 16 / 8; }
 
         /* 02 FACADE */
-        .si-sections .si-facade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 60px; }
-        .si-sections .si-facade-grid .si-facade-item { position: relative; overflow: hidden; border-radius: 4px; }
-        .si-sections .si-facade-grid img { width: 100%; display: block; transition: transform 0.6s ease; }
-        .si-sections .si-facade-item:hover img { transform: scale(1.03); }
-        .si-sections .si-facade-item .si-caption {
-          position: absolute; bottom: 20px; left: 20px; color: #fff;
-          font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500;
-          background: rgba(0,0,0,0.4); padding: 8px 16px; border-radius: 2px;
-          backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-        }
+        .si-sections .si-facade-image { margin-top: 60px; border-radius: 4px; overflow: hidden; }
+        .si-sections .si-facade-image img { width: 100%; display: block; transition: transform 0.6s ease; }
+        .si-sections .si-facade-image:hover img { transform: scale(1.03); }
 
         /* 03 PERSPECTIVES */
         .si-sections .si-perspectives .si-section-label { color: var(--si-benson-red); }
@@ -1000,7 +984,6 @@ export default function Benson() {
         @media (max-width: 1024px) {
           .si-sections .si-section { padding: 80px 40px; }
           .si-sections .si-concept-grid,
-          .si-sections .si-facade-grid,
           .si-sections .si-materials-grid,
           .si-sections .si-color-split { grid-template-columns: 1fr; }
           .si-sections .si-concept-detail-list { grid-template-columns: 1fr; }
