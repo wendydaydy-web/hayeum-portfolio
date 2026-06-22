@@ -296,6 +296,10 @@ export default function Benson() {
           <img className="skstk skstk-br" src="/projects/benson/skate-sticker-br.webp" alt="" aria-hidden="true" />
         </div>
 
+        <div className="cup-feature">
+          <img src="/images/benson/extra-drizzle.webp" alt="BENSON ice cream cup with chocolate and caramel drizzle" />
+        </div>
+
         <div className="full-img"><img src={IMG.facade} alt="BENSON storefront facade" /></div>
 
         {/* ── BENSON POSTER ── */}
@@ -673,6 +677,13 @@ export default function Benson() {
 
         .full-img { width: 100%; line-height: 0; }
         .full-img img { width: 100%; object-fit: cover; }
+
+        /* 세로 컵 제품 컷 — 풀폭 깔면 너무 키 커서 max-height로 제한 + 가운데 정렬 */
+        .cup-feature {
+          width: 100%; background: #fff; padding: 80px 24px;
+          display: flex; justify-content: center; align-items: center;
+        }
+        .cup-feature img { max-width: 100%; max-height: 85vh; width: auto; height: auto; display: block; }
 
         /* ── 첫 이미지(스케이트 사진) 4-corner 스티커 (ㄹ-pattern) ── */
         .full-img-stickers { position: relative; }
