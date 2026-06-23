@@ -852,6 +852,10 @@ export default function Benson() {
 
         @media (max-width: 768px) {
           .hero { padding: 100px 20px 40px; }
+          .hero-title { line-height: 1.15; }
+          .hero-positioning { line-height: 1.5; }
+          .hero-desc { line-height: 1.55; }
+          .hero-quote { line-height: 1.45; }
           .project-info { padding: 40px 20px; grid-template-columns: 1fr 1fr; }
           .project-info .info-partner { grid-column: 1 / -1; }
           .two-col { grid-template-columns: 1fr; }
