@@ -297,6 +297,29 @@ export default function Benson() {
           <img className="skstk skstk-br" src="/projects/benson/skate-sticker-br.webp" alt="" aria-hidden="true" />
         </div>
 
+        {/* ── PROMO POSTER (handoff design — 1130x1392 portrait) ── */}
+        <section className="promo-poster">
+          <img src="/images/benson/bold-topping.webp" alt="BENSON ice cream cup" className="promo-poster-bg" />
+          <div className="promo-poster-copy">
+            <div className="promo-poster-eyebrow">
+              <span className="promo-poster-dash" aria-hidden="true"></span>
+              <span className="promo-poster-label">BENSON ICE CREAM SHOP</span>
+            </div>
+            <h2 className="promo-poster-headline">
+              Benson<br />scoops<br />the <span className="promo-poster-accent">street</span>
+            </h2>
+            <p className="promo-poster-body">
+              <span data-ko>다이내믹한 플레이버, 볼드한 토핑, 진한 유지방이 만드는 묵직한 부드러움 — 스케이트 파크의 곡선을 한 스쿱에 담았습니다.</span>
+              <span data-en>Dynamic flavors, bold toppings, and rich butterfat folded into a heavy, melting softness — the curves of a skatepark caught in a single scoop.</span>
+            </p>
+            <div className="promo-poster-tagline">
+              <span className="promo-poster-tag-ink">AMERICAN STYLE</span>
+              <span className="promo-poster-tag-dot" aria-hidden="true"></span>
+              <span className="promo-poster-tag-red">STREET SOUL</span>
+            </div>
+          </div>
+        </section>
+
         <div className="cup-feature">
           <img src="/images/benson/bold-topping.webp" alt="BENSON ice cream cup with bold toppings and chocolate drizzle" />
         </div>
@@ -335,29 +358,6 @@ export default function Benson() {
             <p className="ko">붉은 아이스크림 한 입의 역동성이 만드는 미감</p>
             <p>DYNAMIC NARRATIVE — ALL THIS DYNAMISM IS THE TASTE OF BENSON.</p>
             <p className="ko">한 스쿱의 자유로움. FROM THE STREET TO YOUR SENSES.</p>
-          </div>
-        </section>
-
-        {/* ── PROMO POSTER (handoff design — 1130x1392 portrait) ── */}
-        <section className="promo-poster">
-          <img src="/images/benson/bold-topping.webp" alt="BENSON ice cream cup" className="promo-poster-bg" />
-          <div className="promo-poster-copy">
-            <div className="promo-poster-eyebrow">
-              <span className="promo-poster-dash" aria-hidden="true"></span>
-              <span className="promo-poster-label">BENSON ICE CREAM SHOP</span>
-            </div>
-            <h2 className="promo-poster-headline">
-              Benson<br />scoops<br />the <span className="promo-poster-accent">street</span>
-            </h2>
-            <p className="promo-poster-body">
-              <span data-ko>다이내믹한 플레이버, 볼드한 토핑, 진한 유지방이 만드는 묵직한 부드러움 — 스케이트 파크의 곡선을 한 스쿱에 담았습니다.</span>
-              <span data-en>Dynamic flavors, bold toppings, and rich butterfat folded into a heavy, melting softness — the curves of a skatepark caught in a single scoop.</span>
-            </p>
-            <div className="promo-poster-tagline">
-              <span className="promo-poster-tag-ink">AMERICAN STYLE</span>
-              <span className="promo-poster-tag-dot" aria-hidden="true"></span>
-              <span className="promo-poster-tag-red">STREET SOUL</span>
-            </div>
           </div>
         </section>
 
