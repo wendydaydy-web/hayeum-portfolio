@@ -338,6 +338,29 @@ export default function Benson() {
           </div>
         </section>
 
+        {/* ── PROMO POSTER (handoff design — 1130x1392 portrait) ── */}
+        <section className="promo-poster">
+          <img src="/images/benson/bold-topping.webp" alt="BENSON ice cream cup" className="promo-poster-bg" />
+          <div className="promo-poster-copy">
+            <div className="promo-poster-eyebrow">
+              <span className="promo-poster-dash" aria-hidden="true"></span>
+              <span className="promo-poster-label">BENSON ICE CREAM SHOP</span>
+            </div>
+            <h2 className="promo-poster-headline">
+              Benson<br />scoops<br />the <span className="promo-poster-accent">street</span>
+            </h2>
+            <p className="promo-poster-body">
+              <span data-ko>다이내믹한 플레이버, 볼드한 토핑, 진한 유지방이 만드는 묵직한 부드러움 — 스케이트 파크의 곡선을 한 스쿱에 담았습니다.</span>
+              <span data-en>Dynamic flavors, bold toppings, and rich butterfat folded into a heavy, melting softness — the curves of a skatepark caught in a single scoop.</span>
+            </p>
+            <div className="promo-poster-tagline">
+              <span className="promo-poster-tag-ink">AMERICAN STYLE</span>
+              <span className="promo-poster-tag-dot" aria-hidden="true"></span>
+              <span className="promo-poster-tag-red">STREET SOUL</span>
+            </div>
+          </div>
+        </section>
+
         <div className="two-col">
           <img src={IMG.counter} alt="" />
           <img src={IMG.seating} alt="" />
@@ -642,29 +665,6 @@ export default function Benson() {
             </div>
           </section>
         </div>
-
-        {/* ── PROMO POSTER (handoff design — 1130x1392 portrait) ── */}
-        <section className="promo-poster">
-          <img src="/images/benson/bold-topping.webp" alt="BENSON ice cream cup" className="promo-poster-bg" />
-          <div className="promo-poster-copy">
-            <div className="promo-poster-eyebrow">
-              <span className="promo-poster-dash" aria-hidden="true"></span>
-              <span className="promo-poster-label">BENSON ICE CREAM SHOP</span>
-            </div>
-            <h2 className="promo-poster-headline">
-              Benson<br />scoops<br />the <span className="promo-poster-accent">street</span>
-            </h2>
-            <p className="promo-poster-body">
-              <span data-ko>다이내믹한 플레이버, 볼드한 토핑, 진한 유지방이 만드는 묵직한 부드러움 — 스케이트 파크의 곡선을 한 스쿱에 담았습니다.</span>
-              <span data-en>Dynamic flavors, bold toppings, and rich butterfat folded into a heavy, melting softness — the curves of a skatepark caught in a single scoop.</span>
-            </p>
-            <div className="promo-poster-tagline">
-              <span className="promo-poster-tag-ink">AMERICAN STYLE</span>
-              <span className="promo-poster-tag-dot" aria-hidden="true"></span>
-              <span className="promo-poster-tag-red">STREET SOUL</span>
-            </div>
-          </div>
-        </section>
 
         <div className="list-bar"><a href="#" onClick={(e) => { e.preventDefault(); toTop(); }}>LIST</a></div>
         <button className="top-btn" onClick={toTop} aria-label="Back to top">&#8593;</button>
