@@ -320,10 +320,6 @@ export default function Benson() {
           </div>
         </section>
 
-        <div className="cup-feature">
-          <img src="/images/benson/bold-topping.webp" alt="BENSON ice cream cup with bold toppings and chocolate drizzle" />
-        </div>
-
         <div className="full-img"><img src={IMG.facade} alt="BENSON storefront facade" /></div>
 
         {/* ── BENSON POSTER ── */}
