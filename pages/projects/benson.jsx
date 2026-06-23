@@ -726,6 +726,8 @@ export default function Benson() {
           position: absolute; inset: 0;
           width: 100%; height: 100%;
           object-fit: cover; display: block;
+          /* 사진 백드롭이 미색이라 brightness로 살짝 띄워 순백에 근접 (컵 본체는 미세 영향만) */
+          filter: brightness(1.07) saturate(1.02);
         }
         .promo-poster-copy {
           position: absolute;
