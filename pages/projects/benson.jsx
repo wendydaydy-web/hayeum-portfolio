@@ -230,9 +230,10 @@ export default function Benson() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Bowlby+One&family=Barlow+Condensed:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Bowlby+One&family=Barlow+Condensed:wght@400;600;700;900&family=Inter:wght@400;500;600;700&family=Archivo:wght@500;600;700;900&family=Archivo+Black&display=swap"
           rel="stylesheet"
         />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
       </Head>
 
       <SiteNav />
@@ -642,6 +643,29 @@ export default function Benson() {
           </section>
         </div>
 
+        {/* ── PROMO POSTER (handoff design — 1130x1392 portrait) ── */}
+        <section className="promo-poster">
+          <img src="/images/benson/bold-topping.webp" alt="BENSON ice cream cup" className="promo-poster-bg" />
+          <div className="promo-poster-copy">
+            <div className="promo-poster-eyebrow">
+              <span className="promo-poster-dash" aria-hidden="true"></span>
+              <span className="promo-poster-label">BENSON ICE CREAM SHOP</span>
+            </div>
+            <h2 className="promo-poster-headline">
+              Benson<br />scoops<br />the <span className="promo-poster-accent">street</span>
+            </h2>
+            <p className="promo-poster-body">
+              <span data-ko>다이내믹한 플레이버, 볼드한 토핑, 진한 유지방이 만드는 묵직한 부드러움 — 스케이트 파크의 곡선을 한 스쿱에 담았습니다.</span>
+              <span data-en>Dynamic flavors, bold toppings, and rich butterfat folded into a heavy, melting softness — the curves of a skatepark caught in a single scoop.</span>
+            </p>
+            <div className="promo-poster-tagline">
+              <span className="promo-poster-tag-ink">AMERICAN STYLE</span>
+              <span className="promo-poster-tag-dot" aria-hidden="true"></span>
+              <span className="promo-poster-tag-red">STREET SOUL</span>
+            </div>
+          </div>
+        </section>
+
         <div className="list-bar"><a href="#" onClick={(e) => { e.preventDefault(); toTop(); }}>LIST</a></div>
         <button className="top-btn" onClick={toTop} aria-label="Back to top">&#8593;</button>
       </main>
@@ -685,6 +709,81 @@ export default function Benson() {
         /* 컵 제품 컷 — 풀폭으로 깔기 (배경 베이지 톤으로 위 flavor-feature와 자연스럽게 이어짐) */
         .cup-feature { width: 100%; line-height: 0; }
         .cup-feature img { width: 100%; display: block; }
+
+        /* ── PROMO POSTER (design handoff — 1130x1392, cqw로 비율 보존 스케일) ── */
+        .promo-poster {
+          position: relative;
+          width: 100%;
+          max-width: 1130px;
+          aspect-ratio: 1130 / 1392;
+          margin: 60px auto;
+          background: #f4f2ef;
+          overflow: hidden;
+          container-type: inline-size;
+          font-family: 'Pretendard Variable', Pretendard, sans-serif;
+        }
+        .promo-poster-bg {
+          position: absolute; inset: 0;
+          width: 100%; height: 100%;
+          object-fit: cover; display: block;
+        }
+        .promo-poster-copy {
+          position: absolute;
+          top: 7.61cqw; left: 8.50cqw; right: 8.50cqw;
+          display: flex; flex-direction: column;
+          gap: 3.01cqw;
+          z-index: 2;
+        }
+        .promo-poster-eyebrow {
+          display: flex; align-items: center; gap: 1.24cqw;
+        }
+        .promo-poster-dash {
+          width: 3.01cqw; height: 0.53cqw;
+          background: #d83a1e; border-radius: 0.27cqw;
+        }
+        .promo-poster-label {
+          font-family: 'Archivo', sans-serif;
+          font-weight: 700;
+          font-size: clamp(11px, 1.68cqw, 19px);
+          letter-spacing: 0.32em;
+          color: #1b1a18;
+        }
+        .promo-poster-headline {
+          font-family: 'Archivo Black', sans-serif;
+          font-weight: 400;
+          font-size: 9.56cqw;
+          line-height: 0.92;
+          letter-spacing: -0.02em;
+          color: #1b1a18;
+          text-transform: uppercase;
+          margin: 0;
+        }
+        .promo-poster-accent { color: #d83a1e; }
+        .promo-poster-body {
+          font-size: clamp(13px, 2.39cqw, 27px);
+          line-height: 1.72;
+          font-weight: 500;
+          color: #2a2825;
+          max-width: 67.26cqw;
+        }
+        .promo-poster-tagline {
+          display: flex; align-items: center;
+          gap: 1.42cqw; margin-top: 0.35cqw;
+        }
+        .promo-poster-tag-ink,
+        .promo-poster-tag-red {
+          font-family: 'Archivo', sans-serif;
+          font-weight: 900;
+          font-size: clamp(12px, 1.95cqw, 22px);
+          letter-spacing: 0.04em;
+        }
+        .promo-poster-tag-ink { color: #1b1a18; }
+        .promo-poster-tag-red { color: #d83a1e; }
+        .promo-poster-tag-dot {
+          width: 0.62cqw; height: 0.62cqw;
+          min-width: 5px; min-height: 5px;
+          background: #d83a1e; border-radius: 50%;
+        }
 
         /* ── 첫 이미지(스케이트 사진) 4-corner 스티커 (ㄹ-pattern) ── */
         .full-img-stickers { position: relative; }
@@ -890,16 +989,19 @@ export default function Benson() {
         .si-sections .si-section-title { font-family: 'Barlow Condensed', 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 56px); line-height: 1.1; margin-bottom: 24px; letter-spacing: 1px; font-weight: 700; }
         .si-sections .si-section-desc { font-size: 15px; line-height: 1.9; color: var(--si-text-mid); max-width: 680px; font-weight: 300; }
 
-        /* KR/EN toggle — si-sections + project-info + hero (default: KR) */
+        /* KR/EN toggle — si-sections + project-info + hero + promo-poster (default: KR) */
         .si-sections [data-en],
         .project-info [data-en],
-        .hero [data-en] { display: none; }
+        .hero [data-en],
+        .promo-poster [data-en] { display: none; }
         :global(html[lang="en"]) .si-sections [data-ko],
         :global(html[lang="en"]) .project-info [data-ko],
-        :global(html[lang="en"]) .hero [data-ko] { display: none; }
+        :global(html[lang="en"]) .hero [data-ko],
+        :global(html[lang="en"]) .promo-poster [data-ko] { display: none; }
         :global(html[lang="en"]) .si-sections [data-en],
         :global(html[lang="en"]) .project-info [data-en],
-        :global(html[lang="en"]) .hero [data-en] { display: revert; }
+        :global(html[lang="en"]) .hero [data-en],
+        :global(html[lang="en"]) .promo-poster [data-en] { display: revert; }
 
         /* 01 CONCEPT */
         .si-sections .si-concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
