@@ -717,7 +717,7 @@ export default function Benson() {
           max-width: 1130px;
           aspect-ratio: 1130 / 1392;
           margin: 60px auto;
-          background: #f4f2ef;
+          background: #ffffff;
           overflow: hidden;
           container-type: inline-size;
           font-family: 'Pretendard Variable', Pretendard, sans-serif;
