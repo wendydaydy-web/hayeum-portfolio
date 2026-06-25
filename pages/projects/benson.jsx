@@ -811,6 +811,23 @@ export default function Benson() {
 
         @media (max-width: 768px) {
           .full-img-stickers .skstk { width: clamp(40px, 10vw, 70px); }
+
+          /* 모바일: 컵을 하단에 고정하고 위쪽 흰 영역에 텍스트를 얹는 오버레이 */
+          .promo-poster {
+            aspect-ratio: 33 / 50;   /* 세로로 길게 → 텍스트용 흰 공간 확보 */
+            display: block;
+            background: #ffffff;
+          }
+          .promo-poster-copy {
+            top: 8cqw; left: 8.5cqw; right: 8.5cqw;
+          }
+          .promo-poster-bg {
+            object-fit: contain;       /* 사진 전체 표시, 잘리지 않게 */
+            object-position: center bottom;  /* 컵을 맨 아래로, 위쪽은 흰 여백 */
+            background: #ffffff;
+            /* 사진의 미색 백드롭을 흰색에 근접하게 보정 (데스크탑과 동일 의도) */
+            filter: brightness(1.07) saturate(1.02);
+          }
         }
 
         .two-col { display: grid; grid-template-columns: 1fr 1fr; line-height: 0; }
