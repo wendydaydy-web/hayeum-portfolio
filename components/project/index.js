@@ -3,3 +3,7 @@ export { default as ProjectHero } from './ProjectHero';
 export { default as ProjectSection } from './ProjectSection';
 export { default as ProjectFooter } from './ProjectFooter';
 export { default as LangToggle } from './LangToggle';
+export { default as ScrollProgress } from './ScrollProgress';
+export { default as SectionNav } from './SectionNav';
+export { default as StudioNav } from './StudioNav';
+export { default as StudioFooter } from './StudioFooter';

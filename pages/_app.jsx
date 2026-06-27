@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Cormorant_Garamond, Noto_Serif_KR } from 'next/font/google';
 import '../styles/globals.css';
+import '../styles/studio.css';
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],

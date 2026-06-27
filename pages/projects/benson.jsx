@@ -1,6 +1,21 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { ScrollProgress, SectionNav } from '../../components/project';
+
+/* 섹션 메뉴 매핑 — 해당 섹션 데이터가 없으면 항목 자체를 빼면 됨(자동 생략) */
+const SECTIONS = [
+  { id: 'concept', label: 'Brand Story' },
+  { id: 'space', label: 'Space' },
+  { id: 'materials', label: 'Detail' },
+  { id: 'layout', label: 'Layout' },
+];
+
+/* 글로벌 메뉴 ↔ 섹션 메뉴 교체 기준점:
+   - SWAP_AT  : 스크롤이 이만큼(px) 내려가면 섹션 메뉴로 교체(맨 위로 오면 글로벌 복귀)
+   - NAV_OFFSET : 섹션 스크롤 점프/스크롤스파이 기준선(상단바 높이) */
+const SWAP_AT = 60;
+const NAV_OFFSET = 80;
 
 /* image map — sources copied from 공간 / 포스터 / 스티커 folders */
 const IMG = {
@@ -12,17 +27,34 @@ const IMG = {
 };
 const STK = (n) => `/images/benson/stickers/${n}`;
 
-/* ── Top navigation — pages/index.jsx 네비바 100% 재현 ── */
-function SiteNav() {
+/* ── Top navigation — pages/index.jsx 네비바 100% 재현 + 섹션 둘째 줄 ── */
+function SiteNav({ sections = [] }) {
   const [scrolled, setScrolled] = useState(false);
+  const [swapped, setSwapped] = useState(false); // 글로벌 → 섹션 메뉴 교체 여부
   const [lang, setLang] = useState('ko');
 
+  const hasSections = sections.length > 0;
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    onScroll();
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      setScrolled(window.scrollY > 80);
+      // 스크롤이 SWAP_AT 이상 내려가면 섹션 메뉴로 교체(섹션 없으면 항상 글로벌)
+      setSwapped(hasSections && window.scrollY > SWAP_AT);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [hasSections]);
 
   useEffect(() => {
     const saved = localStorage.getItem('site-lang');
@@ -50,19 +82,26 @@ function SiteNav() {
         </Link>
       </div>
       <div className="nav-right">
-        <ul className="nav-menu">
-          <li><Link href="/#project">WORK</Link></li>
-          <li><Link href="/work-corp">WORK(CORP.)</Link></li>
-          <li><Link href="/info">INFO</Link></li>
-          <li>
-            <a href="https://www.instagram.com/id_haumm/" target="_blank" rel="noopener noreferrer">INSTA</a>
-          </li>
-          <li className="nav-lang" aria-label="Language toggle">
-            <button type="button" className={lang === 'en' ? 'active' : ''} onClick={() => setLangPersist('en')}>EN</button>
-            <span className="nav-lang-sep">/</span>
-            <button type="button" className={lang === 'ko' ? 'active' : ''} onClick={() => setLangPersist('ko')}>KR</button>
-          </li>
-        </ul>
+        {/* 같은 자리에서 글로벌 메뉴 ↔ 섹션 메뉴 크로스페이드 교체 */}
+        <div className="nav-swap" data-mode={swapped ? 'section' : 'global'}>
+          <ul className="nav-menu" aria-hidden={swapped}>
+            <li><Link href="/#project">WORK</Link></li>
+            <li><Link href="/work-corp">WORK(CORP.)</Link></li>
+            <li><Link href="/info">INFO</Link></li>
+            <li>
+              <a href="https://www.instagram.com/id_haumm/" target="_blank" rel="noopener noreferrer">INSTA</a>
+            </li>
+          </ul>
+          <div className="nav-section" aria-hidden={!swapped}>
+            <SectionNav sections={sections} offset={NAV_OFFSET} />
+          </div>
+        </div>
+        {/* EN/KR 토글 — 글로벌/섹션 어느 모드에서도 항상 표시 (LAYOUT 옆 고정) */}
+        <div className="nav-lang" aria-label="Language toggle">
+          <button type="button" className={lang === 'en' ? 'active' : ''} onClick={() => setLangPersist('en')}>EN</button>
+          <span className="nav-lang-sep">/</span>
+          <button type="button" className={lang === 'ko' ? 'active' : ''} onClick={() => setLangPersist('ko')}>KR</button>
+        </div>
       </div>
 
       <style jsx>{`
@@ -76,15 +115,40 @@ function SiteNav() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          background: transparent;
+          background: #ffffff; /* 투명도 제거 — 맨 위에서도 불투명 흰색 */
           transition: background 0.4s, padding 0.4s, color 0.3s;
           color: #1a1a1a;
         }
+        /* 교체 슬롯 — 두 메뉴를 같은 셀에 겹쳐두고 opacity로 크로스페이드 */
+        .nav-swap {
+          display: grid;
+        }
+        .nav-swap > :global(*) {
+          grid-area: 1 / 1;
+          justify-self: end;
+          align-self: center;
+        }
+        /* 섹션 래퍼를 flex로 → inline-flex baseline 오프셋 제거(글로벌 메뉴와 같은 높이) */
+        .nav-swap .nav-section {
+          display: flex;
+          align-items: center;
+          line-height: 1;
+        }
+        .nav-swap .nav-menu,
+        .nav-swap .nav-section {
+          transition: opacity 0.45s ease;
+        }
+        .nav-swap[data-mode='global'] .nav-section {
+          opacity: 0;
+          pointer-events: none;
+        }
+        .nav-swap[data-mode='section'] .nav-menu {
+          opacity: 0;
+          pointer-events: none;
+        }
         .nav.scrolled {
           padding-bottom: 20px;
-          background: rgba(255,255,255,0.9);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
+          background: #ffffff; /* 투명도 제거 — 완전 불투명 흰색 */
         }
         .nav-left {
           display: flex;
@@ -138,6 +202,7 @@ function SiteNav() {
           display: flex;
           align-items: center;
           justify-content: flex-end;
+          gap: 36px;
         }
         .nav-menu {
           display: flex;
@@ -208,6 +273,7 @@ function SiteNav() {
         }
         @media (max-width: 809px) {
           .nav { padding: 14px 20px; }
+          .nav-right { gap: 14px; }
           .nav-menu { gap: 14px; }
           .nav-menu :global(a),
           .nav-lang { font-size: 10px; letter-spacing: 0.08em; }
@@ -236,7 +302,8 @@ export default function Benson() {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
       </Head>
 
-      <SiteNav />
+      <ScrollProgress />
+      <SiteNav sections={SECTIONS} />
 
       <main className="benson-page">
 
@@ -299,7 +366,7 @@ export default function Benson() {
 
         {/* ── PROMO POSTER (handoff design — 1130x1392 portrait) ── */}
         <section className="promo-poster">
-          <img src="/images/benson/bold-topping.webp" alt="BENSON ice cream cup" className="promo-poster-bg" />
+          <img src="/images/benson/poster-image-1.webp" alt="BENSON ice cream cup" className="promo-poster-bg" />
           <div className="promo-poster-copy">
             <div className="promo-poster-eyebrow">
               <span className="promo-poster-dash" aria-hidden="true"></span>
@@ -387,7 +454,7 @@ export default function Benson() {
         {/* ── SI GUIDE — 9 SECTIONS PORTED FROM SOURCE INDEX.HTML ── */}
         <div className="si-sections">
           {/* 01 — Design Strategy */}
-          <section className="si-section si-concept">
+          <section className="si-section si-concept" id="concept">
             <div className="si-section-inner">
               <div className="si-concept-grid">
                 <div>
@@ -408,8 +475,8 @@ export default function Benson() {
             </div>
           </section>
 
-          {/* 02 — Facade */}
-          <section className="si-section" id="si-facade">
+          {/* 02 — Facade (SPACE: 파사드 + 내부 뷰 + 디테일의 시작 지점) */}
+          <section className="si-section" id="space">
             <div className="si-section-inner">
               <p className="si-section-label">02 — Facade</p>
               <h2 className="si-section-title">Storefront Design</h2>
@@ -534,7 +601,7 @@ export default function Benson() {
           </section>
 
           {/* 06 — Materials */}
-          <section className="si-section si-materials" id="si-materials">
+          <section className="si-section si-materials" id="materials">
             <div className="si-section-inner">
               <p className="si-section-label">06 — Materials</p>
               <h2 className="si-section-title">Raw Material</h2>
@@ -628,7 +695,7 @@ export default function Benson() {
           </section>
 
           {/* 08 — Layout */}
-          <section className="si-section si-layout-section" id="si-layout">
+          <section className="si-section si-layout-section" id="layout">
             <div className="si-section-inner">
               <p className="si-section-label">08 — Layout</p>
               <h2 className="si-section-title">Space Planning</h2>
@@ -712,7 +779,7 @@ export default function Benson() {
           width: 100%;
           max-width: 1130px;
           aspect-ratio: 1130 / 1392;
-          margin: 60px auto;
+          margin: 0 auto;
           background: #ffffff;
           overflow: hidden;
           container-type: inline-size;
@@ -722,8 +789,8 @@ export default function Benson() {
           position: absolute; inset: 0;
           width: 100%; height: 100%;
           object-fit: cover; display: block;
-          /* 사진 백드롭이 미색이라 brightness로 살짝 띄워 순백에 근접 (컵 본체는 미세 영향만) */
-          filter: brightness(1.07) saturate(1.02);
+          /* poster-image-1: 상단 백드롭이 이미 순백 + 회색 카운터/하단 B간판이 또렷해야 하므로 보정 최소화 */
+          filter: brightness(1.005);
         }
         .promo-poster-copy {
           position: absolute;
@@ -736,8 +803,9 @@ export default function Benson() {
           display: flex; align-items: center; gap: 1.24cqw;
         }
         .promo-poster-dash {
-          width: 3.01cqw; height: 0.53cqw;
-          background: #d83a1e; border-radius: 0.27cqw;
+          width: 3.01cqw; height: 1.06cqw; /* 두께 2배 */
+          background: #d83a1e;
+          border-radius: 999px; /* 끝을 완전 라운드(알약)로 유지 → 직사각형 방지 */
         }
         .promo-poster-label {
           font-family: 'Archivo', sans-serif;
