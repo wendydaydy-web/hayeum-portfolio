@@ -364,9 +364,9 @@ export default function Benson() {
           <img className="skstk skstk-br" src="/projects/benson/skate-sticker-br.webp" alt="" aria-hidden="true" />
         </div>
 
-        {/* ── PROMO POSTER (handoff design — 1130x1392 portrait) ── */}
+        {/* ── PROMO POSTER (facade-poster2 합본: 컵 + 스토어프론트, 상단 흰 영역에 카피 오버레이) ── */}
         <section className="promo-poster">
-          <img src="/images/benson/poster-image-1.webp" alt="BENSON ice cream cup" className="promo-poster-bg" />
+          <img src="/images/benson/facade-poster2.webp" alt="BENSON ice cream cup and storefront facade" className="promo-poster-bg" />
           <div className="promo-poster-copy">
             <div className="promo-poster-eyebrow">
               <span className="promo-poster-dash" aria-hidden="true"></span>
@@ -386,8 +386,6 @@ export default function Benson() {
             </div>
           </div>
         </section>
-
-        <div className="full-img"><img src={IMG.facade} alt="BENSON storefront facade" /></div>
 
         {/* ── BENSON POSTER ── */}
         <section className="benson-poster">
@@ -777,8 +775,8 @@ export default function Benson() {
         .promo-poster {
           position: relative;
           width: 100%;
-          max-width: 1130px;
-          aspect-ratio: 1130 / 1392;
+          max-width: 1200px;
+          aspect-ratio: 2400 / 3900;   /* 이미지 본래 비율 그대로(흰 여백 인위적 추가 X) */
           margin: 0 auto;
           background: #ffffff;
           overflow: hidden;
@@ -788,15 +786,18 @@ export default function Benson() {
         .promo-poster-bg {
           position: absolute; inset: 0;
           width: 100%; height: 100%;
-          object-fit: cover; display: block;
-          /* poster-image-1: 상단 백드롭이 이미 순백 + 회색 카운터/하단 B간판이 또렷해야 하므로 보정 최소화 */
+          /* 본래 비율로 꽉 채움(이미지 상단 흰 영역이 그대로 텍스트 자리) */
+          object-fit: cover; object-position: center; display: block;
+          background: #ffffff;
+          /* facade-poster2: 백드롭이 이미 순백이라 보정 최소화 */
           filter: brightness(1.005);
         }
         .promo-poster-copy {
           position: absolute;
-          top: 7.61cqw; left: 8.50cqw; right: 8.50cqw;
+          /* facade-poster2: 상단 흰 영역(약 0~25% 높이)에 카피 전체가 들어가 컵을 안 가림 */
+          top: 3.6cqw; left: 7.5cqw; right: 7.5cqw;
           display: flex; flex-direction: column;
-          gap: 3.01cqw;
+          gap: 1.5cqw;
           z-index: 2;
         }
         .promo-poster-eyebrow {
@@ -817,8 +818,8 @@ export default function Benson() {
         .promo-poster-headline {
           font-family: 'Archivo Black', sans-serif;
           font-weight: 400;
-          font-size: 9.56cqw;
-          line-height: 0.92;
+          font-size: 5.9cqw;
+          line-height: 0.95;
           letter-spacing: -0.02em;
           color: #1b1a18;
           text-transform: uppercase;
@@ -826,11 +827,11 @@ export default function Benson() {
         }
         .promo-poster-accent { color: #d83a1e; }
         .promo-poster-body {
-          font-size: clamp(13px, 2.39cqw, 27px);
-          line-height: 1.72;
+          font-size: clamp(11px, 1.6cqw, 19px);
+          line-height: 1.5;
           font-weight: 500;
           color: #2a2825;
-          max-width: 67.26cqw;
+          max-width: 56cqw;
         }
         .promo-poster-tagline {
           display: flex; align-items: center;
@@ -880,21 +881,33 @@ export default function Benson() {
         @media (max-width: 768px) {
           .full-img-stickers .skstk { width: clamp(40px, 10vw, 70px); }
 
-          /* 모바일: 컵을 하단에 고정하고 위쪽 흰 영역에 텍스트를 얹는 오버레이 */
+          /* 모바일: overlay 해제 → 텍스트(위) + 이미지(아래) 세로 스택 */
           .promo-poster {
-            aspect-ratio: 33 / 50;   /* 세로로 길게 → 텍스트용 흰 공간 확보 */
-            display: block;
+            aspect-ratio: auto;
+            height: auto;
+            display: flex;
+            flex-direction: column;
             background: #ffffff;
           }
           .promo-poster-copy {
-            top: 8cqw; left: 8.5cqw; right: 8.5cqw;
+            position: static; inset: auto;
+            order: 1;
+            padding: 8cqw 8cqw 5cqw;
+            gap: 3cqw;
           }
+          .promo-poster-headline { font-size: 9.2cqw; line-height: 0.95; }
+          .promo-poster-body { font-size: clamp(13px, 3.4cqw, 19px); line-height: 1.6; max-width: 100%; }
           .promo-poster-bg {
-            object-fit: contain;       /* 사진 전체 표시, 잘리지 않게 */
-            object-position: center bottom;  /* 컵을 맨 아래로, 위쪽은 흰 여백 */
+            position: static; inset: auto;
+            order: 2;
+            width: 100%;
+            /* 상단 흰 여백(약 20%)을 잘라 텍스트 바로 아래에 컵이 오게 → 긴 흰 공간 방지 */
+            aspect-ratio: 2400 / 3120;
+            height: auto;
+            object-fit: cover;
+            object-position: center bottom;
             background: #ffffff;
-            /* 사진의 미색 백드롭을 흰색에 근접하게 보정 (데스크탑과 동일 의도) */
-            filter: brightness(1.07) saturate(1.02);
+            filter: brightness(1.005);
           }
         }
 
