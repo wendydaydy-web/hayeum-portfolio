@@ -292,92 +292,16 @@ export default function HomePage() {
             </p>
             <ul className="exp-works">
               <li>{isKo ? '20+ 프로젝트 총괄 (F&B · Retail · Pop-Up · Deco)' : '20+ projects directed (F&B · Retail · Pop-Up · Deco)'}</li>
-              <li>{isKo ? '4개국 프로젝트 수행 (Korea · Singapore · Malaysia · USA)' : 'Projects across 4 countries (Korea · Singapore · Malaysia · USA)'}</li>
+              <li>{isKo ? '3개국 프로젝트 수행 (Korea · Singapore · USA)' : 'Projects across 3 countries (Korea · Singapore · USA)'}</li>
               <li>{isKo ? '브랜드 공간 컨셉 기획 · SI 가이드북 · 실시설계 · 현장 감리' : 'Brand spatial concept · SI guidebook · Working drawings · On-site supervision'}</li>
               <li>
                 {isKo
-                  ? '현재 INIA GROUP 소속으로 tofuG 멀티매장 디자인 총괄 중'
-                  : 'Currently directing multi-location tofuG design under INIA GROUP'}
+                  ? '현재 INIA GROUP 소속 프로젝트 리드 디자이너로 tofuG 멀티매장과 신규 브랜드 3개의 공간 디자인 총괄 중'
+                  : 'Currently Lead Designer at INIA GROUP, leading design for tofuG multi-stores and 3 new brand spaces'}
               </li>
             </ul>
           </div>
         </div>
-      </section>
-
-      {/* ── Projects Header ── */}
-      <div className="section-header reveal" ref={addRevealRef}>
-        <h2 className="section-title">
-          SELECTED
-          <span className="section-title-line">PROJECTS</span>
-        </h2>
-      </div>
-
-      {/* ── Projects ── */}
-      <section className="projects" id="project">
-        {/* Project 1: TOFUG */}
-        <Link href="/projects/tofug" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/main/tofug-default.jpg" alt="TOFUG" className="project-img-default" />
-          <img src="/images/main/tofug-hover.jpg" alt="TOFUG hover" className="project-img-hover" />
-          <div className="project-info">
-            <div>
-              <p className="project-name">TOFUG</p>
-              <span className="project-tag">Singapore &middot; Malaysia</span>
-            </div>
-            <div className="project-expand"><ExpandSVG /></div>
-          </div>
-        </Link>
-
-        {/* Project 2: BODY GUARD */}
-        <Link href="/projects/bodyguard" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/main/bodyguard-default.webp" alt="BODY GUARD" className="project-img-default" />
-          <img src="/images/main/bodyguard-hover.png" alt="BODY GUARD hover" className="project-img-hover" />
-          <div className="project-info">
-            <div>
-              <p className="project-name">BODY GUARD</p>
-              <span className="project-tag">Rebranding</span>
-            </div>
-            <div className="project-expand"><ExpandSVG /></div>
-          </div>
-        </Link>
-
-        {/* Project 3: BENSON */}
-        <Link href="/projects/benson" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/main/benson-default.png" alt="BENSON" className="project-img-default" />
-          <img src="/images/main/benson-hover.webp" alt="BENSON hover" className="project-img-hover" />
-          <div className="project-info">
-            <div>
-              <p className="project-name">BENSON</p>
-              <span className="project-tag">Branding &amp; Spatial Design</span>
-            </div>
-            <div className="project-expand"><ExpandSVG /></div>
-          </div>
-        </Link>
-
-        {/* Project 4: GAGGA */}
-        <Link href="/projects/gagga" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/gagga/hero.jpg" alt="GAGGA" className="project-img-default" />
-          <img src="/images/main/gagga-grid.jpg" alt="GAGGA hover" className="project-img-hover" />
-          <div className="project-info">
-            <div>
-              <p className="project-name">GAGGA</p>
-              <span className="project-tag">Brand &amp; Spatial Design</span>
-            </div>
-            <div className="project-expand"><ExpandSVG /></div>
-          </div>
-        </Link>
-
-        {/* Project 5: SOLDAM MARKET */}
-        <Link href="/projects/soldam" className="project-card reveal" ref={addRevealRef}>
-          <img src="/images/main/soldam-default.webp" alt="SOLDAM MARKET" className="project-img-default" />
-          <img src="/images/main/soldam-hover.webp" alt="SOLDAM MARKET hover" className="project-img-hover" />
-          <div className="project-info">
-            <div>
-              <p className="project-name">SOLDAM MARKET</p>
-              <span className="project-tag">Brand &amp; Spatial Design</span>
-            </div>
-            <div className="project-expand"><ExpandSVG /></div>
-          </div>
-        </Link>
       </section>
 
       {/* ── Scope ── */}
@@ -2157,7 +2081,7 @@ export default function HomePage() {
         @media (max-width: 1199px) {
             .nav { padding: 16px 24px; }
             .about { padding: 100px 24px; }
-            .experience { padding: 0 24px 80px; }
+            .experience { padding: 100px 24px 80px; }
             .projects { padding: 0 24px 100px; }
             .footer { padding: 80px 24px; }
             .projects-grid { grid-template-columns: repeat(3, 1fr); }
@@ -2266,7 +2190,7 @@ export default function HomePage() {
                 margin: 0;
                 padding: 0 8vw;
             }
-            .experience { padding: 0 20px 60px; }
+            .experience { padding: 72px 20px 60px; }
             .exp-header { flex-wrap: wrap; gap: 4px; }
             .section-header { padding: 80px 20px 40px; }
             .projects { padding: 0 20px 80px; }
