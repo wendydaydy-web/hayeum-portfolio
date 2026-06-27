@@ -11,6 +11,37 @@ try { allProjects = require('../data/projects-generated'); } catch (e) { /* not 
 // Hardcoded slugs that have dedicated pages
 const HARDCODED_SLUGS = new Set(['tofug', 'benson', 'bodyguard', 'gagga', 'soldam', 'squidgame', 'handonday', 'shabusangha', 'gyedanbread']);
 
+// Studio work grid — handoff list. href는 기존 페이지가 있는 항목만(없으면 null=비클릭),
+// img는 실제 보유 에셋만(없으면 null=플레이스홀더 타일). tags는 상단 필터 칩과 매칭.
+const WORK_GRID = [
+  { name: 'BENSON',                         tags: ['신규'],            href: '/projects/benson',      img: '/images/main/benson-default.png' },
+  { name: 'GAGGA',                          tags: ['신규'],            href: '/projects/gagga',       img: '/images/main/gagga-grid.jpg' },
+  { name: 'BODY GUARD',                     tags: ['신규', '리브랜딩'], href: '/projects/bodyguard',   img: '/images/main/bodyguard-default.webp' },
+  { name: '3½ FEET',                        tags: ['신규'],            href: null,                    img: null },
+  { name: 'Knickerbocker Bagel Pop-Up',     tags: ['팝업'],            href: null,                    img: null },
+  { name: '한돈데이 선진 Pop-up',           tags: ['팝업'],            href: null,                    img: null },
+  { name: 'RATATOU_LEE CAKE',               tags: ['리브랜딩'],        href: null,                    img: null },
+  { name: 'HANDONDAY',                      tags: ['팝업'],            href: '/projects/handonday',   img: '/images/handonday/built-01.jpg' },
+  { name: 'KALBI SOCIAL CLUB',              tags: ['VMD'],             href: null,                    img: null },
+  { name: 'New Balance Pop-up in Seongsu',  tags: ['팝업'],            href: null,                    img: null },
+  { name: 'SQUID GAME2',                    tags: ['팝업'],            href: '/projects/squidgame',   img: '/images/squidgame/built-01.jpg' },
+  { name: 'SOLDAM MARKET',                  tags: ['신규'],            href: '/projects/soldam',      img: '/images/main/soldam-default.webp' },
+  { name: 'New Balance Pop-up in Seongsu',  tags: ['팝업'],            href: null,                    img: null },
+  { name: 'PAULBASSETT',                    tags: ['VMD'],             href: null,                    img: null },
+  { name: 'SHABU SANGHA',                   tags: ['VMD'],             href: '/projects/shabusangha', img: '/images/shabusangha/DSCF0005.jpg' },
+  { name: 'TOFUG',                          tags: ['신규'],            href: '/projects/tofug',       img: '/images/main/tofug-default.jpg' },
+  { name: '계단빵',                         tags: ['신규'],            href: '/projects/gyedanbread', img: null },
+];
+
+// Studio work grid — category filter chips (key는 WORK_GRID.tags 값과 매칭)
+const WORK_FILTERS = [
+  { key: 'all',     ko: '전체',     en: 'All' },
+  { key: '신규',     ko: '신규',     en: 'New' },
+  { key: '리브랜딩', ko: '리브랜딩', en: 'Rebranding' },
+  { key: 'VMD',     ko: 'VMD',      en: 'VMD' },
+  { key: '팝업',     ko: '팝업',     en: 'Pop-Up' },
+];
+
 // Category filter config
 const CATEGORIES = [
   { key: 'all', label_ko: '전체', label_en: 'All' },
@@ -26,6 +57,7 @@ export default function HomePage() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [mobileHeroOpen, setMobileHeroOpen] = useState(false);
   const [combinedOpen, setCombinedOpen] = useState(false);
+  const [workFilter, setWorkFilter] = useState('all');
   const revealRefs = useRef([]);
   const navRef = useRef(null);
 
@@ -291,7 +323,7 @@ export default function HomePage() {
               {isKo ? '컨셉 기획부터 시공 감리까지' : 'From concept planning to construction supervision'}
             </p>
             <ul className="exp-works">
-              <li>{isKo ? '20+ 프로젝트 총괄 (F&B · Retail · Pop-Up · Deco)' : '20+ projects directed (F&B · Retail · Pop-Up · Deco)'}</li>
+              <li>{isKo ? '20+ 프로젝트 총괄 (F&B · Retail · Pop-Up · VMD)' : '20+ projects directed (F&B · Retail · Pop-Up · VMD)'}</li>
               <li>{isKo ? '3개국 프로젝트 수행 (Korea · Singapore · USA)' : 'Projects across 3 countries (Korea · Singapore · USA)'}</li>
               <li>{isKo ? '브랜드 공간 컨셉 기획 · SI 가이드북 · 실시설계 · 현장 감리' : 'Brand spatial concept · SI guidebook · Working drawings · On-site supervision'}</li>
               <li>
@@ -301,6 +333,61 @@ export default function HomePage() {
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* ── Studio Work Grid ── */}
+        <div className="studio-filters reveal" ref={addRevealRef} role="tablist" aria-label={isKo ? '카테고리 필터' : 'Category filter'}>
+          {WORK_FILTERS.map((f) => (
+            <button
+              key={f.key}
+              type="button"
+              role="tab"
+              aria-selected={workFilter === f.key}
+              className={`sg-chip${workFilter === f.key ? ' is-active' : ''}`}
+              onClick={() => setWorkFilter(f.key)}
+            >
+              {isKo ? f.ko : f.en}
+            </button>
+          ))}
+        </div>
+        <div key={workFilter} className={`studio-grid${isKo ? ' is-ko' : ''}`}>
+          {WORK_GRID
+            .filter((w) => workFilter === 'all' || w.tags.includes(workFilter))
+            .map((w, i) => {
+              const tileClass = `sg-tile${w.img ? '' : ' sg-tile-noimg'}${w.href ? '' : ' sg-tile-static'}`;
+              const inner = (
+                <>
+                  <div className="sg-thumb">
+                    {w.img && (
+                      <img
+                        src={w.img}
+                        alt={w.name}
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.parentNode.classList.add('sg-img-failed');
+                        }}
+                      />
+                    )}
+                    <div className="sg-overlay">
+                      <span className="sg-name">{w.name}</span>
+                    </div>
+                  </div>
+                  <div className="sg-caption">
+                    <span className="sg-cap-name">{w.name}</span>
+                  </div>
+                </>
+              );
+              return w.href ? (
+                <Link key={i} href={w.href} className={tileClass} aria-label={w.name}>
+                  {inner}
+                </Link>
+              ) : (
+                <div key={i} className={tileClass} role="img" aria-label={w.name}>
+                  {inner}
+                </div>
+              );
+            })}
         </div>
       </section>
 
@@ -1143,6 +1230,129 @@ export default function HomePage() {
         }
         .exp-link:hover {
             color: var(--fg-90);
+        }
+
+        /* ── Studio Work Grid ── */
+        .studio-filters {
+            margin-top: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .sg-chip {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            padding: 6px 14px;
+            border: 1px solid var(--fg-30);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--fg-50);
+            cursor: pointer;
+            transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+        .sg-chip:hover {
+            color: var(--fg-90);
+            border-color: var(--fg-50);
+        }
+        .sg-chip.is-active {
+            background: #c0563b;
+            border-color: #c0563b;
+            color: #fff;
+        }
+        .studio-grid {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 7px;
+            animation: sgFade 0.35s ease;
+        }
+        @keyframes sgFade {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .sg-tile {
+            display: block;
+            position: relative;
+        }
+        .sg-tile-static { cursor: default; }
+        .sg-thumb {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--card-bg);
+        }
+        .sg-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        .sg-tile:not(.sg-tile-static):hover .sg-thumb img {
+            transform: scale(1.04);
+        }
+        .sg-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 6px;
+            text-align: center;
+            background: rgba(44,44,42,0.8);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .sg-tile:hover .sg-overlay { opacity: 1; }
+        .sg-name {
+            font-family: var(--font-cormorant), var(--font-noto-serif-kr), serif;
+            color: #fff;
+            font-size: clamp(11px, 0.95vw, 15px);
+            line-height: 1.2;
+            letter-spacing: 0.01em;
+        }
+        /* 한글 버전: 카드 라벨을 본문과 동일한 sans로 (영문은 세리프 유지) */
+        .studio-grid.is-ko .sg-name,
+        .studio-grid.is-ko .sg-cap-name {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+        }
+        /* placeholder(이미지 없음/로드 실패) — 라벨 항상 노출 */
+        .sg-tile-noimg .sg-overlay,
+        .sg-thumb.sg-img-failed .sg-overlay {
+            opacity: 1;
+            background: transparent;
+        }
+        .sg-tile-noimg .sg-name,
+        .sg-thumb.sg-img-failed .sg-name { color: var(--fg-50); }
+        .sg-tile-noimg:hover .sg-overlay { background: rgba(44,44,42,0.8); }
+        .sg-tile-noimg:hover .sg-name { color: #fff; }
+        /* 모바일 캡션 — 데스크톱에선 숨김 */
+        .sg-caption { display: none; }
+
+        @media (max-width: 1024px) {
+            .studio-grid { grid-template-columns: repeat(6, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .studio-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+            /* 터치: hover 없음 → 오버레이 숨기고 캡션 상시 노출 */
+            .sg-overlay { display: none; }
+            .sg-caption {
+                display: flex;
+                flex-direction: column;
+                gap: 1px;
+                padding: 5px 2px 0;
+                text-align: center;
+            }
+            .sg-cap-name {
+                font-family: var(--font-cormorant), var(--font-noto-serif-kr), serif;
+                font-size: 11px;
+                line-height: 1.25;
+                color: var(--fg-90);
+            }
         }
 
         /* ── Section Title ── */
