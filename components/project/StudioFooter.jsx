@@ -51,14 +51,17 @@ export default function StudioFooter({ arrowSrc, listHref = '/#project' }) {
           align-items: center;
           justify-content: center;
         }
-        /* 기본: BENSON식 검정 폴리곤 + 화살표 글리프 */
+        /* 기본: 중립 원형 버튼 + 화살표 (BENSON 폴리곤은 BENSON 전용이므로 사용 안 함) */
         .top-btn:not(.has-img) {
           width: 48px;
           height: 48px;
           background: #1a1a18;
           color: #fff;
           font-size: 18px;
-          clip-path: polygon(0% 0%, 100% 0%, 82% 100%, 18% 100%);
+          border-radius: 50%;
+        }
+        .top-btn:not(.has-img):hover {
+          opacity: 0.85;
         }
         /* 커스텀 이미지 화살표 (tofuG 손그림 등) */
         .top-btn.has-img {

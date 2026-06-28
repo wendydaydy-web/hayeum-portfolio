@@ -45,7 +45,7 @@ export default function TofuG() {
       <main className="studio-page">
         {/* ── HERO ── */}
         <section className="st-hero">
-          <h1 className="st-hero-title">TOFU · <span className="st-hero-accent">G</span></h1>
+          <h1 className="st-hero-title">TOFU · G</h1>
           <p className="st-hero-positioning">
             <span data-ko>한국 전통 두부 제조의 정성을 담은 프리미엄 젤라또 브랜드 — 멧돌과 한국 전통 주방에서 영감을 받은 공간 디자인 · 브랜딩.</span>
             <span data-en>A premium gelato brand carrying the devotion of traditional Korean tofu-making — spatial design &amp; branding drawn from the millstone and the Korean kitchen.</span>
