@@ -1,26 +1,20 @@
 import Head from 'next/head';
-import { ProjectNav, ProjectHero, ProjectFooter } from '../../components/project';
 import { useEffect, useRef } from 'react';
+import { StudioNav, StudioFooter } from '../../components/project';
 
+/* ── 섹션 메뉴 (상단바 ScrollSpy) ── */
 const SECTIONS = [
-  { id: 'story', label: 'Story' },
+  { id: 'story', label: 'Brand Story' },
   { id: 'concept', label: 'Concept' },
   { id: 'space', label: 'Space' },
   { id: 'detail', label: 'Detail' },
   { id: 'credit', label: 'Credit' },
 ];
 
-const HERO_META = [
-  { label: 'Project', value: 'SHABU SANGHA · 샤브식당 상하' },
-  { label: 'Category', value: 'F&B / Deco' },
-  { label: 'Year', value: '2025' },
-  { label: 'Scope', value: 'Spatial Decoration · VMD · Brand Experience' },
-  { label: 'Location', value: 'Cheongdam, Seoul' },
-];
-
 const I = (name) => `/images/shabusangha/${name}`;
 
-function FadeIn({ children, className = '', style }) {
+/* 스크롤 페이드인 */
+function Reveal({ children, className = '', style }) {
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
@@ -32,7 +26,7 @@ function FadeIn({ children, className = '', style }) {
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
-  return <div ref={ref} className={`fade-in ${className}`} style={style}>{children}</div>;
+  return <div ref={ref} className={`st-reveal ${className}`} style={style}>{children}</div>;
 }
 
 export default function ShabuSangha() {
@@ -40,348 +34,191 @@ export default function ShabuSangha() {
     <>
       <Head>
         <title>SHABU SANGHA — Spatial Deco · Cheongdam</title>
+        <meta name="description" content="샤브식당 상하 — 상하농원 철학을 청담으로 옮긴 농부의 부엌. 공간 데코·VMD. 공간하음." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet" />
       </Head>
 
-      <ProjectNav sections={SECTIONS} accentColor="#7a8264" />
+      <StudioNav sections={SECTIONS} />
 
-      <ProjectHero
-        title={"SHABU\nSANGHA"}
-        label="Spatial Deco · VMD · Brand Experience"
-        image={I('DSCF0005.jpg')}
-        subtitleKo="고창 상하농원의 진정성과 상생의 철학을 청담의 맥락으로 옮긴 샤브 식당. 농부의 부엌이라는 컨셉 아래 공간의 정갈한 디테일을 완성했습니다."
-        subtitleEn="A shabu restaurant that translates the authenticity and coexistence philosophy of Sangha Farm into the context of Cheongdam — completing every spatial detail under the concept of a farmer's kitchen."
-        meta={HERO_META}
-      />
+      <main className="studio-page">
+        {/* ── HERO ── */}
+        <section className="st-hero">
+          <h1 className="st-hero-title">SHABU SANGHA</h1>
+          <p className="st-hero-positioning">
+            <span data-ko>고창 상하농원의 진정성과 상생의 철학을 청담의 맥락으로 옮긴 샤브 식당 — 공간 데코 · VMD · 브랜드 경험.</span>
+            <span data-en>A shabu restaurant translating Sangha Farm&apos;s authenticity and coexistence philosophy into the context of Cheongdam — spatial deco · VMD · brand experience.</span>
+          </p>
+          <p className="st-hero-desc">
+            <span data-ko>‘농부의 부엌’이라는 컨셉 아래 공간의 정갈한 디테일을 완성했습니다. 한 그릇의 샤브 안에 농가의 이야기와 농부의 손길이 담기도록 메뉴부터 공간까지 정성스럽게 설계했습니다.</span>
+            <span data-en>Under the concept of “the farmer&apos;s kitchen,” we completed every quiet spatial detail — crafting menu and space so a single bowl of shabu could hold the story of the farm and the touch of the farmer.</span>
+          </p>
+          <p className="st-hero-quote">
+            <span data-ko>“농부의 부엌 — 본질에 집중하다.”</span>
+            <span data-en>“The farmer&apos;s kitchen — focused on essence.”</span>
+          </p>
+        </section>
 
-      {/* ── 01 BRAND STORY ── */}
-      <section className="brand-story" id="story">
-        <div className="section-inner">
-          <FadeIn>
-            <p className="section-label">01 — Brand Story</p>
-            <h2 className="section-title" data-ko>고창에서 청담까지,<br />상하농원의 철학을 담다</h2>
-            <h2 className="section-title" data-en>From Gochang To Cheongdam,<br />Carrying Sangha&apos;s Philosophy</h2>
-            <p className="section-desc" data-ko>샤브식당 상하는 단순한 식당이 아닙니다. 상하농원이 오랜 시간 지켜온 진정성과 상생의 철학을 도시의 식탁 위에 옮겨 놓은 공간입니다. 한 그릇의 샤브샤브 안에 농가의 이야기와 농부의 손길이 담겨 있도록, 메뉴부터 공간 디테일까지 정성스럽게 설계되었습니다.</p>
-            <p className="section-desc" data-en>SHABU SANGHA is more than a restaurant — it is a space that carries the authenticity and the spirit of coexistence that Sangha Farm has nurtured for years, now placed onto the urban table. Every detail, from the menu to the spatial details, was crafted so that a single bowl of shabu could hold the story of the farm and the touch of the farmer.</p>
-          </FadeIn>
-          <div className="story-grid">
-            <FadeIn className="story-text">
-              <div className="story-keywords">
-                <span className="keyword">Authentic</span>
-                <span className="keyword">Farm-to-Table</span>
-                <span className="keyword">Berkshire K</span>
+        {/* ── PROJECT INFO ── */}
+        <section className="st-project-info">
+          <div>
+            <p className="st-info-label">Work Scope</p>
+            <p className="st-info-value">
+              <span data-ko>공간 데코 · VMD · 브랜드 경험 · 디테일 디렉션</span>
+              <span data-en>Spatial Deco · VMD · Brand Experience</span>
+            </p>
+          </div>
+          <div>
+            <p className="st-info-label">Project Type</p>
+            <p className="st-info-value">
+              <span data-ko>F&amp;B · 데코</span>
+              <span data-en>F&amp;B · Deco</span>
+            </p>
+          </div>
+          <div>
+            <p className="st-info-label">Partner</p>
+            <p className="st-info-value">
+              <span className="st-info-line" data-ko>CLIENT | 매일유업 / 엠즈씨드 (상하농원)</span>
+              <span className="st-info-line" data-en>CLIENT | Maeil Dairy / MZ Seed (Sangha Farm)</span>
+              <span className="st-info-line">BX | SPREAD WORKS · Cheongdam · 2025</span>
+            </p>
+          </div>
+        </section>
+
+        <div className="st-full-img"><img src={I('DSCF0005.jpg')} alt="SHABU SANGHA" /></div>
+
+        {/* ── 01 BRAND STORY ── */}
+        <section className="st-section" id="story">
+          <div className="st-section-inner">
+            <Reveal>
+              <p className="st-section-label">01 — Brand Story</p>
+              <h2 className="st-section-title" data-ko>고창에서 청담까지, 상하농원의 철학을 담다</h2>
+              <h2 className="st-section-title" data-en>From Gochang To Cheongdam</h2>
+              <p className="st-section-desc" data-ko>샤브식당 상하는 단순한 식당이 아닙니다. 상하농원이 오랜 시간 지켜온 진정성과 상생의 철학을 도시의 식탁 위에 옮겨 놓은 공간입니다. 한 그릇의 샤브샤브 안에 농가의 이야기와 농부의 손길이 담기도록, 메뉴부터 공간 디테일까지 정성스럽게 설계했습니다.</p>
+              <p className="st-section-desc" data-en>SHABU SANGHA is more than a restaurant — a space carrying the authenticity and spirit of coexistence Sangha Farm has nurtured for years, now placed onto the urban table. Every detail, from menu to space, was crafted so a single bowl could hold the story of the farm and the touch of the farmer.</p>
+              <div className="st-keywords">
+                <span className="st-keyword">Authentic</span>
+                <span className="st-keyword">Farm-to-Table</span>
+                <span className="st-keyword">Berkshire K</span>
               </div>
-            </FadeIn>
-            <FadeIn className="story-visual">
+            </Reveal>
+            <div className="st-render-hero" style={{ marginTop: 40 }}>
               <img src={I('DSCF0012.jpg')} alt="SHABU SANGHA Interior" loading="lazy" />
-            </FadeIn>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── 02 CONCEPT ── */}
-      <section id="concept">
-        <div className="section-inner">
-          <FadeIn>
-            <p className="section-label">02 — Design Concept</p>
-            <h2 className="section-title" data-ko>농부의 부엌</h2>
-            <h2 className="section-title" data-en>The Farmer&apos;s Kitchen</h2>
-            <p className="section-desc" data-ko>샤브식당 상하의 핵심 컨셉은 &lsquo;농부의 부엌&rsquo;입니다. 자극적인 저가형 뷔페식 샤브샤브와는 다른 길 — 간을 세게 하지 않고, 자연식·저염식에 가까운 건강한 한 그릇을 지향합니다. 그래서 디자인 또한 기교 없이 담백하게, 음식의 맛처럼 브랜드의 진심을 그대로 표현했습니다.</p>
-            <p className="section-desc" data-en>The core concept of SHABU SANGHA is &ldquo;the farmer&apos;s kitchen.&rdquo; A different path from the loud, low-cost buffet-style shabu — a healthy bowl that leans toward natural, low-sodium cooking. The design follows the same principle: plain and honest, without ornament, expressing the brand&apos;s sincerity the way the food does.</p>
-          </FadeIn>
-          <div className="concept-grid">
-            <FadeIn className="concept-card">
-              <img src={I('DSCF0053.jpg')} alt="Material Detail" loading="lazy" />
-              <span className="caption" data-ko>마테리얼</span>
-              <span className="caption" data-en>Material</span>
-            </FadeIn>
-            <FadeIn className="concept-card">
-              <img src={I('DSCF0067.jpg')} alt="Lighting Detail" loading="lazy" />
-              <span className="caption" data-ko>조도</span>
-              <span className="caption" data-en>Light</span>
-            </FadeIn>
-            <FadeIn className="concept-card">
-              <img src={I('DSCF0093.jpg')} alt="Tableware Detail" loading="lazy" />
-              <span className="caption" data-ko>집기</span>
-              <span className="caption" data-en>Tableware</span>
-            </FadeIn>
+        {/* ── 02 CONCEPT ── */}
+        <section className="st-section alt" id="concept">
+          <div className="st-section-inner">
+            <Reveal>
+              <p className="st-section-label">02 — Concept</p>
+              <h2 className="st-section-title" data-ko>농부의 부엌</h2>
+              <h2 className="st-section-title" data-en>The Farmer&apos;s Kitchen</h2>
+              <p className="st-section-desc" data-ko>핵심 컨셉은 ‘농부의 부엌’입니다. 자극적인 저가형 뷔페식 샤브와는 다른 길 — 간을 세게 하지 않고 자연식·저염식에 가까운 건강한 한 그릇을 지향합니다. 디자인 또한 기교 없이 담백하게, 음식의 맛처럼 브랜드의 진심을 그대로 표현했습니다.</p>
+              <p className="st-section-desc" data-en>The core concept is “the farmer&apos;s kitchen” — a different path from loud, low-cost buffet shabu, a healthy bowl leaning toward natural, low-sodium cooking. The design follows the same principle: plain and honest, without ornament.</p>
+            </Reveal>
+            <div className="st-insp-grid">
+              <Reveal className="st-insp-card"><img src={I('DSCF0053.jpg')} alt="Material" loading="lazy" /><span className="st-caption" data-ko>마테리얼</span><span className="st-caption" data-en>Material</span></Reveal>
+              <Reveal className="st-insp-card"><img src={I('DSCF0067.jpg')} alt="Light" loading="lazy" /><span className="st-caption" data-ko>조도</span><span className="st-caption" data-en>Light</span></Reveal>
+              <Reveal className="st-insp-card"><img src={I('DSCF0093.jpg')} alt="Tableware" loading="lazy" /><span className="st-caption" data-ko>집기</span><span className="st-caption" data-en>Tableware</span></Reveal>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── 03 SPACE ── */}
-      <section className="brand-story" id="space">
-        <div className="section-inner">
-          <FadeIn>
-            <p className="section-label">03 — Space</p>
-            <h2 className="section-title" data-ko>청담의 맥락,<br />농가의 무드</h2>
-            <h2 className="section-title" data-en>Cheongdam Context,<br />Farmhouse Mood</h2>
-          </FadeIn>
-
-          {/* Concept block 1 */}
-          <FadeIn className="concept-block">
-            <div className="concept-text">
-              <h3 data-ko>균형의 디자인</h3>
-              <h3 data-en>Design Of Balance</h3>
-              <p data-ko>상하농원의 무드를 고스란히 가져오면서도, 청담동이라는 도시적 맥락과 어울리는 균형이 가장 큰 과제였습니다. 자연 소재와 따뜻한 톤은 농가의 정서를 전하고, 정갈한 라인과 절제된 디테일은 청담의 감도를 충족합니다.</p>
-              <p data-en>Bringing the mood of Sangha Farm while harmonizing with the urban context of Cheongdam was the biggest challenge. Natural materials and warm tones carry the sentiment of the farm, while clean lines and restrained details meet Cheongdam&apos;s sensibility.</p>
-            </div>
-            <div className="concept-img">
-              <img src={I('DSCF0097.jpg')} alt="Balanced Interior" loading="lazy" />
-            </div>
-          </FadeIn>
-
-          {/* Concept block 2 — reverse */}
-          <FadeIn className="concept-block reverse" style={{ marginTop: 80 }}>
-            <div className="concept-text">
-              <h3 data-ko>버크셔K — 본질에 집중하다</h3>
-              <h3 data-en>Berkshire K — Focused On Essence</h3>
-              <p data-ko>지리산 청정 고원에서 키운 한국형 프리미엄 흑돼지 버크셔K. 시그니처 식재료의 정직함을 공간이 그대로 받아내도록, 화려한 장식 대신 자연 마감재와 따뜻한 조도가 식탁을 감쌉니다. 손님은 음식 본연의 맛에 먼저 집중하게 됩니다.</p>
-              <p data-en>Berkshire K — a Korean premium black pork raised on the pristine highlands of Jirisan. To let the honesty of this signature ingredient resonate in the space, ornament gave way to natural finishes and warm lighting that wrap the table. Guests are invited to focus first on the essence of the food itself.</p>
-            </div>
-            <div className="concept-img">
-              <img src={I('DSCF0105.jpg')} alt="Berkshire K Plating" loading="lazy" />
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ── 04 DETAIL ── */}
-      <section id="detail">
-        <div className="section-inner">
-          <FadeIn>
-            <p className="section-label">04 — Detail</p>
-            <h2 className="section-title" data-ko>정갈한 디테일</h2>
-            <h2 className="section-title" data-en>Quiet Details</h2>
-            <p className="section-desc" data-ko>VMD부터 식기, 사이니지, 좌석 디테일까지 — 한 그릇의 샤브가 식탁에 닿기까지의 모든 흐름을 정갈한 디테일로 채웠습니다.</p>
-            <p className="section-desc" data-en>From VMD to tableware, signage, and seating details — every flow that leads a bowl of shabu to the table was filled with quiet, considered details.</p>
-          </FadeIn>
-          <div className="gallery-grid" style={{ marginTop: 60 }}>
-            <div className="gallery-item"><img src={I('DSCF0110.jpg')} alt="Detail 1" loading="lazy" /></div>
-            <div className="gallery-item"><img src={I('DSCF0115.jpg')} alt="Detail 2" loading="lazy" /></div>
+        {/* ── 03 SPACE ── */}
+        <section className="st-section" id="space">
+          <div className="st-section-inner">
+            <Reveal>
+              <p className="st-section-label">03 — Space</p>
+              <h2 className="st-section-title" data-ko>청담의 맥락, 농가의 무드</h2>
+              <h2 className="st-section-title" data-en>Cheongdam Context, Farmhouse Mood</h2>
+            </Reveal>
+            <Reveal className="st-concept-block">
+              <div className="st-concept-text">
+                <h3 data-ko>균형의 디자인</h3>
+                <h3 data-en>Design Of Balance</h3>
+                <p data-ko>상하농원의 무드를 고스란히 가져오면서도 청담동의 도시적 맥락과 어울리는 균형이 가장 큰 과제였습니다. 자연 소재와 따뜻한 톤이 농가의 정서를, 정갈한 라인과 절제된 디테일이 청담의 감도를 충족합니다.</p>
+                <p data-en>Bringing Sangha Farm&apos;s mood while harmonizing with Cheongdam&apos;s urban context was the biggest challenge — natural materials and warm tones carry the farm&apos;s sentiment, while clean lines and restraint meet Cheongdam&apos;s sensibility.</p>
+              </div>
+              <div><img src={I('DSCF0097.jpg')} alt="Balanced Interior" loading="lazy" /></div>
+            </Reveal>
+            <Reveal className="st-concept-block reverse">
+              <div className="st-concept-text">
+                <h3 data-ko>버크셔K — 본질에 집중하다</h3>
+                <h3 data-en>Berkshire K — Focused On Essence</h3>
+                <p data-ko>지리산 청정 고원에서 키운 한국형 프리미엄 흑돼지 버크셔K. 시그니처 식재료의 정직함을 공간이 받아내도록, 화려한 장식 대신 자연 마감재와 따뜻한 조도가 식탁을 감쌉니다.</p>
+                <p data-en>Berkshire K — Korean premium black pork raised on Jirisan&apos;s pristine highlands. To let its honesty resonate, ornament gave way to natural finishes and warm lighting wrapping the table.</p>
+              </div>
+              <div><img src={I('DSCF0105.jpg')} alt="Berkshire K Plating" loading="lazy" /></div>
+            </Reveal>
           </div>
-          <div className="gallery-3col" style={{ marginTop: 20 }}>
-            <div className="gallery-item"><img src={I('DSCF0146.jpg')} alt="Detail 3" loading="lazy" /></div>
-            <div className="gallery-item"><img src={I('DSCF0196.jpg')} alt="Detail 4" loading="lazy" /></div>
-            <div className="gallery-item"><img src={I('DSCF0244.jpg')} alt="Detail 5" loading="lazy" /></div>
+        </section>
+
+        {/* ── 04 DETAIL ── */}
+        <section className="st-section alt" id="detail">
+          <div className="st-section-inner">
+            <Reveal>
+              <p className="st-section-label">04 — Detail</p>
+              <h2 className="st-section-title" data-ko>정갈한 디테일</h2>
+              <h2 className="st-section-title" data-en>Quiet Details</h2>
+              <p className="st-section-desc" data-ko>VMD부터 식기·사이니지·좌석 디테일까지 — 한 그릇의 샤브가 식탁에 닿기까지의 모든 흐름을 정갈한 디테일로 채웠습니다.</p>
+              <p className="st-section-desc" data-en>From VMD to tableware, signage, and seating — every flow leading a bowl of shabu to the table was filled with quiet, considered details.</p>
+            </Reveal>
+            <div className="st-gallery-grid">
+              <div className="st-item"><img src={I('DSCF0110.jpg')} alt="Detail 1" loading="lazy" /></div>
+              <div className="st-item"><img src={I('DSCF0115.jpg')} alt="Detail 2" loading="lazy" /></div>
+            </div>
+            <div className="st-gallery-3col">
+              <div className="st-item"><img src={I('DSCF0146.jpg')} alt="Detail 3" loading="lazy" /></div>
+              <div className="st-item"><img src={I('DSCF0196.jpg')} alt="Detail 4" loading="lazy" /></div>
+              <div className="st-item"><img src={I('DSCF0244.jpg')} alt="Detail 5" loading="lazy" /></div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── 05 CREDIT ── */}
-      <section className="credit" id="credit">
-        <div className="section-inner">
-          <FadeIn>
-            <p className="section-label">05 — Credit</p>
-            <h2 className="section-title" data-ko>크레딧</h2>
-            <h2 className="section-title" data-en>Credit</h2>
-          </FadeIn>
-          <dl className="credit-grid">
-            <div className="credit-item">
-              <dt>Client</dt>
-              <dd data-ko>매일유업 / 엠즈씨드 (상하농원)</dd>
-              <dd data-en>Maeil Dairy / MZ Seed (Sangha Farm)</dd>
+        {/* ── 05 CREDIT ── */}
+        <section className="st-section" id="credit">
+          <div className="st-section-inner">
+            <Reveal>
+              <p className="st-section-label">05 — Credit</p>
+              <h2 className="st-section-title">Credit</h2>
+            </Reveal>
+            <div className="st-cards">
+              <Reveal className="st-card"><h4>Client</h4><p data-ko>매일유업 / 엠즈씨드 (상하농원)</p><p data-en>Maeil Dairy / MZ Seed (Sangha Farm)</p></Reveal>
+              <Reveal className="st-card"><h4>Brand Experience</h4><p>SPREAD WORKS</p></Reveal>
+              <Reveal className="st-card"><h4>Role</h4><p data-ko>공간 데코 · VMD · 디테일 디렉션</p><p data-en>Spatial Deco · VMD · Detail Direction</p></Reveal>
+              <Reveal className="st-card"><h4>Location</h4><p data-ko>서울 청담동 · 2025</p><p data-en>Cheongdam, Seoul · 2025</p></Reveal>
             </div>
-            <div className="credit-item">
-              <dt>Brand Experience</dt>
-              <dd>SPREAD WORKS</dd>
-            </div>
-            <div className="credit-item">
-              <dt>Role</dt>
-              <dd data-ko>공간 데코<br />VMD<br />디테일 디렉션</dd>
-              <dd data-en>Spatial Deco<br />VMD<br />Detail Direction</dd>
-            </div>
-            <div className="credit-item">
-              <dt>Location</dt>
-              <dd data-ko>서울 청담동</dd>
-              <dd data-en>Cheongdam, Seoul</dd>
-            </div>
-          </dl>
-        </div>
-      </section>
+          </div>
+        </section>
+      </main>
 
-      {/* ── FOOTER ── */}
-      <ProjectFooter
-        prevProject={{ name: 'GAGGA', href: '/projects/gagga' }}
-        nextProject={{ name: 'TOFU · G', href: '/projects/tofug' }}
-      />
+      <StudioFooter />
 
       <style jsx>{`
-        /* ===== SHABU SANGHA THEME ===== */
         :global(:root) {
-          --warm: #7a8264;
-          --warm-dark: #5d6549;
-          --dark: #1a1a1a;
-          --gray: #888;
-          --max-width: 1400px;
-          --page-bg: #fff;
+          --accent: #7a8264;
+          --secondary: #5d6549;
+          --accent-ink: color-mix(in srgb, var(--accent) 72%, #000 28%);
+          --page-bg: #ffffff;
           --page-fg: #1a1a1a;
-          --section-bg: #f5f3ef;
+          --section-bg: #f3f4ee;
           --text-mid: #555;
-          --text-light: #666;
-          --border-light: rgba(0,0,0,0.08);
-          --border-subtle: rgba(0,0,0,0.05);
-          --nav-scrolled-bg: rgba(255,255,255,0.9);
+          --gray: #888;
           --keyword-border: #1a1a1a;
-          --keyword-color: #1a1a1a;
         }
         :global(html[data-theme='dark']) {
-            --page-bg: #0c0c0c;
-            --page-fg: #e8e8e8;
-            --section-bg: #1a1a1a;
-            --text-mid: #aaa;
-            --text-light: #999;
-            --gray: #999;
-            --border-light: rgba(255,255,255,0.08);
-            --border-subtle: rgba(255,255,255,0.05);
-            --nav-scrolled-bg: rgba(12,12,12,0.9);
-            --keyword-border: #e8e8e8;
-            --keyword-color: #e8e8e8;
+          --page-bg: #0c0c0c;
+          --page-fg: #e8e8e8;
+          --section-bg: #161616;
+          --text-mid: #aaa;
+          --gray: #999;
+          --keyword-border: #e8e8e8;
+          --accent-ink: var(--accent);
         }
-        :global(body) {
-          background: var(--page-bg);
-          color: var(--page-fg);
-        }
-
-        section { padding: 120px 60px; }
-        .section-inner { max-width: var(--max-width); margin: 0 auto; }
-        .section-label {
-          font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
-          color: var(--warm); margin-bottom: 16px; font-weight: 600;
-        }
-        .section-title {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(28px, 4vw, 42px); line-height: 1.1;
-          margin-bottom: 24px; letter-spacing: 1px;
-        }
-        .section-desc {
-          font-size: 15px; line-height: 1.9; color: var(--text-mid);
-          max-width: 680px; font-weight: 300;
-        }
-
-        /* ===== BRAND STORY ===== */
-        .brand-story { background: var(--section-bg); }
-        .story-grid {
-          display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-          align-items: stretch; margin-top: 60px;
-        }
-        .story-grid :global(.story-text) {
-          display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .story-grid :global(.story-visual) {
-          position: relative; border-radius: 4px; overflow: hidden;
-          aspect-ratio: 4/3;
-        }
-        .story-grid :global(.story-visual) img { width: 100%; height: 100%; object-fit: cover; }
-        .story-keywords { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
-        .keyword {
-          padding: 10px 24px; border: 1px solid var(--keyword-border);
-          border-radius: 50px; font-size: 12px; font-weight: 500;
-          letter-spacing: 2px; text-transform: uppercase; color: var(--keyword-color);
-        }
-
-        /* ===== CONCEPT GRID ===== */
-        .concept-grid {
-          display: grid; grid-template-columns: repeat(3, 1fr);
-          gap: 20px; margin-top: 60px;
-        }
-        :global(.concept-card) {
-          position: relative; overflow: hidden; border-radius: 4px;
-          aspect-ratio: 1; background: var(--section-bg);
-        }
-        :global(.concept-card) img {
-          width: 100%; height: 100%; object-fit: cover;
-          transition: transform 0.6s ease;
-        }
-        :global(.concept-card:hover) img { transform: scale(1.05); }
-        :global(.concept-card) .caption {
-          position: absolute; bottom: 20px; left: 20px; color: #fff;
-          font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-          font-weight: 500; background: rgba(0,0,0,0.4); padding: 8px 16px;
-          border-radius: 2px; backdrop-filter: blur(4px);
-        }
-
-        /* ===== CONCEPT BLOCK ===== */
-        :global(.concept-block) {
-          display: grid; grid-template-columns: 1fr 1.2fr;
-          gap: 60px; align-items: center; margin-top: 60px;
-        }
-        :global(.concept-block.reverse) { grid-template-columns: 1.2fr 1fr; }
-        :global(.concept-block.reverse) .concept-text { order: 1; }
-        :global(.concept-block.reverse) .concept-img { order: 0; }
-        .concept-img { border-radius: 4px; overflow: hidden; }
-        .concept-img img { width: 100%; display: block; transition: transform 0.6s ease; }
-        .concept-img:hover img { transform: scale(1.03); }
-        .concept-text h3 {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 28px; letter-spacing: 3px; margin-bottom: 16px;
-        }
-        .concept-text p {
-          font-size: 14px; line-height: 1.9; color: var(--text-mid); font-weight: 300;
-        }
-
-        /* ===== GALLERY ===== */
-        .gallery-grid {
-          display: grid; grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
-        }
-        .gallery-3col {
-          display: grid; grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
-        }
-        .gallery-item { overflow: hidden; border-radius: 4px; }
-        .gallery-item img {
-          width: 100%; height: 100%; object-fit: cover;
-          display: block; transition: transform 0.6s ease;
-          aspect-ratio: 4/3;
-        }
-        .gallery-item:hover img { transform: scale(1.04); }
-
-        /* ===== CREDIT ===== */
-        .credit { background: var(--section-bg); }
-        .credit-grid {
-          display: grid; grid-template-columns: repeat(4, 1fr);
-          gap: 40px; margin-top: 48px; max-width: 1000px;
-        }
-        .credit-item dt {
-          font-family: 'DM Mono', monospace;
-          font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-          color: var(--gray); margin-bottom: 8px;
-        }
-        .credit-item dd {
-          font-size: 14px; font-weight: 500; color: var(--page-fg);
-          line-height: 1.6;
-        }
-
-        /* ===== FADE-IN ===== */
-        :global(.fade-in) {
-          opacity: 0; transform: translateY(20px);
-          transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        :global(.fade-in.visible) {
-          opacity: 1; transform: translateY(0);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-          section { padding: 80px 32px; }
-          .story-grid { grid-template-columns: 1fr; gap: 40px; }
-          .concept-grid { grid-template-columns: 1fr; }
-          :global(.concept-block),
-          :global(.concept-block.reverse) {
-            grid-template-columns: 1fr; gap: 32px;
-          }
-          :global(.concept-block.reverse) .concept-text,
-          :global(.concept-block.reverse) .concept-img {
-            order: initial;
-          }
-          .gallery-grid { grid-template-columns: 1fr; }
-          .gallery-3col { grid-template-columns: 1fr; }
-          .credit-grid { grid-template-columns: 1fr 1fr; }
-        }
-        @media (max-width: 640px) {
-          section { padding: 60px 20px; }
-          .credit-grid { grid-template-columns: 1fr; }
-        }
+        :global(body) { background: var(--page-bg); color: var(--page-fg); }
       `}</style>
     </>
   );

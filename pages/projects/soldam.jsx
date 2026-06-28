@@ -1,35 +1,32 @@
 import Head from 'next/head';
-import { ProjectNav, ProjectHero, ProjectFooter } from '../../components/project';
 import { useEffect, useRef } from 'react';
+import { StudioNav, StudioFooter } from '../../components/project';
 
+/* ── 섹션 메뉴 (상단바 ScrollSpy) ── */
 const SECTIONS = [
-  { id: 'overview', label: 'Overview' },
+  { id: 'story', label: 'Brand Story' },
   { id: 'strategy', label: 'Strategy' },
-  { id: 'spatial', label: 'Spatial' },
   { id: 'proposal', label: 'Proposal' },
-  { id: 'results', label: 'Impact' },
+  { id: 'built', label: 'Built' },
+  { id: 'impact', label: 'Impact' },
 ];
 
-const HERO_META = [
-  { label: 'Project', value: 'SOLDAM MARKET — SOLUM HQ' },
-  { label: 'Category', value: 'Retail / Smart Showroom' },
-  { label: 'Year', value: '2024 — 2025' },
-  { label: 'Scope', value: 'Brand Strategy · Space Design · Supervision' },
-];
+const I = (name) => `/images/soldam/${name}`;
 
-function Reveal({ children, className = '' }) {
+/* 스크롤 페이드인 */
+function Reveal({ children, className = '', style }) {
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) el.classList.add('visible'); },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
-  return <div ref={ref} className={`reveal ${className}`}>{children}</div>;
+  return <div ref={ref} className={`st-reveal ${className}`} style={style}>{children}</div>;
 }
 
 export default function SoldamMarket() {
@@ -37,722 +34,216 @@ export default function SoldamMarket() {
     <>
       <Head>
         <title>SOLDAM MARKET — Spatial Branding for Smart Retail</title>
+        <meta name="description" content="SOLDAM MARKET — 솔루엠 스마트 리테일 쇼룸 공간 브랜딩. 공간하음." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet" />
       </Head>
 
-      <ProjectNav sections={SECTIONS} accentColor="#0038FF" />
+      <StudioNav sections={SECTIONS} />
 
-      <ProjectHero
-        title={"SOLDAM\nMARKET"}
-        label="Spatial Branding &amp; Design Strategy"
-        image="/images/soldam/hero.jpg"
-        subtitleKo="삼성전기에서 분사한 글로벌 리테일 테크 기업 솔루엠 — B2B 전자부품 제조사를 소비자 접점의 라이프스타일 브랜드로 전환하기 위한 공간 브랜딩 기획. 공간 컨셉 수립, 동선 전략, 3D 디자인 제안까지."
-        subtitleEn="Spatial branding concept for SOLUM — a global retail tech company spun off from Samsung Electro-Mechanics — transforming a B2B electronics manufacturer into a consumer-facing lifestyle brand. Space concept, circulation strategy, and 3D design proposal."
-        meta={HERO_META}
-      />
-
-      {/* ── 01 OVERVIEW ── */}
-      <section className="overview" id="overview">
-        <Reveal>
-          <p className="section-num">01 — Overview</p>
-          <h2 className="section-title" data-ko>테크 기업의 기술력을<br /><em>공간으로 번역하다</em></h2>
-          <h2 className="section-title" data-en>Translating Tech DNA<br /><em>Into Space</em></h2>
-        </Reveal>
-        <div className="overview-grid">
-          <Reveal className="overview-text">
-            <p data-ko>삼성전기에서 분사한 글로벌 리테일 테크 기업 <strong>솔루엠(SOLUM)</strong>이 용인 신사옥으로 본사를 이전하면서, 1층에 자사 핵심 기술인 ESL(전자가격표시기), AI 카메라, BLE 센서, 디지털 사이니지를 실제 리테일 환경에서 체험할 수 있는 <strong>스마트 리테일 쇼룸</strong>을 구축했습니다.</p>
-            <p data-en><strong>SOLUM</strong>, a global retail tech company spun off from Samsung Electro-Mechanics, relocated to a new HQ in Yongin. The ground floor was designed as a <strong>smart retail showroom</strong> where core technologies — ESL, AI cameras, BLE sensors, and digital signage — could be experienced in a real retail environment.</p>
-            <p data-ko>단순한 편의점이 아닌, B2B 고객에게는 솔루엠의 <strong>SSP(SOLUM Store Platform)</strong> 기술력을 실증하는 쇼룸이자, B2C 고객에게는 미래형 소비 경험을 제공하는 이중 목적의 공간. 브랜드 네이밍부터 공간 전략, 디자인 제안, 현장 감리까지 전 과정에 참여했습니다.</p>
-            <p data-en>Not just a convenience store — a dual-purpose space serving as a <strong>SSP (SOLUM Store Platform)</strong> demo showroom for B2B clients while delivering futuristic retail experiences for B2C customers. Involved from brand naming through spatial strategy, design proposal, and on-site supervision.</p>
-          </Reveal>
-          <Reveal className="overview-stats">
-            <div className="stat-card">
-              <div className="stat-value">ESL</div>
-              <div className="stat-label" data-ko>전자가격표시기 실시간 재고 연동 시스템 적용</div>
-              <div className="stat-label" data-en>Real-time inventory sync via electronic shelf labels</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-value">AI</div>
-              <div className="stat-label" data-ko>Vision AI 카메라 기반 고객 동선 분석</div>
-              <div className="stat-label" data-en>Customer flow analysis via Vision AI cameras</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-value">GS</div>
-              <div className="stat-label" data-ko>GS리테일 DX Lab 무인결제 게이트 연계</div>
-              <div className="stat-label" data-en>GS Retail DX Lab unmanned checkout gate</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-value">B2B+C</div>
-              <div className="stat-label" data-ko>쇼룸 + 리테일 이중 목적 공간 설계</div>
-              <div className="stat-label" data-en>Dual-purpose showroom + retail space design</div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── 02 CHALLENGE ── */}
-      <section className="challenge" id="challenge">
-        <Reveal>
-          <p className="section-num">02 — Challenge</p>
-          <h2 className="section-title" data-ko>설계의 <em>핵심 과제</em></h2>
-          <h2 className="section-title" data-en>Core Design <em>Challenges</em></h2>
-        </Reveal>
-        <div className="challenge-content">
-          <ul className="challenge-list">
-            <Reveal className="challenge-item">
-              <span className="challenge-num">01</span>
-              <div>
-                <h3 data-ko>동선 = 데이터</h3>
-                <h3 data-en>Circulation = Data</h3>
-                <p data-ko>AI 카메라와 BLE 센서가 고객 동선을 실시간으로 추적하는 공간에서, 동선 설계 자체가 곧 데이터 수집 효율을 결정합니다. 일반 편의점과 달리, 기술이 읽을 수 있는 동선을 설계해야 했습니다.</p>
-                <p data-en>In a space where AI cameras and BLE sensors track customer movement in real time, circulation design directly determines data collection efficiency. Unlike a standard convenience store, we had to design paths that technology could read.</p>
-              </div>
-            </Reveal>
-            <Reveal className="challenge-item">
-              <span className="challenge-num">02</span>
-              <div>
-                <h3 data-ko>쇼룸 × 매장의 공존</h3>
-                <h3 data-en>Showroom × Store Coexistence</h3>
-                <p data-ko>해외 바이어에게는 SSP 플랫폼 데모 공간으로, 지역 주민에게는 일상적 편의점으로 동시에 작동해야 합니다. 체험 동선과 구매 동선이 충돌하지 않는 레이아웃이 필요했습니다.</p>
-                <p data-en>The space needed to function simultaneously as an SSP platform demo for international buyers and an everyday convenience store for local residents. A layout where demo and purchase flows don&apos;t collide was essential.</p>
-              </div>
-            </Reveal>
-            <Reveal className="challenge-item">
-              <span className="challenge-num">03</span>
-              <div>
-                <h3 data-ko>전자부품 기업의 브랜드 감성 전환</h3>
-                <h3 data-en>Brand Perception Shift</h3>
-                <p data-ko>B2B 하드웨어 제조사 이미지를 소비자 친화적 라이프스타일 브랜드로 전환하면서도, 기술 기업으로서의 정체성을 유지하는 균형이 필요했습니다.</p>
-                <p data-en>Transforming a B2B hardware manufacturer&apos;s image into a consumer-friendly lifestyle brand while maintaining its identity as a tech company required careful balance.</p>
-              </div>
-            </Reveal>
-          </ul>
-        </div>
-      </section>
-
-      {/* ── 03 BRAND STRATEGY ── */}
-      <section className="brand-strategy" id="strategy">
-        <Reveal>
-          <p className="section-num">03 — Brand Naming Strategy</p>
-          <h2 className="section-title" data-ko>세 가지 브랜드 방향,<br /><em>하나의 솔루엠</em></h2>
-          <h2 className="section-title" data-en>Three Brand Directions,<br /><em>One SOLUM</em></h2>
-          <p style={{ maxWidth: 680, fontSize: 15, lineHeight: 1.8, color: 'var(--gray-600)', wordBreak: 'keep-all' }} data-ko>
-            솔루엠의 기술 정체성을 소비자 언어로 번역하기 위해, 타겟 퍼소나와 공간 무드가 서로 다른 세 가지 브랜드 네이밍 안을 제안했습니다.
+      <main className="studio-page">
+        {/* ── HERO ── */}
+        <section className="st-hero">
+          <h1 className="st-hero-title">SOLDAM MARKET</h1>
+          <p className="st-hero-positioning">
+            <span data-ko>삼성전기에서 분사한 글로벌 리테일 테크 기업 솔루엠(SOLUM)의 스마트 리테일 쇼룸 — B2B 제조사를 소비자 라이프스타일 브랜드로 전환하는 공간 브랜딩.</span>
+            <span data-en>A smart retail showroom for SOLUM — a global retail tech company spun off from Samsung Electro-Mechanics — transforming a B2B manufacturer into a consumer lifestyle brand.</span>
           </p>
-          <p style={{ maxWidth: 680, fontSize: 15, lineHeight: 1.8, color: 'var(--gray-600)', wordBreak: 'keep-all' }} data-en>
-            To translate SOLUM&apos;s tech identity into consumer language, three brand naming proposals were developed — each with distinct target personas and spatial moods.
+          <p className="st-hero-desc">
+            <span data-ko>용인 신사옥 1층에 ESL·AI 카메라·BLE 센서·디지털 사이니지를 실제 리테일 환경에서 체험하는 쇼룸을 구축했습니다. B2B 데모이자 B2C 매장인 이중 목적 공간으로, 브랜드 네이밍부터 공간 전략·디자인 제안·현장 감리까지 전 과정에 참여했습니다.</span>
+            <span data-en>On the ground floor of SOLUM&apos;s new Yongin HQ, a showroom lets visitors experience ESL, AI cameras, BLE sensors, and digital signage in a real retail setting — a dual-purpose B2B demo and B2C store. We led the full journey from naming to spatial strategy, design proposal, and supervision.</span>
           </p>
-        </Reveal>
-        <div className="brand-options">
-          {/* Option A */}
-          <Reveal className="brand-card">
-            <div className="brand-card-visual opt-a">
-              <div className="brand-logo-text opt-a-text">
-                Pick!<br />
-                <span className="sub-brand" style={{ color: 'var(--white)', fontWeight: 700, fontSize: 16 }}>SOLDAM</span>
-              </div>
-            </div>
-            <div className="brand-card-body">
-              <p className="brand-card-label">Option A</p>
-              <h3 className="brand-card-name">Pick! SOLDAM</h3>
-              <p className="brand-card-desc" data-ko>&ldquo;그냥, 집어봐!&rdquo; — 새로운 CVS, 새로운 소비방법의 즐겁고 아이코닉한 시작. MZ세대 타겟의 캐주얼한 무드.</p>
-              <p className="brand-card-desc" data-en>&ldquo;Just pick it!&rdquo; — A fun, iconic start to a new CVS and new way of shopping. Casual mood targeting Gen MZ.</p>
-            </div>
-          </Reveal>
-          {/* Option B */}
-          <Reveal className="brand-card">
-            <div className="brand-card-visual opt-b">
-              <div className="brand-logo-text opt-b-text">
-                LiFELAB<br />
-                <span className="sub-brand blue-badge">SOLDAM</span>
-              </div>
-            </div>
-            <div className="brand-card-body">
-              <p className="brand-card-label">Option B</p>
-              <h3 className="brand-card-name">LiFELAB SOLDAM</h3>
-              <p className="brand-card-desc" data-ko>&ldquo;생활소비를 연구하는 실험실&rdquo; — 편의점도 편집샵도 아닌, 소비 패턴을 학습하는 공간이라는 기술 지향적 포지셔닝.</p>
-              <p className="brand-card-desc" data-en>&ldquo;A lab that studies everyday consumption&rdquo; — Neither a CVS nor a select shop, but a space that learns consumption patterns. Tech-forward positioning.</p>
-            </div>
-          </Reveal>
-          {/* Option C */}
-          <Reveal className="brand-card">
-            <div className="brand-card-visual opt-c">
-              <div className="brand-logo-text opt-c-text">
-                STORAGE<br />SOLDAM
-              </div>
-            </div>
-            <div className="brand-card-body">
-              <p className="brand-card-label">Option C</p>
-              <h3 className="brand-card-name">STORAGE SOLDAM</h3>
-              <p className="brand-card-desc" data-ko>&ldquo;기술과 소비, 생활, 지역, 그 모두를 모았다&rdquo; — AI의 스토리지 같은 창고형 보관소. 힙한 무드와 기억하기 쉬운 단어.</p>
-              <p className="brand-card-desc" data-en>&ldquo;Tech, consumption, life, community — all stored here&rdquo; — A warehouse-style concept like AI storage. Hip mood with a memorable name.</p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+          <p className="st-hero-quote">
+            <span data-ko>“B2B 기술을, 소비자 경험으로 번역하다.”</span>
+            <span data-en>“Translating B2B technology into consumer experience.”</span>
+          </p>
+        </section>
 
-      {/* ── 04 SPATIAL STRATEGY ── */}
-      <section className="spatial" id="spatial">
-        <Reveal>
-          <p className="section-num">04 — Spatial Strategy</p>
-          <h2 className="section-title" data-ko>데이터가 흐르는<br /><em>동선을 설계하다</em></h2>
-          <h2 className="section-title" data-en>Designing Circulation<br /><em>Where Data Flows</em></h2>
-        </Reveal>
-        <div className="spatial-flow">
-          <div className="flow-step">
-            <div className="flow-icon">🚪</div>
-            <h4>ENTRANCE</h4>
-            <p>충전부스/가입부스<br />GS DX Lab 게이트</p>
+        {/* ── PROJECT INFO ── */}
+        <section className="st-project-info">
+          <div>
+            <p className="st-info-label">Work Scope</p>
+            <p className="st-info-value">
+              <span data-ko>브랜드 전략 · 공간 디자인 · 3D 시각화 · 감리</span>
+              <span data-en>Brand Strategy · Space Design · 3D Visualization</span>
+            </p>
           </div>
-          <div className="flow-step">
-            <div className="flow-icon">🛒</div>
-            <h4>POP-UP ZONE</h4>
-            <p>메인 팝업 매대<br />브랜드 협업 존</p>
+          <div>
+            <p className="st-info-label">Project Type</p>
+            <p className="st-info-value">
+              <span data-ko>리테일 · 스마트 쇼룸</span>
+              <span data-en>Retail · Smart Showroom</span>
+            </p>
           </div>
-          <div className="flow-step">
-            <div className="flow-icon">📦</div>
-            <h4>GS 상품 매대</h4>
-            <p>카테고리별 벽면 매대<br />ESL 연동 선반</p>
+          <div>
+            <p className="st-info-label">Partner</p>
+            <p className="st-info-value">
+              <span className="st-info-line">CLIENT | SOLUM (솔루엠)</span>
+              <span className="st-info-line">STUDIO | WCAMP · SOLUM HQ, Yongin · 2024–2025</span>
+            </p>
           </div>
-          <div className="flow-step">
-            <div className="flow-icon">☕</div>
-            <h4>LOUNGE</h4>
-            <p>고객 라운지<br />86&quot; 커넥트 월</p>
-          </div>
-          <div className="flow-step">
-            <div className="flow-icon">💳</div>
-            <h4>SELF CHECKOUT</h4>
-            <p>이미지 인식 셀프 카운터<br />무인결제 시스템</p>
-          </div>
-        </div>
-        <Reveal className="spatial-insight">
-          <p data-ko>스마트 리테일에서 고객 동선은 곧 데이터 파이프라인입니다.<br />AI 카메라가 추적할 수 있는 명확한 경로, BLE 센서가 체류시간을 측정할 수 있는 구분된 존, ESL이 가시성을 확보할 수 있는 선반 각도 — 모든 공간 결정이 기술 인프라와 동기화되어야 했습니다.</p>
-          <p data-en>In smart retail, customer circulation is a data pipeline.<br />Clear paths for AI cameras to track, distinct zones for BLE sensors to measure dwell time, shelf angles for ESL visibility — every spatial decision had to sync with tech infrastructure.</p>
-          <span className="insight-author">— Design Strategy Note</span>
-        </Reveal>
-      </section>
+        </section>
 
-      {/* ── 05 DESIGN PROPOSAL ── */}
-      <section className="gallery-section proposal" id="proposal">
-        <Reveal>
-          <p className="section-num">05 — Design Proposal</p>
-          <h2 className="section-title" data-ko>공간 디자인 <em>제안</em></h2>
-          <h2 className="section-title" data-en>Spatial Design <em>Proposal</em></h2>
-        </Reveal>
-        <p className="gallery-caption">CONCEPT RENDERINGS — ENSCAPE 3D VISUALIZATION</p>
-        <div className="gallery-scroll">
-          <img src="/images/soldam/proposal-01-interior-front.jpg" alt="Interior Front View" />
-          <img src="/images/soldam/proposal-02-popup-display.jpg" alt="Pop-up & Display" />
-          <img src="/images/soldam/proposal-03-lounge-area.jpg" alt="Lounge Area" />
-          <img src="/images/soldam/proposal-04-dx-lab-gate.jpg" alt="GS DX Lab Gate" />
-          <img src="/images/soldam/proposal-05-full-interior.jpg" alt="Full Interior" />
-        </div>
-        <div className="gallery-grid-2" style={{ marginTop: 4, padding: '0 clamp(24px, 5vw, 80px)' }}>
-          <img src="/images/soldam/proposal-06-soldam-entrance.jpg" alt="Storage SOLDAM Entrance" />
-          <img src="/images/soldam/proposal-07-lifelab-entrance.jpg" alt="LiFELAB SOLDAM Entrance" />
-        </div>
-        <p className="gallery-caption" data-ko>블루 테라조 · 유리벽돌 파티션 · 스테인리스 — 기술 기업의 차가운 정밀함과 리테일의 접근성을 동시에 구현하는 마테리얼 전략</p>
-        <p className="gallery-caption" data-en>Blue terrazzo · Glass brick partition · Stainless steel — A material strategy balancing tech precision with retail accessibility</p>
-      </section>
+        <div className="st-full-img"><img src={I('hero.jpg')} alt="SOLDAM MARKET" /></div>
 
-      {/* ── 06 AS BUILT ── */}
-      <section className="gallery-section built">
-        <Reveal>
-          <p className="section-num">06 — As Built</p>
-          <h2 className="section-title" data-ko>완공 <em>현장</em></h2>
-          <h2 className="section-title" data-en>As <em>Built</em></h2>
-        </Reveal>
-        <Reveal className="built-note">
-          <span className="dot"></span>
-          <span data-ko>시공 단계에서 GS DX Lab 연계 요구사항 반영 및 파사드 디자인 변경이 진행되었습니다. 2025.08.01 그랜드 오픈.</span>
-          <span data-en>GS DX Lab integration requirements and façade design changes were applied during construction. Grand opening 2025.08.01.</span>
-        </Reveal>
-        <div className="gallery-full">
-          <img src="/images/soldam/built-01-exterior-corner.jpg" alt="SOLDAM MARKET Exterior Corner" />
-        </div>
-        <div className="gallery-grid-2">
-          <img src="/images/soldam/built-02-entrance.jpg" alt="SOLDAM MARKET Entrance" />
-          <img src="/images/soldam/built-03-interior.jpg" alt="SOLDAM MARKET Interior" />
-        </div>
-        <div className="gallery-full" style={{ marginTop: 4 }}>
-          <img src="/images/soldam/built-04-self-checkout.jpg" alt="Self Checkout Zone" />
-        </div>
-        <p className="gallery-caption">SOLDAM MARKET — SOLUM HQ 1F, Yongin, Grand Open 2025.08.01</p>
-      </section>
+        {/* ── 01 BRAND STORY ── */}
+        <section className="st-section" id="story">
+          <div className="st-section-inner">
+            <Reveal>
+              <p className="st-section-label">01 — Brand Story</p>
+              <h2 className="st-section-title" data-ko>테크 기업의 기술력을 공간으로 번역하다</h2>
+              <h2 className="st-section-title" data-en>Translating Tech DNA Into Space</h2>
+              <p className="st-section-desc" data-ko>솔루엠이 용인 신사옥으로 이전하며 1층에 ESL·AI 카메라·BLE 센서·디지털 사이니지를 실제 리테일 환경에서 체험하는 스마트 리테일 쇼룸을 구축했습니다. B2B 고객에게는 SSP(SOLUM Store Platform) 실증 쇼룸, B2C 고객에게는 미래형 소비 경험을 제공하는 이중 목적 공간입니다.</p>
+              <p className="st-section-desc" data-en>As SOLUM relocated to its new Yongin HQ, the ground floor became a smart retail showroom where ESL, AI cameras, BLE sensors, and digital signage are experienced in a real retail environment — a dual-purpose space: an SSP (SOLUM Store Platform) demo for B2B clients and a futuristic store for B2C customers.</p>
+            </Reveal>
+            <div className="st-cards">
+              <Reveal className="st-card"><h4>ESL</h4><p data-ko>전자가격표시기 실시간 재고 연동 시스템.</p><p data-en>Real-time inventory sync via electronic shelf labels.</p></Reveal>
+              <Reveal className="st-card"><h4>AI</h4><p data-ko>Vision AI 카메라 기반 고객 동선 분석.</p><p data-en>Customer flow analysis via Vision AI cameras.</p></Reveal>
+              <Reveal className="st-card"><h4>GS</h4><p data-ko>GS리테일 DX Lab 무인결제 게이트 연계.</p><p data-en>GS Retail DX Lab unmanned checkout gate.</p></Reveal>
+              <Reveal className="st-card"><h4>B2B + C</h4><p data-ko>쇼룸 + 리테일 이중 목적 공간 설계.</p><p data-en>Dual-purpose showroom + retail space design.</p></Reveal>
+            </div>
 
-      {/* ── 07 RESULTS ── */}
-      <section className="results" id="results">
-        <Reveal>
-          <p className="section-num">07 — Impact</p>
-          <h2 className="section-title" data-ko>프로젝트가 <em>만든 가치</em></h2>
-          <h2 className="section-title" data-en>Value <em>Created</em></h2>
-        </Reveal>
-        <div className="results-grid">
-          <Reveal className="result-card">
-            <div className="result-icon">🏢</div>
-            <h3 data-ko>기업 쇼룸의 재정의</h3>
-            <h3 data-en>Redefining Corporate Showrooms</h3>
-            <p data-ko>NRF 2026에서 솔루엠이 발표한 SSP 플랫폼의 실증 공간으로 활용. 글로벌 리테일러 대상 PoC 레퍼런스 사이트로 기능.</p>
-            <p data-en>Used as a proof-of-concept space for SOLUM&apos;s SSP platform presented at NRF 2026. Functions as a PoC reference site for global retailers.</p>
-          </Reveal>
-          <Reveal className="result-card">
-            <div className="result-icon">📐</div>
-            <h3 data-ko>데이터 기반 공간설계</h3>
-            <h3 data-en>Data-Driven Spatial Design</h3>
-            <p data-ko>AI 카메라와 BLE 센서가 작동하는 리테일 환경에서, 기술 인프라와 동기화된 공간 전략의 새로운 방법론을 제시.</p>
-            <p data-en>Established a new methodology for spatial strategy synchronized with tech infrastructure in a retail environment powered by AI cameras and BLE sensors.</p>
-          </Reveal>
-          <Reveal className="result-card">
-            <div className="result-icon">🎨</div>
-            <h3 data-ko>브랜드 전환 프레임워크</h3>
-            <h3 data-en>Brand Transition Framework</h3>
-            <p data-ko>B2B 전자부품 제조사를 소비자 접점의 라이프스타일 브랜드로 전환하는 네이밍-공간 통합 전략을 수립.</p>
-            <p data-en>Developed an integrated naming-spatial strategy for transforming a B2B electronics manufacturer into a consumer-facing lifestyle brand.</p>
-          </Reveal>
-        </div>
-      </section>
+            <Reveal>
+              <p className="st-section-label" style={{ marginTop: 80 }}>Core Design Challenges</p>
+            </Reveal>
+            <div className="st-cards">
+              <Reveal className="st-card"><h4>Circulation = Data</h4><p className="st-card-sub">01</p><p data-ko>AI 카메라·BLE 센서가 동선을 실시간 추적하는 공간에서, 동선 설계가 곧 데이터 수집 효율을 결정합니다. 기술이 읽을 수 있는 동선이 필요했습니다.</p><p data-en>Where AI cameras and BLE sensors track movement in real time, circulation design determines data efficiency — paths technology can read.</p></Reveal>
+              <Reveal className="st-card"><h4>Showroom × Store</h4><p className="st-card-sub">02</p><p data-ko>해외 바이어에겐 SSP 데모, 지역 주민에겐 편의점으로 동시에 작동해야 합니다. 체험 동선과 구매 동선이 충돌하지 않는 레이아웃이 필요했습니다.</p><p data-en>It had to work as an SSP demo for buyers and an everyday store for locals at once — a layout where demo and purchase flows don&apos;t collide.</p></Reveal>
+              <Reveal className="st-card"><h4>Brand Perception Shift</h4><p className="st-card-sub">03</p><p data-ko>B2B 하드웨어 제조사 이미지를 소비자 친화적 라이프스타일 브랜드로 전환하면서도 기술 기업의 정체성을 유지하는 균형.</p><p data-en>Shifting a B2B hardware maker&apos;s image into a consumer-friendly lifestyle brand while keeping its tech identity.</p></Reveal>
+            </div>
+          </div>
+        </section>
 
-      {/* ── CREDIT ── */}
-      <section className="credit">
-        <dl className="credit-grid">
-          <div className="credit-item">
-            <dt>Client</dt>
-            <dd>SOLUM (솔루엠)</dd>
-          </div>
-          <div className="credit-item">
-            <dt>Design Studio</dt>
-            <dd>WCAMP</dd>
-          </div>
-          <div className="credit-item">
-            <dt>Role</dt>
-            <dd>Brand Strategy<br />Spatial Design<br />3D Visualization</dd>
-          </div>
-          <div className="credit-item">
-            <dt>Location</dt>
-            <dd>SOLUM HQ 1F<br />Yongin, Gyeonggi-do</dd>
-          </div>
-        </dl>
-      </section>
+        {/* ── 02 STRATEGY ── */}
+        <section className="st-section alt" id="strategy">
+          <div className="st-section-inner">
+            <Reveal>
+              <p className="st-section-label">02 — Strategy</p>
+              <h2 className="st-section-title" data-ko>세 가지 브랜드 방향, 하나의 솔루엠</h2>
+              <h2 className="st-section-title" data-en>Three Brand Directions, One SOLUM</h2>
+              <p className="st-section-desc" data-ko>솔루엠의 기술 정체성을 소비자 언어로 번역하기 위해, 타겟 퍼소나와 공간 무드가 다른 세 가지 네이밍 안을 제안했습니다.</p>
+              <p className="st-section-desc" data-en>To translate SOLUM&apos;s tech identity into consumer language, three naming proposals were developed — each with a distinct persona and spatial mood.</p>
+            </Reveal>
+            <div className="st-cards">
+              <Reveal className="st-card"><h4>Pick! SOLDAM</h4><p className="st-card-sub">Option A · Casual</p><p data-ko>“그냥, 집어봐!” — 새로운 CVS, 새로운 소비방법의 즐겁고 아이코닉한 시작. MZ세대 타겟.</p><p data-en>“Just pick it!” — a fun, iconic start to a new CVS. Casual mood targeting Gen MZ.</p></Reveal>
+              <Reveal className="st-card"><h4>LiFELAB SOLDAM</h4><p className="st-card-sub">Option B · Tech</p><p data-ko>“생활소비를 연구하는 실험실” — 소비 패턴을 학습하는 공간이라는 기술 지향 포지셔닝.</p><p data-en>“A lab studying everyday consumption” — tech-forward positioning as a space that learns consumption patterns.</p></Reveal>
+              <Reveal className="st-card"><h4>STORAGE SOLDAM</h4><p className="st-card-sub">Option C · Hip</p><p data-ko>“기술과 소비, 생활, 지역을 모두 모았다” — AI 스토리지 같은 창고형 보관소. 힙하고 기억하기 쉬운 단어.</p><p data-en>“Tech, consumption, life, community — all stored here” — a warehouse-style concept like AI storage.</p></Reveal>
+            </div>
 
-      <ProjectFooter
-        prevProject={{ name: 'BODY GUARD', href: '/projects/bodyguard' }}
-        nextProject={{ name: 'PAUL BASSETT', href: '/projects/paulbassett' }}
-      />
+            <Reveal>
+              <p className="st-section-label" style={{ marginTop: 80 }}>Spatial Strategy — Where Data Flows</p>
+              <h2 className="st-section-title" data-ko>데이터가 흐르는 동선을 설계하다</h2>
+              <h2 className="st-section-title" data-en>Designing Circulation Where Data Flows</h2>
+            </Reveal>
+            <div className="st-cards">
+              <Reveal className="st-card"><h4>Entrance</h4><p data-ko>충전부스 · 가입부스 · GS DX Lab 게이트</p><p data-en>Charging / sign-up booths · GS DX Lab gate</p></Reveal>
+              <Reveal className="st-card"><h4>Pop-up Zone</h4><p data-ko>메인 팝업 매대 · 브랜드 협업 존</p><p data-en>Main pop-up display · brand collaboration zone</p></Reveal>
+              <Reveal className="st-card"><h4>GS 상품 매대</h4><p data-ko>카테고리별 벽면 매대 · ESL 연동 선반</p><p data-en>Category wall displays · ESL-linked shelving</p></Reveal>
+              <Reveal className="st-card"><h4>Lounge</h4><p data-ko>고객 라운지 · 86&quot; 커넥트 월</p><p data-en>Customer lounge · 86&quot; connect wall</p></Reveal>
+              <Reveal className="st-card"><h4>Self Checkout</h4><p data-ko>이미지 인식 셀프 카운터 · 무인결제</p><p data-en>Image-recognition self counter · unmanned checkout</p></Reveal>
+            </div>
+            <Reveal>
+              <p className="st-section-desc" style={{ marginTop: 40, fontStyle: 'italic' }} data-ko>“스마트 리테일에서 고객 동선은 곧 데이터 파이프라인입니다. AI 카메라가 추적할 경로, BLE 센서가 체류시간을 측정할 존, ESL이 가시성을 확보할 선반 각도 — 모든 공간 결정이 기술 인프라와 동기화되어야 했습니다.”</p>
+              <p className="st-section-desc" style={{ marginTop: 40, fontStyle: 'italic' }} data-en>“In smart retail, customer circulation is a data pipeline. Paths for AI cameras to track, zones for BLE sensors to measure dwell time, shelf angles for ESL visibility — every spatial decision had to sync with the tech infrastructure.”</p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ── 03 PROPOSAL ── */}
+        <section className="st-section" id="proposal">
+          <div className="st-section-inner">
+            <Reveal>
+              <p className="st-section-label">03 — Proposal</p>
+              <h2 className="st-section-title" data-ko>공간 디자인 제안</h2>
+              <h2 className="st-section-title" data-en>Spatial Design Proposal</h2>
+              <p className="st-section-desc" data-ko>블루 테라조 · 유리벽돌 파티션 · 스테인리스 — 기술 기업의 차가운 정밀함과 리테일의 접근성을 동시에 구현하는 마테리얼 전략. (Enscape 3D 시각화)</p>
+              <p className="st-section-desc" data-en>Blue terrazzo · glass brick partition · stainless steel — a material strategy balancing tech precision with retail accessibility. (Enscape 3D visualization)</p>
+            </Reveal>
+            <div className="st-gallery-grid">
+              <div className="st-item st-wide"><img src={I('proposal-05-full-interior.jpg')} alt="Full Interior" loading="lazy" /></div>
+              <div className="st-item"><img src={I('proposal-01-interior-front.jpg')} alt="Interior Front" loading="lazy" /></div>
+              <div className="st-item"><img src={I('proposal-02-popup-display.jpg')} alt="Pop-up & Display" loading="lazy" /></div>
+              <div className="st-item"><img src={I('proposal-03-lounge-area.jpg')} alt="Lounge Area" loading="lazy" /></div>
+              <div className="st-item"><img src={I('proposal-04-dx-lab-gate.jpg')} alt="GS DX Lab Gate" loading="lazy" /></div>
+            </div>
+            <div className="st-gallery-grid">
+              <div className="st-item"><img src={I('proposal-06-soldam-entrance.jpg')} alt="STORAGE SOLDAM Entrance" loading="lazy" /></div>
+              <div className="st-item"><img src={I('proposal-07-lifelab-entrance.jpg')} alt="LiFELAB SOLDAM Entrance" loading="lazy" /></div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 04 BUILT ── */}
+        <section className="st-section alt" id="built">
+          <div className="st-section-inner">
+            <Reveal>
+              <p className="st-section-label">04 — Built</p>
+              <h2 className="st-section-title" data-ko>완공 현장</h2>
+              <h2 className="st-section-title" data-en>As Built</h2>
+              <p className="st-section-desc" data-ko>시공 단계에서 GS DX Lab 연계 요구사항 반영 및 파사드 디자인 변경이 진행되었습니다. SOLUM HQ 1F, 용인 — 2025.08.01 그랜드 오픈.</p>
+              <p className="st-section-desc" data-en>GS DX Lab integration and façade changes were applied during construction. SOLUM HQ 1F, Yongin — grand opening 2025.08.01.</p>
+            </Reveal>
+            <div className="st-full-img" style={{ marginTop: 40 }}><img src={I('built-01-exterior-corner.jpg')} alt="Exterior Corner" loading="lazy" /></div>
+            <div className="st-gallery-grid">
+              <div className="st-item"><img src={I('built-02-entrance.jpg')} alt="Entrance" loading="lazy" /></div>
+              <div className="st-item"><img src={I('built-03-interior.jpg')} alt="Interior" loading="lazy" /></div>
+            </div>
+            <div className="st-full-img" style={{ marginTop: 20 }}><img src={I('built-04-self-checkout.jpg')} alt="Self Checkout Zone" loading="lazy" /></div>
+          </div>
+        </section>
+
+        {/* ── 05 IMPACT ── */}
+        <section className="st-section" id="impact">
+          <div className="st-section-inner">
+            <Reveal>
+              <p className="st-section-label">05 — Impact</p>
+              <h2 className="st-section-title" data-ko>프로젝트가 만든 가치</h2>
+              <h2 className="st-section-title" data-en>Value Created</h2>
+            </Reveal>
+            <div className="st-cards">
+              <Reveal className="st-card"><h4 data-ko>기업 쇼룸의 재정의</h4><h4 data-en>Redefining Corporate Showrooms</h4><p data-ko>NRF 2026에서 발표한 SSP 플랫폼의 실증 공간으로 활용. 글로벌 리테일러 대상 PoC 레퍼런스 사이트.</p><p data-en>A proof-of-concept space for SOLUM&apos;s SSP platform at NRF 2026 — a PoC reference site for global retailers.</p></Reveal>
+              <Reveal className="st-card"><h4 data-ko>데이터 기반 공간설계</h4><h4 data-en>Data-Driven Spatial Design</h4><p data-ko>AI 카메라·BLE 센서가 작동하는 환경에서 기술 인프라와 동기화된 공간 전략의 새 방법론.</p><p data-en>A new methodology for spatial strategy synced with tech infrastructure in an AI/BLE-powered environment.</p></Reveal>
+              <Reveal className="st-card"><h4 data-ko>브랜드 전환 프레임워크</h4><h4 data-en>Brand Transition Framework</h4><p data-ko>B2B 제조사를 소비자 라이프스타일 브랜드로 전환하는 네이밍-공간 통합 전략.</p><p data-en>An integrated naming-spatial strategy turning a B2B maker into a consumer lifestyle brand.</p></Reveal>
+            </div>
+
+            <Reveal>
+              <p className="st-section-label" style={{ marginTop: 80 }}>Credit</p>
+            </Reveal>
+            <div className="st-cards">
+              <Reveal className="st-card"><h4>Client</h4><p>SOLUM (솔루엠)</p></Reveal>
+              <Reveal className="st-card"><h4>Design Studio</h4><p>WCAMP</p></Reveal>
+              <Reveal className="st-card"><h4>Role</h4><p>Brand Strategy · Spatial Design · 3D Visualization</p></Reveal>
+              <Reveal className="st-card"><h4>Location</h4><p>SOLUM HQ 1F, Yongin, Gyeonggi-do</p></Reveal>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <StudioFooter />
 
       <style jsx>{`
-        /* ===== SECTION COMMON ===== */
-        section {
-          padding: clamp(60px, 10vw, 140px) clamp(24px, 5vw, 80px);
+        :global(:root) {
+          --accent: #0038FF;
+          --secondary: #001A80;
+          --accent-ink: var(--accent);
+          --page-bg: #ffffff;
+          --page-fg: #1a1a1a;
+          --section-bg: #f4f6fb;
+          --text-mid: #555;
+          --gray: #888;
+          --keyword-border: #1a1a1a;
         }
-        .section-num {
-          font-family: var(--font-mono);
-          font-size: 11px;
-          letter-spacing: 3px;
-          text-transform: uppercase;
-          color: var(--fg-40);
-          margin-bottom: 12px;
+        :global(html[data-theme='dark']) {
+          --page-bg: #0c0c0c;
+          --page-fg: #e8e8e8;
+          --section-bg: #121420;
+          --text-mid: #aaa;
+          --gray: #999;
+          --keyword-border: #e8e8e8;
+          --accent-ink: #5b7cff;
         }
-        .section-title {
-          font-family: var(--font-display);
-          font-size: clamp(28px, 4vw, 52px);
-          font-weight: 700;
-          letter-spacing: -0.02em;
-          line-height: 1.15;
-          margin-bottom: 40px;
-        }
-        .section-title :global(em) {
-          font-style: normal;
-          color: #0038FF;
-        }
-
-        /* ===== OVERVIEW ===== */
-        .overview { background: var(--bg); }
-        .overview-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 80px;
-          max-width: 1200px;
-        }
-        .overview-grid :global(.overview-text p) {
-          font-size: 15px;
-          line-height: 1.85;
-          color: var(--fg-75);
-          margin-bottom: 20px;
-          word-break: keep-all;
-        }
-        .overview-grid :global(.overview-text p strong) {
-          color: var(--fg);
-          font-weight: 500;
-        }
-        .overview-grid :global(.overview-stats) {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 32px;
-          align-content: start;
-          padding-top: 8px;
-        }
-        .stat-card {
-          background: var(--fg-06);
-          border-radius: 12px;
-          padding: 28px 24px;
-          transition: transform 0.3s ease;
-        }
-        .stat-card:hover { transform: translateY(-4px); }
-        .stat-card .stat-value {
-          font-family: var(--font-display);
-          font-size: 32px;
-          font-weight: 700;
-          color: #0038FF;
-          margin-bottom: 8px;
-        }
-        .stat-card .stat-label {
-          font-size: 12px;
-          color: var(--fg-50);
-          line-height: 1.5;
-          word-break: keep-all;
-        }
-
-        /* ===== CHALLENGE ===== */
-        .challenge { background: #0f0e0e; color: #fff; }
-        .challenge .section-num { color: rgba(255,255,255,0.4); }
-        .challenge .section-title { color: #fff; }
-        .challenge-content { max-width: 900px; }
-        .challenge-list {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 0;
-        }
-        .challenge-list :global(.challenge-item) {
-          padding: 32px 0;
-          border-bottom: 1px solid rgba(255,255,255,0.1);
-          display: grid;
-          grid-template-columns: 40px 1fr;
-          gap: 20px;
-          align-items: start;
-        }
-        .challenge-list :global(.challenge-item:first-child) {
-          border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .challenge-num {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          color: #0038FF;
-          padding-top: 4px;
-        }
-        .challenge-list :global(.challenge-item) h3 {
-          font-family: var(--font-display);
-          font-size: 18px;
-          font-weight: 600;
-          margin-bottom: 8px;
-        }
-        .challenge-list :global(.challenge-item) p {
-          font-size: 14px;
-          line-height: 1.75;
-          color: rgba(255,255,255,0.6);
-          word-break: keep-all;
-        }
-
-        /* ===== BRAND STRATEGY ===== */
-        .brand-strategy { background: var(--fg-06); }
-        .brand-options {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 24px;
-          margin-top: 48px;
-        }
-        .brand-options :global(.brand-card) {
-          background: var(--card-bg);
-          border-radius: 16px;
-          overflow: hidden;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .brand-options :global(.brand-card:hover) {
-          transform: translateY(-6px);
-          box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-        }
-        .brand-card-visual {
-          height: 200px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          overflow: hidden;
-        }
-        .brand-card-visual.opt-a { background: #0038FF; }
-        .brand-card-visual.opt-b { background: var(--bg); border-bottom: 1px solid var(--fg-08); }
-        .brand-card-visual.opt-c { background: var(--fg-06); border-bottom: 1px solid var(--fg-08); }
-        .brand-logo-text {
-          font-family: var(--font-display);
-          font-weight: 800;
-          text-align: center;
-          line-height: 1.1;
-        }
-        .brand-logo-text.opt-a-text { color: #fff; font-size: 42px; }
-        .brand-logo-text.opt-b-text { color: var(--fg); font-size: 28px; letter-spacing: 0.05em; font-weight: 300; }
-        .brand-logo-text.opt-c-text { color: var(--fg); font-size: 24px; letter-spacing: 0.08em; }
-        .brand-logo-text :global(.sub-brand) {
-          display: block;
-          font-size: 14px;
-          font-weight: 500;
-          letter-spacing: 0.1em;
-          margin-top: 4px;
-        }
-        .brand-logo-text :global(.sub-brand.blue-badge) {
-          background: #0038FF;
-          color: #fff;
-          display: inline-block;
-          padding: 4px 16px;
-          border-radius: 20px;
-          font-size: 11px;
-          margin-top: 10px;
-        }
-        .brand-card-body { padding: 28px 24px; }
-        .brand-card-label {
-          font-family: var(--font-mono);
-          font-size: 10px;
-          letter-spacing: 2px;
-          color: #0038FF;
-          text-transform: uppercase;
-          margin-bottom: 12px;
-        }
-        .brand-card-name {
-          font-family: var(--font-display);
-          font-size: 20px;
-          font-weight: 700;
-          margin-bottom: 12px;
-        }
-        .brand-card-desc {
-          font-size: 13px;
-          line-height: 1.7;
-          color: var(--fg-50);
-          word-break: keep-all;
-        }
-
-        /* ===== SPATIAL STRATEGY ===== */
-        .spatial { background: var(--bg); }
-        .spatial-flow {
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          gap: 2px;
-          margin: 48px 0;
-          background: var(--fg-10);
-          border-radius: 12px;
-          overflow: hidden;
-        }
-        .flow-step {
-          background: var(--bg);
-          padding: 32px 20px;
-          text-align: center;
-          position: relative;
-        }
-        .flow-step::after {
-          content: '→';
-          position: absolute;
-          right: -10px;
-          top: 50%;
-          transform: translateY(-50%);
-          font-size: 18px;
-          color: #0038FF;
-          z-index: 1;
-        }
-        .flow-step:last-child::after { display: none; }
-        .flow-icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          background: rgba(0, 56, 255, 0.12);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 16px;
-          font-size: 20px;
-        }
-        .flow-step h4 {
-          font-family: var(--font-display);
-          font-size: 13px;
-          font-weight: 600;
-          margin-bottom: 6px;
-        }
-        .flow-step p {
-          font-size: 11px;
-          color: var(--fg-50);
-          line-height: 1.5;
-          word-break: keep-all;
-        }
-        .spatial-flow + :global(.spatial-insight) {
-          margin-top: 0;
-        }
-        :global(.spatial-insight) {
-          background: linear-gradient(135deg, #001A80, #0038FF);
-          color: #fff;
-          border-radius: 16px;
-          padding: 48px;
-          margin-top: 48px;
-          position: relative;
-          overflow: hidden;
-        }
-        :global(.spatial-insight)::before {
-          content: '"';
-          position: absolute;
-          top: -20px;
-          left: 24px;
-          font-family: var(--font-display);
-          font-size: 200px;
-          font-weight: 800;
-          color: rgba(255,255,255,0.08);
-          line-height: 1;
-        }
-        :global(.spatial-insight) p {
-          font-size: 18px;
-          line-height: 1.8;
-          font-weight: 300;
-          position: relative;
-          z-index: 1;
-          word-break: keep-all;
-        }
-        .insight-author {
-          display: block;
-          margin-top: 24px;
-          font-size: 12px;
-          opacity: 0.6;
-          font-family: var(--font-mono);
-        }
-
-        /* ===== GALLERY ===== */
-        .gallery-section { padding: clamp(60px, 10vw, 140px) 0; }
-        .gallery-section .section-num,
-        .gallery-section .section-title {
-          padding: 0 clamp(24px, 5vw, 80px);
-        }
-        .gallery-full { margin-top: 48px; }
-        .gallery-full img { width: 100%; height: auto; display: block; }
-        .gallery-grid-2 {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4px;
-          margin-top: 4px;
-        }
-        .gallery-grid-2 img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .gallery-scroll {
-          display: flex;
-          gap: 16px;
-          overflow-x: auto;
-          padding: 48px clamp(24px, 5vw, 80px) 24px;
-          scroll-snap-type: x mandatory;
-          -webkit-overflow-scrolling: touch;
-        }
-        .gallery-scroll::-webkit-scrollbar { height: 2px; }
-        .gallery-scroll::-webkit-scrollbar-track { background: var(--fg-08); }
-        .gallery-scroll::-webkit-scrollbar-thumb { background: #0038FF; }
-        .gallery-scroll img {
-          flex: 0 0 auto;
-          width: min(80vw, 900px);
-          height: auto;
-          border-radius: 8px;
-          scroll-snap-align: start;
-        }
-        .gallery-caption {
-          padding: 16px clamp(24px, 5vw, 80px) 0;
-          font-family: var(--font-mono);
-          font-size: 11px;
-          color: var(--fg-40);
-          letter-spacing: 1px;
-        }
-
-        /* ===== PROPOSAL / BUILT ===== */
-        .proposal { background: var(--fg-06); }
-        .built { background: var(--bg); }
-        :global(.built-note) {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(0, 56, 255, 0.08);
-          border: 1px solid rgba(0, 56, 255, 0.2);
-          border-radius: 8px;
-          padding: 12px 20px;
-          margin: 0 clamp(24px, 5vw, 80px) 40px;
-          font-size: 13px;
-          color: #0038FF;
-          word-break: keep-all;
-        }
-        .dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #0038FF;
-          flex-shrink: 0;
-        }
-
-        /* ===== RESULTS ===== */
-        .results { background: #0f0e0e; color: #fff; }
-        .results .section-num { color: rgba(255,255,255,0.4); }
-        .results .section-title { color: #fff; }
-        .results-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 32px;
-          margin-top: 48px;
-        }
-        :global(.result-card) {
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 16px;
-          padding: 40px 28px;
-          transition: border-color 0.3s ease;
-        }
-        :global(.result-card:hover) { border-color: #0038FF; }
-        .result-icon { font-size: 28px; margin-bottom: 20px; }
-        :global(.result-card) h3 {
-          font-family: var(--font-display);
-          font-size: 18px;
-          font-weight: 600;
-          margin-bottom: 12px;
-        }
-        :global(.result-card) p {
-          font-size: 13px;
-          line-height: 1.75;
-          color: rgba(255,255,255,0.55);
-          word-break: keep-all;
-        }
-
-        /* ===== CREDIT ===== */
-        .credit {
-          background: var(--fg-06);
-          padding: 80px clamp(24px, 5vw, 80px);
-        }
-        .credit-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 40px;
-          max-width: 1000px;
-        }
-        .credit-grid :global(.credit-item) dt {
-          font-family: var(--font-mono);
-          font-size: 10px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          color: var(--fg-40);
-          margin-bottom: 8px;
-        }
-        .credit-grid :global(.credit-item) dd {
-          font-size: 14px;
-          font-weight: 500;
-          color: var(--fg);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-          .overview-grid { grid-template-columns: 1fr; gap: 48px; }
-          .brand-options { grid-template-columns: 1fr; max-width: 480px; }
-          .spatial-flow { grid-template-columns: 1fr; }
-          .flow-step::after { display: none; }
-          .results-grid { grid-template-columns: 1fr; }
-          .credit-grid { grid-template-columns: 1fr 1fr; }
-        }
-        @media (max-width: 640px) {
-          .overview-grid :global(.overview-stats) { grid-template-columns: 1fr; }
-          .gallery-grid-2 { grid-template-columns: 1fr; }
-          .credit-grid { grid-template-columns: 1fr; }
-        }
+        :global(body) { background: var(--page-bg); color: var(--page-fg); }
       `}</style>
     </>
   );
