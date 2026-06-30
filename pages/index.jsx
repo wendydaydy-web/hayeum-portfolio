@@ -34,7 +34,6 @@ const WORK_GRID = [
 const WORK_FILTERS = [
   { key: 'all',     ko: '전체',     en: 'All' },
   { key: '신규',     ko: '신규',     en: 'New' },
-  { key: '리브랜딩', ko: '리브랜딩', en: 'Rebranding' },
   { key: 'VMD',     ko: 'VMD',      en: 'VMD' },
   { key: '팝업',     ko: '팝업',     en: 'Pop-Up' },
 ];
