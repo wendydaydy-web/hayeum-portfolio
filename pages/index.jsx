@@ -14,23 +14,22 @@ const HARDCODED_SLUGS = new Set(['tofug', 'benson', 'bodyguard', 'gagga', 'solda
 // Studio work grid — handoff list. href는 기존 페이지가 있는 항목만(없으면 null=비클릭),
 // img는 실제 보유 에셋만(없으면 null=플레이스홀더 타일). tags는 상단 필터 칩과 매칭.
 const WORK_GRID = [
+  { name: 'TOFUG',                          tags: ['신규'],            href: '/projects/tofug',       img: '/images/main/tofug-default.jpg' },
   { name: 'BENSON',                         tags: ['신규'],            href: '/projects/benson',      img: '/images/main/benson-default.png' },
-  { name: 'GAGGA',                          tags: ['신규'],            href: '/projects/gagga',       img: '/images/main/gagga-grid.jpg' },
   { name: 'BODY GUARD',                     tags: ['신규', '리브랜딩'], href: '/projects/bodyguard',   img: '/images/main/bodyguard-default.webp' },
-  { name: '3½ FEET',                        tags: ['신규'],            href: null,                    img: null },
-  { name: 'Knickerbocker Bagel Pop-Up',     tags: ['팝업'],            href: null,                    img: null },
-  { name: '한돈데이 선진 Pop-up',           tags: ['팝업'],            href: null,                    img: null },
-  { name: 'RATATOU_LEE CAKE',               tags: ['리브랜딩'],        href: null,                    img: null },
-  { name: 'HANDONDAY',                      tags: ['팝업'],            href: '/projects/handonday',   img: '/images/handonday/built-01.jpg' },
+  { name: 'GAGGA',                          tags: ['신규'],            href: '/projects/gagga',       img: '/images/main/gagga-grid.jpg' },
+  { name: 'SHABU SANGHA',                   tags: ['VMD'],             href: '/projects/shabusangha', img: '/images/shabusangha/DSCF0005.jpg' },
+  { name: 'SOLDAM MARKET',                  tags: ['신규'],            href: '/projects/soldam',      img: '/images/main/soldam-default.webp' },
   { name: 'KALBI SOCIAL CLUB',              tags: ['VMD'],             href: null,                    img: null },
   { name: 'New Balance Pop-up in Seongsu',  tags: ['팝업'],            href: null,                    img: null },
-  { name: 'SQUID GAME2',                    tags: ['팝업'],            href: '/projects/squidgame',   img: '/images/squidgame/built-01.jpg' },
-  { name: 'SOLDAM MARKET',                  tags: ['신규'],            href: '/projects/soldam',      img: '/images/main/soldam-default.webp' },
   { name: 'New Balance Pop-up in Seongsu',  tags: ['팝업'],            href: null,                    img: null },
   { name: 'PAULBASSETT',                    tags: ['VMD'],             href: null,                    img: null },
-  { name: 'SHABU SANGHA',                   tags: ['VMD'],             href: '/projects/shabusangha', img: '/images/shabusangha/DSCF0005.jpg' },
-  { name: 'TOFUG',                          tags: ['신규'],            href: '/projects/tofug',       img: '/images/main/tofug-default.jpg' },
+  { name: 'SQUID GAME2',                    tags: ['팝업'],            href: '/projects/squidgame',   img: '/images/squidgame/built-01.jpg' },
   { name: '계단빵',                         tags: ['신규'],            href: '/projects/gyedanbread', img: null },
+  { name: '3½ FEET',                        tags: ['신규'],            href: null,                    img: null },
+  { name: 'Knickerbocker Bagel Pop-Up',     tags: ['팝업'],            href: null,                    img: null },
+  { name: '한돈데이 선진 Pop-up',           tags: ['팝업'],            href: '/projects/handonday',   img: '/images/handonday/built-01.jpg' },
+  { name: 'RATATOU_LEE CAKE',               tags: ['리브랜딩'],        href: null,                    img: null },
 ];
 
 // Studio work grid — category filter chips (key는 WORK_GRID.tags 값과 매칭)
