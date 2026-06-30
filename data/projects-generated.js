@@ -150,15 +150,6 @@ const projects = [
     link: false, feat: false, wide: false, isNew: true, hidden: true,
     sections: [],
   },
-  {
-    slug: 'ratatoulee', name: 'RATATOU_LEE CAKE', category: 'deco', year: '2024',
-    tagline_kr: 'Deco', tagline_en: 'Deco',
-    type_kr: '데코', type_en: 'Deco',
-    category_label_kr: 'Dessert / Deco', category_label_en: 'Dessert / Deco',
-    cover_image: null, grid_image: null,
-    link: false, feat: false, wide: false, isNew: true, hidden: true,
-    sections: [],
-  },
 
   // ── Brand ──
   {
