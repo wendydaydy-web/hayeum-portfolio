@@ -25,7 +25,6 @@ const WORK_GRID = [
   { name: 'New Balance Pop-up in Seongsu',  tags: ['팝업'],            href: null,                    img: '/images/work/newbalance-2.png' },
   { name: 'PAULBASSETT',                    tags: ['VMD'],             href: null,                    img: '/images/work/paulbassett.png' },
   { name: 'SQUID GAME2',                    tags: ['팝업'],            href: '/projects/squidgame',   img: '/images/work/squidgame.png' },
-  { name: '계단빵',                         tags: ['신규'],            href: '/projects/gyedanbread', img: null },
   { name: '3½ FEET',                        tags: ['신규'],            href: null,                    img: '/images/work/3feet.png' },
   { name: 'Knickerbocker Bagel Pop-Up',     tags: ['팝업'],            href: null,                    img: '/images/work/knickerbocker.png' },
   { name: '한돈데이 선진 Pop-up',           tags: ['팝업'],            href: '/projects/handonday',   img: '/images/work/handonday.png' },

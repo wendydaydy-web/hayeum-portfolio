@@ -112,15 +112,6 @@ const projects = [
     link: false, feat: false, wide: false, isNew: true, hidden: true,
     sections: [],
   },
-  {
-    slug: 'gyedanbread', name: '계단빵', category: 'new', year: '2025',
-    tagline_kr: '준비 중', tagline_en: 'Coming Soon',
-    type_kr: '신규매장', type_en: 'New Store',
-    category_label_kr: 'F&B / Bakery', category_label_en: 'F&B / Bakery',
-    cover_image: null, grid_image: null,
-    link: true, feat: false, wide: false, isNew: true, hidden: true,
-    sections: [],
-  },
 
   // ── Deco ──
   {
