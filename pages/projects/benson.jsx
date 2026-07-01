@@ -1127,10 +1127,11 @@ export default function Benson() {
 
         /* 04 / 05 CONCEPT DETAIL */
         .si-sections .si-concept-detail-grid { margin-top: 60px; }
-        .si-sections .si-concept-detail-pair { display: grid; grid-template-columns: 755fr 1778fr; gap: 16px; align-items: stretch; }
-        .si-sections .si-concept-detail-pair .si-pair-left { width: 100%; height: 100%; object-fit: cover; }
-        .si-sections .si-concept-detail-img-wrap { position: relative; line-height: 0; }
-        .si-sections .si-concept-detail-img { width: 100%; border-radius: 4px; }
+        /* 넓은 화면: 가로 2단(755:1778 비율로 높이 자동 정렬, minmax로 넘침 방지) / 좁은 화면(≤1024): 세로 스택 */
+        .si-sections .si-concept-detail-pair { display: grid; grid-template-columns: minmax(0, 755fr) minmax(0, 1778fr); gap: 16px; align-items: start; }
+        .si-sections .si-concept-detail-pair .si-pair-left { display: block; width: 100%; max-width: 100%; height: auto; }
+        .si-sections .si-concept-detail-img-wrap { position: relative; line-height: 0; width: 100%; max-width: 100%; min-width: 0; }
+        .si-sections .si-concept-detail-img { display: block; width: 100%; max-width: 100%; height: auto; border-radius: 4px; }
         .si-sections .si-img-marker {
           position: absolute;
           width: clamp(38px, 4.4vw, 52px);
@@ -1206,8 +1207,10 @@ export default function Benson() {
           .si-sections .si-gallery-grid { grid-template-columns: 1fr; }
           .si-sections .si-gallery-grid .si-gallery-item.si-wide { grid-column: span 1; }
           .si-sections .si-tech-images { grid-template-columns: 1fr 1fr; }
-          .si-sections .si-concept-detail-pair { margin-left: -40px; margin-right: -40px; }
-          .si-sections .si-concept-detail-img { border-radius: 0; }
+          /* 스택 모드: 풀블리드 네거티브 마진 제거(오버플로우/잘림 방지) + 세로 이미지 자연 높이 */
+          .si-sections .si-concept-detail-pair { margin-left: 0; margin-right: 0; }
+          .si-sections .si-concept-detail-pair .si-pair-left { height: auto; }
+          .si-sections .si-concept-detail-img { border-radius: 4px; }
         }
         @media (max-width: 600px) {
           .si-sections .si-section { padding: 60px 24px; }
@@ -1216,7 +1219,6 @@ export default function Benson() {
           .si-sections .si-concept-detail-list { grid-template-columns: 1fr; }
           .si-sections .si-tech-images { grid-template-columns: 1fr; }
           .si-sections .si-color-info { padding: 40px 24px; }
-          .si-sections .si-concept-detail-pair { margin-left: -24px; margin-right: -24px; }
         }
       `}</style>
     </>
