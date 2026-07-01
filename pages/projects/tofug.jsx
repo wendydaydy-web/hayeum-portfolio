@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useEffect, useRef } from 'react';
 import { StudioNav, StudioFooter } from '../../components/project';
+import { byMeStores, expansionStores, byMeCount, openStoreCount, countryCount } from '../../data/tofug-stores';
 
 /* ── 섹션 메뉴 (상단바 ScrollSpy) ── */
 const SECTIONS = [
@@ -12,6 +13,38 @@ const SECTIONS = [
 ];
 
 const I = (name) => `/images/tofug/${name}`;
+
+/* 매장 카드 (byMe / 확장 공용) — byMe·status에 따라 태그를 다르게 렌더 */
+function StoreCard({ store }) {
+  const isUpcoming = store.status === 'upcoming';
+  return (
+    <Reveal className={`st-card st-store-card${store.byMe ? ' is-mine' : ' is-expansion'}${isUpcoming ? ' is-upcoming' : ''}`}>
+      <div className="st-store-tagrow">
+        {store.byMe ? (
+          <>
+            <span className="st-store-tag mine" data-ko>설계 · 시공 by 공간하음</span>
+            <span className="st-store-tag mine" data-en>Designed &amp; Built</span>
+          </>
+        ) : (
+          <>
+            <span className="st-store-tag expansion" data-ko>브랜드 확장 · SI 적용</span>
+            <span className="st-store-tag expansion" data-en>Brand Expansion · SI</span>
+          </>
+        )}
+        {isUpcoming && (
+          <>
+            <span className="st-store-tag upcoming" data-ko>오픈 예정</span>
+            <span className="st-store-tag upcoming" data-en>Coming soon</span>
+          </>
+        )}
+      </div>
+      <h4>{store.name}</h4>
+      <p className="st-card-sub">{store.city} · {store.country} · {store.openDate}</p>
+      {store.descKo && <p data-ko>{store.descKo}</p>}
+      {store.descEn && <p data-en>{store.descEn}</p>}
+    </Reveal>
+  );
+}
 
 /* 스크롤 페이드인 */
 function Reveal({ children, className = '', style }) {
@@ -51,13 +84,38 @@ export default function TofuG() {
             <span data-en>A premium gelato brand carrying the devotion of traditional Korean tofu-making — spatial design &amp; branding drawn from the millstone and the Korean kitchen.</span>
           </p>
           <p className="st-hero-desc">
-            <span data-ko>싱가포르 오차드 로드에서 시작해 말레이시아 쿠알라룸푸르까지, 2개국 4개 매장으로 확장한 프레시 처닝 두부 젤라또 브랜드. 공간 브랜드 컨셉 기획부터 디자인, 시공, 그리고 브랜드 공간 가이드라인 확립까지 전 과정을 담당했습니다.</span>
-            <span data-en>A fresh-churned tofu gelato brand that grew from Orchard Road, Singapore to Kuala Lumpur, Malaysia — four stores across two countries. We led the full journey: spatial brand concept, design, construction, and the brand&apos;s spatial guideline.</span>
+            <span data-ko>싱가포르 오차드 로드에서 시작한 프레시 처닝 두부 젤라또 브랜드. 저는 싱가폴 매장들의 공간 브랜드 컨셉 기획부터 디자인, 시공, 그리고 브랜드 공간 가이드라인(SI) 확립까지 전 과정을 담당했습니다. 이 가이드라인을 바탕으로 브랜드가 말레이시아 · 인도네시아로 확장하고 있습니다.</span>
+            <span data-en>A fresh-churned tofu gelato brand born on Orchard Road, Singapore. I led the full journey for the Singapore stores — spatial brand concept, design, construction, and the brand&apos;s spatial guideline (SI). Building on that guideline, the brand is now expanding into Malaysia and Indonesia.</span>
           </p>
           <p className="st-hero-quote">
             <span data-ko>“두부 한 모에 담긴 정성을, 한 입의 젤라또에 담다.”</span>
             <span data-en>“The care once held in a block of tofu — now in every scoop.”</span>
           </p>
+        </section>
+
+        {/* ── STAT BAND (시스템 설계자 포지션) ── */}
+        <section className="st-statband" aria-label="Key metrics">
+          <div className="st-statband-line">
+            <span className="st-statband-item"><span className="st-statband-num">9</span><span className="st-statband-unit">Months</span></span>
+            <span className="st-statband-dot" aria-hidden="true">·</span>
+            <span className="st-statband-item"><span className="st-statband-num">{openStoreCount}</span><span className="st-statband-unit">Stores</span></span>
+            <span className="st-statband-dot" aria-hidden="true">·</span>
+            <span className="st-statband-item"><span className="st-statband-num">{countryCount}</span><span className="st-statband-unit">Countries</span></span>
+            <span className="st-statband-dot" aria-hidden="true">·</span>
+            <span className="st-statband-item"><span className="st-statband-num">1</span><span className="st-statband-unit">Spatial System</span></span>
+          </div>
+          <p className="st-statband-sub" data-ko>
+            9개월 만에 싱가폴에서 {byMeCount}개 매장과 브랜드 공간 가이드라인(SI)을 직접 설계·구축했습니다.
+            이 시스템을 바탕으로 브랜드는 현재 {countryCount}개국 {openStoreCount}개 매장으로 확장했습니다
+            (말레이시아 오픈 · 인도네시아 진행 중).
+          </p>
+          <p className="st-statband-sub" data-en>
+            In 9 months, I designed and built {byMeCount} stores and the brand’s spatial guideline (SI) in Singapore.
+            On that system, the brand has since grown to {openStoreCount} stores across {countryCount} countries
+            (Malaysia open · Indonesia in progress).
+          </p>
+          <p className="st-statband-note" data-ko>싱가폴 4개 매장. 하나의 공간 시스템으로, 이제 브랜드를 3개국으로 확장 중입니다.</p>
+          <p className="st-statband-note" data-en>Four stores in Singapore. One spatial system, now scaling the brand across three countries.</p>
         </section>
 
         {/* ── PROJECT INFO ── */}
@@ -142,43 +200,27 @@ export default function TofuG() {
           <div className="st-section-inner">
             <Reveal>
               <p className="st-section-label">02 — Expansion</p>
-              <h2 className="st-section-title" data-ko>2개국, 네 개의 매장</h2>
-              <h2 className="st-section-title" data-en>Two Countries, Four Stores</h2>
-              <p className="st-section-desc" data-ko>싱가포르 오차드 로드의 1호점에서 출발해, 타카시마야와 텔록아여, 그리고 말레이시아 TRX까지 — 하나의 브랜드 공간 가이드라인을 바탕으로 빠르게 확장했습니다.</p>
-              <p className="st-section-desc" data-en>From the first store on Orchard Road to Takashimaya, Telok Ayer, and Malaysia&apos;s TRX — the brand expanded rapidly on a single spatial guideline.</p>
+              <h2 className="st-section-title" data-ko>하나의 시스템, 확장되는 브랜드</h2>
+              <h2 className="st-section-title" data-en>One System, an Expanding Brand</h2>
+              <p className="st-section-desc" data-ko>싱가폴에서 {byMeCount}개 매장과 브랜드 공간 가이드라인(SI)을 직접 설계·구축했습니다. 이렇게 확립한 시스템을 바탕으로, 브랜드는 이후 말레이시아 · 인도네시아로 확장하고 있습니다. 아래는 “제가 직접 한 작업”과 “그 시스템으로 브랜드가 확장한 사례”를 명확히 구분한 것입니다.</p>
+              <p className="st-section-desc" data-en>In Singapore, I directly designed and built {byMeCount} stores and the brand’s spatial guideline (SI). On that system, the brand has since expanded into Malaysia and Indonesia. Below, my own work and the brand’s guideline-based expansion are shown separately.</p>
             </Reveal>
 
+            {/* 내 실적 — 싱가폴 (byMe:true) */}
+            <Reveal>
+              <p className="st-group-label mine" style={{ marginTop: 56 }}>
+                <span data-ko>내 실적 · 싱가폴 {byMeCount}개 매장</span>
+                <span data-en>My Work · {byMeCount} Singapore Stores</span>
+              </p>
+            </Reveal>
             <div className="st-cards">
-              <Reveal className="st-card">
-                <h4>Mandarin Gallery</h4>
-                <p className="st-card-sub">Singapore · #03-30</p>
-                <p data-ko>333A Orchard Rd, Singapore 238867 — 싱가포르 최초의 프리미엄 두부 젤라또.</p>
-                <p data-en>333A Orchard Rd, Singapore — Singapore&apos;s first premium tofu gelato.</p>
-              </Reveal>
-              <Reveal className="st-card">
-                <h4>Takashimaya</h4>
-                <p className="st-card-sub">Singapore · #B1-29</p>
-                <p data-ko>391 Orchard Rd, Singapore 238873 — 한국 아틀리에 컨셉 리테일 매장.</p>
-                <p data-en>391 Orchard Rd, Singapore — Korean atelier-inspired retail store.</p>
-              </Reveal>
-              <Reveal className="st-card">
-                <h4>AiFOKATO</h4>
-                <p className="st-card-sub">Telok Ayer · Flagship</p>
-                <p data-ko>111 Telok Ayer St, Singapore 068582 — 아포가토 전문 서브 브랜드.</p>
-                <p data-en>111 Telok Ayer St, Singapore — affogato-focused sub-brand.</p>
-              </Reveal>
-              <Reveal className="st-card">
-                <h4>MODU TRX</h4>
-                <p className="st-card-sub">Kuala Lumpur · Malaysia</p>
-                <p data-ko>The Exchange TRX, Kuala Lumpur — 한식 다이닝 &amp; 젤라또 해외 확장.</p>
-                <p data-en>The Exchange TRX, Kuala Lumpur — Korean dining &amp; gelato expansion.</p>
-              </Reveal>
+              {byMeStores.map((s) => <StoreCard key={s.no} store={s} />)}
             </div>
 
             <div className="st-stats">
               <Reveal><div className="st-stat-num">4.8</div><div className="st-stat-label">Google Rating</div></Reveal>
               <Reveal><div className="st-stat-num">1,400+</div><div className="st-stat-label">Reviews</div></Reveal>
-              <Reveal><div className="st-stat-num">4</div><div className="st-stat-label">Locations</div></Reveal>
+              <Reveal><div className="st-stat-num">{byMeCount}</div><div className="st-stat-label" data-ko>싱가폴 매장 (직접)</div><div className="st-stat-label" data-en>Singapore Stores</div></Reveal>
             </div>
 
             <Reveal>
@@ -190,8 +232,22 @@ export default function TofuG() {
               <div className="st-item"><img src={I('c75c6d_b5a53dd11256403eabcf16fbd83d43ee~mv2.jpg')} alt="Takashimaya 3" loading="lazy" /></div>
               <div className="st-item"><img src={I('c75c6d_f6c8ce3c0dc64f8a93fdcf631be405b5~mv2.jpg')} alt="Takashimaya 4" loading="lazy" /></div>
             </div>
+
+            {/* 브랜드 확장 — 말레이시아 · 인도네시아 (byMe:false) */}
             <Reveal>
-              <p className="st-section-label" style={{ marginTop: 60 }}>MODU TRX · Kuala Lumpur</p>
+              <p className="st-group-label expansion" style={{ marginTop: 80 }}>
+                <span data-ko>브랜드 확장 · SI 가이드라인 적용 (직접 작업 아님)</span>
+                <span data-en>Brand Expansion · Built on the SI Guideline (not my work)</span>
+              </p>
+              <p className="st-section-desc" data-ko>아래 매장들은 제가 직접 시공한 실적이 아니라, 싱가폴에서 확립한 SI 가이드라인을 바탕으로 브랜드가 해외로 확장한 사례입니다. 인도네시아는 아직 오픈 전(진행 중)입니다.</p>
+              <p className="st-section-desc" data-en>These are not stores I built, but cases where the brand expanded overseas on the SI guideline established in Singapore. Indonesia is not yet open (in progress).</p>
+            </Reveal>
+            <div className="st-cards">
+              {expansionStores.map((s) => <StoreCard key={s.no} store={s} />)}
+            </div>
+
+            <Reveal>
+              <p className="st-section-label" style={{ marginTop: 60 }}>MODU TRX · Kuala Lumpur <span className="st-label-tag" data-ko>브랜드 확장</span><span className="st-label-tag" data-en>Brand Expansion</span></p>
             </Reveal>
             <div className="st-gallery-grid">
               <div className="st-item"><img src={I('tofuft.jpg')} alt="MODU TRX Storefront" loading="lazy" /></div>
@@ -310,7 +366,7 @@ export default function TofuG() {
             <div className="st-stats">
               <Reveal><div className="st-stat-num">10h+</div><div className="st-stat-label">Design Hours</div></Reveal>
               <Reveal><div className="st-stat-num">1st</div><div className="st-stat-label">Brand Spatial Guide</div></Reveal>
-              <Reveal><div className="st-stat-num">4</div><div className="st-stat-label">Stores Applied</div></Reveal>
+              <Reveal><div className="st-stat-num">{byMeCount}</div><div className="st-stat-label" data-ko>싱가폴 매장 (직접)</div><div className="st-stat-label" data-en>Singapore Stores</div></Reveal>
             </div>
           </div>
         </section>

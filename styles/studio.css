@@ -168,3 +168,42 @@
   .studio-page .st-color-info { padding: 40px 24px; }
   .studio-page .st-footer { padding: 30px 24px; }
 }
+
+/* ── STAT BAND (시스템 설계자 포지션) ── */
+.studio-page .st-statband { max-width: 1600px; margin: 0 auto; padding: 20px 60px 70px; border-bottom: 1px solid var(--fg-10, #e5e5e5); }
+.studio-page .st-statband-line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px 26px; }
+.studio-page .st-statband-item { display: inline-flex; align-items: baseline; gap: 12px; }
+.studio-page .st-statband-num { font-family: 'Barlow Condensed', 'Bebas Neue', sans-serif; font-size: clamp(56px, 9vw, 116px); font-weight: 700; line-height: 0.9; color: var(--accent-ink, var(--accent)); letter-spacing: -0.01em; }
+.studio-page .st-statband-unit { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(15px, 1.8vw, 24px); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--page-fg); }
+.studio-page .st-statband-dot { font-size: clamp(40px, 6vw, 80px); line-height: 0.9; color: var(--accent); opacity: 0.5; align-self: center; }
+.studio-page .st-statband-sub { margin-top: 22px; max-width: 940px; font-size: 15px; line-height: 1.8; color: var(--fg-75, #333); word-break: keep-all; }
+.studio-page .st-statband-note { margin-top: 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.01em; color: var(--accent-ink, var(--accent)); word-break: keep-all; }
+
+/* ── GROUP LABEL (내 실적 / 브랜드 확장 구분 헤더) ── */
+.studio-page .st-group-label { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding-left: 14px; position: relative; }
+.studio-page .st-group-label::before { content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 4px; border-radius: 2px; }
+.studio-page .st-group-label.mine { color: var(--accent-ink, var(--accent)); }
+.studio-page .st-group-label.mine::before { background: var(--accent-ink, var(--accent)); }
+.studio-page .st-group-label.expansion { color: var(--text-mid, var(--fg-60)); }
+.studio-page .st-group-label.expansion::before { background: var(--fg-20, #ccc); }
+
+/* ── STORE CARD (byMe / 확장 구분 렌더) ── */
+.studio-page .st-store-card { display: flex; flex-direction: column; }
+.studio-page .st-store-card.is-mine { border-color: var(--fg-20, #d8d8d8); border-left: 4px solid var(--accent-ink, var(--accent)); }
+.studio-page .st-store-card.is-expansion { border-style: dashed; border-color: var(--fg-20, #d0d0d0); background: color-mix(in srgb, var(--section-bg) 55%, transparent); }
+.studio-page .st-store-card.is-upcoming { opacity: 0.82; }
+.studio-page .st-store-tagrow { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.studio-page .st-store-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; line-height: 1.4; white-space: nowrap; }
+.studio-page .st-store-tag.mine { background: var(--accent-ink, var(--accent)); color: #fff; }
+.studio-page .st-store-tag.expansion { background: transparent; color: var(--text-mid, var(--fg-60)); border: 1px solid var(--fg-20, #ccc); }
+.studio-page .st-store-tag.upcoming { background: transparent; color: var(--accent-ink, var(--accent)); border: 1px dashed var(--accent-ink, var(--accent)); }
+.studio-page .st-store-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+
+/* 섹션 라벨 옆 인라인 태그 (예: MODU TRX · 브랜드 확장) */
+.studio-page .st-label-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-mid, var(--fg-60)); border: 1px solid var(--fg-20, #ccc); border-radius: 999px; padding: 2px 8px; margin-left: 10px; vertical-align: middle; }
+
+@media (max-width: 809px) {
+  .studio-page .st-statband { padding: 16px 24px 50px; }
+  .studio-page .st-statband-line { gap: 6px 16px; }
+  .studio-page .st-statband-item { gap: 8px; }
+}
