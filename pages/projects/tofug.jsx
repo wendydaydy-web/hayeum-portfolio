@@ -14,6 +14,23 @@ const SECTIONS = [
 
 const I = (name) => `/images/tofug/${name}`;
 
+/* ─────────────────────────────────────────────────────────────
+ * 문의 폼 받는 곳 설정 — 나중에 여기 두 값만 채우면 바로 작동합니다.
+ *
+ *  ① Formspree(또는 유사 폼서비스) 사용 시:
+ *     FORMSPREE_ENDPOINT 에 'https://formspree.io/f/xxxxxxxx' 를 넣으면
+ *     보내기 → 해당 엔드포인트로 POST(폼 내용 전송)됩니다. (권장)
+ *
+ *  ② 폼서비스 없이 이메일로 받을 때:
+ *     CONTACT_EMAIL 에 'project@haumm.studio' 처럼 주소를 넣으면
+ *     보내기 → 메일 클라이언트가 열리며 내용이 채워집니다. (mailto)
+ *
+ *  둘 다 비어("") 있으면 → "문의 접수 준비 중" 안내만 표시(전송 비활성).
+ *  우선순위: FORMSPREE_ENDPOINT 가 있으면 그걸 사용, 없으면 CONTACT_EMAIL.
+ * ───────────────────────────────────────────────────────────── */
+const CONTACT_EMAIL = '';        // 예: 'project@haumm.studio'
+const FORMSPREE_ENDPOINT = '';   // 예: 'https://formspree.io/f/xxxxxxxx'
+
 /* 매장 카드 (byMe / 확장 공용) — byMe·status에 따라 태그를 다르게 렌더 */
 function StoreCard({ store }) {
   const isUpcoming = store.status === 'upcoming';
@@ -189,6 +206,102 @@ function Reveal({ children, className = '', style }) {
   return <div ref={ref} className={`st-reveal ${className}`} style={style}>{children}</div>;
 }
 
+/* ── 문의 위젯: 아이스크림 스티커(왼쪽 아래) + 문의 폼 모달 ── */
+function InquiryWidget() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button
+        type="button"
+        className="tg-icesticker"
+        onClick={() => setOpen(true)}
+        aria-label="프로젝트 문의 열기"
+      >
+        <span className="tg-icesticker-inner">
+          <img className="tg-icesticker-img" src={I('icecream-sticker.webp')} alt="" aria-hidden="true" />
+          <span className="tg-icesticker-drip" aria-hidden="true"></span>
+        </span>
+        <span className="tg-icesticker-tip" aria-hidden="true">프로젝트 문의 →</span>
+      </button>
+      {open && <InquiryModal onClose={() => setOpen(false)} />}
+    </>
+  );
+}
+
+function InquiryModal({ onClose }) {
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error | disabled
+  const firstRef = useRef(null);
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';       // 모달 열릴 때 배경 스크롤 잠금
+    firstRef.current?.focus();
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
+  }, [onClose]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const data = {
+      name: (fd.get('name') || '').toString().trim(),
+      email: (fd.get('email') || '').toString().trim(),
+      message: (fd.get('message') || '').toString().trim(),
+    };
+
+    // 받는 곳 미설정 → 안내만
+    if (!FORMSPREE_ENDPOINT && !CONTACT_EMAIL) { setStatus('disabled'); return; }
+
+    // ① Formspree 등 폼서비스 연동 지점
+    if (FORMSPREE_ENDPOINT) {
+      try {
+        setStatus('sending');
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        });
+        setStatus(res.ok ? 'sent' : 'error');
+      } catch { setStatus('error'); }
+      return;
+    }
+
+    // ② mailto 폴백 (CONTACT_EMAIL 만 채운 경우)
+    const subject = encodeURIComponent(`[TOFU·G] 프로젝트 문의 — ${data.name}`);
+    const body = encodeURIComponent(`이름: ${data.name}\n이메일: ${data.email}\n\n${data.message}`);
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    setStatus('sent');
+  };
+
+  return (
+    <div className="tg-modal-backdrop" onClick={onClose}>
+      <div className="tg-modal" role="dialog" aria-modal="true" aria-label="프로젝트 문의" onClick={(e) => e.stopPropagation()}>
+        <button type="button" className="tg-modal-close" onClick={onClose} aria-label="닫기">×</button>
+        <p className="tg-modal-eyebrow">TOFU·G</p>
+        <h3 className="tg-modal-title">프로젝트 문의</h3>
+        <p className="tg-modal-sub">
+          <span data-ko>공간·브랜드 프로젝트를 함께 만들고 싶으시면 남겨주세요.</span>
+          <span data-en>Tell us about your spatial or brand project.</span>
+        </p>
+        {status === 'sent' ? (
+          <p className="tg-modal-done">문의가 접수되었습니다. 감사합니다! 🍦</p>
+        ) : (
+          <form className="tg-modal-form" onSubmit={handleSubmit}>
+            <input ref={firstRef} name="name" required placeholder="이름 · Name" autoComplete="name" />
+            <input name="email" type="email" required placeholder="이메일 · Email" autoComplete="email" />
+            <textarea name="message" required rows={4} placeholder="프로젝트 내용 · Project details" />
+            <button type="submit" className="tg-modal-send" disabled={status === 'sending'}>
+              {status === 'sending' ? '보내는 중…' : '보내기 →'}
+            </button>
+            {status === 'disabled' && <p className="tg-modal-note">문의 접수 준비 중입니다. 곧 열립니다 🙏</p>}
+            {status === 'error' && <p className="tg-modal-note err">전송 오류가 발생했습니다. 다시 시도해 주세요.</p>}
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function TofuG() {
   return (
     <>
@@ -202,6 +315,7 @@ export default function TofuG() {
 
       <StudioNav sections={SECTIONS} />
       <FloatingStoreCard />
+      <InquiryWidget />
 
       <main className="studio-page">
         {/* ── HERO ── */}
@@ -527,7 +641,7 @@ export default function TofuG() {
         </section>
       </main>
 
-      <StudioFooter arrowSrc="/images/tofug/arrow-top.png" />
+      <StudioFooter arrowSrc="/images/tofug/arrow-top.png" showList={false} />
 
       <style jsx>{`
         :global(:root) {

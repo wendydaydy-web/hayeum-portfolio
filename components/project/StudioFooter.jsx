@@ -8,13 +8,14 @@ import Link from 'next/link';
  *                                     지정 시 그 이미지를 버튼으로 사용(예: tofuG 손그림 화살표).
  *                                     미지정 시 BENSON식 검정 폴리곤 버튼 + ↑ 글리프.
  * @param {string} [props.listHref]  - LIST 링크 목적지 (기본 '/#project' — WORK 목록).
+ * @param {boolean} [props.showList]  - 좌하단 LIST 표시 여부 (기본 true). false면 숨김.
  */
-export default function StudioFooter({ arrowSrc, listHref = '/#project' }) {
+export default function StudioFooter({ arrowSrc, listHref = '/#project', showList = true }) {
   const toTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
     <>
-      <div className="list-bar"><Link href={listHref}>LIST</Link></div>
+      {showList && <div className="list-bar"><Link href={listHref}>LIST</Link></div>}
       <button
         type="button"
         className={`top-btn${arrowSrc ? ' has-img' : ''}`}
