@@ -207,3 +207,90 @@
   .studio-page .st-statband-line { gap: 6px 16px; }
   .studio-page .st-statband-item { gap: 8px; }
 }
+
+/* ── [D] 떠다니는 라이브 매장 카드 (tofuG 전용, 브랜드 굿즈 감성) ── */
+.tg-livecard {
+  position: fixed; top: 70px; right: 10px; z-index: 95;   /* 더 우상단 */
+  width: 264px; aspect-ratio: 1 / 1;                       /* 크림 면 안에 글자 다 들어오게 약간 확대 */
+  color: #2c2820;                                          /* 검정 잉크 */
+  border: none; -webkit-appearance: none; appearance: none;  /* 버튼 기본 검정 테두리 제거 */
+  background: url('/images/tofug/tofu-case2.webp') center / contain no-repeat;  /* 두부틀 프레임만 */
+  cursor: pointer;
+  filter: drop-shadow(0 14px 20px rgba(60,50,30,0.26));
+  transform-origin: top center;                            /* 위쪽을 축으로 매달려 살랑이는 느낌 */
+  transform: translateY(-10px); opacity: 0; pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.2,0.7,0.2,1), opacity 0.5s ease, filter 0.3s ease;
+}
+.tg-livecard.show { opacity: 1; pointer-events: auto; animation: tg-sway 5.5s ease-in-out infinite; }  /* 은은한 좌우 스웨이 */
+.tg-livecard:hover { animation-play-state: paused; filter: drop-shadow(0 18px 26px rgba(60,50,30,0.34)); }  /* 호버 시 멈춰 읽기/클릭 편하게 */
+@keyframes tg-sway {
+  0%   { transform: rotate(-2deg) translateY(-3px); }
+  50%  { transform: rotate(2deg)  translateY(3px);  }
+  100% { transform: rotate(-2deg) translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tg-livecard.show { animation: none; transform: none; }   /* 접근성: 움직임 최소화 설정 시 정지 */
+}
+.tg-livecard:focus-visible { outline: 2px solid #2c2820; outline-offset: 4px; border-radius: 10px; }
+/* 프레임 안쪽 크림 '두부' 면 — 텍스트는 이 영역 안에만 (나무틀 침범 X) */
+/* 크림 면 실측(평평한 영역 ≈ L32.5 R71 T32 B71.5)에 맞춘 비대칭 인셋 + 안전여백 */
+.tg-lc-inner { position: absolute; top: 33%; left: 33%; right: 33%; bottom: 31%; display: flex; flex-direction: column; justify-content: center; text-align: left; overflow: hidden; }  /* 좌우 대칭 여백 */
+.tg-lc-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; position: relative; z-index: 1; }
+.tg-lc-brand { font-family: 'Barlow Condensed','Oswald',sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2c2820; line-height: 1; white-space: nowrap; }
+.tg-lc-live { display: inline-flex; align-items: center; gap: 4px; font-family: 'Barlow Condensed','Oswald',sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #2c2820; white-space: nowrap; }
+.tg-lc-dot { width: 5px; height: 5px; border-radius: 50%; background: #b5341f; box-shadow: 0 0 0 0 rgba(181,52,31,0.5); animation: tg-live-pulse 1.8s ease-out infinite; }
+@keyframes tg-live-pulse { 0% { box-shadow: 0 0 0 0 rgba(181,52,31,0.45); } 70% { box-shadow: 0 0 0 4px rgba(181,52,31,0); } 100% { box-shadow: 0 0 0 0 rgba(181,52,31,0); } }
+.tg-lc-rule { display: block; height: 2px; margin: 3px 0; border-top: 1px solid #2c2820; border-bottom: 1px solid #2c2820; opacity: 0.85; }  /* 이중선 */
+
+/* 원점 블록 (byMe:true — 내 실적/싱가폴) : 연한 탄 틴트 + 검정 잉크 */
+/* 원점: 틴트 배경 없이, Singapore 볼드 + 아래 얇은 실선(1px)으로만 구분 */
+.tg-lc-origin { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 2px; padding-bottom: 4px; border-bottom: 1px solid #2c2820; }
+.tg-lc-origin-label { font-family: 'Inter','Noto Sans KR',sans-serif; font-size: 7.5px; font-weight: 700; letter-spacing: 0; line-height: 1.18; text-transform: uppercase; color: rgba(44,40,32,0.62); display: block; width: 100%; text-align: justify; text-align-last: justify; }  /* 좌우 라인 꽉 채움 */
+.tg-lc-origin-main { display: flex; align-items: baseline; justify-content: space-between; gap: 7px; }
+.tg-lc-origin-country { font-family: 'Cormorant Garamond','Noto Serif KR',Georgia,serif; font-size: 11px; font-weight: 700; line-height: 1.05; color: #2c2820; }
+.tg-lc-origin-val { display: inline-flex; align-items: baseline; gap: 4px; font-family: 'Barlow Condensed',sans-serif; font-size: 14.5px; font-weight: 700; line-height: 1; color: #2c2820; font-variant-numeric: tabular-nums; }
+
+/* 점선 가지 (byMe:false — 브랜드 확장) */
+.tg-lc-branch { position: relative; z-index: 1; margin-top: 5px; padding-left: 0; display: flex; flex-direction: column; gap: 3px; }  /* 세로 점선 제거 · 왼쪽 정렬 */
+.tg-lc-branch::before { display: none; }
+.tg-lc-branch-label { font-family: 'Barlow Condensed',sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #6b5f4a; margin-bottom: 1px; white-space: nowrap; }  /* BRAND EXPANSION: 크림 면 안에 한 줄로 들어오게 */
+.tg-lc-branch-arrow { color: #6b5f4a; }
+.tg-lc-exp-row { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; line-height: 1.1; font-family: 'Cormorant Garamond','Noto Serif KR',Georgia,serif; }  /* 국가 왼쪽 · 값 오른쪽 라인 */
+.tg-lc-exp-country { font-size: 11px; font-weight: 500; color: #4a4132; white-space: nowrap; }
+.tg-lc-exp-val { font-family: 'Barlow Condensed',sans-serif; font-size: 13.5px; font-weight: 700; line-height: 1; color: #4a4132; font-variant-numeric: tabular-nums; }
+.tg-lc-soon { font-family: 'Cormorant Garamond',Georgia,serif; font-style: italic; font-weight: 600; font-size: 11px; color: #8a7c62; letter-spacing: 0.01em; }
+
+/* ── [3] Expansion 라이브 카운터 (tofuG 전용) ── */
+.studio-page .tg-counter { margin-top: 44px; border: 1px solid var(--fg-10, #e5e5e5); border-radius: 8px; padding: 26px 28px; background: color-mix(in srgb, var(--section-bg) 40%, transparent); }
+.studio-page .tg-counter-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 22px; }
+.studio-page .tg-counter-title { font-family: 'Barlow Condensed',sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--page-fg); }
+.studio-page .tg-counter-asof { font-family: 'DM Mono',monospace; font-size: 11px; letter-spacing: 0.04em; color: var(--accent-ink, var(--accent)); }
+.studio-page .tg-counter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
+.studio-page .tg-counter-cell { padding: 18px 18px 16px; border-radius: 6px; border: 1px solid var(--fg-10, #e5e5e5); background: var(--page-bg); }
+.studio-page .tg-counter-cell.mine { border-left: 4px solid var(--accent-ink, var(--accent)); }
+.studio-page .tg-counter-cell.exp { border-left: 4px solid var(--fg-20, #ccc); border-style: dashed; }
+.studio-page .tg-counter-num { font-family: 'Barlow Condensed','Bebas Neue',sans-serif; font-size: clamp(44px, 6vw, 68px); font-weight: 700; line-height: 0.95; font-variant-numeric: tabular-nums; }
+.studio-page .tg-counter-cell.mine .tg-counter-num { color: var(--accent-ink, var(--accent)); }
+.studio-page .tg-counter-cell.exp .tg-counter-num { color: var(--gray, #888); }
+.studio-page .tg-counter-num .tg-soon { font-family: 'Barlow Condensed',sans-serif; font-size: clamp(22px, 3vw, 30px); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray, #999); }
+.studio-page .tg-counter-country { margin-top: 8px; font-size: 14px; font-weight: 600; letter-spacing: 0.02em; color: var(--page-fg); }
+.studio-page .tg-counter-role { margin-top: 3px; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-mid, var(--fg-60)); }
+.studio-page .tg-counter-cell.mine .tg-counter-role { color: var(--accent-ink, var(--accent)); }
+
+@media (max-width: 809px) {
+  .studio-page .tg-counter { padding: 20px 18px; }
+  .studio-page .tg-counter-grid { grid-template-columns: 1fr 1fr; }
+  /* 두부틀 카드: 더 우상단 */
+  .tg-livecard { top: 46px; right: 6px; width: 236px; }
+  .tg-lc-inner { top: 32%; left: 32.5%; right: 32.5%; bottom: 31%; }   /* 좌우 대칭 여백 */
+  .tg-lc-origin-label { font-size: 6.5px; }
+  .tg-lc-origin-country { font-size: 10.5px; }
+  .tg-lc-origin-val { font-size: 13px; }
+  .tg-lc-branch-label { font-size: 7px; }
+  .tg-lc-exp-country { font-size: 10.5px; }
+  .tg-lc-exp-val { font-size: 12.5px; }
+  .tg-lc-soon { font-size: 10px; }
+}
+@media (max-width: 380px) {
+  .tg-livecard { width: 206px; }
+}

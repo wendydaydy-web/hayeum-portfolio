@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { StudioNav, StudioFooter } from '../../components/project';
-import { byMeStores, expansionStores, byMeCount, openStoreCount, countryCount } from '../../data/tofug-stores';
+import { byMeStores, expansionStores, byMeCount, countries, asOf } from '../../data/tofug-stores';
 
 /* ── 섹션 메뉴 (상단바 ScrollSpy) ── */
 const SECTIONS = [
@@ -46,6 +46,133 @@ function StoreCard({ store }) {
   );
 }
 
+/* ── [D] 떠다니는 라이브 매장 카드 (브랜드 굿즈 감성) ──
+   크림 종이 + 검정 잉크 + 빈티지 세리프. 화면 왼쪽 아래 고정.
+   히어로를 지나면 나타나 이후 계속 표시. 클릭 시 Expansion 섹션으로 스무스 스크롤.
+   숫자·국가는 전부 data/tofug-stores.js에서 자동. */
+function FloatingStoreCard() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const sentinel = document.querySelector('.st-statband');
+    let raf = 0;
+    const measure = () => {
+      raf = 0;
+      const rect = sentinel ? sentinel.getBoundingClientRect() : null;
+      setShow(rect ? rect.bottom < 40 : window.scrollY > 360);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(measure); };
+    measure();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (raf) cancelAnimationFrame(raf); };
+  }, []);
+
+  const toExpansion = () => {
+    const el = document.getElementById('expansion');
+    if (!el) return;
+    const navH = (document.querySelector('nav.nav')?.getBoundingClientRect().height) || 72;
+    const y = el.getBoundingClientRect().top + window.scrollY - navH - 8;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  };
+
+  const mine = countries.filter((c) => c.mine);   // 검정 원점 그룹 (byMe:true, 싱가폴)
+  const exp = countries.filter((c) => !c.mine);   // 확장 가지 그룹 (byMe:false)
+
+  return (
+    <button
+      type="button"
+      className={`tg-livecard${show ? ' show' : ''}`}
+      aria-hidden={!show}
+      tabIndex={show ? 0 : -1}
+      onClick={toExpansion}
+      aria-label="브랜드 매장 현황 — Expansion 섹션으로 이동"
+    >
+      {/* 두부틀 프레임 안쪽 크림 '두부' 패널에 내용을 얹음 (상단 헤더 줄 제거됨) */}
+      <span className="tg-lc-inner">
+      {/* 검정 원점 블록 — 내 실적(byMe:true, 싱가폴) */}
+      <span className="tg-lc-origin">
+        <span className="tg-lc-origin-label" data-ko>Designed · 1~{byMeCount}호점</span>
+        <span className="tg-lc-origin-label" data-en>Designed · Stores 1–{byMeCount}</span>
+        {mine.map((c) => (
+          <span key={c.country} className="tg-lc-origin-main">
+            <span className="tg-lc-origin-country">{c.country}</span>
+            <span className="tg-lc-origin-val">{c.byMe}</span>
+          </span>
+        ))}
+      </span>
+
+      {/* 점선 가지 — 브랜드 확장(byMe:false) */}
+      <span className="tg-lc-branch">
+        <span className="tg-lc-branch-label"><span className="tg-lc-branch-arrow" aria-hidden="true">→</span> Brand Expansion</span>
+        {exp.map((c) => (
+          <span key={c.country} className="tg-lc-exp-row">
+            <span className="tg-lc-exp-country">{c.country}</span>
+            <span className="tg-lc-exp-val">{c.open > 0 ? c.open : <em className="tg-lc-soon">soon</em>}</span>
+          </span>
+        ))}
+      </span>
+      </span>{/* /.tg-lc-inner */}
+    </button>
+  );
+}
+
+/* 숫자 count-up (뷰포트 진입 시 0→value, 과하지 않게 한 번) */
+function CountUp({ value, duration = 850 }) {
+  const [n, setN] = useState(0);
+  const ref = useRef(null);
+  const done = useRef(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !done.current) {
+        done.current = true;
+        const start = performance.now();
+        const tick = (now) => {
+          const p = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - p, 3);
+          setN(Math.round(eased * value));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.5 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [value, duration]);
+  return <span ref={ref}>{n}</span>;
+}
+
+/* ── [3] Expansion 라이브 카운터 (국가별, byMe 색 구분, count-up) ── */
+function CountryCounter() {
+  return (
+    <Reveal className="tg-counter">
+      <div className="tg-counter-head">
+        <span className="tg-counter-title" data-ko>브랜드 현황 · 라이브</span>
+        <span className="tg-counter-title" data-en>Brand Footprint · Live</span>
+        <span className="tg-counter-asof">
+          {asOf ? `As of ${asOf} · ` : ''}<span data-ko>확장 중</span><span data-en>&amp; growing</span>
+        </span>
+      </div>
+      <div className="tg-counter-grid">
+        {countries.map((c) => (
+          <div key={c.country} className={`tg-counter-cell${c.mine ? ' mine' : ' exp'}`}>
+            <div className="tg-counter-num">
+              {c.open > 0 ? <CountUp value={c.open} /> : <span className="tg-soon">soon</span>}
+            </div>
+            <div className="tg-counter-country">{c.country}</div>
+            <div className="tg-counter-role">
+              {c.mine
+                ? (<><span data-ko>내 작업</span><span data-en>My work</span></>)
+                : (<><span data-ko>브랜드 확장{c.open === 0 && c.upcoming > 0 ? ' · 예정' : ''}</span><span data-en>Brand expansion{c.open === 0 && c.upcoming > 0 ? ' · soon' : ''}</span></>)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </Reveal>
+  );
+}
+
 /* 스크롤 페이드인 */
 function Reveal({ children, className = '', style }) {
   const ref = useRef(null);
@@ -74,6 +201,7 @@ export default function TofuG() {
       </Head>
 
       <StudioNav sections={SECTIONS} />
+      <FloatingStoreCard />
 
       <main className="studio-page">
         {/* ── HERO ── */}
@@ -98,24 +226,12 @@ export default function TofuG() {
           <div className="st-statband-line">
             <span className="st-statband-item"><span className="st-statband-num">9</span><span className="st-statband-unit">Months</span></span>
             <span className="st-statband-dot" aria-hidden="true">·</span>
-            <span className="st-statband-item"><span className="st-statband-num">{openStoreCount}</span><span className="st-statband-unit">Stores</span></span>
-            <span className="st-statband-dot" aria-hidden="true">·</span>
-            <span className="st-statband-item"><span className="st-statband-num">{countryCount}</span><span className="st-statband-unit">Countries</span></span>
+            <span className="st-statband-item"><span className="st-statband-num">{byMeCount}</span><span className="st-statband-unit">Stores</span></span>
             <span className="st-statband-dot" aria-hidden="true">·</span>
             <span className="st-statband-item"><span className="st-statband-num">1</span><span className="st-statband-unit">Spatial System</span></span>
           </div>
-          <p className="st-statband-sub" data-ko>
-            9개월 만에 싱가폴에서 {byMeCount}개 매장과 브랜드 공간 가이드라인(SI)을 직접 설계·구축했습니다.
-            이 시스템을 바탕으로 브랜드는 현재 {countryCount}개국 {openStoreCount}개 매장으로 확장했습니다
-            (말레이시아 오픈 · 인도네시아 진행 중).
-          </p>
-          <p className="st-statband-sub" data-en>
-            In 9 months, I designed and built {byMeCount} stores and the brand’s spatial guideline (SI) in Singapore.
-            On that system, the brand has since grown to {openStoreCount} stores across {countryCount} countries
-            (Malaysia open · Indonesia in progress).
-          </p>
-          <p className="st-statband-note" data-ko>싱가폴 4개 매장. 하나의 공간 시스템으로, 이제 브랜드를 3개국으로 확장 중입니다.</p>
-          <p className="st-statband-note" data-en>Four stores in Singapore. One spatial system, now scaling the brand across three countries.</p>
+          <p className="st-statband-note" data-ko>싱가폴 {byMeCount}개 매장. 하나의 공간 시스템, 지금 브랜드가 국경을 넘어 확장 중.</p>
+          <p className="st-statband-note" data-en>Four stores in Singapore. One spatial system, now scaling the brand across borders.</p>
         </section>
 
         {/* ── PROJECT INFO ── */}
@@ -205,6 +321,9 @@ export default function TofuG() {
               <p className="st-section-desc" data-ko>싱가폴에서 {byMeCount}개 매장과 브랜드 공간 가이드라인(SI)을 직접 설계·구축했습니다. 이렇게 확립한 시스템을 바탕으로, 브랜드는 이후 말레이시아 · 인도네시아로 확장하고 있습니다. 아래는 “제가 직접 한 작업”과 “그 시스템으로 브랜드가 확장한 사례”를 명확히 구분한 것입니다.</p>
               <p className="st-section-desc" data-en>In Singapore, I directly designed and built {byMeCount} stores and the brand’s spatial guideline (SI). On that system, the brand has since expanded into Malaysia and Indonesia. Below, my own work and the brand’s guideline-based expansion are shown separately.</p>
             </Reveal>
+
+            {/* [3] 라이브 카운터 — 국가별 현황(데이터 자동, count-up) */}
+            <CountryCounter />
 
             {/* 내 실적 — 싱가폴 (byMe:true) */}
             <Reveal>
