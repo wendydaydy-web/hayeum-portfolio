@@ -31,6 +31,20 @@ const I = (name) => `/images/tofug/${name}`;
 const CONTACT_EMAIL = '';        // 예: 'project@haumm.studio'
 const FORMSPREE_ENDPOINT = '';   // 예: 'https://formspree.io/f/xxxxxxxx'
 
+/* 사이트 언어 상태(EN/KR) 훅 — StudioNav 토글이 document.documentElement.lang 을 바꾸므로 그걸 관찰.
+   placeholder 등 속성값처럼 CSS(data-ko/data-en)로 못 바꾸는 텍스트에 사용. */
+function useSiteLang() {
+  const [lang, setLang] = useState('ko');
+  useEffect(() => {
+    const read = () => setLang(document.documentElement.lang === 'en' ? 'en' : 'ko');
+    read();
+    const obs = new MutationObserver(read);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+    return () => obs.disconnect();
+  }, []);
+  return lang;
+}
+
 /* 매장 카드 (byMe / 확장 공용) — byMe·status에 따라 태그를 다르게 렌더 */
 function StoreCard({ store }) {
   const isUpcoming = store.status === 'upcoming';
@@ -209,19 +223,23 @@ function Reveal({ children, className = '', style }) {
 /* ── 문의 위젯: 아이스크림 스티커(왼쪽 아래) + 문의 폼 모달 ── */
 function InquiryWidget() {
   const [open, setOpen] = useState(false);
+  const lang = useSiteLang();
   return (
     <>
       <button
         type="button"
         className="tg-icesticker"
         onClick={() => setOpen(true)}
-        aria-label="프로젝트 문의 열기"
+        aria-label={lang === 'en' ? 'Open inquiry form' : '프로젝트 문의 열기'}
       >
         <span className="tg-icesticker-inner">
           <img className="tg-icesticker-img" src={I('icecream-sticker.webp')} alt="" aria-hidden="true" />
           <span className="tg-icesticker-drip" aria-hidden="true"></span>
         </span>
-        <span className="tg-icesticker-tip" aria-hidden="true">프로젝트 문의 →</span>
+        <span className="tg-icesticker-tip" aria-hidden="true">
+          <span data-ko>프로젝트 문의 →</span>
+          <span data-en>Get in touch →</span>
+        </span>
       </button>
       {open && <InquiryModal onClose={() => setOpen(false)} />}
     </>
@@ -229,8 +247,10 @@ function InquiryWidget() {
 }
 
 function InquiryModal({ onClose }) {
-  const [status, setStatus] = useState('idle'); // idle | sending | sent | error | disabled
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
   const firstRef = useRef(null);
+  const lang = useSiteLang();
+  const t = (ko, en) => (lang === 'en' ? en : ko);
 
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') onClose(); };
@@ -249,8 +269,9 @@ function InquiryModal({ onClose }) {
       message: (fd.get('message') || '').toString().trim(),
     };
 
-    // 받는 곳 미설정 → 안내만
-    if (!FORMSPREE_ENDPOINT && !CONTACT_EMAIL) { setStatus('disabled'); return; }
+    // 받는 곳 미설정(임시 B): 실제 전송은 안 되지만 접수 메시지 표시.
+    // ★ 나중에 위 FORMSPREE_ENDPOINT 또는 CONTACT_EMAIL 을 채우면 아래 실제 전송 로직으로 자동 대체됨.
+    if (!FORMSPREE_ENDPOINT && !CONTACT_EMAIL) { setStatus('sent'); return; }
 
     // ① Formspree 등 폼서비스 연동 지점
     if (FORMSPREE_ENDPOINT) {
@@ -275,26 +296,22 @@ function InquiryModal({ onClose }) {
 
   return (
     <div className="tg-modal-backdrop" onClick={onClose}>
-      <div className="tg-modal" role="dialog" aria-modal="true" aria-label="프로젝트 문의" onClick={(e) => e.stopPropagation()}>
-        <button type="button" className="tg-modal-close" onClick={onClose} aria-label="닫기">×</button>
+      <div className="tg-modal" role="dialog" aria-modal="true" aria-label={t('프로젝트 문의', 'Get in touch')} onClick={(e) => e.stopPropagation()}>
+        <button type="button" className="tg-modal-close" onClick={onClose} aria-label={t('닫기', 'Close')}>×</button>
         <p className="tg-modal-eyebrow">TOFU·G</p>
-        <h3 className="tg-modal-title">프로젝트 문의</h3>
-        <p className="tg-modal-sub">
-          <span data-ko>공간·브랜드 프로젝트를 함께 만들고 싶으시면 남겨주세요.</span>
-          <span data-en>Tell us about your spatial or brand project.</span>
-        </p>
+        <h3 className="tg-modal-title">{t('프로젝트 문의', 'Get in touch')}</h3>
+        <p className="tg-modal-sub">{t('공간·브랜드 프로젝트를 함께 만들고 싶으시면 남겨주세요.', 'Tell us about your spatial or brand project.')}</p>
         {status === 'sent' ? (
-          <p className="tg-modal-done">문의가 접수되었습니다. 감사합니다! 🍦</p>
+          <p className="tg-modal-done">{t('문의가 접수되었습니다. 감사합니다! 🍦', 'Thanks — your message has been received! 🍦')}</p>
         ) : (
           <form className="tg-modal-form" onSubmit={handleSubmit}>
-            <input ref={firstRef} name="name" required placeholder="이름 · Name" autoComplete="name" />
-            <input name="email" type="email" required placeholder="이메일 · Email" autoComplete="email" />
-            <textarea name="message" required rows={4} placeholder="프로젝트 내용 · Project details" />
+            <input ref={firstRef} name="name" required placeholder={t('이름', 'Name')} autoComplete="name" />
+            <input name="email" type="email" required placeholder={t('이메일', 'Email')} autoComplete="email" />
+            <textarea name="message" required rows={4} placeholder={t('프로젝트 내용', 'Project details')} />
             <button type="submit" className="tg-modal-send" disabled={status === 'sending'}>
-              {status === 'sending' ? '보내는 중…' : '보내기 →'}
+              {status === 'sending' ? t('보내는 중…', 'Sending…') : t('보내기 →', 'Send →')}
             </button>
-            {status === 'disabled' && <p className="tg-modal-note">문의 접수 준비 중입니다. 곧 열립니다 🙏</p>}
-            {status === 'error' && <p className="tg-modal-note err">전송 오류가 발생했습니다. 다시 시도해 주세요.</p>}
+            {status === 'error' && <p className="tg-modal-note err">{t('전송 오류가 발생했습니다. 다시 시도해 주세요.', 'Something went wrong. Please try again.')}</p>}
           </form>
         )}
       </div>
