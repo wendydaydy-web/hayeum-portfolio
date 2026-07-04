@@ -339,16 +339,24 @@ export default function TofuG() {
         <section className="st-hero">
           <h1 className="st-hero-title">TOFU · G</h1>
           <p className="st-hero-positioning">
-            <span data-ko>한국 전통 두부 제조의 정성을 담은 프리미엄 젤라또 브랜드 — 멧돌과 한국 전통 주방에서 영감을 받은 공간 디자인 · 브랜딩.</span>
-            <span data-en>A premium gelato brand carrying the devotion of traditional Korean tofu-making — spatial design &amp; branding drawn from the millstone and the Korean kitchen.</span>
+            <span data-ko>9개월 만에 3개국 진출을 이끈 글로벌 F&amp;B 브랜드 TOFU · G — 맷돌과 한국 전통 주방의 모티브를 모던하게 풀어낸 1호점-4호점 공간 디자인 및 SI 시스템 구축.</span>
+            <span data-en>TOFU · G: A global F&amp;B brand expanding to 3 countries in just 9 months — Spatial design, branding, and SI system from the 1st store to the 4th flagship, inspired by the heritage Korean kitchen.</span>
           </p>
           <p className="st-hero-desc">
-            <span data-ko>싱가포르 오차드 로드에서 시작한 프레시 처닝 두부 젤라또 브랜드. 저는 싱가폴 매장들의 공간 브랜드 컨셉 기획부터 디자인, 시공, 그리고 브랜드 공간 가이드라인(SI) 확립까지 전 과정을 담당했습니다. 이 가이드라인을 바탕으로 브랜드가 말레이시아 · 인도네시아로 확장하고 있습니다.</span>
-            <span data-en>A fresh-churned tofu gelato brand born on Orchard Road, Singapore. I led the full journey for the Singapore stores — spatial brand concept, design, construction, and the brand&apos;s spatial guideline (SI). Building on that guideline, the brand is now expanding into Malaysia and Indonesia.</span>
+            <span data-ko>한국 전통 두부 제조의 정성을 담은 프리미엄 젤라또 브랜드 — 맷돌과 한국 전통 주방에서 영감을 받은 공간 디자인 · 브랜딩.</span>
+            <span data-en>A premium gelato brand capturing the devotion of traditional Korean tofu making — Spatial Design &amp; Branding inspired by the Maetdol (traditional millstone) and the heritage Korean kitchen.</span>
+          </p>
+          <p className="st-hero-desc">
+            <span data-ko>싱가포르 오차드 로드에서 시작해 말레이시아와 인도네시아로 확장 중인 프리미엄 두부 젤라또 브랜드, TOFU · G. 싱가포르 1호점의 공간 브랜드 컨셉 기획과 공간 디자인을 통해 브랜드의 시각적 아이덴티티를 정립했으며, 추후 이니시아(Initia Group) 소속으로 2호점부터 4호점 플래그십 매장까지의 프로젝트를 연속성 있게 진행했습니다. 이 과정에서 지속적인 매장 확장이 가능하도록 표준화된 공간 디자인 시스템(SI 가이드라인)을 완벽히 구축했습니다.</span>
+            <span data-en>Starting from Orchard Road in Singapore and now expanding across Malaysia and Indonesia, TOFU · G is a premium tofu gelato brand. I established the brand&apos;s visual identity through the spatial concept planning and interior design of the first store in Singapore. Subsequently, as part of Initia Group, I seamlessly executed consecutive projects from the 2nd to the 4th flagship locations. Through this trajectory, I successfully developed a standardized Spatial Identity (SI) guideline to support sustainable and scalability-driven brand expansion.</span>
+          </p>
+          <p className="st-hero-desc">
+            <span data-ko>TOFU·G의 공간은 한국의 전통 주방에서 영감을 받았습니다. 맷돌의 묵직한 질감과 장인의 고요한 시간성을 모던하게 재해석해 소재와 디테일에 녹여냈습니다. 전통적 터치와 현대적 감각이 공존하는 이곳에서, 고객은 브랜드의 철학을 시각과 미각으로 동시에 경험합니다. 매일 매장에서 직접 만드는 신선한 두부 젤라또 한 스쿱은, 단순한 디저트를 넘어 하나의 작품이 됩니다.</span>
+            <span data-en>TOFU·G&apos;s space is inspired by the traditional Korean kitchen. The weight of the millstone and the artisan&apos;s quiet, unhurried time are reimagined through a modern lens, woven into every material and detail. Where tradition meets contemporary sensibility, guests experience the brand&apos;s philosophy through both sight and taste — and each scoop of tofu gelato, freshly made in-store every day, becomes not just a dessert but a work of art.</span>
           </p>
           <p className="st-hero-quote">
             <span data-ko>“두부 한 모에 담긴 정성을, 한 입의 젤라또에 담다.”</span>
-            <span data-en>“The care once held in a block of tofu — now in every scoop.”</span>
+            <span data-en>“Crafting the devotion of a single block of tofu into a single scoop of gelato.”</span>
           </p>
         </section>
 
@@ -384,9 +392,7 @@ export default function TofuG() {
           <div>
             <p className="st-info-label">Partner</p>
             <p className="st-info-value">
-              <span className="st-info-line" data-ko>CLIENT | TOFU G</span>
-              <span className="st-info-line" data-en>CLIENT | TOFU G</span>
-              <span className="st-info-line">Singapore · Kuala Lumpur · 2025</span>
+              <span className="st-info-line">CLIENT | INITIA GROUP SG</span>
             </p>
           </div>
         </section>
