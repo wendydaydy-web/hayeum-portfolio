@@ -211,11 +211,11 @@
 /* ── [D] 떠다니는 라이브 매장 카드 (tofuG 전용, 브랜드 굿즈 감성) ── */
 .tg-livecard {
   position: fixed; top: 70px; right: 6px; z-index: 95;   /* 화면 오른쪽 끝(여백)에 밀착 */
-  width: clamp(180px, 24vw, 360px); aspect-ratio: 1 / 1;  /* 뷰포트에 따라 유동(넓을수록 크게, 최대 360) */
+  width: clamp(124px, 16.5vw, 248px); aspect-ratio: 1 / 1;  /* case3가 박스를 더 꽉 채워서 값 축소 → 보이는 크기 이전과 동일 */
   container-type: inline-size;                             /* 안쪽 글자를 카드 폭(cqw) 기준으로 → 카드 줄면 글자도 같이 축소 */
   color: #2c2820;                                          /* 검정 잉크 */
   border: none; -webkit-appearance: none; appearance: none;  /* 버튼 기본 검정 테두리 제거 */
-  background: url('/images/tofug/tofu-case2.webp') center / contain no-repeat;  /* 두부틀 프레임만 */
+  background: url('/images/tofug/tofu-case3.webp') center / contain no-repeat;  /* 두부틀 프레임만 */
   cursor: pointer;
   filter: drop-shadow(0 14px 20px rgba(60,50,30,0.26));
   transform-origin: top center;                            /* 위쪽을 축으로 매달려 살랑이는 느낌 */
@@ -235,7 +235,7 @@
 .tg-livecard:focus-visible { outline: 2px solid #2c2820; outline-offset: 4px; border-radius: 10px; }
 /* 프레임 안쪽 크림 '두부' 면 — 텍스트는 이 영역 안에만 (나무틀 침범 X) */
 /* 크림 면 실측(평평한 영역 ≈ L32.5 R71 T32 B71.5)에 맞춘 비대칭 인셋 + 안전여백 */
-.tg-lc-inner { position: absolute; top: 33%; left: 33%; right: 33%; bottom: 31%; display: flex; flex-direction: column; justify-content: center; text-align: left; overflow: hidden; }  /* 좌우 대칭 여백 */
+.tg-lc-inner { position: absolute; top: 24%; left: 24%; right: 24%; bottom: 24%; display: flex; flex-direction: column; justify-content: center; text-align: left; overflow: hidden; }  /* case3 크림 면(22.5~79.5%)에 맞춰 확대 */
 .tg-lc-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; position: relative; z-index: 1; }
 .tg-lc-brand { font-family: 'Barlow Condensed','Oswald',sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2c2820; line-height: 1; white-space: nowrap; }
 .tg-lc-live { display: inline-flex; align-items: center; gap: 4px; font-family: 'Barlow Condensed','Oswald',sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #2c2820; white-space: nowrap; }
@@ -246,21 +246,21 @@
 /* 원점 블록 (byMe:true — 내 실적/싱가폴) : 연한 탄 틴트 + 검정 잉크 */
 /* 원점: 틴트 배경 없이, Singapore 볼드 + 아래 얇은 실선(1px)으로만 구분 */
 /* ↓ 글자·간격을 cqw(카드 폭 %)로 → 카드가 유동으로 줄면 내용도 비율대로 함께 축소 (기준 264px) */
-.tg-lc-origin { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.76cqw; padding-bottom: 1.5cqw; border-bottom: 1px solid #2c2820; }
-.tg-lc-origin-label { font-family: 'Inter','Noto Sans KR',sans-serif; font-size: 2.84cqw; font-weight: 700; letter-spacing: 0; line-height: 1.18; text-transform: uppercase; color: rgba(44,40,32,0.62); display: block; width: 100%; text-align: justify; text-align-last: justify; }  /* 좌우 라인 꽉 채움 */
-.tg-lc-origin-main { display: flex; align-items: baseline; justify-content: space-between; gap: 2.6cqw; }
-.tg-lc-origin-country { font-family: 'Cormorant Garamond','Noto Serif KR',Georgia,serif; font-size: 4.17cqw; font-weight: 700; line-height: 1.05; color: #2c2820; }
-.tg-lc-origin-val { display: inline-flex; align-items: baseline; gap: 1.5cqw; font-family: 'Barlow Condensed',sans-serif; font-size: 5.49cqw; font-weight: 700; line-height: 1; color: #2c2820; font-variant-numeric: tabular-nums; }
+.tg-lc-origin { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1.06cqw; padding-bottom: 2.1cqw; border-bottom: 1px solid #2c2820; }
+.tg-lc-origin-label { font-family: 'Inter','Noto Sans KR',sans-serif; font-size: 3.98cqw; font-weight: 700; letter-spacing: 0; line-height: 1.18; text-transform: uppercase; color: rgba(44,40,32,0.62); display: block; width: 100%; text-align: justify; text-align-last: justify; }  /* 좌우 라인 꽉 채움 */
+.tg-lc-origin-main { display: flex; align-items: baseline; justify-content: space-between; gap: 3.64cqw; }
+.tg-lc-origin-country { font-family: 'Cormorant Garamond','Noto Serif KR',Georgia,serif; font-size: 5.84cqw; font-weight: 700; line-height: 1.05; color: #2c2820; }
+.tg-lc-origin-val { display: inline-flex; align-items: baseline; gap: 2.1cqw; font-family: 'Barlow Condensed',sans-serif; font-size: 7.69cqw; font-weight: 700; line-height: 1; color: #2c2820; font-variant-numeric: tabular-nums; }
 
 /* 점선 가지 (byMe:false — 브랜드 확장) */
-.tg-lc-branch { position: relative; z-index: 1; margin-top: 1.9cqw; padding-left: 0; display: flex; flex-direction: column; gap: 1.14cqw; }  /* 세로 점선 제거 · 왼쪽 정렬 */
+.tg-lc-branch { position: relative; z-index: 1; margin-top: 2.66cqw; padding-left: 0; display: flex; flex-direction: column; gap: 1.6cqw; }  /* 세로 점선 제거 · 왼쪽 정렬 */
 .tg-lc-branch::before { display: none; }
-.tg-lc-branch-label { font-family: 'Barlow Condensed',sans-serif; font-size: 3.03cqw; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #6b5f4a; margin-bottom: 0.4cqw; white-space: nowrap; }  /* BRAND EXPANSION: 크림 면 안에 한 줄로 들어오게 */
+.tg-lc-branch-label { font-family: 'Barlow Condensed',sans-serif; font-size: 4.24cqw; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #6b5f4a; margin-bottom: 0.56cqw; white-space: nowrap; }  /* BRAND EXPANSION: 크림 면 안에 한 줄로 들어오게 */
 .tg-lc-branch-arrow { color: #6b5f4a; font-family: 'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif; }  /* → 글자를 한글 폰트로 고정 → EN/KR 동일 모양 */
-.tg-lc-exp-row { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 3cqw; line-height: 1.1; font-family: 'Cormorant Garamond','Noto Serif KR',Georgia,serif; }  /* 국가 왼쪽 · 값 오른쪽 라인 */
-.tg-lc-exp-country { font-size: 4.17cqw; font-weight: 500; color: #4a4132; white-space: nowrap; }
-.tg-lc-exp-val { font-family: 'Barlow Condensed',sans-serif; font-size: 5.11cqw; font-weight: 700; line-height: 1; color: #4a4132; font-variant-numeric: tabular-nums; }
-.tg-lc-soon { font-family: 'Cormorant Garamond',Georgia,serif; font-style: italic; font-weight: 600; font-size: 4.17cqw; color: #8a7c62; letter-spacing: 0.01em; }
+.tg-lc-exp-row { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 4.2cqw; line-height: 1.1; font-family: 'Cormorant Garamond','Noto Serif KR',Georgia,serif; }  /* 국가 왼쪽 · 값 오른쪽 라인 */
+.tg-lc-exp-country { font-size: 5.84cqw; font-weight: 500; color: #4a4132; white-space: nowrap; }
+.tg-lc-exp-val { font-family: 'Barlow Condensed',sans-serif; font-size: 7.15cqw; font-weight: 700; line-height: 1; color: #4a4132; font-variant-numeric: tabular-nums; }
+.tg-lc-soon { font-family: 'Cormorant Garamond',Georgia,serif; font-style: italic; font-weight: 600; font-size: 5.84cqw; color: #8a7c62; letter-spacing: 0.01em; }
 
 /* ── [3] Expansion 라이브 카운터 (tofuG 전용) ── */
 .studio-page .tg-counter { margin-top: 44px; border: 1px solid var(--fg-10, #e5e5e5); border-radius: 8px; padding: 26px 28px; background: color-mix(in srgb, var(--section-bg) 40%, transparent); }
