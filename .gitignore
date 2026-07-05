@@ -6,4 +6,7 @@ out/
 *.log
 .claude/settings.local.json
 
+# 로컬 환경변수 (Formspree 엔드포인트 등) — 커밋 금지
+.env*.local
+
 .vercel

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { submitInquiry, INQUIRY_ENABLED } from '../lib/contact';
 
 /**
  * BENSON 전용 — 떠다니는 문의 스티커(왼쪽 아래) + 문의 폼 모달.
@@ -8,13 +9,8 @@ import { useEffect, useRef, useState } from 'react';
  *  - 클릭: 문의 폼 모달. 닫기(X)·바깥클릭·ESC 닫힘.
  *  - prefers-reduced-motion: 반복 노출·움직임 끔 / 터치(coarse): 축소 + 처음 한 번만.
  *
- * 받는 주소 미정 → CONTACT_EMAIL/FORMSPREE_ENDPOINT 비워둠.
- *  · FORMSPREE_ENDPOINT 채우면 → 해당 엔드포인트로 POST 전송.
- *  · CONTACT_EMAIL 만 채우면 → mailto 폴백.
- *  · 둘 다 비면 → "문의 접수 준비 중"(전송 없이 접수 메시지).
+ * 수신 주소·전송 로직은 lib/contact.js 에서 공통 관리(submitInquiry).
  */
-const CONTACT_EMAIL = '';        // 예: 'project@haumm.studio'
-const FORMSPREE_ENDPOINT = '';   // 예: 'https://formspree.io/f/xxxxxxxx'
 
 /* 사이트 언어(EN/KR) — SiteNav 토글이 document.documentElement.lang 을 바꾸므로 관찰.
    placeholder 등 속성 텍스트에 사용(CSS data-ko/en 으로 못 바꾸는 것). */
@@ -182,30 +178,13 @@ function BensonInquiryModal({ onClose }) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const data = {
-      name: (fd.get('name') || '').toString().trim(),
-      email: (fd.get('email') || '').toString().trim(),
-      message: (fd.get('message') || '').toString().trim(),
+      name: fd.get('name'),
+      email: fd.get('email'),
+      message: fd.get('message'),
+      botcheck: fd.get('botcheck'), // 허니팟
     };
-
-    if (!FORMSPREE_ENDPOINT && !CONTACT_EMAIL) { setStatus('sent'); return; }
-
-    if (FORMSPREE_ENDPOINT) {
-      try {
-        setStatus('sending');
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(data),
-        });
-        setStatus(res.ok ? 'sent' : 'error');
-      } catch { setStatus('error'); }
-      return;
-    }
-
-    const subject = encodeURIComponent(`[BENSON] 프로젝트 문의 — ${data.name}`);
-    const body = encodeURIComponent(`이름: ${data.name}\n이메일: ${data.email}\n\n${data.message}`);
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    setStatus('sent');
+    setStatus('sending');
+    setStatus(await submitInquiry(data, { brand: 'BENSON' }));
   };
 
   return (
@@ -217,12 +196,21 @@ function BensonInquiryModal({ onClose }) {
         <p className="bn-modal-sub">{t('공간·브랜드 프로젝트를 함께 만들고 싶으시면 남겨주세요.', 'Tell us about your spatial or brand project.')}</p>
         {status === 'sent' ? (
           <p className="bn-modal-done">
-            {(!FORMSPREE_ENDPOINT && !CONTACT_EMAIL)
-              ? t('문의 접수 준비 중입니다. 곧 연결됩니다 — 감사합니다! 🍦', 'Inquiry intake is being set up — coming soon. Thanks! 🍦')
-              : t('문의가 접수되었습니다. 감사합니다! 🍦', 'Thanks — your message has been received! 🍦')}
+            {INQUIRY_ENABLED
+              ? t('문의가 전송되었습니다. 감사합니다! 🍦', 'Your message has been sent — thanks! 🍦')
+              : t('문의 접수 준비 중입니다. 곧 연결됩니다 — 감사합니다! 🍦', 'Inquiry intake is being set up — coming soon. Thanks! 🍦')}
           </p>
         ) : (
           <form className="bn-modal-form" onSubmit={handleSubmit}>
+            {/* 허니팟 — 사람에겐 안 보이고 봇만 채움(스팸 방지) */}
+            <input
+              type="text"
+              name="botcheck"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+            />
             <input ref={firstRef} name="name" required placeholder={t('이름', 'Name')} autoComplete="name" />
             <input name="email" type="email" required placeholder={t('이메일', 'Email')} autoComplete="email" />
             <textarea name="message" required rows={4} placeholder={t('프로젝트 내용', 'Project details')} />

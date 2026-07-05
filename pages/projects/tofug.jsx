@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { StudioNav, StudioFooter } from '../../components/project';
 import { journey, expansionCountryNames, hasPhotos, byMeCount, brandTotalCount, openStoreCount, soonStoreCount, countries, countryCount, timelapseStores, spaceGridStores, asOf } from '../../data/tofug-stores';
 import { stats, placeRating } from '../../data/tofug-stats';
+import { submitInquiry, INQUIRY_ENABLED } from '../../lib/contact';
 
 /* ── 섹션 메뉴 (상단바 ScrollSpy) ── */
 const SECTIONS = [
@@ -22,22 +23,7 @@ function scrollToSection(id) {
   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH - 8, behavior: 'smooth' });
 }
 
-/* ─────────────────────────────────────────────────────────────
- * 문의 폼 받는 곳 설정 — 나중에 여기 두 값만 채우면 바로 작동합니다.
- *
- *  ① Formspree(또는 유사 폼서비스) 사용 시:
- *     FORMSPREE_ENDPOINT 에 'https://formspree.io/f/xxxxxxxx' 를 넣으면
- *     보내기 → 해당 엔드포인트로 POST(폼 내용 전송)됩니다. (권장)
- *
- *  ② 폼서비스 없이 이메일로 받을 때:
- *     CONTACT_EMAIL 에 'project@haumm.studio' 처럼 주소를 넣으면
- *     보내기 → 메일 클라이언트가 열리며 내용이 채워집니다. (mailto)
- *
- *  둘 다 비어("") 있으면 → "문의 접수 준비 중" 안내만 표시(전송 비활성).
- *  우선순위: FORMSPREE_ENDPOINT 가 있으면 그걸 사용, 없으면 CONTACT_EMAIL.
- * ───────────────────────────────────────────────────────────── */
-const CONTACT_EMAIL = '';        // 예: 'project@haumm.studio'
-const FORMSPREE_ENDPOINT = '';   // 예: 'https://formspree.io/f/xxxxxxxx'
+/* 문의 폼 수신 주소·전송 로직은 lib/contact.js 에서 공통 관리(submitInquiry). */
 
 /* 사이트 언어 상태(EN/KR) 훅 — StudioNav 토글이 document.documentElement.lang 을 바꾸므로 그걸 관찰.
    placeholder 등 속성값처럼 CSS(data-ko/data-en)로 못 바꾸는 텍스트에 사용. */
@@ -607,34 +593,13 @@ function InquiryModal({ onClose }) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const data = {
-      name: (fd.get('name') || '').toString().trim(),
-      email: (fd.get('email') || '').toString().trim(),
-      message: (fd.get('message') || '').toString().trim(),
+      name: fd.get('name'),
+      email: fd.get('email'),
+      message: fd.get('message'),
+      botcheck: fd.get('botcheck'), // 허니팟
     };
-
-    // 받는 곳 미설정(임시 B): 실제 전송은 안 되지만 접수 메시지 표시.
-    // ★ 나중에 위 FORMSPREE_ENDPOINT 또는 CONTACT_EMAIL 을 채우면 아래 실제 전송 로직으로 자동 대체됨.
-    if (!FORMSPREE_ENDPOINT && !CONTACT_EMAIL) { setStatus('sent'); return; }
-
-    // ① Formspree 등 폼서비스 연동 지점
-    if (FORMSPREE_ENDPOINT) {
-      try {
-        setStatus('sending');
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(data),
-        });
-        setStatus(res.ok ? 'sent' : 'error');
-      } catch { setStatus('error'); }
-      return;
-    }
-
-    // ② mailto 폴백 (CONTACT_EMAIL 만 채운 경우)
-    const subject = encodeURIComponent(`[TOFU·G] 프로젝트 문의 — ${data.name}`);
-    const body = encodeURIComponent(`이름: ${data.name}\n이메일: ${data.email}\n\n${data.message}`);
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    setStatus('sent');
+    setStatus('sending');
+    setStatus(await submitInquiry(data, { brand: 'TOFU·G' }));
   };
 
   return (
@@ -645,9 +610,22 @@ function InquiryModal({ onClose }) {
         <h3 className="tg-modal-title">{t('프로젝트 문의', 'Get in touch')}</h3>
         <p className="tg-modal-sub">{t('공간·브랜드 프로젝트를 함께 만들고 싶으시면 남겨주세요.', 'Tell us about your spatial or brand project.')}</p>
         {status === 'sent' ? (
-          <p className="tg-modal-done">{t('문의가 접수되었습니다. 감사합니다! 🍦', 'Thanks — your message has been received! 🍦')}</p>
+          <p className="tg-modal-done">
+            {INQUIRY_ENABLED
+              ? t('문의가 전송되었습니다. 감사합니다! 🍦', 'Your message has been sent — thanks! 🍦')
+              : t('문의 접수 준비 중입니다. 곧 연결됩니다 — 감사합니다! 🍦', 'Inquiry intake is being set up — coming soon. Thanks! 🍦')}
+          </p>
         ) : (
           <form className="tg-modal-form" onSubmit={handleSubmit}>
+            {/* 허니팟 — 사람에겐 안 보이고 봇만 채움(스팸 방지) */}
+            <input
+              type="text"
+              name="botcheck"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+            />
             <input ref={firstRef} name="name" required placeholder={t('이름', 'Name')} autoComplete="name" />
             <input name="email" type="email" required placeholder={t('이메일', 'Email')} autoComplete="email" />
             <textarea name="message" required rows={4} placeholder={t('프로젝트 내용', 'Project details')} />
