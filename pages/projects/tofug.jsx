@@ -683,24 +683,20 @@ export default function TofuG() {
         <section className="st-hero">
           <h1 className="st-hero-title">TOFU · G</h1>
           <p className="st-hero-positioning">
-            <span data-ko>9개월 만에 {countryCount}개국 진출을 이끈 글로벌 F&amp;B 브랜드 TOFU · G — 맷돌과 한국 전통 주방의 모티브를 모던하게 풀어낸 1호점-{byMeCount}호점 공간 디자인 및 SI 시스템 구축.</span>
-            <span data-en>TOFU · G: A global F&amp;B brand expanding to {countryCount} countries in just 9 months — Spatial design, branding, and SI system from the 1st store to the flagship, inspired by the heritage Korean kitchen.</span>
+            <span data-ko>9개월 만에 {countryCount}개국으로 확장한 글로벌 F&amp;B 브랜드 TOFU · G. 1~{byMeCount}호점 공간 디자인과 SI 시스템을 구축했습니다.</span>
+            <span data-en>TOFU · G, a global F&amp;B brand that scaled to {countryCount} countries in just 9 months. I built the spatial design and SI system for stores 1–{byMeCount}.</span>
           </p>
           <p className="st-hero-desc">
-            <span data-ko>한국 전통 두부 제조의 정성을 담은 프리미엄 젤라또 브랜드 — 맷돌과 한국 전통 주방에서 영감을 받은 공간 디자인 · 브랜딩.</span>
-            <span data-en>A premium gelato brand capturing the devotion of traditional Korean tofu making — Spatial Design &amp; Branding inspired by the Maetdol (traditional millstone) and the heritage Korean kitchen.</span>
+            <span data-ko>한국 전통 두부 제조의 정성을 담은 프리미엄 젤라또 브랜드 TOFU · G. 맷돌과 한국 전통 주방에서 영감받은 공간 디자인·브랜딩으로, 싱가포르 오차드 로드에서 시작해 말레이시아·인도네시아로 확장 중입니다.</span>
+            <span data-en>TOFU · G is a premium gelato brand capturing the devotion of traditional Korean tofu-making — with spatial design and branding inspired by the Maetdol (millstone) and heritage Korean kitchen, it began on Orchard Road in Singapore and is now expanding across Malaysia and Indonesia.</span>
           </p>
           <p className="st-hero-desc">
-            <span data-ko>싱가포르 오차드 로드에서 시작해 말레이시아와 인도네시아로 확장 중인 프리미엄 두부 젤라또 브랜드, TOFU · G. 싱가포르 1호점의 공간 브랜드 컨셉 기획과 공간 디자인을 통해 브랜드의 시각적 아이덴티티를 정립했으며, 추후 이니시아(Initia Group) 소속으로 2호점부터 4호점 플래그십 매장까지의 프로젝트를 연속성 있게 진행했습니다. 이 과정에서 지속적인 매장 확장이 가능하도록 표준화된 공간 디자인 시스템(SI 가이드라인)을 완벽히 구축했습니다.</span>
-            <span data-en>Starting from Orchard Road in Singapore and now expanding across Malaysia and Indonesia, TOFU · G is a premium tofu gelato brand. I established the brand&apos;s visual identity through the spatial concept planning and interior design of the first store in Singapore. Subsequently, as part of Initia Group, I seamlessly executed consecutive projects from the 2nd to the 4th flagship locations. Through this trajectory, I successfully developed a standardized Spatial Identity (SI) guideline to support sustainable and scalability-driven brand expansion.</span>
-          </p>
-          <p className="st-hero-desc">
-            <span data-ko>TOFU·G의 공간은 한국의 전통 주방에서 영감을 받았습니다. 맷돌의 묵직한 질감과 장인의 고요한 시간성을 모던하게 재해석해 소재와 디테일에 녹여냈습니다. 전통적 터치와 현대적 감각이 공존하는 이곳에서, 고객은 브랜드의 철학을 시각과 미각으로 동시에 경험합니다. 매일 매장에서 직접 만드는 신선한 두부 젤라또 한 스쿱은, 단순한 디저트를 넘어 하나의 작품이 됩니다.</span>
-            <span data-en>TOFU·G&apos;s space is inspired by the traditional Korean kitchen. The weight of the millstone and the artisan&apos;s quiet, unhurried time are reimagined through a modern lens, woven into every material and detail. Where tradition meets contemporary sensibility, guests experience the brand&apos;s philosophy through both sight and taste — and each scoop of tofu gelato, freshly made in-store every day, becomes not just a dessert but a work of art.</span>
+            <span data-ko>TOFU·G의 공간은 하루의 온기가 피어나던 한국의 전통 주방에서 시작됩니다. 콩을 고르고 맷돌로 천천히 갈아, 정성으로 기다려 굳혀내던 두부처럼 그 고요한 시간을 공간의 소재와 디테일에 담았습니다. 전통적 터치와 현대적 감각이 공존하는 이곳에서, 고객은 브랜드의 철학을 시각과 미각으로 동시에 경험합니다. 매일 매장에서 직접 만드는 신선한 두부 젤라또 한 스쿱은, 단순한 디저트를 넘어 하나의 작품이 됩니다.</span>
+            <span data-en>TOFU·G&apos;s space begins in the traditional Korean kitchen, where the warmth of each day once rose. Like tofu — beans selected, slowly ground on the millstone, and patiently left to set — that quiet, unhurried time is woven into the materials and details of the space. Where tradition meets contemporary sensibility, guests experience the brand&apos;s philosophy through both sight and taste — and each scoop of tofu gelato, freshly made in-store every day, becomes not just a dessert but a work of art.</span>
           </p>
           <p className="st-hero-quote">
             <span data-ko>“두부 한 모에 담긴 정성을, 한 입의 젤라또에 담다.”</span>
-            <span data-en>“Crafting the devotion of a single block of tofu into a single scoop of gelato.”</span>
+            <span data-en>“The devotion held in a single block of tofu, poured into a single spoonful of gelato.”</span>
           </p>
         </section>
 
@@ -755,6 +751,8 @@ export default function TofuG() {
               <h2 className="st-section-title" data-en>Proven Results</h2>
               <p className="st-section-desc" data-ko>2024년 7월 첫 오픈 이후 9개월 만에 싱가폴 {byMeCount}개 매장과 브랜드 공간 가이드라인(SI)을 구축했고, 그 시스템으로 브랜드는 {countryCount}개국 {brandTotalCount}개 매장으로 확장 중입니다.</p>
               <p className="st-section-desc" data-en>Since its first opening in July 2024, I built {byMeCount} Singapore stores and the brand&apos;s spatial guideline (SI) in just 9 months; on that system the brand is now scaling to {brandTotalCount} stores across {countryCount} countries.</p>
+              <p className="st-section-desc" data-ko>싱가포르 1호점의 공간 브랜드 컨셉 기획과 공간 디자인을 통해 브랜드의 시각적 아이덴티티를 정립했으며, 추후 이니시아(Initia Group) 소속으로 2호점부터 4호점 플래그십 매장까지의 프로젝트를 연속성 있게 진행했습니다. 이 과정에서 지속적인 매장 확장이 가능하도록 표준화된 공간 디자인 시스템(SI 가이드라인)을 완벽히 구축했습니다.</p>
+              <p className="st-section-desc" data-en>I established the brand&apos;s visual identity through the spatial concept planning and interior design of the first store in Singapore. Subsequently, as part of Initia Group, I seamlessly executed consecutive projects from the 2nd to the 4th flagship locations. Through this trajectory, I built a standardized Spatial Identity (SI) guideline to support sustainable, scalable brand expansion.</p>
             </Reveal>
             <OverviewStats />
 

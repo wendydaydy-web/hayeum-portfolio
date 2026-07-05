@@ -25,6 +25,10 @@
 .studio-page .st-hero-desc { font-size: 15px; line-height: 1.85; color: var(--fg-75, #333); max-width: 1100px; word-break: keep-all; margin-bottom: 28px; text-align: justify; }
 .studio-page .st-hero-quote { font-size: 15px; color: var(--page-fg); }
 
+/* 영문 인트로: 국문과 비슷한 밀도로 행간·문단여백 조정 (폰트 크기는 유지, 가독성 유지) */
+html[lang="en"] .studio-page .st-hero-positioning { line-height: 1.55; margin-bottom: 26px; }
+html[lang="en"] .studio-page .st-hero-desc { line-height: 1.62; margin-bottom: 22px; text-align: left; }
+
 /* ── PROJECT INFO (Work Scope / Type / Partner 3-col) ── */
 .studio-page .st-project-info {
   padding: 50px 60px 60px; max-width: 1600px; margin: 0 auto;

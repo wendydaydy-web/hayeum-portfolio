@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ScrollProgress, SectionNav } from '../../components/project';
+import BensonCursor from '../../components/BensonCursor';
+import BensonInquiry from '../../components/BensonInquiry';
 
 /* 섹션 메뉴 매핑 — 해당 섹션 데이터가 없으면 항목 자체를 빼면 됨(자동 생략) */
 const SECTIONS = [
@@ -302,6 +304,8 @@ export default function Benson() {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
       </Head>
 
+      <BensonCursor />
+      <BensonInquiry />
       <ScrollProgress />
       <SiteNav sections={SECTIONS} />
 
@@ -311,16 +315,16 @@ export default function Benson() {
         <section className="hero">
           <h1 className="hero-title">BENSON_<span className="hero-client">Hanwha Galleria</span></h1>
           <p className="hero-positioning">
-            <span data-ko>Fortune Global 500 기업 한화갤러리아의 신규 F&amp;B 브랜드 BENSON — 스프레드웍스의 의뢰로 공간·SI 디자인을 맡았습니다.</span>
-            <span data-en>Space &amp; SI design for BENSON, a new F&amp;B brand for Hanwha Galleria (Fortune Global 500), commissioned by Spreadworks.</span>
+            <span data-ko>Fortune Global 500 기업 한화갤러리아의 신규 F&amp;B 브랜드 BENSON. 신규 브랜드의 플래그십 공간을 디자인하고 SI 가이드북을 제작했습니다.</span>
+            <span data-en>BENSON, a new F&amp;B brand by Hanwha Galleria — a Fortune Global 500 company. We designed the flagship space and produced the SI guidebook for the new brand.</span>
           </p>
           <p className="hero-desc">
-            <span data-ko>볼드한 토핑과 풍부한 유지방의 깊은 맛이 감각을 깨우는 곳. 벤슨(BENSON)은 단순히 아이스크림을 즐기는 공간을 넘어, 미국의 서브컬처와 스트릿 무드가 교차하며 만들어내는 역동적인 순간을 담았다. 공간을 가로지르는 대담한 곡선은 스케이트 파크의 에너지에서 시작되었다. 거칠면서도 정제된 콘크리트 질감 위로, 벤슨의 시그니처 레드가 맥박처럼 흐르며 공간에 강렬한 생동감을 불어넣는다. 파사드에서 내부로 부드럽게 이어지는 곡선형 퍼니처와 천장 조형물은 경계를 허물고 당신을 이 자유로운 아웃도어 무드 속으로 자연스럽게 이끈다. 이곳에서 아이스크림 한 스쿱은 단순한 디저트가 아니다. 페그보드 위에 펼쳐진 다채로운 플레이버의 향연 그리고 그 속에 스며든 스트릿 무드의 자유로움이 당신의 오감을 자극한다. 부드러운 텍스처와 청키한 토핑이 입안에서 리듬을 만들 때, 당신은 비로소 이 역동적인 세계의 일부가 된다.</span>
-            <span data-en>A place where bold toppings and deeply rich, creamy ice cream awaken the senses. BENSON is more than an ice cream shop — it captures the dynamic energy born where American subculture meets the street. The bold curves sweeping through the space draw their energy from skate-park geometry. Across raw yet refined concrete, BENSON&apos;s signature red runs like a pulse, breathing vitality into every corner. Curvilinear furniture and ceiling sculptures flow gently from facade to interior, dissolving boundaries and drawing you into a free, open-air atmosphere. Here, a single scoop is more than dessert. The pegboard&apos;s vivid procession of flavors — charged with the freedom of the street — awakens every sense. When soft textures and chunky toppings build a rhythm on your tongue, you become part of this dynamic world.</span>
+            <span data-ko>볼드한 토핑과 풍부한 유지방의 깊은 맛이 감각을 깨우는 곳. 벤슨(BENSON)은 미국의 서브컬처와 스트릿 무드가 교차하며 만들어내는 역동적인 순간을 담았습니다.<br /><br />스케이트 파크의 에너지에서 시작된 대담한 곡선, 거친 콘크리트 위로 맥박처럼 흐르는 시그니처 레드. 파사드에서 내부로 이어지는 곡선형 퍼니처와 천장 조형물이 경계를 허물며, 당신을 자유로운 아웃도어 무드로 이끕니다. 이곳에서 아이스크림 한 스쿱은 단순한 디저트가 아닙니다 — 부드러운 텍스처와 청키한 토핑이 입안에서 리듬을 만들 때, 당신은 이 역동적인 세계의 일부가 됩니다.</span>
+            <span data-en>Where bold toppings and rich, full-bodied depth awaken the senses. BENSON captures the dynamic moments born where American subculture meets street mood.<br /><br />Daring curves inspired by the energy of the skate park; a signature red pulsing like a heartbeat across raw concrete. Flowing furniture and sculptural ceiling forms carry from the façade into the interior, dissolving boundaries and drawing you into a free, outdoor mood. Here, a single scoop of ice cream is more than dessert — as soft textures and chunky toppings create rhythm on your palate, you become part of this dynamic world.</span>
           </p>
           <p className="hero-quote">
             <span data-ko>“당신이 마주하는 이 모든 역동성이 곧 벤슨의 맛이다.”</span>
-            <span data-en>“All this energy you encounter — that is the taste of BENSON.”</span>
+            <span data-en>“All the energy you encounter — that is the taste of BENSON.”</span>
           </p>
         </section>
 
@@ -727,7 +731,6 @@ export default function Benson() {
           </section>
         </div>
 
-        <div className="list-bar"><a href="#" onClick={(e) => { e.preventDefault(); toTop(); }}>LIST</a></div>
         <button className="top-btn" onClick={toTop} aria-label="Back to top">&#8593;</button>
       </main>
 
@@ -749,9 +752,13 @@ export default function Benson() {
         .hero { padding: 130px 60px 60px; max-width: 1600px; margin: 0 auto; }
         .hero-title { font-size: 36px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 18px; line-height: 1.3; }
         .hero-client { font-weight: 700; color: #000; }
-        .hero-positioning { font-size: 13px; line-height: 1.7; color: #666; max-width: 1100px; word-break: keep-all; margin-bottom: 32px; font-weight: 400; letter-spacing: 0.01em; }
-        .hero-desc { font-size: 15px; line-height: 1.85; color: #333; max-width: 1100px; word-break: keep-all; margin-bottom: 28px; text-align: justify; }
-        .hero-quote { font-size: 15px; color: #111; }
+        .hero-positioning { font-family: 'Inter', 'Noto Sans KR', sans-serif; font-size: 13px; line-height: 1.7; color: #666; max-width: 1100px; word-break: keep-all; margin-bottom: 32px; font-weight: 400; letter-spacing: 0.01em; }
+        .hero-desc { font-family: 'Inter', 'Noto Sans KR', sans-serif; font-size: 15px; line-height: 1.85; color: #333; max-width: 1100px; word-break: keep-all; margin-bottom: 28px; text-align: justify; }
+        .hero-quote { font-family: 'Inter', 'Noto Sans KR', sans-serif; font-size: 15px; color: #111; }
+        /* 영문 인트로 — 행간이 국문보다 헐렁해 보여서 밀도를 국문과 비슷하게(폰트 크기는 유지) */
+        :global(html[lang="en"]) .hero-positioning { line-height: 1.55; margin-bottom: 26px; }
+        :global(html[lang="en"]) .hero-desc { line-height: 1.62; margin-bottom: 24px; }
+        :global(html[lang="en"]) .hero-quote { line-height: 1.45; }
 
         /* ── PROJECT INFO ── */
         .project-info {
