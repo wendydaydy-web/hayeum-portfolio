@@ -237,7 +237,7 @@ body.tg-cursor-on [contenteditable="true"] { cursor: text !important; }
 
 /* ── [D] 떠다니는 라이브 매장 카드 (tofuG 전용, 브랜드 굿즈 감성) ── */
 .tg-livecard {
-  position: fixed; top: 70px; right: 6px; z-index: 95;   /* 화면 오른쪽 끝(여백)에 밀착 */
+  position: fixed; top: 92px; right: 6px; z-index: 95;   /* nav(높이 ~84px, z-index 100) 아래에서 시작 → 상단바 안 가림. z-index도 nav보다 낮게 유지 */
   width: clamp(124px, 16.5vw, 248px); aspect-ratio: 1 / 1;  /* case3가 박스를 더 꽉 채워서 값 축소 → 보이는 크기 이전과 동일 */
   container-type: inline-size;                             /* 안쪽 글자를 카드 폭(cqw) 기준으로 → 카드 줄면 글자도 같이 축소 */
   color: #2c2820;                                          /* 검정 잉크 */
@@ -368,8 +368,8 @@ body.tg-cursor-on [contenteditable="true"] { cursor: text !important; }
 @media (max-width: 809px) {
   .studio-page .tg-counter { padding: 20px 18px; }
   .studio-page .tg-counter-grid { grid-template-columns: 1fr 1fr; }
-  /* 두부틀 카드: 우상단 위치만 조정(크기는 clamp+cqw가 유동 처리) */
-  .tg-livecard { top: 44px; right: 4px; }
+  /* 두부틀 카드: 모바일 nav(높이 ~50px) 아래에서 시작 → 상단바 안 가림 */
+  .tg-livecard { top: 66px; right: 4px; }
 }
 
 /* ── 아이스크림 문의 스티커 (왼쪽 아래 고정) ── */
