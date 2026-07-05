@@ -10,6 +10,7 @@ const ITEMS = [
   {
     kanji: '空',
     label: '공간 공',
+    enLabel: 'Space · Gong',
     eng: 'Concept Strategy',
     ko: { body: '비어 있는 공간은 브랜드 이야기를 담기 위해 존재합니다. 우리는 그 공간에 브랜드 컨셉을 입히고, 이야기가 흐르도록 만듭니다.', tasks: '업무 · 공간 컨셉 기획, 브랜드 스토리 설계' },
     en: { body: 'Empty spaces exist to hold brand stories. We dress spaces in brand concepts, letting narratives flow naturally.', tasks: 'Scope · Space concept planning, Brand story design' },
@@ -17,6 +18,7 @@ const ITEMS = [
   {
     kanji: '間',
     label: '사이 간',
+    enLabel: 'Between · Gan',
     eng: 'Engage & Experience',
     ko: { body: '브랜드와 공간을 이어주는 건 그 안에서 흘러가는 시간과 경험입니다. 우리는 사람들이 머무는 모든 순간을 브랜드 경험으로 설계합니다.', tasks: '업무 · 경험 설계, 체험 프로그램 기획' },
     en: { body: 'What connects brand and space is the time and experience flowing within. We design every moment of presence as a brand experience.', tasks: 'Scope · Experience design, Program planning' },
@@ -24,6 +26,7 @@ const ITEMS = [
   {
     kanji: '夏',
     label: '여름 하',
+    enLabel: 'Summer · Ha',
     eng: 'Branding Design',
     ko: { body: '가장 뜨거운 계절, 여름은 브랜드가 가장 빛나는 순간입니다. 하음은 선명하게 기억되는 브랜드를 제안합니다.', tasks: '업무 · 그래픽 디자인 (로고, 패키지, 포스터 etc)' },
     en: { body: 'The hottest season — summer is when a brand shines brightest. Ha-umm proposes brands that are vividly remembered.', tasks: 'Scope · Graphic design (Logo, Package, Poster etc)' },
@@ -31,6 +34,7 @@ const ITEMS = [
   {
     kanji: '陰',
     label: '그늘 음',
+    enLabel: 'Shade · Eum',
     eng: 'Spatial Design',
     ko: { body: '뜨거운 여름 속 그늘, 사람들이 머물고 싶은 자리. 보이지 않는 그늘 속 시간과 디테일이 공간의 가치를 완성합니다.', tasks: '업무 · 공간 설계, 실시 설계, 감리' },
     en: { body: "Shade in the hot summer — a place where people want to stay. Invisible time and detail within the shade complete a space's value.", tasks: 'Scope · Spatial design, Construction documentation, Supervision' },
@@ -58,7 +62,7 @@ export default function ScopeSection({ isKo = true, addRevealRef, className = ''
               <div className="scope-header-left">
                 <span className="scope-kanji">{item.kanji}</span>
                 <div>
-                  <p className="scope-label">{item.label}</p>
+                  <p className="scope-label">{isKo ? item.label : item.enLabel}</p>
                   <p className="scope-eng">{item.eng}</p>
                 </div>
               </div>
