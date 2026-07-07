@@ -574,6 +574,13 @@ body.tg-cursor-on [contenteditable="true"] { cursor: text !important; }
   display: inline-flex; align-items: center; gap: 10px;
   border: 1px dashed var(--gray, #888); border-radius: 999px; padding: 9px 16px;
 }
+/* 호점 라벨 — 작고 은은하게(muted). flagship 부분만 accent 강조. */
+.studio-page .tg-chip-no {
+  font-family: 'Barlow Condensed','Noto Sans KR',sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+  color: var(--text-mid, #999); white-space: nowrap;
+}
+.studio-page .tg-chip-flag { font-style: normal; font-weight: 700; color: var(--accent-ink, var(--accent)); }
 .studio-page .tg-chip-name { font-family: 'Cormorant Garamond','Noto Serif KR',Georgia,serif; font-size: 16px; color: var(--text-strong, var(--fg-90, #1a1a1a)); }
 .studio-page .tg-chip-loc { font-family: 'Inter','Noto Sans KR',sans-serif; font-size: 11.5px; color: var(--text-mid, #666); }
 .studio-page .tg-chip-badge {

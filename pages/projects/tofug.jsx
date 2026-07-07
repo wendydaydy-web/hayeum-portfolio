@@ -119,11 +119,21 @@ function PhotoPlaceholder({ label }) {
   );
 }
 
-/* 곧 오픈 · 사진 없는 매장 — compact 정보 칩 */
+/* 곧 오픈 · 사진 없는 매장 — compact 정보 칩.
+   OPEN 상태의 내 작업(byMe) 매장(1~4호점)에는 은은한 호점 라벨을 앞에 붙임.
+   4호점(97 Amoy Street)만 '플래그십/Flagship'을 accent 컬러로 강조. */
 function PlaceChip({ store }) {
   const isSoon = store.status === 'upcoming';
+  const showNo = store.byMe && !isSoon && store.no >= 1 && store.no <= 4;
+  const isFlagship = store.no === 4;
   return (
     <span className="tg-place-chip">
+      {showNo && (
+        <span className="tg-chip-no">
+          <span data-ko>{store.no}호점{isFlagship && <> · <em className="tg-chip-flag">플래그십</em></>}</span>
+          <span data-en>Store {String(store.no).padStart(2, '0')}{isFlagship && <> · <em className="tg-chip-flag">Flagship</em></>}</span>
+        </span>
+      )}
       <span className="tg-chip-name">{store.name}</span>
       <span className="tg-chip-loc">{store.city || '-'}</span>
       <span className="tg-chip-badge">
