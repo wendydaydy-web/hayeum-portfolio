@@ -16,7 +16,7 @@
 //     · mainImage/gallery 가 비면 → "구글 플레이스 정보 카드"로 자동 대체(사진 대신 정보)
 //
 // ★ 표시 로직(사진 유무로 자동 분기) ★
-//   byMe=TRUE  + 사진 O → SPACE 큰 갤러리 (1호점 플래그십 + 2~4호점 그리드)
+//   byMe=TRUE  + 사진 O → SPACE 큰 갤러리 (1호점 + 2~4호점 그리드)
 //   byMe=FALSE + 사진 O → EXPANSION 사진 카드
 //   사진 X (soon/미래) → EXPANSION "구글 플레이스 정보 카드"(이름·평점·위치·상태). 구글 사진은 가져오지 않음.
 //
@@ -33,8 +33,8 @@ const rawStores = [
     no: 1, name: 'Mandarin Gallery', city: 'Singapore', country: 'Singapore',
     openDate: '2025', status: 'open', byMe: true,
     address: '333A Orchard Rd, #03-30, Singapore 238867',
-    descKo: '싱가포르 최초의 프리미엄 두부 젤라또 — 1호점 플래그십. 공간 컨셉·디자인·시공 전 과정 담당.',
-    descEn: "Singapore's first premium tofu gelato — the flagship first store. Led concept, design and construction end-to-end.",
+    descKo: '싱가포르 최초의 프리미엄 두부 젤라또 — 1호점. 공간 컨셉·디자인·시공 전 과정 담당.',
+    descEn: "Singapore's first premium tofu gelato — the first store. Led concept, design and construction end-to-end.",
     // 1호점 타임랩스 (구 Design Process 영상). 비우면 검정 placeholder.
     video: 'https://framerusercontent.com/assets/aVYOmv4OpeHjgcDD1ZLrdcKk.mp4',
     mainImage: 'c75c6d_484e34ff6c744b8f9fbc8c867893796e~mv2.webp',
@@ -180,8 +180,8 @@ export const byMeStores = stores.filter((s) => s.byMe);
 export const expansionStores = stores.filter((s) => !s.byMe);
 export const byMeCount = byMeStores.length;                 // 내 작업 매장 수(싱가폴) — 유지
 
-// 1호점 플래그십 / 2~n호점 그리드
-export const flagshipStore = byMeStores[0] || null;
+// 1호점(첫 매장) / 2~n호점 그리드  — flagship 명칭은 4호점(97 Amoy) 전용
+export const flagshipStore = byMeStores[0] || null;  // = 첫 매장(1호점). 변수명은 내부용(렌더 텍스트 아님)
 export const spaceGridStores = byMeStores.slice(1);        // 1호점 제외한 내 작업(2~4호점)
 
 // 브랜드 확장 — 사진 유무로 분기 (카드 스타일)

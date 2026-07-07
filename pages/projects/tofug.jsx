@@ -190,7 +190,7 @@ function JourneyStep({ g, idx }) {
   );
 }
 
-/* ── 로고 커서 (B방식) : 로고가 마우스를 부드럽게 따라오며 멧돌처럼 천천히 회전.
+/* ── 로고 커서 (B방식) : 로고가 마우스를 부드럽게 따라오며 맷돌처럼 천천히 회전.
    클릭 시 휙 한 바퀴, 클릭 가능한 요소 위에선 살짝 확대+빨라짐.
    데스크톱(hover·fine 포인터)에서만. 터치/reduced-motion → 기본 커서 유지.
    입력창 위에선 로고 숨기고 텍스트 커서 유지. */
@@ -214,7 +214,7 @@ function LogoCursor() {
     let my = window.innerHeight / 2;
     let x = mx;
     let y = my;
-    let angle = 0;         // 연속 회전(멧돌)
+    let angle = 0;         // 연속 회전(맷돌)
     let spinCur = 0;       // 클릭 스핀(누적)
     let spinTarget = 0;
     let scale = 0.6;
@@ -863,7 +863,7 @@ export default function TofuG() {
               </Reveal>
               <Reveal className="st-insp-card">
                 <img src={I('inspiration-millstone.jpg')} alt="Millstone" />
-                <span className="st-caption" data-ko>멧돌</span>
+                <span className="st-caption" data-ko>맷돌</span>
                 <span className="st-caption" data-en>Millstone</span>
               </Reveal>
             </div>
@@ -886,7 +886,7 @@ export default function TofuG() {
               <p className="st-section-label" data-ko>1호점</p>
               <p className="st-section-label" data-en>Store 01</p>
               <h2 className="st-section-title">Mandarin Gallery</h2>
-              <p className="st-section-desc" data-ko>싱가포르 오차드 로드 만다린 갤러리 #03-30, 싱가포르 최초의 프레시 처닝 프리미엄 두부 젤라또. 멧돌·전통 주방·Test Zone·VMD의 공간 언어가 처음으로 하나의 공간에 완성된 1호점입니다.</p>
+              <p className="st-section-desc" data-ko>싱가포르 오차드 로드 만다린 갤러리 #03-30, 싱가포르 최초의 프레시 처닝 프리미엄 두부 젤라또. 맷돌·전통 주방·Test Zone·VMD의 공간 언어가 처음으로 하나의 공간에 완성된 1호점입니다.</p>
               <p className="st-section-desc" data-en>333A Orchard Rd, #03-30 Mandarin Gallery — Singapore&apos;s first fresh-churned premium tofu gelato, where the spatial language of millstone, kitchen, Test Zone and VMD first came together as one space.</p>
             </Reveal>
             <div className="st-gallery-grid">
@@ -926,11 +926,11 @@ export default function TofuG() {
             </Reveal>
             <SpaceStoreGrid stores={spaceGridStores} />
 
-            {/* 3. 1~4호점 공통 디자인 디테일 · 재료 · 멧돌 · VMD — 섹션 마무리 */}
+            {/* 3. 1~4호점 공통 디자인 디테일 · 재료 · 맷돌 · VMD — 섹션 마무리 */}
             <Reveal>
               <p className="st-section-label" style={{ marginTop: 96 }} data-ko>공통 디자인 디테일 · 1~4호점</p>
               <p className="st-section-label" style={{ marginTop: 96 }} data-en>Design Language · Stores 1–4</p>
-              <p className="st-section-desc" data-ko>린넨·무표백 면·원목 마감과 멧돌 모티프 — 1호점에서 정립해 전 매장에 공통으로 흐르는 공간 언어입니다.</p>
+              <p className="st-section-desc" data-ko>린넨·무표백 면·원목 마감과 맷돌 모티프 — 1호점에서 정립해 전 매장에 공통으로 흐르는 공간 언어입니다.</p>
               <p className="st-section-desc" data-en>Linen, unbleached cotton, wood finishes and the millstone motif — the spatial language defined at the first store and shared across every store.</p>
             </Reveal>
 
@@ -946,9 +946,9 @@ export default function TofuG() {
 
             <Reveal className="st-concept-block reverse">
               <div className="st-concept-text">
-                <h3 data-ko>멧돌 — 디자인 모티프</h3>
+                <h3 data-ko>맷돌 — 디자인 모티프</h3>
                 <h3 data-en>Millstone — Design Motif</h3>
-                <p data-ko>콩을 갈아 두부를 만들던 멧돌의 형상을 공간과 브랜딩의 핵심 모티프로 활용했습니다. 로고, 조명, 컵 디자인까지 멧돌의 원형 패턴이 일관되게 적용됩니다.</p>
+                <p data-ko>콩을 갈아 두부를 만들던 맷돌의 형상을 공간과 브랜딩의 핵심 모티프로 활용했습니다. 로고, 조명, 컵 디자인까지 맷돌의 원형 패턴이 일관되게 적용됩니다.</p>
                 <p data-en>The millstone — once used to grind soybeans into tofu — is the core motif across space and branding. From logo and lighting to cup design, the circular pattern is applied consistently.</p>
               </div>
               <div><img src={I('concept-millstone-soybeans.jpg')} alt="Millstone with soybeans" loading="lazy" /></div>
@@ -966,7 +966,7 @@ export default function TofuG() {
 
             <Reveal className="st-concept-block reverse">
               <div className="st-concept-text">
-                <h3 data-ko>VMD — 천과 멧돌의 재해석</h3>
+                <h3 data-ko>VMD — 천과 맷돌의 재해석</h3>
                 <h3 data-en>VMD — Reinterpreting Cloth &amp; Millstone</h3>
                 <p data-ko>맷돌에서 콩이 갈리는 모습을 얇은 천으로 표현한 VMD 디자인을 제안하고, 전통 맷돌을 현대적 디스플레이 테이블로 재해석해 공간의 핵심 오브제로 구현했습니다.</p>
                 <p data-en>A VMD design expressing soybeans grinding through delicate fabric draping — reinterpreting the millstone as a modern display table as the central spatial object.</p>
