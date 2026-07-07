@@ -73,6 +73,15 @@ export default function HomePage() {
     }
   }, []);
 
+  // 다른 페이지(WORK(CORP.)/INFO)의 상단바 WORK 링크로 진입 시 → WORK 오버레이 자동 열기
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#work') {
+      setOverlayOpen(true);
+      setScrolled(true);
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  }, []);
+
   // Scroll handler for nav
   useEffect(() => {
     const handleScroll = () => {

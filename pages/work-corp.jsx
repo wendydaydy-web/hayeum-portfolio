@@ -32,7 +32,15 @@ export default function WorkCorpPage() {
             <span className="wc-logo-hover">{isKo ? '여름 그늘' : 'summer shade'}</span>
           </Link>
           <div className="wc-nav-right">
-            <Link href="/" className="wc-nav-link">HOME</Link>
+            <Link href="/#work" className="wc-nav-link">WORK</Link>
+            <Link href="/work-corp" className="wc-nav-link" aria-current="page">WORK(CORP.)</Link>
+            <Link href="/info" className="wc-nav-link">INFO</Link>
+            <a
+              href="https://www.instagram.com/id_haumm/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="wc-nav-link"
+            >INSTA</a>
             <span className="wc-lang" aria-label="Language toggle">
               <button
                 type="button"
