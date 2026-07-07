@@ -142,6 +142,9 @@ export default function InfoPage() {
           .info-nav .info-logo { font-size: 28px; line-height: 1; letter-spacing: 0.05em; color: var(--fg, #111); }
           .info-nav-right a { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: opacity 0.2s; }
           .info-nav-right a:hover { opacity: 0.6; }
+          /* Back to home도 <Link>라 scoped 스타일이 안 먹음 → 전역으로 */
+          .info-back { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-60, #666); text-decoration: none; transition: color 0.2s; }
+          .info-back:hover { color: var(--fg, #111); }
         `}</style>
         <style jsx>{`
           .info {

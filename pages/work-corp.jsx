@@ -137,6 +137,11 @@ export default function WorkCorpPage() {
           .wc-nav .wc-logo { font-size: 28px; line-height: 1; letter-spacing: 0.05em; color: var(--fg, #111); }
           .wc-nav-right a { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: opacity 0.2s; }
           .wc-nav-right a:hover { opacity: 0.6; }
+          /* 본문 링크도 <Link>라 scoped 스타일이 안 먹음 → 전역으로(의도한 회색 톤) */
+          .exp-link { color: var(--fg-50, #888); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+          .exp-link:hover { color: var(--fg-90, #1a1a1a); }
+          .wc-back { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-60, #666); text-decoration: none; transition: color 0.2s; }
+          .wc-back:hover { color: var(--fg, #111); }
         `}</style>
         <style jsx>{`
           .wc {
