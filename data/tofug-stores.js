@@ -57,7 +57,7 @@ const rawStores = [
     variationKo: '', variationEn: '',
     video: '',
     mainImage: 'takashimaya/tk-01.jpg',
-    gallery: 'takashimaya/tk-02.jpg, takashimaya/tk-03.jpg, takashimaya/tk-04.jpg, takashimaya/tk-05.jpg, takashimaya/tk-06.jpg, takashimaya/tk-07.jpg, takashimaya/tk-08.jpg',
+    gallery: 'takashimaya/tk-02.jpg, takashimaya/tk-03.jpg, takashimaya/tk-04.jpg, takashimaya/tk-05.jpg, takashimaya/tk-06.jpg, takashimaya/tk-07.jpg, takashimaya/tk-08.jpg, takashimaya/tk-09.jpg, takashimaya/tk-10.jpg, takashimaya/tk-11.jpg, takashimaya/tk-12.jpg, takashimaya/tk-13.jpg, takashimaya/tk-14.jpg, takashimaya/tk-15.jpg, takashimaya/tk-16.jpg, takashimaya/tk-17.jpg, takashimaya/tk-18.jpg, takashimaya/tk-19.jpg, takashimaya/tk-20.jpg, takashimaya/tk-21.jpg, takashimaya/tk-22.jpg, takashimaya/tk-23.jpg, takashimaya/tk-24.jpg, takashimaya/tk-25.jpg',
     placeId: '', url: '',
   },
   {
