@@ -119,6 +119,21 @@ export default function WorkCorpPage() {
                     {isKo ? 'tofuG 브랜드 & 공간 디자인' : 'tofuG Brand & Spatial Design'}
                   </Link>
                 </li>
+                <li>
+                  <Link href="/projects/tofug-takashimaya" className="exp-link">
+                    {isKo ? 'tofuG · 2호점 Takashimaya (Ngee Ann City)' : 'tofuG · Store 02 Takashimaya (Ngee Ann City)'}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/projects/tofug-ue-square" className="exp-link">
+                    {isKo ? 'tofuG · 3호점 UE Square' : 'tofuG · Store 03 UE Square'}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/projects/tofug-amoy" className="exp-link">
+                    {isKo ? 'tofuG · 4호점 97 Amoy Street (Flagship)' : 'tofuG · Store 04 97 Amoy Street (Flagship)'}
+                  </Link>
+                </li>
               </ul>
             </div>
 

@@ -7,3 +7,4 @@ export { default as ScrollProgress } from './ScrollProgress';
 export { default as SectionNav } from './SectionNav';
 export { default as StudioNav } from './StudioNav';
 export { default as StudioFooter } from './StudioFooter';
+export { default as TofugStorePage } from './TofugStorePage';

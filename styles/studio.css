@@ -574,6 +574,10 @@ body.tg-cursor-on [contenteditable="true"] { cursor: text !important; }
   display: inline-flex; align-items: center; gap: 10px;
   border: 1px dashed var(--gray, #888); border-radius: 999px; padding: 9px 16px;
 }
+/* 카드·칩이 <Link>(앵커)로 렌더될 때 기본 파란 밑줄 제거 + 링크 커서 */
+.studio-page a.tg-store-card, .studio-page a.tg-place-chip { text-decoration: none; color: inherit; }
+.studio-page a.tg-place-chip.is-link { cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+.studio-page a.tg-place-chip.is-link:hover { border-color: var(--accent-ink, #4a4a4a); }
 /* 호점 라벨 — 작고 은은하게(muted). flagship 부분만 accent 강조. */
 .studio-page .tg-chip-no {
   font-family: 'Barlow Condensed','Noto Sans KR',sans-serif;

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { StudioNav, StudioFooter } from '../../components/project';
 import { journey, expansionCountryNames, hasPhotos, byMeCount, brandTotalCount, openStoreCount, soonStoreCount, countries, countryCount, timelapseStores, spaceGridStores, asOf } from '../../data/tofug-stores';
@@ -129,8 +130,8 @@ function PlaceChip({ store }) {
   const showNo = store.byMe && !isSoon && store.no >= 1 && store.no <= 4;
   const isFlagship = store.no === 4;
   const showLoc = store.city && store.city !== store.country;
-  return (
-    <span className="tg-place-chip">
+  const inner = (
+    <>
       {showNo && (
         <span className="tg-chip-no">
           <span data-ko>{store.no}호점</span>
@@ -153,8 +154,13 @@ function PlaceChip({ store }) {
           <span data-en>Soon</span>
         </span>
       )}
-    </span>
+    </>
   );
+  // 상세 페이지가 있는 매장(2·3·4호점)은 칩 클릭 시 해당 페이지로 이동
+  if (store.slug) {
+    return <Link href={`/projects/${store.slug}`} className="tg-place-chip is-link">{inner}</Link>;
+  }
+  return <span className="tg-place-chip">{inner}</span>;
 }
 
 /* EXPANSION 브랜드 여정 — 나라별: 대표 이미지(없으면 placeholder) + 매장 수 + 예정/추가 칩.
@@ -501,11 +507,8 @@ function SpaceStoreGrid({ stores }) {
       <div className="tg-store-grid">
         {stores.map((s) => {
           const hasGallery = (s.gallery || []).length > 0;
-          const clickable = hasGallery ? { role: 'button', tabIndex: 0, onClick: () => setOpen(s),
-            onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(s); } },
-            'aria-label': `${s.no}호점 ${s.name} 갤러리 열기` } : {};
-          return (
-            <div key={s.no} className={`tg-store-card${hasGallery ? ' is-clickable' : ''}`} {...clickable}>
+          const inner = (
+            <>
               <div className="tg-store-thumb">
                 {s.mainImage
                   ? <img src={I(s.mainImage)} alt={`${s.name} main`} loading="lazy" />
@@ -524,6 +527,28 @@ function SpaceStoreGrid({ stores }) {
                   )}
                 </span>
               </div>
+            </>
+          );
+          // 상세 페이지(slug) 있으면 카드 클릭 → 매장 페이지로 이동
+          if (s.slug) {
+            return (
+              <Link
+                key={s.no}
+                href={`/projects/${s.slug}`}
+                className="tg-store-card is-clickable"
+                aria-label={`${s.no}호점 ${s.name} 페이지 열기`}
+              >
+                {inner}
+              </Link>
+            );
+          }
+          // slug 없으면 기존 동작(사진 있으면 라이트박스)
+          const clickable = hasGallery ? { role: 'button', tabIndex: 0, onClick: () => setOpen(s),
+            onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(s); } },
+            'aria-label': `${s.no}호점 ${s.name} 갤러리 열기` } : {};
+          return (
+            <div key={s.no} className={`tg-store-card${hasGallery ? ' is-clickable' : ''}`} {...clickable}>
+              {inner}
             </div>
           );
         })}

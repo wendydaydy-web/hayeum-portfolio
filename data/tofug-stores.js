@@ -48,27 +48,41 @@ const rawStores = [
   },
   {
     no: 2, name: 'Takashimaya (Ngee Ann City)', city: 'Singapore', country: 'Singapore',
+    slug: 'tofug-takashimaya',
     openDate: '2025', status: 'open', byMe: true,
-    address: 'Ngee Ann City, 391 Orchard Rd, Takashimaya S.C., Singapore 238872',
+    address: '391 Orchard Rd #B1-29, Singapore',
+    buildingKo: '백화점 (Ngee Ann City)', buildingEn: 'Department store (Ngee Ann City)',
     descKo: '오차드로드의 상징적인 다카시마야 쇼핑센터 내에 위치해, 상쾌하고 건강한 디저트를 찾는 쇼핑객이 쉽게 들를 수 있는 2호점.',
     descEn: "Our Takashimaya outlet is situated within Orchard Road's iconic Takashimaya Shopping Centre, making it easily accessible for shoppers seeking a refreshing, healthy dessert option.",
-    video: '', mainImage: '', gallery: '', placeId: '', url: '',
+    variationKo: '', variationEn: '',
+    video: '',
+    mainImage: 'takashimaya/tk-01.jpg',
+    gallery: 'takashimaya/tk-02.jpg, takashimaya/tk-03.jpg, takashimaya/tk-04.jpg, takashimaya/tk-05.jpg, takashimaya/tk-06.jpg, takashimaya/tk-07.jpg, takashimaya/tk-08.jpg',
+    placeId: '', url: '',
   },
   {
     no: 3, name: 'UE Square', city: 'Singapore', country: 'Singapore',
+    slug: 'tofug-ue-square',
     openDate: '2025', status: 'open', byMe: true,
-    address: 'UE Square, 81 Clemenceau Ave, Singapore 239917',
+    address: '81 Clemenceau Ave #01-19, Singapore',
+    buildingKo: '복합몰 · 리버사이드', buildingEn: 'Mixed-use mall · Riverside',
     descKo: '싱가포르강을 따라 자리한 UE Square 3호점. 오피스 인파와 방문객 모두에게 상쾌한 한 끼가 되어주는 아늑한 공간.',
     descEn: "Located at UE Square along the Singapore River, this outlet offers a cozy spot for Tofu G's Korean-style tofu gelato — perfect for a refreshing treat for both office crowds and visitors.",
+    variationKo: '', variationEn: '',
     video: '', mainImage: '', gallery: '', placeId: '', url: '',
   },
   {
     no: 4, name: '97 Amoy Street', city: 'Singapore', country: 'Singapore',
+    slug: 'tofug-amoy',
     openDate: '2025', status: 'open', byMe: true,
-    address: '97 Amoy St, Singapore 069917',
+    address: '97 Amoy Street, S069916',
+    buildingKo: '독립매장 · CBD 쇼트하우스', buildingEn: 'Standalone · CBD shophouse',
     descKo: 'CBD 중심 97 암오이 스트리트에 위치해, 오피스 인파와 인근 방문객에게 안성맞춤인 프리미엄 두부 젤라또 4호점.',
     descEn: 'Located at 97 Amoy Street in the CBD, our outlet offers a cozy spot for premium tofu-based gelato, ideal for office crowds and nearby visitors.',
-    mainImage: '', gallery: '', placeId: '', url: '',
+    variationKo: '', variationEn: '',
+    mainImage: 'amoy/amoy-01.jpg',
+    gallery: 'amoy/amoy-02.jpg, amoy/amoy-03.jpg, amoy/amoy-04.jpg, amoy/amoy-05.jpg, amoy/amoy-06.jpg, amoy/amoy-07.jpg, amoy/amoy-08.jpg',
+    placeId: '', url: '',
   },
 
   // ── 브랜드 확장 (byMe:false) ──
@@ -130,14 +144,19 @@ const str = (v) => (v == null ? '' : String(v).trim());
 function normalizeRow(row) {
   const s = {
     name: str(row.name),
+    slug: str(row.slug),
     city: str(row.city),
     country: str(row.country),
     openDate: str(row.openDate),
     status: normStatus(row.status),
     byMe: toBool(row.byMe),
     address: str(row.address),
+    buildingKo: str(row.buildingKo),
+    buildingEn: str(row.buildingEn),
     descKo: str(row.descKo),
     descEn: str(row.descEn),
+    variationKo: str(row.variationKo),
+    variationEn: str(row.variationEn),
     mainImage: str(row.mainImage),
     gallery: splitList(row.gallery),
     placeId: str(row.placeId),
@@ -197,6 +216,24 @@ export const expansionMainStores = expansionStores.filter((s) => !isSgSoon(s)); 
 
 // ── 타임랩스: 내 작업 1~3호점 (각 매장 video 필드로 재생/placeholder) ──
 export const timelapseStores = byMeStores.slice(0, 3);
+
+// ── 개별 매장 상세 페이지 (2·3·4호점 전용 페이지 / 1호점=tofug 본 페이지) ──
+//   순서: 1호점(만다린)=tofug 본 페이지 → 2·3·4호점 전용 페이지. 이전/다음 이동용.
+const STORE_PAGE_ORDER = [
+  { name: 'Mandarin Gallery', href: '/projects/tofug' },
+  { name: 'Takashimaya', href: '/projects/tofug-takashimaya' },
+  { name: 'UE Square', href: '/projects/tofug-ue-square' },
+  { name: '97 Amoy Street', href: '/projects/tofug-amoy' },
+];
+
+// slug 로 매장 + 이전/다음 네비를 반환 (개별 페이지에서 사용)
+export function getStorePage(slug) {
+  const store = stores.find((s) => s.slug === slug) || null;
+  const idx = STORE_PAGE_ORDER.findIndex((p) => p.href === `/projects/${slug}`);
+  const prev = idx > 0 ? STORE_PAGE_ORDER[idx - 1] : null;
+  const next = (idx >= 0 && idx < STORE_PAGE_ORDER.length - 1) ? STORE_PAGE_ORDER[idx + 1] : null;
+  return { store, prev, next };
+}
 
 // ── 운영/집계 ──
 export const openStores = stores.filter((s) => s.status === 'open');
