@@ -33,7 +33,15 @@ export default function InfoPage() {
             <span className="info-logo-hover">{isKo ? '여름 그늘' : 'summer shade'}</span>
           </Link>
           <div className="info-nav-right">
-            <Link href="/" className="info-nav-link">HOME</Link>
+            <Link href="/#work" className="info-nav-link">WORK</Link>
+            <Link href="/work-corp" className="info-nav-link">WORK(CORP.)</Link>
+            <Link href="/info" className="info-nav-link" aria-current="page">INFO</Link>
+            <a
+              href="https://www.instagram.com/id_haumm/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="info-nav-link"
+            >INSTA</a>
             <span className="info-lang" aria-label="Language toggle">
               <button
                 type="button"
@@ -127,6 +135,14 @@ export default function InfoPage() {
           <p className="info-copy">&copy; 2025 Gonggan Ha-umm. All rights reserved.</p>
         </footer>
 
+        {/* next/link <Link> 앵커는 styled-jsx 스코프 해시를 못 받아 기본 파란 링크로 보임
+            → nav 앵커는 .info-nav 조상 기준 전역 규칙으로 확실히 스타일(메인 nav와 동일 톤). */}
+        <style jsx global>{`
+          .info-nav a { color: var(--fg-75, #444); text-decoration: none; font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+          .info-nav .info-logo { font-size: 28px; line-height: 1; letter-spacing: 0.05em; color: var(--fg, #111); }
+          .info-nav-right a { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: opacity 0.2s; }
+          .info-nav-right a:hover { opacity: 0.6; }
+        `}</style>
         <style jsx>{`
           .info {
             min-height: 100vh;

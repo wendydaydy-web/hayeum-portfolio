@@ -129,6 +129,15 @@ export default function WorkCorpPage() {
           <Link href="/" className="wc-back">← {isKo ? '홈으로' : 'Back to home'}</Link>
         </footer>
 
+        {/* next/link <Link> 앵커는 styled-jsx 스코프 해시를 못 받아
+            scoped .wc-logo/.wc-nav-link 이 안 먹고 기본 파란 링크로 보임.
+            → nav 앵커는 .wc-nav 조상 기준 전역 규칙으로 확실히 스타일(메인 nav와 동일 톤). */}
+        <style jsx global>{`
+          .wc-nav a { color: var(--fg-90, #1a1a1a); text-decoration: none; font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+          .wc-nav .wc-logo { font-size: 28px; line-height: 1; letter-spacing: 0.05em; color: var(--fg, #111); }
+          .wc-nav-right a { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: opacity 0.2s; }
+          .wc-nav-right a:hover { opacity: 0.6; }
+        `}</style>
         <style jsx>{`
           .wc {
             min-height: 100vh;
