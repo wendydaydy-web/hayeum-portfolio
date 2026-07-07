@@ -514,7 +514,15 @@ function SpaceStoreGrid({ stores }) {
               </div>
               <div className="tg-store-meta">
                 <span className="tg-store-no">{s.no}호점</span>
-                <span className="tg-store-name">{s.name}</span>
+                <span className="tg-store-name">
+                  {s.name}
+                  {s.no === 4 && (
+                    <>
+                      <em className="tg-chip-flag" data-ko> · 플래그십</em>
+                      <em className="tg-chip-flag" data-en> · Flagship</em>
+                    </>
+                  )}
+                </span>
               </div>
             </div>
           );
@@ -757,7 +765,7 @@ export default function TofuG() {
               <p className="st-section-desc" data-ko>2024년 7월 첫 오픈 이후 9개월 만에 싱가폴 {byMeCount}개 매장과 브랜드 공간 가이드라인(SI)을 구축했고, 그 시스템으로 브랜드는 {countryCount}개국 {brandTotalCount}개 매장으로 확장 중입니다.</p>
               <p className="st-section-desc" data-en>Since its first opening in July 2024, I built {byMeCount} Singapore stores and the brand&apos;s spatial guideline (SI) in just 9 months; on that system the brand is now scaling to {brandTotalCount} stores across {countryCount} countries.</p>
               <p className="st-section-desc" data-ko>싱가포르 1호점의 공간 브랜드 컨셉 기획과 공간 디자인을 통해 브랜드의 시각적 아이덴티티를 정립했으며, 추후 이니시아(Initia Group) 소속으로 2호점부터 4호점 플래그십 매장까지의 프로젝트를 연속성 있게 진행했습니다. 이 과정에서 지속적인 매장 확장이 가능하도록 표준화된 공간 디자인 시스템(SI 가이드라인)을 완벽히 구축했습니다.</p>
-              <p className="st-section-desc" data-en>I established the brand&apos;s visual identity through the spatial concept planning and interior design of the first store in Singapore. Subsequently, as part of Initia Group, I seamlessly executed consecutive projects from the 2nd to the 4th flagship locations. Through this trajectory, I built a standardized Spatial Identity (SI) guideline to support sustainable, scalable brand expansion.</p>
+              <p className="st-section-desc" data-en>I established the brand&apos;s visual identity through the spatial concept planning and interior design of the first store in Singapore. Subsequently, as part of Initia Group, I seamlessly executed consecutive projects from the 2nd store through to the 4th, the flagship. Through this trajectory, I built a standardized Spatial Identity (SI) guideline to support sustainable, scalable brand expansion.</p>
             </Reveal>
             <OverviewStats />
 
@@ -873,10 +881,10 @@ export default function TofuG() {
               <p className="st-section-desc" data-en>With linen, unbleached cotton, and wood finishes, a serene Korean kitchen was brought to life within Orchard Road&apos;s luxury retail environment.</p>
             </Reveal>
 
-            {/* 1. 1호점(만다린 갤러리) 플래그십 — 크게 */}
+            {/* 1. 1호점(만다린 갤러리) — 크게 (첫 매장, flagship 아님) */}
             <Reveal style={{ marginTop: 20 }}>
-              <p className="st-section-label" data-ko>1호점 · 플래그십</p>
-              <p className="st-section-label" data-en>Store 1 · Flagship</p>
+              <p className="st-section-label" data-ko>1호점</p>
+              <p className="st-section-label" data-en>Store 01</p>
               <h2 className="st-section-title">Mandarin Gallery</h2>
               <p className="st-section-desc" data-ko>싱가포르 오차드 로드 만다린 갤러리 #03-30, 싱가포르 최초의 프레시 처닝 프리미엄 두부 젤라또. 멧돌·전통 주방·Test Zone·VMD의 공간 언어가 처음으로 하나의 공간에 완성된 1호점입니다.</p>
               <p className="st-section-desc" data-en>333A Orchard Rd, #03-30 Mandarin Gallery — Singapore&apos;s first fresh-churned premium tofu gelato, where the spatial language of millstone, kitchen, Test Zone and VMD first came together as one space.</p>
@@ -895,14 +903,14 @@ export default function TofuG() {
             <Reveal style={{ marginTop: 60 }}>
               <p className="st-section-label">Design Process</p>
               <p className="st-section-desc" data-ko>컨셉 스케치부터 3D 모델링, 마감재 선정, 최종 시공까지 — 1호점을 실제 공간으로 완성한 과정.</p>
-              <p className="st-section-desc" data-en>From concept sketches to 3D modeling, material selection, and final construction — how the flagship became a real space.</p>
+              <p className="st-section-desc" data-en>From concept sketches to 3D modeling, material selection, and final construction — how the first store became a real space.</p>
             </Reveal>
 
             {/* Floor Plan · Elevation (도면) */}
             <Reveal>
               <p className="st-section-label" style={{ marginTop: 80 }}>Floor Plan · Elevation</p>
               <p className="st-section-desc" data-ko>1호점 공간을 기준으로 작성한 평면도와 입면도 — 이후 전 매장에 적용된 브랜드 공간 가이드의 기준이 되었습니다.</p>
-              <p className="st-section-desc" data-en>Floor plan and elevation based on the flagship — the reference for the brand spatial guide later applied across all stores.</p>
+              <p className="st-section-desc" data-en>Floor plan and elevation based on the first store — the reference for the brand spatial guide later applied across all stores.</p>
             </Reveal>
             <div className="st-gallery-grid">
               <div className="st-item"><img src={I('drawing-floorplan.jpg')} alt="Floor Plan" loading="lazy" /></div>
@@ -914,7 +922,7 @@ export default function TofuG() {
               <p className="st-section-label" style={{ marginTop: 90 }} data-ko>싱가폴 2~4호점</p>
               <p className="st-section-label" style={{ marginTop: 90 }} data-en>Singapore Stores 2–4</p>
               <p className="st-section-desc" data-ko>1호점에서 완성한 공간 언어를 이어받은 매장들. 대표 컷을 클릭하면 매장 공간 사진을 팝업으로 볼 수 있습니다.</p>
-              <p className="st-section-desc" data-en>Stores carrying forward the spatial language established at the flagship. Click a store to open its space photos.</p>
+              <p className="st-section-desc" data-en>Stores carrying forward the spatial language established at the first store. Click a store to open its space photos.</p>
             </Reveal>
             <SpaceStoreGrid stores={spaceGridStores} />
 
@@ -923,7 +931,7 @@ export default function TofuG() {
               <p className="st-section-label" style={{ marginTop: 96 }} data-ko>공통 디자인 디테일 · 1~4호점</p>
               <p className="st-section-label" style={{ marginTop: 96 }} data-en>Design Language · Stores 1–4</p>
               <p className="st-section-desc" data-ko>린넨·무표백 면·원목 마감과 멧돌 모티프 — 1호점에서 정립해 전 매장에 공통으로 흐르는 공간 언어입니다.</p>
-              <p className="st-section-desc" data-en>Linen, unbleached cotton, wood finishes and the millstone motif — the spatial language defined at the flagship and shared across every store.</p>
+              <p className="st-section-desc" data-en>Linen, unbleached cotton, wood finishes and the millstone motif — the spatial language defined at the first store and shared across every store.</p>
             </Reveal>
 
             <Reveal className="st-concept-block">
