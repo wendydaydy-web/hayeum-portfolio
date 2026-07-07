@@ -434,19 +434,23 @@ function OverviewStats() {
 
 /* ── 타임랩스 자리: video 있으면 재생, 없으면 검정 placeholder(16:9) ── */
 function TimelapseSlot({ store }) {
+  // 라벨용 매장명 — 괄호 부제 제거 (예: 'Takashimaya (Ngee Ann City)' → 'Takashimaya')
+  const shortName = store.name.replace(/\s*\([^)]*\)\s*$/, '');
+  const noKo = `${store.no}호점`;
+  const noEn = `Store ${String(store.no).padStart(2, '0')}`;
   return (
     <div className="tg-timelapse">
       {store.video ? (
         <video src={store.video} autoPlay muted loop playsInline />
       ) : (
-        <div className="tg-timelapse-ph" role="img" aria-label={`${store.no}호점 타임랩스 준비 중`}>
+        <div className="tg-timelapse-ph" role="img" aria-label={`${noKo} ${shortName} 타임랩스 준비 중`}>
           <span className="tg-tl-play" aria-hidden="true"></span>
         </div>
       )}
       {/* 매장 라벨: 영상/placeholder 공통으로 항상 하단에 표시 */}
       <div className="tg-tl-caption">
-        <span className="tg-tl-label" data-ko>{store.no}호점 타임랩스{store.video ? '' : <em> (준비 중)</em>}</span>
-        <span className="tg-tl-label" data-en>Store {store.no} Timelapse{store.video ? '' : <em> (coming soon)</em>}</span>
+        <span className="tg-tl-label" data-ko>{noKo} · {shortName} 타임랩스{store.video ? '' : <em> (준비중)</em>}</span>
+        <span className="tg-tl-label" data-en>{noEn} · {shortName} Timelapse{store.video ? '' : <em> (Coming Soon)</em>}</span>
       </div>
     </div>
   );
@@ -787,13 +791,13 @@ export default function TofuG() {
               <h2 className="st-section-title" data-ko>확장의 비결 — SI 시스템</h2>
               <h2 className="st-section-title" data-en>The Key to Scale — the SI System</h2>
               <p className="st-section-desc" data-ko>1호점의 공간을 기준으로 재료·디테일·조닝·사이니지를 표준화한 브랜드 공간 가이드라인(SI)을 구축했습니다. 덕분에 2~4호점, 그리고 해외 확장까지 일관된 브랜드 경험을 빠르고 정확하게 재현할 수 있었습니다.</p>
-              <p className="st-section-desc" data-en>Based on the flagship, I standardized materials, details, zoning and signage into a brand spatial guideline (SI) — letting stores 2–4, and later overseas expansion, reproduce a consistent brand experience quickly and precisely.</p>
+              <p className="st-section-desc" data-en>Based on the first store, I standardized materials, details, zoning and signage into a brand spatial guideline (SI) — letting stores 2–4, and later overseas expansion, reproduce a consistent brand experience quickly and precisely.</p>
             </Reveal>
 
             {/* Store 1–3 Timelapse (video 있으면 재생, 없으면 검정 placeholder) */}
             <Reveal>
               <p className="st-section-label" style={{ marginTop: 80 }} data-ko>1~3호점 타임랩스</p>
-              <p className="st-section-label" style={{ marginTop: 80 }} data-en>Store 1–3 Timelapse</p>
+              <p className="st-section-label" style={{ marginTop: 80 }} data-en>Store 01–03 Timelapse</p>
             </Reveal>
             <div className="tg-timelapse-row">
               {timelapseStores.map((s) => <TimelapseSlot key={s.no} store={s} />)}
