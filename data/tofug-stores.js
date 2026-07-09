@@ -56,8 +56,8 @@ const rawStores = [
     descEn: "Our Takashimaya outlet is situated within Orchard Road's iconic Takashimaya Shopping Centre, making it easily accessible for shoppers seeking a refreshing, healthy dessert option.",
     variationKo: '', variationEn: '',
     video: '',
-    mainImage: 'takashimaya/tk-01.jpg',
-    gallery: 'takashimaya/tk-02.jpg, takashimaya/tk-03.jpg, takashimaya/tk-04.jpg, takashimaya/tk-05.jpg, takashimaya/tk-06.jpg, takashimaya/tk-07.jpg, takashimaya/tk-08.jpg, takashimaya/tk-09.jpg, takashimaya/tk-10.jpg, takashimaya/tk-11.jpg, takashimaya/tk-12.jpg, takashimaya/tk-13.jpg, takashimaya/tk-14.jpg, takashimaya/tk-15.jpg, takashimaya/tk-16.jpg, takashimaya/tk-17.jpg, takashimaya/tk-18.jpg, takashimaya/tk-19.jpg, takashimaya/tk-20.jpg, takashimaya/tk-21.jpg, takashimaya/tk-22.jpg, takashimaya/tk-23.jpg, takashimaya/tk-24.jpg, takashimaya/tk-25.jpg',
+    mainImage: 'takashimaya/tk-03.jpg',
+    gallery: 'takashimaya/tk-01.jpg, takashimaya/tk-02.jpg, takashimaya/tk-04.jpg, takashimaya/tk-05.jpg, takashimaya/tk-06.jpg, takashimaya/tk-07.jpg, takashimaya/tk-08.jpg, takashimaya/tk-09.jpg, takashimaya/tk-10.jpg, takashimaya/tk-11.jpg, takashimaya/tk-12.jpg, takashimaya/tk-13.jpg, takashimaya/tk-14.jpg, takashimaya/tk-15.jpg, takashimaya/tk-16.jpg, takashimaya/tk-17.jpg, takashimaya/tk-18.jpg, takashimaya/tk-19.jpg, takashimaya/tk-20.jpg, takashimaya/tk-21.jpg, takashimaya/tk-22.jpg, takashimaya/tk-23.jpg, takashimaya/tk-24.jpg, takashimaya/tk-25.jpg',
     placeId: '', url: '',
   },
   {
@@ -69,7 +69,10 @@ const rawStores = [
     descKo: '싱가포르강을 따라 자리한 UE Square 3호점. 오피스 인파와 방문객 모두에게 상쾌한 한 끼가 되어주는 아늑한 공간.',
     descEn: "Located at UE Square along the Singapore River, this outlet offers a cozy spot for Tofu G's Korean-style tofu gelato — perfect for a refreshing treat for both office crowds and visitors.",
     variationKo: '', variationEn: '',
-    video: '', mainImage: '', gallery: '', placeId: '', url: '',
+    video: '',
+    mainImage: 'ue-square/ue-01.avif',
+    gallery: 'ue-square/ue-02.avif',
+    placeId: '', url: '',
   },
   {
     no: 4, name: '97 Amoy Street', city: 'Singapore', country: 'Singapore',
@@ -81,7 +84,7 @@ const rawStores = [
     descEn: 'Located at 97 Amoy Street in the CBD, our outlet offers a cozy spot for premium tofu-based gelato, ideal for office crowds and nearby visitors.',
     variationKo: '', variationEn: '',
     mainImage: 'amoy/amoy-01.jpg',
-    gallery: 'amoy/amoy-02.jpg, amoy/amoy-03.jpg, amoy/amoy-04.jpg, amoy/amoy-05.jpg, amoy/amoy-06.jpg, amoy/amoy-07.jpg, amoy/amoy-08.jpg',
+    gallery: 'amoy/amoy-02.jpg, amoy/amoy-03.jpg, amoy/amoy-04.jpg, amoy/amoy-05.jpg, amoy/amoy-06.jpg, amoy/amoy-07.jpg, amoy/amoy-08.jpg, amoy/amoy-09.jpg, amoy/amoy-10.jpg, amoy/amoy-11.jpg, amoy/amoy-12.jpg, amoy/amoy-13.jpg, amoy/amoy-14.jpg, amoy/amoy-15.jpg',
     placeId: '', url: '',
   },
 
